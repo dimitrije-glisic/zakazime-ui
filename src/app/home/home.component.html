@@ -1,4 +1,9 @@
 <div>
-  <p>The ID is {{greeting.id}}</p>
-  <p>The content is {{greeting.content}}</p>
+
+  <button (click)="callUserPrivateApi()">get user</button>
+
+  <p>
+    {{ user | json }}
+  </p>
+
 </div>

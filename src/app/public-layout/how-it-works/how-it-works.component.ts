@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { REGISTRATION_TYPE_BUSINESS, RegistrationComponent } from 'src/app/registration-login/registration/registration.component';
+import { REGISTRATION_TYPE_SERVICE_PROVIDER, RegistrationComponent } from 'src/app/registration-login/registration/registration.component';
 
 @Component({
   selector: 'app-how-it-works',
@@ -8,7 +8,7 @@ import { REGISTRATION_TYPE_BUSINESS, RegistrationComponent } from 'src/app/regis
   styleUrls: ['./how-it-works.component.css']
 })
 export class HowItWorksComponent {
-  private registrationType = REGISTRATION_TYPE_BUSINESS;
+  private registrationType = REGISTRATION_TYPE_SERVICE_PROVIDER;
 
   constructor(private dialog: MatDialog) { }
 

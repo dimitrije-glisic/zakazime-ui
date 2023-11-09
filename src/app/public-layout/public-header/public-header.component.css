@@ -1,0 +1,5 @@
+/* Add a class to your logout link for specific styling */
+.nav-link.logout-link {
+    cursor: pointer; /* This will ensure the pointer (hand) cursor appears */
+  }
+  

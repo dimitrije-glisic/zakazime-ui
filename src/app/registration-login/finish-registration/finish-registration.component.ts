@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from 'src/app/interfaces/business.interface';
+import { BusinessService } from 'src/app/business.service';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -13,16 +15,17 @@ import { Business } from 'src/app/interfaces/business.interface';
 export class FinishRegistrationComponent {
 
   finishRegistrationForm: FormGroup;
-  private userEmailAddress!: string;
+  private userEmailAddress: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private bu: BusinessService,
     private route: ActivatedRoute,
     private router: Router
   ) {
     this.finishRegistrationForm = this.formBuilder.group({
-      businessName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
       city: ['', [Validators.required]],
       postalCode: ['', [Validators.required]],
@@ -34,21 +37,21 @@ export class FinishRegistrationComponent {
     });
   }
 
-  // finishRegistration() {
+  async finishRegistration() {
   //   if (this.finishRegistrationForm.valid) {
-  //     const data: Business = this.finishRegistrationForm.value;
-  //     this.authService.finishRegistration(this.userEmailAddress, data).subscribe({
-  //       next: response => {
-  //         console.log('finish registration successful', response);
-  //         this.router.navigate(['manage']);
-  //       },
-  //       error: error => {
-  //         console.log('finish registration failed', error);
-  //       }
-  //     });
+  //     try {
+  //       const business: Business = this.finishRegistrationForm.value;
+  //       const email = await firstValueFrom(this.authService.getUserEmail());
+  //       business.ownerEmail = email;
+  //       const response = await firstValueFrom(this.bu.createBusiness(business));
+  //       console.log('finish registration successful', response);
+  //       await this.router.navigate(['manage-business']);
+  //     } catch (error) {
+  //       console.error('finish registration failed', error);
+  //     }
   //   } else {
   //     console.log('Form is invalid');
   //   }
-  // }
+  }
 
 }

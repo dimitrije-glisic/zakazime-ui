@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">ZakaziMe</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -11,9 +11,12 @@
         <li class="nav-item active">
           <a class="nav-link" style="color: blue;" routerLink="/how-it-works">Izlistajte biznis</a>
         </li>
-        <li *ngIf="isUserLoggedIn()" class="nav-item">
+        <li *ngIf="this.authService.isLoggedInSubject | async" class="nav-item">
+          <!-- <li *ngIf="isLoggedIn" class="nav-item"> -->
+
           <a class="nav-link" (click)="logout()">Logout</a>
-        <li *ngIf="!isUserLoggedIn()" class="nav-item">
+          <!-- <li *ngIf="!isLoggedIn" class="nav-item"> -->
+        <li *ngIf="!(this.authService.isLoggedInSubject | async)" class="nav-item">
           <a class="nav-link" routerLink="/login">Login</a>
         </li>
         <li class="nav-item">

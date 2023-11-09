@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-import { RegistrationDto } from 'src/app/interfaces/registration-dto.interface';
+import { RegistrationRequest } from 'src/app/interfaces/registration-dto.interface';
 
 @Component({
   selector: 'app-registration',
@@ -33,16 +33,13 @@ export class RegistrationComponent {
 
   registerUser() {
     if (this.registerForm.valid) {
-
-      const userData: RegistrationDto = this.registerForm.value;
+      const userData: RegistrationRequest = this.registerForm.value;
       const registrationType = this.data.registrationType;
-      userData.userType = registrationType;
+      userData.role = registrationType;
       this.authService.registerUser(userData).subscribe({
         next: response => {
           console.log('Registration successful', response);
-          localStorage.setItem('jwtToken', response.token);
-          localStorage.setItem('finishedRegistration', response.registrationStatus === 'COMPLETED' ? 'true' : 'false');
-          if (registrationType === REGISTRATION_TYPE_BUSINESS) {
+          if (registrationType === REGISTRATION_TYPE_SERVICE_PROVIDER) {
             this.handleSuccessfulBusinessRegistration();
           } else if (registrationType === REGISTRATION_TYPE_CUSTOMER) {
             this.handleSuccessfulUserRegistration();
@@ -73,5 +70,5 @@ export class RegistrationComponent {
 
 }
 
-export const REGISTRATION_TYPE_BUSINESS = 'BUSINESS';
+export const REGISTRATION_TYPE_SERVICE_PROVIDER = 'SERVICE_PROVIDER';
 export const REGISTRATION_TYPE_CUSTOMER = 'CUSTOMER';

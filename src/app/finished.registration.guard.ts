@@ -12,12 +12,13 @@ export class FinishedRegistrationGuard implements CanActivate {
   }
 
   canActivate(): boolean {
-    if (this.authService.isFinishedRegistration()) {
-      return true;
-    }
-    const email = this.authService.decodeEmailFromToken();
-    this.router.navigate(['finish-registration'], { queryParams: { email: email } });
-    return false;
+    // if (this.authService.isFinishedRegistration()) {
+    //   return true;
+    // }
+    // const email = this.authService.decodeEmailFromToken();
+    // this.router.navigate(['finish-registration'], { queryParams: { email: email } });
+    // return false;
+    return true;
   }
 
 }

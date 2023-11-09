@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {Token} from "../interfaces/token.interface";
-import {Greeting} from "../interfaces/greeting.interface";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
+import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-home',
@@ -10,15 +9,18 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class HomeComponent {
 
-  greeting: Greeting = {id: 0, content: ''};
+  user: User | undefined;
 
   constructor(private http: HttpClient) {
-    http.get<Token>('api/token').subscribe(data => {
-      const token = data['token'];
-      http.get<Greeting>('http://localhost:9000', {headers: new HttpHeaders().set('X-Auth-Token', token)})
-        .subscribe(response => this.greeting = response);
-    }, () => {
-    });
+   
+  }
+
+  callUserPrivateApi() {
+    this.http.get<User>('api/user').subscribe(
+      data => {
+        this.user = data; 
+      }
+    )
   }
 
 }

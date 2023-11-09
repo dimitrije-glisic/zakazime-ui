@@ -1,9 +1,9 @@
-import {Injectable, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { Injectable, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppComponent} from './app.component';
-import {HowItWorksComponent} from './public-layout/how-it-works/how-it-works.component';
-import {AppRoutingModule} from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HowItWorksComponent } from './public-layout/how-it-works/how-it-works.component';
+import { AppRoutingModule } from './app-routing.module';
 import {
   HTTP_INTERCEPTORS,
   HttpClientModule,
@@ -11,16 +11,18 @@ import {
   HttpInterceptor,
   HttpRequest
 } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RegistrationComponent} from './registration-login/registration/registration.component';
-import {LoginComponent} from './registration-login/login/login.component';
-import {PublicLayoutComponent} from './public-layout/public-layout/public-layout.component';
-import {PublicHeaderComponent} from './public-layout/public-header/public-header.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatDialogModule} from '@angular/material/dialog';
-import {FinishRegistrationComponent} from './registration-login/finish-registration/finish-registration.component';
-import {AuthService} from "./auth.service";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegistrationComponent } from './registration-login/registration/registration.component';
+import { LoginComponent } from './registration-login/login/login.component';
+import { PublicLayoutComponent } from './public-layout/public-layout/public-layout.component';
+import { PublicHeaderComponent } from './public-layout/public-header/public-header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FinishRegistrationComponent } from './registration-login/finish-registration/finish-registration.component';
+import { AuthService } from "./auth.service";
 import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
+import { BusinessComponent } from './business/business.component';
 
 
 @Injectable()
@@ -44,6 +46,8 @@ export class XhrInterceptor implements HttpInterceptor {
     PublicHeaderComponent,
     FinishRegistrationComponent,
     HomeComponent,
+    AdminComponent,
+    BusinessComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ export class XhrInterceptor implements HttpInterceptor {
     BrowserAnimationsModule,
     MatDialogModule
   ],
-  providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}],
+  providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
+    // { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
