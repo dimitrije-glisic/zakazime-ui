@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Usluga</th>
+        <th scope="col">Kategorija</th>
+        <th scope="col">Napomena</th>
+        <th scope="col">Opis</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Uobicajeno trajanje</th>
+        <th scope="col">Komande</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let service of services">
+        <td>{{ service.name }}</td>
+        <td>{{ service.category }}</td>
+        <td>{{ service.note ? service.note : '-' }}</td>
+        <td>{{ service.description ? service.description : '-' }}</td>
+        <td>{{ service.price }}</td>
+        <td>{{ service.avgDuration }}</td>
+        <td>
+          <a class="btn btn-primary btn-sm" [routerLink]="['edit', service.name]">
+            Uredi
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <button type="button" class="btn btn-primary mt-3 me-3" routerLink="create">Nova usluga</button>
+  <button type="button" class="btn btn-primary mt-3" routerLink="create-fast">Brzo dodavanje</button>
+
+
+</div>

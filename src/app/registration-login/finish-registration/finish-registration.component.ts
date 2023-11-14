@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from 'src/app/interfaces/business.interface';
-import { BusinessService } from 'src/app/business.service';
+import { ServicesService } from 'src/app/services.service';
 import { firstValueFrom } from 'rxjs';
 
 
@@ -20,7 +20,7 @@ export class FinishRegistrationComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private bu: BusinessService,
+    private bu: ServicesService,
     private route: ActivatedRoute,
     private router: Router
   ) {

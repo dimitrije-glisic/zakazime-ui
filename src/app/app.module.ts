@@ -22,8 +22,12 @@ import { FinishRegistrationComponent } from './registration-login/finish-registr
 import { AuthService } from "./auth.service";
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
-import { BusinessComponent } from './business/business.component';
-
+import { BusinessDashboardComponent } from './business/business-dashboard/business-dashboard.component';
+import { BusinessServicesComponent } from './business/services/business-services/business-services.component';
+import { AddServiceFormComponent } from './business/services/add-service-form/add-service-form.component';
+import { StatisticsComponent } from './business/statistics/statistics.component';
+import { AddServiceFastFormComponent } from './business/services/add-service-fast-form/add-service-fast-form.component';
+import { EditServiceComponent } from './business/services/edit-service/edit-service.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -47,7 +51,12 @@ export class XhrInterceptor implements HttpInterceptor {
     FinishRegistrationComponent,
     HomeComponent,
     AdminComponent,
-    BusinessComponent,
+    BusinessDashboardComponent,
+    BusinessServicesComponent,
+    AddServiceFormComponent,
+    StatisticsComponent,
+    AddServiceFastFormComponent,
+    EditServiceComponent,
   ],
   imports: [
     BrowserModule,

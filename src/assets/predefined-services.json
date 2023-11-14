@@ -1,0 +1,73 @@
+[
+    {
+      "name": "Haircut for Men",
+      "description": "A classic haircut for men.",
+      "price": 20,
+      "avgDuration": 30,
+      "category": "Haircuts"
+    },
+    {
+      "name": "Haircut for Women",
+      "description": "A stylish haircut for women.",
+      "price": 30,
+      "avgDuration": 45,
+      "category": "Haircuts"
+    },
+    {
+      "name": "Deep Tissue Massage",
+      "description": "A relaxing deep tissue massage.",
+      "price": 50,
+      "avgDuration": 60,
+      "category": "Massage"
+    },
+    {
+      "name": "Swedish Massage",
+      "description": "A soothing Swedish massage.",
+      "price": 40,
+      "avgDuration": 45,
+      "category": "Massage"
+    },
+    {
+      "name": "Manicure",
+      "description": "A nail service for hands.",
+      "price": 25,
+      "avgDuration": 45,
+      "category": "Nails"
+    },
+    {
+      "name": "Pedicure",
+      "description": "A nail service for feet.",
+      "price": 30,
+      "avgDuration": 60,
+      "category": "Nails"
+    },
+    {
+      "name": "Hot Stone Massage",
+      "description": "A rejuvenating hot stone massage.",
+      "price": 55,
+      "avgDuration": 60,
+      "category": "Massage"
+    },
+    {
+      "name": "Couples Massage",
+      "description": "A romantic massage for couples.",
+      "price": 90,
+      "avgDuration": 90,
+      "category": "Massage"
+    },
+    {
+      "name": "French Manicure",
+      "description": "A classic French manicure.",
+      "price": 35,
+      "avgDuration": 60,
+      "category": "Nails"
+    },
+    {
+      "name": "Beard Trim",
+      "description": "A neat trim for beards.",
+      "price": 15,
+      "avgDuration": 15,
+      "category": "Haircuts"
+    }
+  ]
+  
