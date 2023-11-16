@@ -23,7 +23,7 @@ export class AddServiceFastFormComponent implements OnInit {
   ngOnInit(): void {
     //read categories from file ./predefined-services.json
     // this.http.get<Service[]>('assets/predefined-services.json').subscribe(data => {
-    this.servicesService.loadMockServices().subscribe(data => {
+    this.servicesService.getServices().subscribe(data => {
       this.predefinedServices = data;
       this.selectedCategory = this.categories[0];
       this.categoryServices = this.predefinedServices

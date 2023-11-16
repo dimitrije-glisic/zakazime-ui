@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 import { Business } from './interfaces/business.interface';
 import { Service } from './interfaces/service.interface';
 
@@ -30,34 +30,7 @@ export class ServicesService {
     }
   ]
 
-  mockServices: Service[] = [
-    {
-      name: 'Musko sisanje',
-      price: 500,
-      avgDuration: 30,
-      category: 'Sisanje'
-
-    },
-    {
-      name: 'Zensko sisanje',
-      price: 1000,
-      avgDuration: 60,
-      category: 'Sisanje'
-    },
-    {
-      name: 'Depilacija',
-      note: 'Depilacija nogu',
-      price: 500,
-      avgDuration: 30,
-      category: 'Depilacija'
-    },
-    {
-      name: 'Geliranje noktiju',
-      price: 1000,
-      avgDuration: 60,
-      category: 'Nokti'
-    }
-  ]
+  mockServices: Service[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -72,12 +45,6 @@ export class ServicesService {
   getBusinesses(): Observable<Business[]> {
     return new Observable<Business[]>(subscriber => {
       return subscriber.next(this.mockBusiness);
-    });
-  }
-
-  getServices(): Observable<Service[]> {
-    return new Observable<Service[]>(subscriber => {
-      return subscriber.next(this.mockServices);
     });
   }
 
@@ -101,9 +68,18 @@ export class ServicesService {
     });
   }
 
-
-  loadMockServices(): Observable<Service[]> {
-    return this.http.get<Service[]>('assets/predefined-services.json');
+  getServices(): Observable<Service[]> {
+    if (this.mockServices.length > 0) {
+      return new Observable<Service[]>(subscriber => {
+        return subscriber.next(this.mockServices)
+      });
+    } else {
+      return this.http.get<Service[]>('assets/predefined-services.json').pipe(
+        tap(services => {
+          this.mockServices = services;
+        }),
+      );
+    }
   }
 
   getServiceByName(name: string) {
@@ -120,7 +96,7 @@ export class ServicesService {
   updateService(service: Service) {
     //update service 'service'
     this.mockServices.forEach((element, index) => {
-      if(element.name === service.name) this.mockServices[index] = service;
+      if (element.name === service.name) this.mockServices[index] = service;
     });
 
     return new Observable<boolean>(subscriber => {

@@ -28,6 +28,7 @@ import { AddServiceFormComponent } from './business/services/add-service-form/ad
 import { StatisticsComponent } from './business/statistics/statistics.component';
 import { AddServiceFastFormComponent } from './business/services/add-service-fast-form/add-service-fast-form.component';
 import { EditServiceComponent } from './business/services/edit-service/edit-service.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -65,7 +66,8 @@ export class XhrInterceptor implements HttpInterceptor {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxPaginationModule
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
     // { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true }],

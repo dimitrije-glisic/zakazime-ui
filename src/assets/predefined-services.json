@@ -1,73 +1,317 @@
 [
-    {
-      "name": "Haircut for Men",
-      "description": "A classic haircut for men.",
-      "price": 20,
-      "avgDuration": 30,
-      "category": "Haircuts"
-    },
-    {
-      "name": "Haircut for Women",
-      "description": "A stylish haircut for women.",
-      "price": 30,
-      "avgDuration": 45,
-      "category": "Haircuts"
-    },
-    {
-      "name": "Deep Tissue Massage",
-      "description": "A relaxing deep tissue massage.",
-      "price": 50,
-      "avgDuration": 60,
-      "category": "Massage"
-    },
-    {
-      "name": "Swedish Massage",
-      "description": "A soothing Swedish massage.",
-      "price": 40,
-      "avgDuration": 45,
-      "category": "Massage"
-    },
-    {
-      "name": "Manicure",
-      "description": "A nail service for hands.",
-      "price": 25,
-      "avgDuration": 45,
-      "category": "Nails"
-    },
-    {
-      "name": "Pedicure",
-      "description": "A nail service for feet.",
-      "price": 30,
-      "avgDuration": 60,
-      "category": "Nails"
-    },
-    {
-      "name": "Hot Stone Massage",
-      "description": "A rejuvenating hot stone massage.",
-      "price": 55,
-      "avgDuration": 60,
-      "category": "Massage"
-    },
-    {
-      "name": "Couples Massage",
-      "description": "A romantic massage for couples.",
-      "price": 90,
-      "avgDuration": 90,
-      "category": "Massage"
-    },
-    {
-      "name": "French Manicure",
-      "description": "A classic French manicure.",
-      "price": 35,
-      "avgDuration": 60,
-      "category": "Nails"
-    },
-    {
-      "name": "Beard Trim",
-      "description": "A neat trim for beards.",
-      "price": 15,
-      "avgDuration": 15,
-      "category": "Haircuts"
-    }
-  ]
-  
+  {
+    "name": "Muška šišanja",
+    "description": "Klasično muško šišanje.",
+    "price": 20,
+    "avgDuration": 30,
+    "category": "Frizure"
+  },
+  {
+    "name": "Ženska šišanja",
+    "description": "Stilizovano žensko šišanje.",
+    "price": 30,
+    "avgDuration": 45,
+    "category": "Frizure"
+  },
+  {
+    "name": "Dubinska masaža",
+    "description": "Relaksirajuća dubinska masaža.",
+    "price": 50,
+    "avgDuration": 60,
+    "category": "Masaže"
+  },
+  {
+    "name": "Švedska masaža",
+    "description": "Ugodna švedska masaža.",
+    "price": 40,
+    "avgDuration": 45,
+    "category": "Masaže"
+  },
+  {
+    "name": "Manikir",
+    "description": "Nega ruku.",
+    "price": 25,
+    "avgDuration": 45,
+    "category": "Nokti"
+  },
+  {
+    "name": "Pedicir",
+    "description": "Nega stopala.",
+    "price": 30,
+    "avgDuration": 60,
+    "category": "Nokti"
+  },
+  {
+    "name": "Masaža sa toplim kamenjem",
+    "description": "Oživljavajuća masaža sa toplim kamenjem.",
+    "price": 55,
+    "avgDuration": 60,
+    "category": "Masaže"
+  },
+  {
+    "name": "Masaža za parove",
+    "description": "Romantična masaža za parove.",
+    "price": 90,
+    "avgDuration": 90,
+    "category": "Masaže"
+  },
+  {
+    "name": "Francuski manikir",
+    "description": "Klasični francuski manikir.",
+    "price": 35,
+    "avgDuration": 60,
+    "category": "Nokti"
+  },
+  {
+    "name": "Šišanje brade",
+    "description": "Precizno šišanje brade.",
+    "price": 15,
+    "avgDuration": 15,
+    "category": "Frizure"
+  },
+  {
+    "name": "Brazilski vosak",
+    "description": "Brazilski vosak za depilaciju.",
+    "price": 40,
+    "avgDuration": 30,
+    "category": "Depilacija"
+  },
+  {
+    "name": "Aromaterapija masaža",
+    "description": "Masaža sa aromatičnim uljima.",
+    "price": 60,
+    "avgDuration": 75,
+    "category": "Masaže"
+  },
+  {
+    "name": "Šišanje i feniranje",
+    "description": "Šišanje i feniranje za žene.",
+    "price": 45,
+    "avgDuration": 60,
+    "category": "Frizure"
+  },
+  {
+    "name": "Masaža stopala",
+    "description": "Relaksacija masaža stopala.",
+    "price": 35,
+    "avgDuration": 40,
+    "category": "Masaže"
+  },
+  {
+    "name": "Nadogradnja noktiju",
+    "description": "Nadogradnja i ukrašavanje noktiju.",
+    "price": 50,
+    "avgDuration": 90,
+    "category": "Nokti"
+  },
+  {
+    "name": "Pirsing",
+    "description": "Pirsing tela po izboru.",
+    "price": 30,
+    "avgDuration": 30,
+    "category": "Pirsing"
+  },
+  {
+    "name": "Botoks tretman",
+    "description": "Botoks tretman za osvežavanje kože.",
+    "price": 75,
+    "avgDuration": 45,
+    "category": "Kozmetika"
+  },
+  {
+    "name": "Nadogradnja trepavica",
+    "description": "Nadogradnja trepavica za duže i gušće trepavice.",
+    "price": 55,
+    "avgDuration": 90,
+    "category": "Trepavice"
+  },
+  {
+    "name": "Relaksaciona masaža",
+    "description": "Masaža za potpunu relaksaciju.",
+    "price": 45,
+    "avgDuration": 60,
+    "category": "Masaže"
+  },
+  {
+    "name": "Tretman lica",
+    "description": "Tretman lica sa hranljivim maskama.",
+    "price": 50,
+    "avgDuration": 45,
+    "category": "Kozmetika"
+  },
+  {
+    "name": "Tetovaže",
+    "description": "Izrada tetovaža po želji.",
+    "price": 80,
+    "avgDuration": 120,
+    "category": "Tetovaže"
+  },
+  {
+    "name": "Pirsing obrva",
+    "description": "Pirsing obrva po izboru.",
+    "price": 25,
+    "avgDuration": 30,
+    "category": "Pirsing"
+  },
+  {
+    "name": "Depilacija ruku",
+    "description": "Depilacija ruku voskom.",
+    "price": 20,
+    "avgDuration": 45,
+    "category": "Depilacija"
+  },
+  {
+    "name": "Brazilski vosak",
+    "description": "Brazilski vosak za depilaciju.",
+    "price": 40,
+    "avgDuration": 30,
+    "category": "Depilacija"
+  },
+  {
+    "name": "Frizura za posebne prilike",
+    "description": "Frizura za posebne prilike.",
+    "price": 50,
+    "avgDuration": 60,
+    "category": "Frizure"
+  },
+  {
+    "name": "Masaža leđa",
+    "description": "Masaža leđa za opuštanje.",
+    "price": 35,
+    "avgDuration": 30,
+    "category": "Masaže"
+  },
+  {
+    "name": "Manikir za posebne prilike",
+    "description": "Manikir za posebne prilike.",
+    "price": 30,
+    "avgDuration": 45,
+    "category": "Nokti"
+  },
+  {
+    "name": "Pedicir za posebne prilike",
+    "description": "Pedicir za posebne prilike.",
+    "price": 35,
+    "avgDuration": 60,
+    "category": "Nokti"
+  },
+  {
+    "name": "Brazilski vosak",
+    "description": "Brazilski vosak za depilaciju.",
+    "price": 40,
+    "avgDuration": 30,
+    "category": "Depilacija"
+  },
+  {
+    "name": "Tretman tela",
+    "description": "Tretman tela sa hranljivim uljima.",
+    "price": 55,
+    "avgDuration": 75,
+    "category": "Kozmetika"
+  },
+  {
+    "name": "Šišanje za decu",
+    "description": "Šišanje za najmlađe.",
+    "price": 15,
+    "avgDuration": 20,
+    "category": "Frizure"
+  },
+  {
+    "name": "Masaža vrata i ramena",
+    "description": "Masaža vrata i ramena za opuštanje.",
+    "price": 30,
+    "avgDuration": 30,
+    "category": "Masaže"
+  },
+  {
+    "name": "Nadogradnja i ukrašavanje noktiju",
+    "description": "Nadogradnja i ukrašavanje noktiju po izboru.",
+    "price": 40,
+    "avgDuration": 75,
+    "category": "Nokti"
+  },
+  {
+    "name": "Tretman lica sa voćnim kiselinama",
+    "description": "Tretman lica sa voćnim kiselinama za revitalizaciju kože.",
+    "price": 60,
+    "avgDuration": 60,
+    "category": "Kozmetika"
+  },
+  {
+    "name": "Uklanjanje tetovaža",
+    "description": "Uklanjanje tetovaža po želji.",
+    "price": 70,
+    "avgDuration": 90,
+    "category": "Tetovaže"
+  },
+  {
+    "name": "Pirsing usne",
+    "description": "Pirsing usne po izboru.",
+    "price": 25,
+    "avgDuration": 30,
+    "category": "Pirsing"
+  },
+  {
+    "name": "Depilacija nogu",
+    "description": "Depilacija nogu voskom.",
+    "price": 25,
+    "avgDuration": 45,
+    "category": "Depilacija"
+  },
+  {
+    "name": "Brazilski vosak",
+    "description": "Brazilski vosak za depilaciju.",
+    "price": 40,
+    "avgDuration": 30,
+    "category": "Depilacija"
+  },
+  {
+    "name": "Kozmetička masaža lica",
+    "description": "Kozmetička masaža lica za revitalizaciju kože.",
+    "price": 50,
+    "avgDuration": 45,
+    "category": "Kozmetika"
+  },
+  {
+    "name": "Nadogradnja trepavica",
+    "description": "Nadogradnja trepavica za duže i gušće trepavice.",
+    "price": 55,
+    "avgDuration": 90,
+    "category": "Trepavice"
+  },
+  {
+    "name": "Relaksaciona masaža",
+    "description": "Masaža za potpunu relaksaciju.",
+    "price": 45,
+    "avgDuration": 60,
+    "category": "Masaže"
+  },
+  {
+    "name": "Tretman lica",
+    "description": "Tretman lica sa hranljivim maskama.",
+    "price": 50,
+    "avgDuration": 45,
+    "category": "Kozmetika"
+  },
+  {
+    "name": "Tetovaže",
+    "description": "Izrada tetovaža po želji.",
+    "price": 80,
+    "avgDuration": 120,
+    "category": "Tetovaže"
+  },
+  {
+    "name": "Pirsing obrva",
+    "description": "Pirsing obrva po izboru.",
+    "price": 25,
+    "avgDuration": 30,
+    "category": "Pirsing"
+  },
+  {
+    "name": "Depilacija ruku",
+    "description": "Depilacija ruku voskom.",
+    "price": 20,
+    "avgDuration": 45,
+    "category": "Depilacija"
+  }
+]

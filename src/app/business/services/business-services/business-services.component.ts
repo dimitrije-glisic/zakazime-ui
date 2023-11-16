@@ -10,6 +10,10 @@ import { Service } from 'src/app/interfaces/service.interface';
 export class BusinessServicesComponent implements OnInit {
 
   services: Service[] = [];
+  // pagedServices: Service[] = [];
+  currentPage = 1;
+  itemsPerPage = 10;
+
   newService: Service = {
     name: '',
     description: '',
@@ -24,7 +28,15 @@ export class BusinessServicesComponent implements OnInit {
     // Fetch the list of services on init
     this.businessService.getServices().subscribe(services => {
       this.services = services;
+      // this.pagedServices = this.services.slice(0, this.itemsPerPage);
     });
   }
+
+  // pageChange(event: any): void {
+    // this.currentPage = event.page;
+    // const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    // const endIndex = startIndex + this.itemsPerPage;
+    // this.pagedServices = this.services.slice(startIndex, endIndex);
+  // }
 
 }
