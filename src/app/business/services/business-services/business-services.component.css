@@ -1,0 +1,78 @@
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    padding: 10px 40px 10px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Makes the icon non-interactive */
+    color: #555;
+  }
+  
+  .clear-btn {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #555;
+    font-size: 20px;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+  
+/* Style for the dropdown container */
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Style for the dropdown button */
+  .filter-dropdown select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 10px 35px 10px 15px;
+    -webkit-appearance: none; /* Removes default chrome and safari style */
+    -moz-appearance: none; /* Removes default style Firefox */
+    appearance: none; /* Remove default arrow */
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  /* Style for the dropdown arrow */
+  .filter-dropdown:after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  /* Style when the dropdown is focused */
+  .filter-dropdown select:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+  
+  /* You might want to include styles for when the dropdown is disabled, hovered, etc. */
+  

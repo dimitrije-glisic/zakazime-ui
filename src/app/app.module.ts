@@ -29,6 +29,7 @@ import { StatisticsComponent } from './business/statistics/statistics.component'
 import { AddServiceFastFormComponent } from './business/services/add-service-fast-form/add-service-fast-form.component';
 import { EditServiceComponent } from './business/services/edit-service/edit-service.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ServicesFilterPipe } from './business/services/filter-name.pipe';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -58,6 +59,7 @@ export class XhrInterceptor implements HttpInterceptor {
     StatisticsComponent,
     AddServiceFastFormComponent,
     EditServiceComponent,
+    ServicesFilterPipe,
   ],
   imports: [
     BrowserModule,

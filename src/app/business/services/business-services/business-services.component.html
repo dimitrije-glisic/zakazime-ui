@@ -1,4 +1,19 @@
 <div class="container mt-4 p-4">
+  <!-- filtering -->
+  
+  <div class="search-container">
+    <input type="text" class="form-control search-input" placeholder="Pretraga po nazivu usluge..." [(ngModel)]="textFilter">
+    <button class="clear-btn" *ngIf="textFilter" (click)="textFilter = ''">&times;</button>
+  </div>
+  
+  
+  <div class="filter-dropdown mb-3">
+    <select class="form-control" [(ngModel)]="categoryFilter">
+      <option value="">Sve kategorije</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  </div>
+
   <table class="table">
     <thead>
       <tr>
@@ -12,7 +27,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let service of services  | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+      <tr
+        *ngFor="let service of services | servicesFilter:textFilter:categoryFilter | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
         <td>{{ service.name }}</td>
         <td>{{ service.category }}</td>
         <td>{{ service.note ? service.note : '-' }}</td>
@@ -27,13 +43,11 @@
       </tr>
     </tbody>
   </table>
-  
 
   <div class="text-center" style="padding-top: 24px; padding-right: 10%">
     <pagination-controls (pageChange)="currentPage = $event" previousLabel="Prethodna" nextLabel="Sledeća">
     </pagination-controls>
-  </div>  
-
+  </div>
 
   <div class="p-3">
     <button type="button" class="btn btn-primary mt-3 me-3" routerLink="create">Nova usluga</button>
