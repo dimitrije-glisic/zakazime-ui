@@ -6,18 +6,15 @@ import { PublicLayoutComponent } from './public-layout/public-layout/public-layo
 import { HomeComponent } from "./home/home.component";
 import { AdminComponent } from './admin/admin.component';
 import { RoleGuard } from './role.guard';
-import { BusinessDashboardComponent } from './business/business-dashboard/business-dashboard.component';
-import { BusinessServicesComponent } from './business/services/business-services/business-services.component';
-import { StatisticsComponent } from './business/statistics/statistics.component';
-import { AddServiceFormComponent } from './business/services/add-service-form/add-service-form.component';
-import { AddServiceFastFormComponent } from './business/services/add-service-fast-form/add-service-fast-form.component';
-import { EditServiceComponent } from './business/services/edit-service/edit-service.component';
-
-
-//   // Error route
-//   { path: 'error', component: ErrorComponent },
-// ];
-
+import { BusinessDashboardComponent } from './business/components/business-dashboard/business-dashboard.component';
+import { StatisticsComponent } from './business/components/statistics/statistics.component';
+import { BusinessServicesComponent } from './business/components/services/business-services/business-services.component';
+import { AddServiceFormComponent } from './business/components/services/add-service-form/add-service-form.component';
+import { AddServiceFastFormComponent } from './business/components/services/add-service-fast-form/add-service-fast-form.component';
+import { EditServiceComponent } from './business/components/services/edit-service/edit-service.component';
+import { BusinessProfileComponent } from './business/components/business-profile/business-profile.component';
+import { FinishRegistrationComponent } from './registration-login/finish-registration/finish-registration.component';
+import { FinishedRegistrationGuard } from './finished.registration.guard';
 
 const routes: Routes = [
   {
@@ -26,7 +23,9 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'how-it-works', component: HowItWorksComponent },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      // add is logged in guard for finish registration
+      { path: 'finish-registration', component: FinishRegistrationComponent },
     ]
   },
 
@@ -34,8 +33,10 @@ const routes: Routes = [
   // { path: 'manage-business', component: BusinessComponent, canActivate: [RoleGuard], data: { expectedRole: 'SERVICE_PROVIDER' } },
 
   {
-    path: 'manage-business', component: BusinessDashboardComponent,
+    path: 'manage-business', component: BusinessDashboardComponent, canActivate: [FinishedRegistrationGuard],
     children: [
+      { path: 'profile', component: BusinessProfileComponent },
+
       { path: '', component: StatisticsComponent },
       { path: 'services', component: BusinessServicesComponent },
       { path: 'services/create', component: AddServiceFormComponent },

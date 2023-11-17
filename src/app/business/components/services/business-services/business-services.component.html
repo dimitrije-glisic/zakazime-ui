@@ -1,12 +1,12 @@
 <div class="container mt-4 p-4">
   <!-- filtering -->
-  
+
   <div class="search-container">
-    <input type="text" class="form-control search-input" placeholder="Pretraga po nazivu usluge..." [(ngModel)]="textFilter">
+    <input type="text" class="form-control search-input" placeholder="Pretraga po nazivu usluge..."
+      [(ngModel)]="textFilter">
     <button class="clear-btn" *ngIf="textFilter" (click)="textFilter = ''">&times;</button>
   </div>
-  
-  
+
   <div class="filter-dropdown mb-3">
     <select class="form-control" [(ngModel)]="categoryFilter">
       <option value="">Sve kategorije</option>

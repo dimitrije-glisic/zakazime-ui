@@ -36,6 +36,7 @@ export class RegistrationComponent {
       const userData: RegistrationRequest = this.registerForm.value;
       const registrationType = this.data.registrationType;
       userData.role = registrationType;
+      console.log('Registering user', userData);
       this.authService.registerUser(userData).subscribe({
         next: response => {
           console.log('Registration successful', response);
@@ -61,7 +62,7 @@ export class RegistrationComponent {
 
   private handleSuccessfulBusinessRegistration() {
     this.dialogRef.close();
-    this.router.navigate(['finish-registration'], { queryParams: { email: this.registerForm.value.email } });
+    this.router.navigate(['/finish-registration'], { queryParams: { email: this.registerForm.value.email } });
   }
 
   private handleSuccessfulUserRegistration() {

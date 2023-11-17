@@ -1,10 +1,10 @@
 export interface Business {
     name: string;
-    phoneNumber: string;
+    phone: string;
     city: string;
     postalCode: string;
     address: string;
     status: string;
-    ownerEmail: string;
+    ownerEmail?: string;
 }
     

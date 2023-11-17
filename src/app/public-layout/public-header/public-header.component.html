@@ -12,10 +12,8 @@
           <a class="nav-link" style="color: blue;" routerLink="/how-it-works">Izlistajte biznis</a>
         </li>
         <li *ngIf="this.authService.isLoggedInSubject | async" class="nav-item">
-          <!-- <li *ngIf="isLoggedIn" class="nav-item"> -->
-
           <a class="nav-link" (click)="logout()">Logout</a>
-          <!-- <li *ngIf="!isLoggedIn" class="nav-item"> -->
+        </li>
         <li *ngIf="!(this.authService.isLoggedInSubject | async)" class="nav-item">
           <a class="nav-link" routerLink="/login">Login</a>
         </li>

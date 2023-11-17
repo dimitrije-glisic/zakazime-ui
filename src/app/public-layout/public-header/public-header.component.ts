@@ -21,7 +21,6 @@ export class PublicHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('PublicHeaderComponent ngOnInit called');
     this.authService.setInitialLoginState();
   }
 
@@ -38,7 +37,6 @@ export class PublicHeaderComponent implements OnInit {
     this.authService.logout().subscribe(() => {
       this.router.navigateByUrl('/');
     });
-
   }
 
 }

@@ -23,6 +23,7 @@ export class AuthService {
         tap((response: User) => {
           this.userSubject.next(response);
           this.isLoggedInSubject.next(true);
+          this.doDummyPostToObtainCsrfToken();
         })
       );
   }
@@ -38,6 +39,7 @@ export class AuthService {
           console.log('Login successful, setting userSubject');
           this.userSubject.next(response);
           this.isLoggedInSubject.next(true);
+          this.doDummyPostToObtainCsrfToken();
         } else {
           console.log('Login failed');
         }
@@ -122,7 +124,13 @@ export class AuthService {
     });
   }
 
+
+  doDummyPostToObtainCsrfToken() {
+    this.http.post('api/dummy-post', {}).subscribe();
+  }
+
 }
+
 
 
 

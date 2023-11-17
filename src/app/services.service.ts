@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take, tap } from 'rxjs';
-import { Business } from './interfaces/business.interface';
 import { Service } from './interfaces/service.interface';
 
 @Injectable({
@@ -9,44 +8,9 @@ import { Service } from './interfaces/service.interface';
 })
 export class ServicesService {
 
-  mockBusiness: Business[] = [
-    {
-      name: 'Business 1',
-      phoneNumber: '1234567890',
-      city: 'City 1',
-      postalCode: '12345',
-      address: 'Address 1',
-      status: 'Active',
-      ownerEmail: 'Owner 1'
-    },
-    {
-      name: 'Business 2',
-      phoneNumber: '1234567890',
-      city: 'City 2',
-      postalCode: '12345',
-      address: 'Address 2',
-      status: 'Active',
-      ownerEmail: 'Owner 2'
-    }
-  ]
-
   mockServices: Service[] = [];
 
   constructor(private http: HttpClient) { }
-
-  getBusiness(): Observable<Business> {
-    return this.http.get<Business>('/api/business');
-  }
-
-  createBusiness(business: Business): Observable<Business> {
-    return this.http.post<Business>('/api/business', business);
-  }
-
-  getBusinesses(): Observable<Business[]> {
-    return new Observable<Business[]>(subscriber => {
-      return subscriber.next(this.mockBusiness);
-    });
-  }
 
   createService(service: Service): Observable<boolean> {
     this.mockServices.push(service);

@@ -22,14 +22,15 @@ import { FinishRegistrationComponent } from './registration-login/finish-registr
 import { AuthService } from "./auth.service";
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
-import { BusinessDashboardComponent } from './business/business-dashboard/business-dashboard.component';
-import { BusinessServicesComponent } from './business/services/business-services/business-services.component';
-import { AddServiceFormComponent } from './business/services/add-service-form/add-service-form.component';
-import { StatisticsComponent } from './business/statistics/statistics.component';
-import { AddServiceFastFormComponent } from './business/services/add-service-fast-form/add-service-fast-form.component';
-import { EditServiceComponent } from './business/services/edit-service/edit-service.component';
+import { BusinessDashboardComponent } from './business/components/business-dashboard/business-dashboard.component';
+import { BusinessServicesComponent } from './business/components/services/business-services/business-services.component';
+import { StatisticsComponent } from './business/components/statistics/statistics.component';
+import { AddServiceFastFormComponent } from './business/components/services/add-service-fast-form/add-service-fast-form.component';
+import { ServicesFilterPipe } from './business/components/services/filter-name.pipe';
+import { EditServiceComponent } from './business/components/services/edit-service/edit-service.component';
+import { BusinessProfileComponent } from './business/components/business-profile/business-profile.component';
+import { AddServiceFormComponent } from './business/components/services/add-service-form/add-service-form.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ServicesFilterPipe } from './business/services/filter-name.pipe';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -60,6 +61,7 @@ export class XhrInterceptor implements HttpInterceptor {
     AddServiceFastFormComponent,
     EditServiceComponent,
     ServicesFilterPipe,
+    BusinessProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,7 @@ export class XhrInterceptor implements HttpInterceptor {
     NgxPaginationModule
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
-    // { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true }],
+  // { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
