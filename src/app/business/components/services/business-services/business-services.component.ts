@@ -23,7 +23,7 @@ export class BusinessServicesComponent implements OnInit {
     description: '',
     price: 0,
     avgDuration: 0,
-    category: ''
+    categoryName: ''
   };
 
   constructor(private businessService: ServicesService) { }
@@ -32,7 +32,7 @@ export class BusinessServicesComponent implements OnInit {
     // Fetch the list of services on init
     this.businessService.getServices().subscribe(services => {
       this.services = services;
-      this.categories = [...new Set(this.services.map(service => service.category))];
+      this.categories = [...new Set(this.services.map(service => service.categoryName))];
     });
   }
 

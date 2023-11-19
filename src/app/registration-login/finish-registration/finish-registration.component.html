@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center   ">
     <div class="container border p-3" style="margin-top:150px; max-width: 300px;">
         <div class="row">
             <div class="col">
@@ -50,6 +50,15 @@
                             *ngIf="finishRegistrationForm.controls['address'].invalid && finishRegistrationForm.controls['address'].touched">
                             Neispravna adresa
                         </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Tip biznisa</label>
+                        <select class="form-select" formControlName="type" required>
+                            <option *ngFor="let type of businessTypes" [value]="type">
+                                {{ type }}
+                            </option>
+                        </select>
                     </div>
 
                     <div>

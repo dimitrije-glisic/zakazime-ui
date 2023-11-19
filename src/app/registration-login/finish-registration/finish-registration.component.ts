@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from 'src/app/interfaces/business.interface';
 import { BusinessService } from 'src/app/business/services/business-service';
 import { User } from 'src/app/interfaces/user.interface';
+import { ServicesService } from 'src/app/services.service';
 
 
 @Component({
@@ -16,11 +17,13 @@ export class FinishRegistrationComponent implements OnInit {
 
   finishRegistrationForm: FormGroup;
   loggedInUser?: User;
+  businessTypes: string[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private bs: BusinessService,
+    private ss: ServicesService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -30,6 +33,7 @@ export class FinishRegistrationComponent implements OnInit {
       city: ['', [Validators.required]],
       postalCode: ['', [Validators.required]],
       address: ['', [Validators.required]],
+      type: ['', [Validators.required]],
     });
     this.route.queryParams.subscribe(params => {
       const data = params['email'];
@@ -39,6 +43,9 @@ export class FinishRegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.authService.fetchUser().subscribe((user: any) => {
       this.loggedInUser = user;
+    });
+    this.bs.getBusinessTypes().subscribe((types: string[]) => {
+      this.businessTypes = types;
     });
   }
 

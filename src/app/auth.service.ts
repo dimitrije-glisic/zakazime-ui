@@ -58,7 +58,6 @@ export class AuthService {
 
   fetchUser(): Observable<User | null> {
     console.log('fetchUser called');
-    // Make an HTTP request only if userSubject's current value is null
     if (this.userSubject.getValue() === null) {
       console.log('fetchUser making HTTP request');
       return this.http.get<User>('/api/user', { withCredentials: true }).pipe(
@@ -66,55 +65,19 @@ export class AuthService {
           this.userSubject.next(response);
         }),
         catchError(error => {
+          console.log('fetchUser error', error);
           this.userSubject.next(null);
-          return of(null); // Handle error and return a null Observable to signify no user
+          return of(null);
         })
       );
     } else {
-      // If we already have a user value, return it as an Observable
       return this.userSubject.asObservable();
     }
   }
 
   get user$(): Observable<User | null> {
-    // if (this.userSubject.getValue() === null) {
-    //   return this.fetchUser();
-    // }
     return this.userSubject.asObservable();
   }
-
-
-  // isLoggedIn$(): Observable<boolean> {
-  //   if(this.userSubject.value === null) {
-  //     return this.fetchUser().pipe(
-  //       map(user => user !== null)
-  //     );
-  //   }
-  //   return this.userSubject.asObservable().pipe(
-  //     map(user => user !== null)
-  //   );
-  // }
-
-  // getUserRole(): Observable<string> {
-  //   if (this.userSubject.value === null) {
-  //     return this.fetchUser().pipe(
-  //       map(response => response?.role || '')
-  //     );
-  //   }
-  //   return of(this.userSubject.value?.role || '');
-  // }
-
-  // getUserEmail(): Observable<string> {
-  //   if (!this.userSubject) {
-  //     return this.http.get<User>('/api/user', { withCredentials: true }).pipe(
-  //       tap(response => {
-  //         this.userSubject.next(response);
-  //       }),
-  //       map(response => response.email || '')
-  //     );
-  //   }
-  //   return of(this.userSubject.value?.email || '');
-  // }
 
   setInitialLoginState(): void {
     this.fetchUser().subscribe(user => {
@@ -123,7 +86,6 @@ export class AuthService {
       }
     });
   }
-
 
   doDummyPostToObtainCsrfToken() {
     this.http.post('api/dummy-post', {}).subscribe();

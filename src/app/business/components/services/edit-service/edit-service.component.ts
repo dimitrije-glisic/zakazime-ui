@@ -40,7 +40,7 @@ export class EditServiceComponent implements OnInit {
         'description': new FormControl(service.description),
         'price': new FormControl(service.price),
         'avgDuration': new FormControl(service.avgDuration),
-        'category': new FormControl(service.category),
+        'category': new FormControl(service.categoryName),
       });
 
     });

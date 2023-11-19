@@ -10,6 +10,7 @@ import { BusinessService } from '../../services/business-service';
 export class BusinessProfileComponent {
   business: Business = {
     name: '',
+    type: '',
     phone: '',
     city: '',
     postalCode: '',
@@ -22,18 +23,12 @@ export class BusinessProfileComponent {
 
   ngOnInit(): void {
     this.businessService.getBusiness().subscribe(business => {
-      if(business) {
+      if (business) {
         this.business = business;
       } else {
         throw new Error('Business not found');
       }
     });
   }
-
-  // updateBusiness() {
-  //   this.businessService.updateBusiness(this.business).subscribe(business => {
-  //     this.business = business;
-  //   });
-  // }
 
 }

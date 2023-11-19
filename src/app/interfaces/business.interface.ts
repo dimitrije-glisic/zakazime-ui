@@ -6,5 +6,6 @@ export interface Business {
     address: string;
     status: string;
     ownerEmail?: string;
+    type: string;
 }
     

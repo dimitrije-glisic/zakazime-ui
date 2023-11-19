@@ -4,5 +4,5 @@ export interface Service {
     description?: string;
     price: number;
     avgDuration: number;
-    category: string;
+    categoryName: string;
 }

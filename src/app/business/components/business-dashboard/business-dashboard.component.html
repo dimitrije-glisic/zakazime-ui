@@ -28,14 +28,7 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link" routerLink="profile">Biznis Profil</a>
                 </div>
-
-                <!-- <li *ngIf="this.authService.isLoggedInSubject | async" class="nav-item">
-                    <a class="nav-link" (click)="logout()">Logout</a>
-                </li>
-                <li *ngIf="!(this.authService.isLoggedInSubject | async)" class="nav-item">
-                    <a class="nav-link" routerLink="/login">Login</a>
-                </li> -->
-
+                
                 <div *ngIf="this.authService.isLoggedInSubject | async" class="navbar-nav ml-auto">
                     <a class="nav-item nav-link" (click)="logout()">Logout</a>
                 </div>

@@ -38,7 +38,7 @@
     <div class="mb-3 row">
       <label for="category" class="col-sm-2 col-form-label">Kategorija:</label>
       <div class="col-sm-10">
-        <select class="form-control" id="category" formControlName="category" [(ngModel)]="service.category">
+        <select class="form-control" id="category" formControlName="category" [(ngModel)]="service.categoryName">
           <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
         </select>
       </div>
