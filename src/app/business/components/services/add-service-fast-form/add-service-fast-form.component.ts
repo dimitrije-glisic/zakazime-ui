@@ -17,6 +17,8 @@ export class AddServiceFastFormComponent implements OnInit {
   categoryServices: Service[] = [];
   userSelectedServices: Service[] = [];
 
+  businessName: string | null = null;
+
   constructor(private http: HttpClient, private servicesService: ServicesService, private businessService: BusinessService,
     private router: Router) {
   }
@@ -40,6 +42,7 @@ export class AddServiceFastFormComponent implements OnInit {
         if(!business.type) {
           throw new Error('Business type not found');
         }
+        this.businessName = business.name;
         this.loadTemplates(business.type);
       }
     )
@@ -74,7 +77,10 @@ export class AddServiceFastFormComponent implements OnInit {
   }
 
   onSaveServices(): void {
-    this.servicesService.createServices(this.userSelectedServices).subscribe(response => {
+    if(!this.businessName) {
+      throw new Error('Business name not found');
+    }
+    this.servicesService.createServices(this.userSelectedServices, this.businessName).subscribe(response => {
       console.log('Services created');
       this.router.navigate(['manage-business', 'services']);
     });

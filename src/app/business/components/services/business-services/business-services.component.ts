@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicesService } from 'src/app/services.service';
 import { Service } from 'src/app/interfaces/service.interface';
 import { ServicesFilterPipe } from '../filter-name.pipe';
+import { BusinessService } from 'src/app/business/services/business-service';
 
 @Component({
   selector: 'app-business-services',
@@ -26,13 +27,17 @@ export class BusinessServicesComponent implements OnInit {
     categoryName: ''
   };
 
-  constructor(private businessService: ServicesService) { }
+  constructor(private businessService: BusinessService, private servicesService: ServicesService) { }
 
   ngOnInit(): void {
-    // Fetch the list of services on init
-    this.businessService.getServices().subscribe(services => {
-      this.services = services;
-      this.categories = [...new Set(this.services.map(service => service.categoryName))];
+    this.businessService.getBusiness().subscribe(business => {
+      if (!business) {
+        throw new Error('Business not found');
+      }
+      this.servicesService.getServices(business.name).subscribe(services => {
+        this.services = services;
+        this.categories = [...new Set(this.services.map(service => service.categoryName))];
+      });
     });
   }
 

@@ -10,6 +10,8 @@ export class ServicesService {
 
   mockServices: Service[] = [];
 
+  services: Service[] = [];
+
   constructor(private http: HttpClient) { }
 
   createService(service: Service): Observable<boolean> {
@@ -21,30 +23,38 @@ export class ServicesService {
     });
   }
 
-  createServices(userSelectedServices: Service[]) {
-    for (const service of userSelectedServices) {
-      this.mockServices.push(service);
-    }
-    return new Observable<boolean>(subscriber => {
-      setTimeout(() => {
-        subscriber.next(true);
-      }, 800);
-    });
+  createServices(services: Service[], businessName: string) {
+    return this.http.post(`/api/business/${businessName}/services`, services).pipe(
+      tap(() => {
+        this.services.push(...services);
+      }
+      ),
+      catchError(err => {
+        if (err.status === 404) {
+          console.log('No services found for business type ' + businessName);
+        }
+        return throwError(() => err);
+      }
+      )
+    );
+
   }
 
-  getServices(): Observable<Service[]> {
-    if (this.mockServices.length > 0) {
+  getServices(name: string): Observable<Service[]> {
+    if (this.services.length > 0) {
       return new Observable<Service[]>(subscriber => {
-        return subscriber.next(this.mockServices)
+        return subscriber.next(this.services);
       });
-    } else {
-      return this.http.get<Service[]>('assets/predefined-services.json').pipe(
-        tap(services => {
-          this.mockServices = services;
-        }),
-      );
     }
+
+    return this.http.get<Service[]>(`/api/business/${name}/services`).pipe(
+      tap(services => {
+        this.services = services;
+      }),
+    );
   }
+
+
 
   getServiceByName(name: string) {
     return new Observable<Service>(subscriber => {
@@ -80,7 +90,7 @@ export class ServicesService {
         }
         return throwError(() => err);
       })
-    );  
+    );
   }
 
 }
