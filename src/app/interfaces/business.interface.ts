@@ -1,3 +1,5 @@
+import { Service } from "./service.interface";
+
 export interface Business {
     name: string;
     phone: string;
@@ -5,7 +7,8 @@ export interface Business {
     postalCode: string;
     address: string;
     status: string;
-    ownerEmail?: string;
+    ownerEmail: string;
     type: string;
+    services: Service[];
 }
     

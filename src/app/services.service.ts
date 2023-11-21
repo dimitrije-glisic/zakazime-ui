@@ -26,7 +26,7 @@ export class ServicesService {
   createServices(services: Service[], businessName: string) {
     return this.http.post(`/api/business/${businessName}/services`, services).pipe(
       tap(() => {
-        this.services.push(...services);
+        // this.services.push(...services);
       }
       ),
       catchError(err => {
@@ -46,15 +46,14 @@ export class ServicesService {
         return subscriber.next(this.services);
       });
     }
-
+    
+    console.log('calling getServices in services.service.ts');
     return this.http.get<Service[]>(`/api/business/${name}/services`).pipe(
       tap(services => {
         this.services = services;
       }),
     );
   }
-
-
 
   getServiceByName(name: string) {
     return new Observable<Service>(subscriber => {
@@ -82,8 +81,8 @@ export class ServicesService {
   }
 
   getServiceTemplatesForBusinessType(type: String): Observable<Service[]> {
+    console.log('calling getServiceTemplatesForBusinessType in services.service.ts');
     return this.http.get<Service[]>(`/api/business/types/${type}/services`).pipe(
-      // tap(business => this.business = business)
       catchError(err => {
         if (err.status === 404) {
           console.log('No services found for business type ' + type);

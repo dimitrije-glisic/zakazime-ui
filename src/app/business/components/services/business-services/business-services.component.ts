@@ -34,10 +34,8 @@ export class BusinessServicesComponent implements OnInit {
       if (!business) {
         throw new Error('Business not found');
       }
-      this.servicesService.getServices(business.name).subscribe(services => {
-        this.services = services;
-        this.categories = [...new Set(this.services.map(service => service.categoryName))];
-      });
+      this.services = business.services;
+      this.categories = [...new Set(this.services.map(service => service.categoryName))];
     });
   }
 

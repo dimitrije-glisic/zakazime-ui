@@ -12,11 +12,12 @@ export class BusinessProfileComponent {
     name: '',
     type: '',
     phone: '',
-    city: '',
+    city: '', 
     postalCode: '',
     address: '',
     status: '',
-    ownerEmail: ''
+    ownerEmail: '',
+    services: [],
   };
 
   constructor(private businessService: BusinessService) { }

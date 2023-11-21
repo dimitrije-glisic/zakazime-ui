@@ -14,7 +14,6 @@ export class AuthService {
   isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
-    console.log('AuthService constructor called');
   }
 
   registerUser(userData: RegistrationRequest): Observable<User> {

@@ -11,6 +11,8 @@ import { BusinessService } from 'src/app/business/services/business-service';
   styleUrls: ['./add-service-fast-form.component.css']
 })
 export class AddServiceFastFormComponent implements OnInit {
+  existingServices: Service[] = [];
+
   categories: string[] = [];
   serviceTemplates: Service[] = [];
   selectedCategory: string | null = null;
@@ -23,26 +25,18 @@ export class AddServiceFastFormComponent implements OnInit {
     private router: Router) {
   }
 
-  // ngOnInit(): void {
-  //   this.servicesService.getServices().subscribe(data => {
-  //     this.predefinedServices = data;
-  //     this.selectedCategory = this.categories[0];
-  //     this.categoryServices = this.predefinedServices
-  //       .filter(service => service.category === this.selectedCategory);
-  //   });
-  // }
-
   ngOnInit(): void {
     const businessType = this.businessService.getBusiness().subscribe(
       business => {
-        if(!business) {
+        if (!business) {
           throw new Error('Business not found');
         }
         //to do: make sure business type is not null
-        if(!business.type) {
+        if (!business.type) {
           throw new Error('Business type not found');
         }
         this.businessName = business.name;
+        this.existingServices = business.services;
         this.loadTemplates(business.type);
       }
     )
@@ -50,11 +44,8 @@ export class AddServiceFastFormComponent implements OnInit {
 
   loadTemplates(businessType: string): void {
     this.servicesService.getServiceTemplatesForBusinessType(businessType).subscribe(data => {
-      console.log('data', data);
-      // this.categories = data.map(service => service.categoryName);
-      // need a set
-      this.categories = [...new Set(data.map(service => service.categoryName))];
-      this.serviceTemplates = data;
+      this.serviceTemplates = data.filter(service => !this.existingServices.some(existingService => existingService.name === service.name));
+      this.categories = [...new Set(this.serviceTemplates.map(service => service.categoryName))];
       this.selectedCategory = this.categories[0];
       this.categoryServices = this.serviceTemplates
         .filter(service => service.categoryName === this.selectedCategory);
@@ -77,11 +68,12 @@ export class AddServiceFastFormComponent implements OnInit {
   }
 
   onSaveServices(): void {
-    if(!this.businessName) {
+    if (!this.businessName) {
       throw new Error('Business name not found');
     }
     this.servicesService.createServices(this.userSelectedServices, this.businessName).subscribe(response => {
       console.log('Services created');
+      this.businessService.addServicesLocally(this.userSelectedServices);
       this.router.navigate(['manage-business', 'services']);
     });
   }

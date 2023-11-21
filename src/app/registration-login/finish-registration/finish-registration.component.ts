@@ -16,7 +16,7 @@ import { ServicesService } from 'src/app/services.service';
 export class FinishRegistrationComponent implements OnInit {
 
   finishRegistrationForm: FormGroup;
-  loggedInUser?: User;
+  loggedInUser: User | undefined;
   businessTypes: string[] = [];
 
   constructor(
@@ -52,8 +52,10 @@ export class FinishRegistrationComponent implements OnInit {
   finishRegistration() {
     if (this.finishRegistrationForm.valid) {
       const business: Business = this.finishRegistrationForm.value;
-      console.log('user', this.loggedInUser);
-      business.ownerEmail = this.loggedInUser?.email;
+      if (!this.loggedInUser) {
+        throw new Error('User not found');
+      }
+      business.ownerEmail = this.loggedInUser.email;
       this.bs.createBusiness(business).subscribe((created: Business) => {
         console.log('business created', created);
         this.router.navigate(['manage-business']);
