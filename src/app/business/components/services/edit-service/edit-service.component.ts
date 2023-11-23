@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BusinessService } from 'src/app/business/services/business-service';
 import { Service } from 'src/app/interfaces/service.interface';
 import { ServicesService } from 'src/app/services.service';
 
@@ -11,45 +12,65 @@ import { ServicesService } from 'src/app/services.service';
 export class EditServiceComponent implements OnInit {
   service: Service | undefined;
   serviceForm: FormGroup;
-
-  categories: string[] = ['Haircuts', 'Depilation', 'Nails', 'Makeup', 'Massage'];
-
+  categories: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private servicesService: ServicesService // Assuming you have a service to handle API calls
+    private businessService: BusinessService,
+    private servicesService: ServicesService,
   ) {
     this.serviceForm = new FormGroup({});
-   }
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const serviceId = params['id']; // Get the id from the route
-      this.loadService(serviceId);
+      const serviceId = params['id'];
+      console.log('EditServiceComponent ngOnInit', serviceId);
+      this.loadServiceAndCategories(serviceId);
     });
   }
 
-  loadService(name: string) {
-    // Logic to load service by ID
-    this.servicesService.getServiceByName(name).subscribe(service => {
-      this.service = service;
-      this.serviceForm = new FormGroup({
-        'name': new FormControl(service.name),
-        'note': new FormControl(service.note),
-        'description': new FormControl(service.description),
-        'price': new FormControl(service.price),
-        'avgDuration': new FormControl(service.avgDuration),
-        'category': new FormControl(service.categoryName),
-      });
+  loadServiceAndCategories(id: string) {
+    this.businessService.getBusiness().subscribe(business => {
+      if (!business || !business.services) {
+        throw new Error('Business not found with services');
+      }
 
+      this.service = business.services.find(service => service.id == id);
+
+      if (!this.service) {
+        throw new Error('Service not found');
+      }
+
+      this.serviceForm = new FormGroup({
+        'name': new FormControl(this.service.name),
+        'note': new FormControl(this.service.note),
+        'description': new FormControl(this.service.description),
+        'price': new FormControl(this.service.price),
+        'avgDuration': new FormControl(this.service.avgDuration),
+        'category': new FormControl(this.service.categoryName),
+      });
+      this.loadCategories(business.type);
     });
   }
 
   onSave(service: Service): void {
-    // Logic to save the edited service
+    if (!this.service) {
+      throw new Error('Service not defined on edit-service.component.ts onSave()');
+    }
+    service.businessName = this.service.businessName;
     this.servicesService.updateService(service).subscribe(result => {
+      this.businessService.updateServiceLocally(service);
       this.router.navigate(['/manage-business/services']);
     });
   }
+
+  loadCategories(type: string) {
+    return this.servicesService.getServiceTemplatesForBusinessType(type).subscribe(data => {
+      this.categories = [...new Set(data.map(service => service.categoryName))];
+    }
+    );
+  }
+
 }

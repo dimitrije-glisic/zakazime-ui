@@ -1,32 +1,42 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="serviceForm" class="container mt-4">
-    <div class="mb-3">
-        <label for="name" class="form-label">Usluga:</label>
-        <input type="text" class="form-control" id="name" formControlName="name">
-    </div>
-    <div class="mb-3">
-        <label for="note" class="form-label">Napomena:</label>
-        <input type="text" class="form-control" id="note" formControlName="note">
-    </div>
-    <div class="mb-3">
-        <label for="description" class="form-label">Opis:</label>
-        <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="price" class="form-label">Cena:</label>
-        <input type="number" class="form-control" id="price" formControlName="price">
-    </div>
-    <div class="mb-3">
-        <label for="avgDuration" class="form-label">Prosecno trajanje:</label>
-        <input type="number" class="form-control" id="avgDuration" formControlName="avgDuration">
-    </div>
+<div class="container">
+    <div class="row pb-5">
+        <div class="col-12">
 
-    <div class="mb-3">
-        <label for="category" class="form-label">Kategorija:</label>
-        <select class="form-control" id="category" formControlName="category">
-            <option value="" disabled selected>Select a Category</option>
-            <option *ngFor="let category of mockCategories" [value]="category">{{ category }}</option>
-        </select>
-    </div>
+            <form (ngSubmit)="onSubmit()" [formGroup]="serviceForm" class="container mt-4">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Usluga:</label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                </div>
+                <div class="mb-3">
+                    <label for="note" class="form-label">Napomena:</label>
+                    <input type="text" class="form-control" id="note" formControlName="note">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Opis:</label>
+                    <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Cena:</label>
+                    <input type="number" class="form-control" id="price" formControlName="price">
+                </div>
+                <div class="mb-3">
+                    <label for="avgDuration" class="form-label">Prosecno trajanje:</label>
+                    <input type="number" class="form-control" id="avgDuration" formControlName="avgDuration">
+                </div>
 
-    <button type="submit" class="btn btn-primary">Add Service</button>
-</form>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Kategorija:</label>
+                    <select class="form-control" id="category" formControlName="categoryName">
+                        <option value="" disabled selected>Selektujte kategoriju</option>
+                        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 pt-1">
+                    <button type="submit" class="btn btn-primary">Add Service</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

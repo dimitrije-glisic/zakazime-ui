@@ -26,7 +26,7 @@ import { BusinessDashboardComponent } from './business/components/business-dashb
 import { BusinessServicesComponent } from './business/components/services/business-services/business-services.component';
 import { StatisticsComponent } from './business/components/statistics/statistics.component';
 import { AddServiceFastFormComponent } from './business/components/services/add-service-fast-form/add-service-fast-form.component';
-import { ServicesFilterPipe } from './business/components/services/filter-name.pipe';
+import { ServicesFilterPipe } from './business/components/services/services-filter.pipe';
 import { EditServiceComponent } from './business/components/services/edit-service/edit-service.component';
 import { BusinessProfileComponent } from './business/components/business-profile/business-profile.component';
 import { AddServiceFormComponent } from './business/components/services/add-service-form/add-service-form.component';

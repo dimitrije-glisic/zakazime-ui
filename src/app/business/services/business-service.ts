@@ -42,9 +42,17 @@ export class BusinessService {
     }
   }
 
-  addServicesLocally(userSelectedServices: Service[]) {
+  addServicesLocally(services: Service[]) {
     if (this.business) {
-      this.business.services.push(...userSelectedServices);
+      this.business.services.push(...services);
+    }
+  }
+
+  updateServiceLocally(service: Service) {
+    if (this.business) {
+      this.business.services.forEach((element, index) => {
+        if (element.name === service.name) this.business!.services[index] = service;
+      });
     }
   }
 

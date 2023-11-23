@@ -14,21 +14,12 @@ export class ServicesService {
 
   constructor(private http: HttpClient) { }
 
-  createService(service: Service): Observable<boolean> {
-    this.mockServices.push(service);
-    return new Observable<boolean>(subscriber => {
-      setTimeout(() => {
-        subscriber.next(true);
-      }, 800);
-    });
+  createService(service: Service, businessName: string) {
+    return this.createServices([service], businessName);
   }
 
   createServices(services: Service[], businessName: string) {
     return this.http.post(`/api/business/${businessName}/services`, services).pipe(
-      tap(() => {
-        // this.services.push(...services);
-      }
-      ),
       catchError(err => {
         if (err.status === 404) {
           console.log('No services found for business type ' + businessName);
@@ -46,7 +37,7 @@ export class ServicesService {
         return subscriber.next(this.services);
       });
     }
-    
+
     console.log('calling getServices in services.service.ts');
     return this.http.get<Service[]>(`/api/business/${name}/services`).pipe(
       tap(services => {
@@ -55,34 +46,20 @@ export class ServicesService {
     );
   }
 
-  getServiceByName(name: string) {
-    return new Observable<Service>(subscriber => {
-      const service = this.mockServices.find(service => service.name === name);
-      if (service) {
-        subscriber.next(service);
-      } else {
-        subscriber.error('Service not found');
-      }
-    });
-  }
-
   updateService(service: Service) {
-    //update service 'service'
-    this.mockServices.forEach((element, index) => {
-      if (element.name === service.name) this.mockServices[index] = service;
-    });
-
-    return new Observable<boolean>(subscriber => {
-      setTimeout(() => {
-        subscriber.next(true);
-      }, 800);
-    });
-
+    return this.http.put(`/api/business/${service.businessName}/services/${service.id}`, service).pipe(
+      catchError(err => {
+        return throwError(() => err);
+      }
+      )
+    );
   }
 
   getServiceTemplatesForBusinessType(type: String): Observable<Service[]> {
-    console.log('calling getServiceTemplatesForBusinessType in services.service.ts');
     return this.http.get<Service[]>(`/api/business/types/${type}/services`).pipe(
+      tap(services => {
+       console.log('getServiceTemplatesForBusinessType received services.services', services);
+      }),
       catchError(err => {
         if (err.status === 404) {
           console.log('No services found for business type ' + type);

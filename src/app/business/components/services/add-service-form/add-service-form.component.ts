@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BusinessService } from 'src/app/business/services/business-service';
 import { ServicesService } from 'src/app/services.service';
 
 @Component({
@@ -10,17 +11,11 @@ import { ServicesService } from 'src/app/services.service';
 })
 export class AddServiceFormComponent {
 
-  mockCategories: string[] = [
-    'Sisanje',
-    'Depilacija',
-    'Nokti',
-    'Sminka',
-    'Masaza'
-  ]
-
+  businessName: string | undefined;
+  categories: string[] = [];
   serviceForm: FormGroup;
 
-  constructor(private businessService: ServicesService, private router: Router) {
+  constructor(private businessService: BusinessService, private servicesService: ServicesService, private router: Router) {
     this.serviceForm = new FormGroup({});
   }
 
@@ -32,14 +27,32 @@ export class AddServiceFormComponent {
       'description': new FormControl(null),
       'price': new FormControl(null),
       'avgDuration': new FormControl(null),
-      'category': new FormControl(null),
+      'categoryName': new FormControl(null),
+    });
+
+    this.businessService.getBusiness().subscribe(business => {
+      if (!business) {
+        throw new Error('Business not found');
+      }
+      this.businessName = business.name;
+      this.servicesService.getServiceTemplatesForBusinessType(business.type).subscribe(data => {
+        console.log('getServiceTemplatesForBusinessType', data);
+        this.categories = [...new Set(data.map(service => service.categoryName))];
+      });
+
     });
   }
 
   onSubmit() {
-    console.log(this.serviceForm.value);
     if (this.serviceForm.valid) {
-      this.businessService.createService(this.serviceForm.value).subscribe(response => {
+      if (!this.businessName) {
+        throw new Error('Business name not found');
+      }
+      
+      console.log(`Trying to create service ${JSON.stringify(this.serviceForm.value)} for business ${this.businessName}`)
+
+      this.servicesService.createService(this.serviceForm.value, this.businessName).subscribe(() => {
+        this.businessService.addServicesLocally([this.serviceForm.value]);
         this.router.navigate(['manage-business', 'services']);
       });
     }

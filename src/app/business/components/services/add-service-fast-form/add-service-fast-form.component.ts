@@ -19,7 +19,8 @@ export class AddServiceFastFormComponent implements OnInit {
   categoryServices: Service[] = [];
   userSelectedServices: Service[] = [];
 
-  businessName: string | null = null;
+  businessName: string | undefined;
+  businessType: string | undefined;
 
   constructor(private http: HttpClient, private servicesService: ServicesService, private businessService: BusinessService,
     private router: Router) {
@@ -36,6 +37,7 @@ export class AddServiceFastFormComponent implements OnInit {
           throw new Error('Business type not found');
         }
         this.businessName = business.name;
+        this.businessType = business.type;
         this.existingServices = business.services;
         this.loadTemplates(business.type);
       }

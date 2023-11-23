@@ -5,11 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ServicesFilterPipe implements PipeTransform {
 
-  transform(items: any[], text: string, category: string): any[] {
+  transform(items: any[], text: string, categoryName: string): any[] {
     if (!items) return [];
 
     let filteredItems = text ? this.filterByText(items, text) : items;
-    return category ? this.filterByCategory(filteredItems, category) : filteredItems;
+    return categoryName ? this.filterByCategory(filteredItems, categoryName) : filteredItems;
   }
 
   private filterByText(items: any[], searchText: string): any[] {
@@ -20,7 +20,7 @@ export class ServicesFilterPipe implements PipeTransform {
     });
   }
 
-  private filterByCategory(items: any[], category: string): any[] {
-    return items.filter(item => item.category === category);
+  private filterByCategory(items: any[], categoryName: string): any[] {
+    return items.filter(item => item.categoryName === categoryName);
   }
 }

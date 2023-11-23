@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicesService } from 'src/app/services.service';
 import { Service } from 'src/app/interfaces/service.interface';
-import { ServicesFilterPipe } from '../filter-name.pipe';
+import { ServicesFilterPipe } from '../services-filter.pipe';
 import { BusinessService } from 'src/app/business/services/business-service';
 
 @Component({
@@ -20,6 +20,7 @@ export class BusinessServicesComponent implements OnInit {
   categoryFilter = '';
 
   newService: Service = {
+    id: '',
     name: '',
     description: '',
     price: 0,
@@ -34,6 +35,7 @@ export class BusinessServicesComponent implements OnInit {
       if (!business) {
         throw new Error('Business not found');
       }
+      console.log(business.services);
       this.services = business.services;
       this.categories = [...new Set(this.services.map(service => service.categoryName))];
     });
