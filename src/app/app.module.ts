@@ -31,6 +31,7 @@ import { EditServiceComponent } from './business/components/services/edit-servic
 import { BusinessProfileComponent } from './business/components/business-profile/business-profile.component';
 import { AddServiceFormComponent } from './business/components/services/add-service-form/add-service-form.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BusinessTypesComponent } from './public-layout/business-types/business-types.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -62,6 +63,7 @@ export class XhrInterceptor implements HttpInterceptor {
     EditServiceComponent,
     ServicesFilterPipe,
     BusinessProfileComponent,
+    BusinessTypesComponent,
   ],
   imports: [
     BrowserModule,

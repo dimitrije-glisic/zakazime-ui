@@ -5,15 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './public-layout.component.html',
   styleUrls: ['./public-layout.component.css']
 })
-export class PublicLayoutComponent  {
-
-  // constructor() { 
-  //   console.log('public layout component constructor')
-  // }
-
-  // ngOnInit(): void {
-  //   console.log('public layout component init')
-  // }
-
-
+export class PublicLayoutComponent {
 }
