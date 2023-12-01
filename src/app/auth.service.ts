@@ -56,15 +56,15 @@ export class AuthService {
   }
 
   fetchUser(): Observable<User | null> {
-    console.log('fetchUser called');
+    // console.log('fetchUser called');
     if (this.userSubject.getValue() === null) {
-      console.log('fetchUser making HTTP request');
+      // console.log('fetchUser making HTTP request');
       return this.http.get<User>('/api/user', { withCredentials: true }).pipe(
         tap(response => {
           this.userSubject.next(response);
         }),
         catchError(error => {
-          console.log('fetchUser error', error);
+          // console.log('fetchUser error', error);
           this.userSubject.next(null);
           return of(null);
         })

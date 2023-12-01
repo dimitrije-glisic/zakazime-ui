@@ -9,6 +9,7 @@ import { BusinessType } from 'src/app/interfaces/business-type.interface';
   styleUrls: ['./business-types.component.css']
 })
 export class BusinessTypesComponent {
+
   businessTypes: BusinessType[] = [
     {
       title: 'Ulepsavanje',
@@ -24,9 +25,9 @@ export class BusinessTypesComponent {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  navigateTo(link: string): void {
-    this.router.navigate([link]);
+  onBusinessTypeClick(type: BusinessType) {
+    this.router.navigate([`${type.title.toLowerCase()}`]);
   }
 }

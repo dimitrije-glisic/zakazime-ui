@@ -32,6 +32,11 @@ import { BusinessProfileComponent } from './business/components/business-profile
 import { AddServiceFormComponent } from './business/components/services/add-service-form/add-service-form.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BusinessTypesComponent } from './public-layout/business-types/business-types.component';
+import { BusinessTypeHomeComponent } from './public-layout/business-type-home/business-type-home.component';
+import { CategoriesComponent } from './public-layout/categories/categories.component';
+import { SubCategoriesComponent } from './public-layout/sub-categories/sub-categories.component';
+import { BusinessListingComponent } from './public-layout/business-listing/business-listing.component';
+import { BreadcrumbComponent } from './public-layout/breadcrumb/breadcrumb.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -64,6 +69,11 @@ export class XhrInterceptor implements HttpInterceptor {
     ServicesFilterPipe,
     BusinessProfileComponent,
     BusinessTypesComponent,
+    BusinessTypeHomeComponent,
+    CategoriesComponent,
+    SubCategoriesComponent,
+    BusinessListingComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,17 +15,35 @@ import { EditServiceComponent } from './business/components/services/edit-servic
 import { BusinessProfileComponent } from './business/components/business-profile/business-profile.component';
 import { FinishRegistrationComponent } from './registration-login/finish-registration/finish-registration.component';
 import { FinishedRegistrationGuard } from './finished.registration.guard';
+import { BusinessTypeHomeComponent } from './public-layout/business-type-home/business-type-home.component';
+import { BusinessTypesComponent } from './public-layout/business-types/business-types.component';
+import { CategoriesComponent } from './public-layout/categories/categories.component';
+import { SubCategoriesComponent } from './public-layout/sub-categories/sub-categories.component';
+import { BusinessListingComponent } from './public-layout/business-listing/business-listing.component';
 
 const routes: Routes = [
   {
     path: '',
     component: PublicLayoutComponent,
     children: [
-      { path: 'home', component: HomeComponent },
-      { path: 'how-it-works', component: HowItWorksComponent },
-      { path: 'login', component: LoginComponent },
-      // add is logged in guard for finish registration
-      { path: 'finish-registration', component: FinishRegistrationComponent },
+      { path: '', component: BusinessTypesComponent },
+      // ... other static routes
+
+      {
+        path: ':title', 
+        component: CategoriesComponent, 
+        data: { breadcrumb: '/:title' } // Including 'Home' for full path
+      },
+      {
+        path: ':title/:categoryTitle', 
+        component: SubCategoriesComponent, 
+        data: { breadcrumb: '/:title/:categoryTitle' }
+      },
+      {
+        path: ':title/:categoryTitle/:subCategoryTitle', 
+        component: BusinessListingComponent, 
+        data: { breadcrumb: '/:title/:categoryTitle/:subCategoryTitle' }
+      },
     ]
   },
 

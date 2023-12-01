@@ -6,5 +6,6 @@ export interface Service {
     price: number;
     avgDuration: number;
     categoryName: string;
+    subCategoryName?: string;
     businessName?: string;
 }

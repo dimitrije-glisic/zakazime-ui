@@ -1,0 +1,13 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let subCategory of subCategories">
+            <div class="card h-100" (click)="onSubCategoryClick(subCategory)">
+                <img [src]="getCategoryImageUrl(subCategory)" class="card-img-top" [alt]="subCategory">
+                <div class="card-body">
+                    <h5 class="card-title">{{ subCategory }}</h5>
+                    <a href="#" class="btn btn-primary">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
