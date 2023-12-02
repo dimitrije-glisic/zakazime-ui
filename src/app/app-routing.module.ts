@@ -26,23 +26,23 @@ const routes: Routes = [
     path: '',
     component: PublicLayoutComponent,
     children: [
-      { path: '', component: BusinessTypesComponent },
+      { path: '', component: BusinessTypesComponent, data: { breadcrumb: 'pocetna' } },
       // ... other static routes
 
       {
         path: ':title', 
         component: CategoriesComponent, 
-        data: { breadcrumb: '/:title' } // Including 'Home' for full path
+        data: { breadcrumb: 'title' } // Including 'Home' for full path
       },
       {
         path: ':title/:categoryTitle', 
         component: SubCategoriesComponent, 
-        data: { breadcrumb: '/:title/:categoryTitle' }
+        data: { breadcrumb: 'categoryTitle' }
       },
       {
         path: ':title/:categoryTitle/:subCategoryTitle', 
         component: BusinessListingComponent, 
-        data: { breadcrumb: '/:title/:categoryTitle/:subCategoryTitle' }
+        data: { breadcrumb: 'subCategoryTitle' }
       },
     ]
   },

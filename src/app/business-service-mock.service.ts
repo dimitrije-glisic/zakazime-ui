@@ -136,12 +136,6 @@ function generateMockData() {
   const healthBusiness = createBusiness('HealthHub', 'MEDICINA', 1);
   const beautyBusiness = createBusiness('BeautySpot', 'ULEPSAVANJE', 2);
 
-  console.log(healthBusiness);
-  console.log(beautyBusiness);
-
   return [healthBusiness, beautyBusiness];
 
 }
-
-const mockData = generateMockData();
-console.log(mockData);

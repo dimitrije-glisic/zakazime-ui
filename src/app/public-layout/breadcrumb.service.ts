@@ -17,37 +17,50 @@ export class BreadcrumbService {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      const rootRoute = this.activatedRoute.root;
-      const breadcrumbs = this.createBreadcrumbs(rootRoute);
+    ).subscribe((event) => {
+      const leaf = this.findLeafRoute(this.activatedRoute);
+      const breadcrumbs = this.createBreadcrumbs(leaf);
+      breadcrumbs.unshift({ label: 'Pocetna', url: '' });
+      console.log(breadcrumbs);
       this.breadcrumbsSource.next(breadcrumbs);
     });
   }
 
-  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
-    const newBreadcrumbs = [...breadcrumbs];
-
-    if (route.routeConfig && route.snapshot.url.length) {
-      const path = route.snapshot.url.map(segment => segment.path).join('/');
-      url = `${url}/${path}`;
-
-      let label = route.routeConfig.data?.['breadcrumb'] || 'Home';
-      if (label.includes(':')) {
-        label = this.getLabelFromParams(label, route.snapshot.params);
-      }
-
-      newBreadcrumbs.push({ label, url });
-    }
-
+  private findLeafRoute(route: ActivatedRoute): ActivatedRoute {
     if (route.firstChild) {
-      return this.createBreadcrumbs(route.firstChild, url, newBreadcrumbs);
+      return this.findLeafRoute(route.firstChild);
     }
+    return route;
+  }
 
-    return newBreadcrumbs;
+  private createBreadcrumbs(route: ActivatedRoute): Breadcrumb[] {
+    const breadcrumbs: Breadcrumb[] = [];
+    const path = this.getCurrentRoute(route);
+    let url = '';
+    path.split('/')
+      .filter(part => part)
+      .forEach((part, index, parts) => {
+        part = part.replace(':', '');
+        const label = this.getLabelFromParams(part, route.snapshot.params);
+        url += `${label}/`;
+        const breadcrumb = {
+          label: label.charAt(0).toUpperCase() + label.slice(1),
+          url: url
+        };
+        breadcrumbs.push(breadcrumb);
+      });
+    return breadcrumbs;
+  }
+
+  private getCurrentRoute(route: ActivatedRoute): string {
+    return route.snapshot.pathFromRoot
+      .map(r => r.routeConfig && r.routeConfig.path)
+      .filter(path => path)
+      .join('/');
   }
 
   private getLabelFromParams(label: string, params: Params): string {
-    return label.split(':').map(part => {
+    return label.split('/').map(part => {
       return params[part] || part;
     }).join(' ');
   }
