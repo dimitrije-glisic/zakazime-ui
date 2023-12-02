@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, Params } from '@angular/router';
-import { BehaviorSubject, filter } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, filter, map } from 'rxjs';
 
 export interface Breadcrumb {
   label: string;
@@ -16,38 +16,49 @@ export class BreadcrumbService {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      const rootRoute = this.activatedRoute.root;
-      const breadcrumbs = this.createBreadcrumbs(rootRoute);
+      filter(event => event instanceof NavigationEnd),
+      distinctUntilChanged(),
+      map(() => this.findLeafRoute(this.activatedRoute)),
+      map(leafRoute => this.createBreadcrumbs(leafRoute))
+    ).subscribe(breadcrumbs => {
+      breadcrumbs.unshift({ label: 'Pocetna', url: '' });
+      console.log(breadcrumbs);
       this.breadcrumbsSource.next(breadcrumbs);
     });
   }
 
-  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
-    const newBreadcrumbs = [...breadcrumbs];
-
-    if (route.routeConfig && route.snapshot.url.length) {
-      const path = route.snapshot.url.map(segment => segment.path).join('/');
-      url = `${url}/${path}`;
-
-      let label = route.routeConfig.data?.['breadcrumb'] || 'Home';
-      if (label.includes(':')) {
-        label = this.getLabelFromParams(label, route.snapshot.params);
-      }
-
-      newBreadcrumbs.push({ label, url });
-    }
-
+  private findLeafRoute(route: ActivatedRoute): ActivatedRoute {
     if (route.firstChild) {
-      return this.createBreadcrumbs(route.firstChild, url, newBreadcrumbs);
+      return this.findLeafRoute(route.firstChild);
     }
+    return route;
+  }
 
-    return newBreadcrumbs;
+  private createBreadcrumbs(route: ActivatedRoute): Breadcrumb[] {
+    const routePath = this.getCurrentRoute(route);
+    return routePath.split('/')
+      .filter(part => part)
+      .map(part => part.split(':')[1])
+      .reduce((acc, part, index, array) => {
+        const label = this.getLabelFromParams(part, route.snapshot.params);
+        acc.url += `${label}/`;
+        acc.breadcrumbs.push({
+          label: label.charAt(0).toUpperCase() + label.slice(1),
+          url: acc.url
+        } as Breadcrumb); // Add type assertion here
+        return acc;
+      }, { breadcrumbs: [] as Breadcrumb[], url: '' }).breadcrumbs;
+  }
+
+  private getCurrentRoute(route: ActivatedRoute): string {
+    return route.snapshot.pathFromRoot
+      .map(r => r.routeConfig && r.routeConfig.path)
+      .filter(path => path)
+      .join('/');
   }
 
   private getLabelFromParams(label: string, params: Params): string {
-    return label.split(':').map(part => {
+    return label.split('/').map(part => {
       return params[part] || part;
     }).join(' ');
   }

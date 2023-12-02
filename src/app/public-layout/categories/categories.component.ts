@@ -27,8 +27,6 @@ export class CategoriesComponent {
   loadData(title: string) {
     this.businessses = this.businessServiceMock.getBusinesses();
 
-    console.log(title);
-
     this.categories = [...new Set(
       this.businessses
         .filter((business: Business) => business.type === title)
@@ -36,7 +34,6 @@ export class CategoriesComponent {
         .map((service: Service) => service.categoryName) as string[]
     )];
 
-    console.log(this.categories);
   }
 
   getCategoryImageUrl(category: string): string {
