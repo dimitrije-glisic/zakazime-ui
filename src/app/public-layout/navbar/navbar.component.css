@@ -1,0 +1,32 @@
+.navbar {
+    position: relative;
+    /* For positioning the overlay text absolutely */
+    color: #fff;
+    /* White text color */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #0056b3;
+    /* Adjust to match your branding */
+}
+
+.nav-link {
+    color: #fff;
+}
+
+.nav-link:hover {
+    color: #0056b3;
+    /* Brand color for hover state */
+}
+
+.list-business-action {
+    background-color: #fff;
+    color: #0056b3;
+    border-radius: 5px;
+}
+
+.list-business-action:hover {
+    background-color: #0056b3;
+    color: #fff;
+}

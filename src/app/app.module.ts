@@ -14,7 +14,6 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration-login/registration/registration.component';
 import { LoginComponent } from './registration-login/login/login.component';
-import { PublicLayoutComponent } from './public-layout/public-layout/public-layout.component';
 import { PublicHeaderComponent } from './public-layout/public-header/public-header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -37,6 +36,7 @@ import { SubCategoriesComponent } from './public-layout/sub-categories/sub-categ
 import { BusinessListingComponent } from './public-layout/business-listing/business-listing.component';
 import { BreadcrumbComponent } from './public-layout/breadcrumb/breadcrumb.component';
 import { BusinessDetailsComponent } from './public-layout/business-details/business-details.component';
+import { NavbarComponent } from './public-layout/navbar/navbar.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -55,7 +55,6 @@ export class XhrInterceptor implements HttpInterceptor {
     HowItWorksComponent,
     RegistrationComponent,
     LoginComponent,
-    PublicLayoutComponent,
     PublicHeaderComponent,
     FinishRegistrationComponent,
     HomeComponent,
@@ -73,7 +72,8 @@ export class XhrInterceptor implements HttpInterceptor {
     SubCategoriesComponent,
     BusinessListingComponent,
     BreadcrumbComponent,
-    BusinessDetailsComponent
+    BusinessDetailsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { ApplicationRef, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   REGISTRATION_TYPE_CUSTOMER,
@@ -15,6 +15,16 @@ import { Router } from "@angular/router";
 })
 export class PublicHeaderComponent implements OnInit {
   registrationType = REGISTRATION_TYPE_CUSTOMER;
+
+  // make bellow fields as @Input() and pass them from parent component
+
+  // backgroundImg = '/assets/images/gradient.jpeg';
+  // title = 'Dobrodosli na ZakaziMe';
+  // subtitle = 'Pronadjite najbolju uslugu za svoje potrebe';
+
+  @Input() backgroundImg: string | undefined;
+  @Input() title: string | undefined;
+  @Input() subtitle: string | undefined;
 
   constructor(private dialog: MatDialog, public authService: AuthService, private router: Router) {
 

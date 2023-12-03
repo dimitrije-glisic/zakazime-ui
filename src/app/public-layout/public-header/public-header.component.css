@@ -1,52 +1,20 @@
-.navbar {
-  position: relative; /* For positioning the overlay text absolutely */
-  color: #fff; /* White text color */
-}
-
 .background-image-container {
-  background: url('/assets/images/gradient.jpeg') no-repeat center center;
   background-size: cover; /* Cover the entire area of the container */
   background-position: top center;
   height: auto;
 }
 
-.navbar-brand {
-  font-weight: bold;
-  color: #0056b3; /* Adjust to match your branding */
-}
-
-.nav-link {
-  color: #fff;
-}
-
-.nav-link:hover {
-  color: #0056b3; /* Brand color for hover state */
-}
-
-.list-business-action {
-  background-color: #fff;
-  color: #0056b3;
-  border-radius: 5px;
-}
-
-.list-business-action:hover {
-  background-color: #0056b3;
-  color: #fff;
-}
-
-
 .overlay-text {
   margin-top: 3rem; /* Space between the navbar and overlay text */
-  margin-bottom: 3rem;
+  margin-bottom: 10%;
   padding-top: 3rem;
-  padding-bottom: 10rem;
+  padding-bottom: 10%;
 }
 
 .overlay-text h1,
 .overlay-text p {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Black shadow for better visibility */
 }
-
 
 .container {
   max-width: 1140px;

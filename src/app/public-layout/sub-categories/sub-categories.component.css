@@ -14,3 +14,11 @@
     background-color: #007bff;
     border-color: #007bff;
 }
+
+
+.container {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px;
+  }

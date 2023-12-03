@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PublicLayoutComponent } from './public-layout/public-layout/public-layout.component';
 import { AdminComponent } from './admin/admin.component';
 import { RoleGuard } from './role.guard';
 import { BusinessDashboardComponent } from './business/components/business-dashboard/business-dashboard.component';
@@ -18,29 +17,23 @@ import { BusinessListingComponent } from './public-layout/business-listing/busin
 import { BusinessDetailsComponent } from './public-layout/business-details/business-details.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: PublicLayoutComponent,
-    children: [
-      { path: '', component: BusinessTypesComponent, data: { breadcrumb: 'pocetna' } },
-      // ... other static routes
+  { path: '', component: BusinessTypesComponent, data: { breadcrumb: 'pocetna' } },
 
-      {
-        path: 'business-type/:title', 
-        component: CategoriesComponent, 
-        data: { breadcrumb: 'title' }
-      },
-      {
-        path: 'business-type/:title/:categoryTitle', 
-        component: SubCategoriesComponent, 
-        data: { breadcrumb: 'categoryTitle' }
-      },
-      {
-        path: 'business-type/:title/:categoryTitle/:subCategoryTitle', 
-        component: BusinessListingComponent, 
-        data: { breadcrumb: 'subCategoryTitle' }
-      },
-    ]
+  {
+    path: 'business-type/:title', 
+    component: CategoriesComponent, 
+    data: { breadcrumb: 'title' }
+  },
+  {
+    path: 'business-type/:title/:categoryTitle', 
+    component: SubCategoriesComponent, 
+    data: { breadcrumb: 'categoryTitle' }
+  },
+
+  {
+    path: 'business-type/:title/:categoryTitle/:subCategoryTitle', 
+    component: BusinessListingComponent, 
+    data: { breadcrumb: 'subCategoryTitle' }
   },
 
   { path: 'business/:id', component: BusinessDetailsComponent },

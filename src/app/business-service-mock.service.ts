@@ -29,14 +29,33 @@ export class BusinessServiceMockService {
     return serviceImages[serviceName] || 'assets/images/default-service.jpg';
   }
 
+  getTypeImageUrl(type: string): string {
+    return typeImages[type] || 'assets/images/beauty.jpg';
+  }
+
+  getSubCategoryImageUrl(subCategory: string): string {
+    return subCategoryImages[subCategory] || 'assets/images/default-subcategory.jpg';
+  }
+
 }
+
+const typeImages: { [key: string]: string } = {
+  // Add your type-image mappings here
+  'ULEPSAVANJE': 'assets/images/beauty.jpg',
+  'MEDICINA': 'assets/images/health.jpg',
+  // ... other types
+};
 
 const categoryImages: { [key: string]: string } = {
   // Add your category-image mappings here
-  // 'Hair': 'assets/images/url-to-hair-category-image',
+  'HAIR': 'assets/images/category/hair',
   // 'Nails': 'assets/images/url-to-nails-category-image',
   // ... other categories
 };
+
+const subCategoryImages: { [key: string]: string } = {
+  'WOMAN-HAIR': 'assets/images/subcategory/woman-hair',
+}
 
 const cityImages: { [key: string]: string } = {
   // 'Belgrade': 'assets/images/url-to-belgrade-image',

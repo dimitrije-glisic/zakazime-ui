@@ -8,6 +8,9 @@ import { BusinessType } from 'src/app/interfaces/business-type.interface';
   styleUrls: ['./business-types.component.css']
 })
 export class BusinessTypesComponent {
+  backgroundImg = '/assets/images/gradient.jpeg';
+  title = 'Dobrodosli na ZakaziMe';
+  subtitle = 'Pronadjite najbolju uslugu za svoje potrebe';
 
   businessTypes: BusinessType[] = [
     {

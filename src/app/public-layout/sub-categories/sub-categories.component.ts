@@ -10,6 +10,11 @@ import { Service } from 'src/app/interfaces/service.interface';
   styleUrls: ['./sub-categories.component.css']
 })
 export class SubCategoriesComponent {
+
+  backgroundImg: string | undefined;
+  title: string | undefined;
+  subtitle: string | undefined;
+
   businessType: string | undefined;
   category: string | undefined;
 
@@ -37,10 +42,18 @@ export class SubCategoriesComponent {
         .map((service: Service) => service.subCategoryName) as string[]
     )];
 
+    this.backgroundImg = this.getSubCategoryImageUrl(this.subCategories[0]);
+    this.title = categoryTitle;
+    this.subtitle = 'Sub Categories Subtitle';
+
   }
 
   getCategoryImageUrl(category: string): string {
     return this.businessServiceMock.getCategoryImageUrl(category);
+  }
+
+  getSubCategoryImageUrl(subCategory: string): string {
+    return this.businessServiceMock.getSubCategoryImageUrl(subCategory);
   }
 
   onSubCategoryClick(subCategory: string) {
