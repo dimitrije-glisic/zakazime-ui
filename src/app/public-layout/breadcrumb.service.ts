@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, Params } from '@angular/router';
-import { BehaviorSubject, filter } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, filter, map } from 'rxjs';
 
 export interface Breadcrumb {
   label: string;
@@ -16,10 +16,13 @@ export class BreadcrumbService {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event) => {
-      const leaf = this.findLeafRoute(this.activatedRoute);
-      const breadcrumbs = this.createBreadcrumbs(leaf);
+      filter(event => event instanceof NavigationEnd),
+      // check if contains 'business-type' in url or empty
+      filter(() => this.router.url.includes('business-type') || this.router.url === '/'),
+      distinctUntilChanged(),
+      map(() => this.findLeafRoute(this.activatedRoute)),
+      map(leafRoute => this.createBreadcrumbs(leafRoute))
+    ).subscribe(breadcrumbs => {
       breadcrumbs.unshift({ label: 'Pocetna', url: '' });
       console.log(breadcrumbs);
       this.breadcrumbsSource.next(breadcrumbs);
@@ -34,22 +37,20 @@ export class BreadcrumbService {
   }
 
   private createBreadcrumbs(route: ActivatedRoute): Breadcrumb[] {
-    const breadcrumbs: Breadcrumb[] = [];
-    const path = this.getCurrentRoute(route);
-    let url = '';
-    path.split('/')
+    const routePath = this.getCurrentRoute(route);
+    return routePath.split('/')
       .filter(part => part)
-      .forEach((part, index, parts) => {
-        part = part.replace(':', '');
+      .filter(part => !part.includes('business-type'))
+      .map(part => part.split(':')[1])
+      .reduce((acc, part, index, array) => {
         const label = this.getLabelFromParams(part, route.snapshot.params);
-        url += `${label}/`;
-        const breadcrumb = {
+        acc.url += `${label}/`;
+        acc.breadcrumbs.push({
           label: label.charAt(0).toUpperCase() + label.slice(1),
-          url: url
-        };
-        breadcrumbs.push(breadcrumb);
-      });
-    return breadcrumbs;
+          url: 'business-type/' + acc.url
+        } as Breadcrumb); // Add type assertion here
+        return acc;
+      }, { breadcrumbs: [] as Breadcrumb[], url: '' }).breadcrumbs;
   }
 
   private getCurrentRoute(route: ActivatedRoute): string {

@@ -1,4 +1,3 @@
-// business-type.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BusinessType } from 'src/app/interfaces/business-type.interface';
@@ -28,6 +27,7 @@ export class BusinessTypesComponent {
   constructor(private router: Router) { }
 
   onBusinessTypeClick(type: BusinessType) {
-    this.router.navigate([`${type.title.toLowerCase()}`]);
+    console.log('onBusinessTypeClick', type);
+    this.router.navigate(['/business-type', type.title.toLowerCase()]);
   }
 }

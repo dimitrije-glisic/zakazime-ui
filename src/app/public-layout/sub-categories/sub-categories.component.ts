@@ -44,7 +44,7 @@ export class SubCategoriesComponent {
   }
 
   onSubCategoryClick(subCategory: string) {
-    this.router.navigate([this.businessType?.toLowerCase(), this.category?.toLowerCase(), subCategory.toLowerCase()]);
+    this.router.navigate(['/business-type', this.businessType?.toLowerCase(), this.category?.toLowerCase(), subCategory.toLowerCase()]);
   }
 
 }

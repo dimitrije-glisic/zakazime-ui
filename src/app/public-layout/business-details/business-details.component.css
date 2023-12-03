@@ -1,0 +1,14 @@
+.business-profile h2, h3 {
+    color: #007bff;
+}
+
+.business-profile hr {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
