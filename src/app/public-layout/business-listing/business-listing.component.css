@@ -1,0 +1,14 @@
+/* Unique layout feature */
+.business-listing-page .card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Interactive image effect */
+.business-listing-page .card-img-top {
+    border-bottom: 5px solid #ffc107;
+}
+
+/* Business name style */
+.business-listing-page .card-body h5 {
+    color: #ffc107;
+}

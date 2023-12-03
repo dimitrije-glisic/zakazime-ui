@@ -28,8 +28,6 @@ export class BusinessListingComponent {
 
   loadData(typeTitle: string, categoryTitle: string, subCategoryTitle: string) {
     const businesses = this.businessServiceMock.getBusinesses();
-    console.log('businesses:', businesses.map(b => b.name));
-  
     const typeTitleUpper = typeTitle.toUpperCase();
     const categoryTitleUpper = categoryTitle.toUpperCase();
     const subCategoryTitleUpper = subCategoryTitle.toUpperCase();
@@ -44,11 +42,8 @@ export class BusinessListingComponent {
         )
         .map(service => service.businessName)
     );
-  
-    console.log('matchedBusinessNames:', Array.from(matchedBusinessNames));
-  
+
     this.businesses = businesses.filter(business => matchedBusinessNames.has(business.name));
-    console.log('matched businesses:', this.businesses);
   }
   
 

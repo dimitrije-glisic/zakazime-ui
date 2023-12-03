@@ -41,7 +41,7 @@ export class CategoriesComponent {
   }
 
   onCategoryClick(category: string) {
-    this.router.navigate([this.businessType?.toLowerCase(), category.toLowerCase()]);
+    this.router.navigate(['/business-type', this.businessType?.toLowerCase(), category.toLowerCase()]);
   }
 
 }

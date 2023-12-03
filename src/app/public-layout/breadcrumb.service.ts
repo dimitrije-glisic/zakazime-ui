@@ -17,6 +17,8 @@ export class BreadcrumbService {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
+      // check if contains 'business-type' in url or empty
+      filter(() => this.router.url.includes('business-type') || this.router.url === '/'),
       distinctUntilChanged(),
       map(() => this.findLeafRoute(this.activatedRoute)),
       map(leafRoute => this.createBreadcrumbs(leafRoute))
@@ -38,13 +40,14 @@ export class BreadcrumbService {
     const routePath = this.getCurrentRoute(route);
     return routePath.split('/')
       .filter(part => part)
+      .filter(part => !part.includes('business-type'))
       .map(part => part.split(':')[1])
       .reduce((acc, part, index, array) => {
         const label = this.getLabelFromParams(part, route.snapshot.params);
         acc.url += `${label}/`;
         acc.breadcrumbs.push({
           label: label.charAt(0).toUpperCase() + label.slice(1),
-          url: acc.url
+          url: 'business-type/' + acc.url
         } as Breadcrumb); // Add type assertion here
         return acc;
       }, { breadcrumbs: [] as Breadcrumb[], url: '' }).breadcrumbs;
