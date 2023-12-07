@@ -10,6 +10,10 @@ import { Service } from 'src/app/interfaces/service.interface';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent {
+  backgroundImg = '/assets/images/gradient.jpeg';
+  title = 'Dobrodosli na ZakaziMe';
+  subtitle = 'Pronadjite najbolju uslugu za svoje potrebe';
+
   businessses: Business[] | undefined;
   categories: string[] | undefined;
 
@@ -34,6 +38,11 @@ export class CategoriesComponent {
         .map((service: Service) => service.categoryName) as string[]
     )];
 
+    this.backgroundImg = this.getBusinessesTypeImageUrl(title);
+  }
+
+  getBusinessesTypeImageUrl(type: string): string {
+    return this.businessServiceMock.getTypeImageUrl(type);
   }
 
   getCategoryImageUrl(category: string): string {

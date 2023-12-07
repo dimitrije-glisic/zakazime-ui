@@ -1,14 +1,83 @@
-.business-profile h2, h3 {
-    color: #007bff;
+.business-profile .business-name {
+    color: #35495e;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.business-profile hr {
-    margin-top: 0.5rem;
+.business-profile .divider {
+    width: 10%;
+    margin: auto;
+    border-top: 4px solid #3498db;
+}
+
+.business-profile .section-title {
+    color: #2c3e50;
+    font-size: 2rem;
     margin-bottom: 1rem;
-    border: 0;
-    border-top: 2px solid rgba(0, 0, 0, 0.1);
 }
 
-.card {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+.business-profile .sub-category-title {
+    color: #27ae60;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
 }
+
+.business-profile .list-group {
+    margin-bottom: 1rem;
+    border-radius: 0;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.business-profile .list-group-item {
+    border: none;
+    padding: 0.75rem 1.25rem;
+    background-color: #ecf0f1;
+    color: #34495e;
+    font-size: 1rem;
+    border-radius: 0;
+}
+
+.business-profile .list-group-item + .list-group-item {
+    border-top: 1px solid #dfe6e9;
+}
+
+.business-profile .book-now-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.business-profile .book-now-btn:hover {
+    background-color: #c0392b;
+    cursor: pointer;
+}
+
+.section-title {
+    font-size: 1.75rem; /* Adjust the font size if necessary */
+    margin-bottom: 1rem;
+    margin-left: 0; /* Align with the services list */
+    padding-left: 0; /* Align with the services list */
+}
+
+/* Ensure that the .sub-category-title and .list-group have no additional padding or margin that would cause misalignment */
+.sub-category-title {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.list-group {
+    padding-left: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .business-profile .divider {
+        width: 20%;
+    }
+}
+
+
