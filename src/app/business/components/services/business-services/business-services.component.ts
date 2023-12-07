@@ -25,7 +25,8 @@ export class BusinessServicesComponent implements OnInit {
     description: '',
     price: 0,
     avgDuration: 0,
-    categoryName: ''
+    categoryName: '',
+    subCategoryName: '',
   };
 
   constructor(private businessService: BusinessService, private servicesService: ServicesService) { }
