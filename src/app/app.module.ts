@@ -38,6 +38,7 @@ import { BreadcrumbComponent } from './public-layout/breadcrumb/breadcrumb.compo
 import { BusinessDetailsComponent } from './public-layout/business-details/business-details.component';
 import { NavbarComponent } from './public-layout/navbar/navbar.component';
 import { BookingComponent } from './public-layout/booking/booking.component';
+import { FilterBySubcategoryPipe } from './public-layout/filter-by-subcategory.pipe';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -75,7 +76,8 @@ export class XhrInterceptor implements HttpInterceptor {
     BreadcrumbComponent,
     BusinessDetailsComponent,
     NavbarComponent,
-    BookingComponent
+    BookingComponent,
+    FilterBySubcategoryPipe
   ],
   imports: [
     BrowserModule,

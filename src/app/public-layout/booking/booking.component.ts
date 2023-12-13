@@ -10,7 +10,6 @@ import { Service } from 'src/app/interfaces/service.interface';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent {
-
   business: Business = {} as Business;
 
   services: Service[] = [];
@@ -23,7 +22,7 @@ export class BookingComponent {
     const businessId = this.route.snapshot.paramMap.get('business-name');
     this.business = this.businessServiceMock.getBusinesses().find(b => b.name === businessId) as Business;
     this.services = this.business.services;
-    this.subcategories = this.business.services.map(s => s.subCategoryName);
+    this.subcategories = [...new Set(this.business.services.map(s => s.subCategoryName))];
   }
 
   filterBySubcategory(subcategory: any) {
@@ -36,6 +35,11 @@ export class BookingComponent {
 
   removeService(service: any) {
     this.selectedServices = this.selectedServices.filter(s => s !== service);
+  }
+
+  scrollToSubcategory(subcategory: string): void {
+    const element = document.getElementById(`subcategory-${subcategory}`);
+    element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
 }

@@ -1,51 +1,47 @@
-<div class="container business-profile my-4">
-
+<div class="container my-4">
     <!-- Subcategory Navigation Tabs -->
-    <nav class="nav nav-pills nav-fill">
-        <a class="nav-item nav-link" *ngFor="let subcategory of subcategories" (click)="filterBySubcategory(subcategory)">{{ subcategory }}</a>
+    <nav class="nav nav-pills nav-fill mb-3 sticky-subcategories">
+        <a class="nav-item nav-link" *ngFor="let subcategory of subcategories"
+            (click)="scrollToSubcategory(subcategory)">{{ subcategory }}</a>
     </nav>
 
     <!-- Main Content Row -->
-    <div class="row my-3">
-        
-        <!-- Scrollable Services List -->
-        <div class="col-md-8" style="overflow-y: scroll; max-height: 600px;">
-            <div *ngFor="let subcategory of filteredSubcategories">
+    <div class="row">
+        <!-- Services List -->
+        <div class="services-list col-lg-8">
+            <section *ngFor="let subcategory of subcategories; let i = index" [attr.id]="'subcategory-' + subcategory">
                 <h4>{{ subcategory }}</h4>
                 <div class="row">
-                    <div class="col-md-12" *ngFor="let service of services">
+                    <div class="col-md-12" *ngFor="let service of services | filterBySubcategory:subcategory">
                         <div class="d-flex justify-content-between align-items-center p-2 border rounded mb-2">
                             <div>
-                                <h5 class="mb-1">{{ service.name }}</h5>
-                                <p class="mb-1">Duration: {{ service.avgDuration }}</p>
-                                <p class="mb-0">Price: {{ service.price }}</p>
+                                <h5 class="mb-1 service-name">{{ service.name }}</h5>
+                                <p class="mb-1 service-duration">{{ service.avgDuration }} min</p>
+                                <p class="mb-0 service-price">{{ service.price | currency }}</p>
                             </div>
-                            <button class="btn btn-outline-primary" (click)="addService(service)">+</button>
+                            <button class="btn btn-outline-secondary btn-add-service" (click)="addService(service)">+</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
 
         <!-- Selected Services Box -->
-        <div class="col-md-4" style="position: sticky; top: 0;">
-            <h4>Selected Services</h4>
-            <div *ngIf="selectedServices.length">
-                <div *ngFor="let selectedService of selectedServices">
-                    <div class="d-flex justify-content-between align-items-center p-2 border rounded mb-2">
-                        <div>
-                            <h5 class="mb-1">{{ selectedService.name }}</h5>
-                            <p class="mb-1">Duration: {{ selectedService.duration }}</p>
-                            <p class="mb-0">Price: {{ selectedService.price }}</p>
-                        </div>
+        <div class="selected-services-box col-lg-4">
+            <h4 class="mb-3">Selected Services</h4>
+            <div *ngIf="selectedServices.length > 0">
+                <div *ngFor="let selectedService of selectedServices" class="card selected-service-card mb-3">
+                    <div class="card-body">
+                        <span class="service-name">{{ selectedService.name }}</span>
+                        <span class="service-duration">{{ selectedService.avgDuration }} min</span>
+                        <span class="service-price">${{ selectedService.price }}</span>
                         <button class="btn btn-danger" (click)="removeService(selectedService)">-</button>
                     </div>
                 </div>
             </div>
-            <div *ngIf="!selectedServices.length">
+            <div *ngIf="selectedServices.length === 0" class="text-center no-services">
                 <p>No services selected.</p>
             </div>
         </div>
-
     </div>
 </div>
