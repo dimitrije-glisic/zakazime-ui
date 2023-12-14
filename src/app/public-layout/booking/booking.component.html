@@ -42,6 +42,8 @@
             <div *ngIf="selectedServices.length === 0" class="text-center no-services">
                 <p>No services selected.</p>
             </div>
+            <div *ngIf="selectedServices.length > 0">
+                <button class="btn btn-primary" (click)="pickTime()">Pick time</button>
         </div>
     </div>
 </div>

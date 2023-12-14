@@ -39,6 +39,7 @@ import { BusinessDetailsComponent } from './public-layout/business-details/busin
 import { NavbarComponent } from './public-layout/navbar/navbar.component';
 import { BookingComponent } from './public-layout/booking/booking.component';
 import { FilterBySubcategoryPipe } from './public-layout/filter-by-subcategory.pipe';
+import { BookingDatePickerComponent } from './public-layout/booking-date-picker/booking-date-picker.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -77,7 +78,8 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessDetailsComponent,
     NavbarComponent,
     BookingComponent,
-    FilterBySubcategoryPipe
+    FilterBySubcategoryPipe,
+    BookingDatePickerComponent
   ],
   imports: [
     BrowserModule,

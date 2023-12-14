@@ -16,30 +16,33 @@ import { SubCategoriesComponent } from './public-layout/sub-categories/sub-categ
 import { BusinessListingComponent } from './public-layout/business-listing/business-listing.component';
 import { BusinessDetailsComponent } from './public-layout/business-details/business-details.component';
 import { BookingComponent } from './public-layout/booking/booking.component';
+import { BookingDatePickerComponent } from './public-layout/booking-date-picker/booking-date-picker.component';
 
 const routes: Routes = [
   { path: '', component: BusinessTypesComponent, data: { breadcrumb: 'pocetna' } },
 
   {
-    path: 'business-type/:title', 
-    component: CategoriesComponent, 
+    path: 'business-type/:title',
+    component: CategoriesComponent,
     data: { breadcrumb: 'title' }
   },
   {
-    path: 'business-type/:title/:categoryTitle', 
-    component: SubCategoriesComponent, 
+    path: 'business-type/:title/:categoryTitle',
+    component: SubCategoriesComponent,
     data: { breadcrumb: 'categoryTitle' }
   },
 
   {
-    path: 'business-type/:title/:categoryTitle/:subCategoryTitle', 
-    component: BusinessListingComponent, 
+    path: 'business-type/:title/:categoryTitle/:subCategoryTitle',
+    component: BusinessListingComponent,
     data: { breadcrumb: 'subCategoryTitle' }
   },
 
   { path: 'business/:id', component: BusinessDetailsComponent },
 
   { path: 'booking/:business-name', component: BookingComponent },
+
+  { path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent },
 
   { path: 'manage-users', component: AdminComponent, canActivate: [RoleGuard], data: { expectedRole: 'ADMIN' } },
   // { path: 'manage-business', component: BusinessComponent, canActivate: [RoleGuard], data: { expectedRole: 'SERVICE_PROVIDER' } },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessServiceMockService } from 'src/app/business-service-mock.service';
 import { Business } from 'src/app/interfaces/business.interface';
 import { Service } from 'src/app/interfaces/service.interface';
@@ -18,7 +18,8 @@ export class BookingComponent {
   filteredSubcategories: string[] = [];
   selectedServices: any[] = [];
 
-  constructor(private route: ActivatedRoute, private businessServiceMock: BusinessServiceMockService) {
+  constructor(private route: ActivatedRoute, private businessServiceMock: BusinessServiceMockService,
+    private router: Router) {
     const businessId = this.route.snapshot.paramMap.get('business-name');
     this.business = this.businessServiceMock.getBusinesses().find(b => b.name === businessId) as Business;
     this.services = this.business.services;
@@ -40,6 +41,11 @@ export class BookingComponent {
   scrollToSubcategory(subcategory: string): void {
     const element = document.getElementById(`subcategory-${subcategory}`);
     element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  pickTime() {
+    console.log('pick time');
+    this.router.navigate(['booking', this.business.name, 'pick-time'], { queryParams: { services: this.selectedServices.map(s => s.id) } });
   }
 
 }
