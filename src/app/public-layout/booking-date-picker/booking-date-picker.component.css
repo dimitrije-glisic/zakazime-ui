@@ -1,47 +1,61 @@
 .btn-arrow {
-  color: #000; /* Black color for the arrow */
+  color: #000;
+  /* Black color for the arrow */
   font-size: 20px;
 }
 
 .btn-arrow:hover {
-  background-color: #e9ecef; /* Light grey background for hover effect */
+  background-color: #e9ecef;
+  /* Light grey background for hover effect */
 }
 
 .month-navigation h2 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   /* Smaller month label */
 }
 
 .week-days {
   display: flex;
   gap: 5px;
+  padding: 1rem;
   /* Reduce space between circles */
 }
 
 .day-circle {
-  width: 60px; /* Circle size */
-  height: 60px; /* Circle size */
-  line-height: 60px; /* Line height for vertical centering */
-  border: 2px solid #000; /* Black border */
-  background-color: #fff; /* White background */
-  color: #000; /* Black text color */
+  width: 60px;
+  /* Circle size */
+  height: 60px;
+  /* Circle size */
+  line-height: 60px;
+  /* Line height for vertical centering */
+  border: 2px solid #000;
+  /* Black border */
+  background-color: #fff;
+  /* White background */
+  color: #000;
+  /* Black text color */
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%; /* This makes the element a circle */
+  border-radius: 50%;
+  /* This makes the element a circle */
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
 
 .day-circle:hover {
-  transform: scale(1.05); /* Slightly scale up on hover */
+  transform: scale(1.05);
+  /* Slightly scale up on hover */
 }
 
 /* Selected day */
 .day-circle.selected {
-  background-color: #007bff; /* Distinct background color for selected day */
-  color: #fff; /* White text color for selected day */
-  border-color: #007bff; /* Border color to match background */
+  background-color: #007bff;
+  /* Distinct background color for selected day */
+  color: #fff;
+  /* White text color for selected day */
+  border-color: #007bff;
+  /* Border color to match background */
 }
 
 .day-circle.crossed-out {
@@ -76,6 +90,12 @@
   font-weight: bold;
 }
 
+.booking-summary {
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 576px) {
   .week-days .day-circle {
     width: 40px;
@@ -93,4 +113,22 @@
     /* Smaller font size for the day number */
   }
 
+}
+
+@media (max-width: 991px) {
+  .col-lg-7,
+  .col-lg-5 {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
+.col-lg-7 {
+  padding-right: 40px;
+}
+
+.col-lg-5 {
+  padding-top: 30px;
+  padding-left: 40px;
+  
 }

@@ -16,7 +16,7 @@ export class BookingComponent {
 
   subcategories: string[];
   filteredSubcategories: string[] = [];
-  selectedServices: any[] = [];
+  selectedServices: Service[] = [];
 
   constructor(private route: ActivatedRoute, private businessServiceMock: BusinessServiceMockService,
     private router: Router) {
@@ -30,11 +30,11 @@ export class BookingComponent {
     this.filteredSubcategories = this.subcategories.filter(s => s === subcategory);
   }
 
-  addService(service: any) {
+  addService(service: Service) {
     this.selectedServices.push(service);
   }
 
-  removeService(service: any) {
+  removeService(service: Service) {
     this.selectedServices = this.selectedServices.filter(s => s !== service);
   }
 
@@ -45,7 +45,7 @@ export class BookingComponent {
 
   pickTime() {
     console.log('pick time');
-    this.router.navigate(['booking', this.business.name, 'pick-time'], { queryParams: { services: this.selectedServices.map(s => s.id) } });
+    this.router.navigate(['booking', this.business.name, 'pick-time'], { queryParams: { services: this.selectedServices} });
   }
 
 }

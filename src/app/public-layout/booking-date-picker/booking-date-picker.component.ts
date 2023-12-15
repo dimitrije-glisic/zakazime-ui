@@ -1,5 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Service } from 'src/app/interfaces/service.interface';
 
 @Component({
   selector: 'app-booking-date-picker',
@@ -13,8 +15,23 @@ export class BookingDatePickerComponent {
   selectedDate: Date = new Date();
   monthLabel: string = '';
 
+  selectedServices: { name: string, price: number }[] = [];
+  totalSum: number = 0;
+  selectedTime: string | null = null;
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+
   ngOnInit() {
     this.loadWeekDates(new Date());
+    this.loadSelectedServices();
+  }
+
+  loadSelectedServices() {
+    // Replace with actual logic
+    this.selectedServices = [
+      { name: 'Service 1', price: 50 },
+      { name: 'Service 2', price: 75 }
+    ];
   }
 
   loadWeekDates(startingDate: Date) {
@@ -75,11 +92,6 @@ export class BookingDatePickerComponent {
     this.loadWeekDates(newStartDate);
   }
 
-  selectTimeSlot(slot: string) {
-    console.log('Time slot selected:', slot);
-    // Implement logic to handle time slot selection
-  }
-
   // Convert Date to a string key for indexing
   dateString(date: Date): string {
     return formatDate(date, 'yyyy-MM-dd', 'en-US');
@@ -89,6 +101,20 @@ export class BookingDatePickerComponent {
   hasAvailableSlots(date: Date): boolean {
     const dateString = this.dateString(date);
     return this.availableSlots[dateString] && this.availableSlots[dateString].length > 0;
+  }
+
+  calculateTotalSum() {
+    this.totalSum = this.selectedServices.reduce((sum, service) => sum + service.price, 0);
+  }
+
+  selectTimeSlot(slot: string) {
+    this.selectedTime = slot;
+    // other logic...
+  }
+
+  goToConfirmPage() {
+    // Navigate to confirm page with necessary data
+    this.router.navigate(['../confirm-booking'], { relativeTo: this.activatedRoute});
   }
 
 }

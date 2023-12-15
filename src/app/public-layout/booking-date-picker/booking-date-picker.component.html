@@ -1,37 +1,59 @@
 <!-- booking-datepicker.component.html -->
 <div class="container my-4">
-    <div class="row justify-content-between align-items-center mb-3">
-        <div class="month-navigation col-auto">
-          <h2 class="mb-0">{{ monthLabel }}</h2>
-        </div>
-        <div class="col-auto">
-          <button class="btn btn-arrow" (click)="navigateWeeks(-1)">&lt;</button>
-          <button class="btn btn-arrow ms-2" (click)="navigateWeeks(1)">&gt;</button>
-        </div>
-      </div>
 
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="week-days d-flex justify-content-between p-3 mb-1">
-                <div *ngFor="let date of weekDates" class="text-center" [class.crossed-out]="!hasAvailableSlots(date)"
-                    (click)="selectDate(date)">
-                    <div class="day-circle day-number" [class.selected]="isSelectedDate(date)">{{ date | date: 'd' }}
-                    </div>
-                    <div class="day-label">{{ date | date: 'E' }}</div>
+    <div class="row gx-5">
+        <div class="col-lg-7">
+            <h2 class="mb-3">Pick a date and time</h2>
+            <div class="row justify-content-between align-items-center mb-3 pt-3">
+                <div class="month-navigation col-auto">
+                    <h2 class="mb-0">{{ monthLabel }}</h2>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-arrow" (click)="navigateWeeks(-1)">&lt;</button>
+                    <button class="btn btn-arrow ms-2" (click)="navigateWeeks(1)">&gt;</button>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row" *ngIf="selectedDate">
-        <div class="col-12">
-            <div class="time-slots">
-                <div *ngFor="let slot of availableSlots[dateString(selectedDate)]" class="time-slot-card card mb-3"
-                    (click)="selectTimeSlot(slot)">
-                    <div class="card-body">
-                        {{ slot }}
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="week-days d-flex justify-content-between p-3 mb-1">
+                        <div *ngFor="let date of weekDates" class="text-center"
+                            [class.crossed-out]="!hasAvailableSlots(date)" (click)="selectDate(date)">
+                            <div class="day-circle day-number" [class.selected]="isSelectedDate(date)">{{ date | date:
+                                'd' }}
+                            </div>
+                            <div class="day-label">{{ date | date: 'E' }}</div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="row" *ngIf="selectedDate">
+                <div class="col-12">
+                    <div class="time-slots">
+                        <div *ngFor="let slot of availableSlots[dateString(selectedDate)]"
+                            class="time-slot-card card mb-3" (click)="selectTimeSlot(slot)">
+                            <div class="card-body">
+                                {{ slot }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-5">
+            <div class="booking-summary border p-3">
+                <h3>Booking Summary</h3>
+                <ul class="list-unstyled">
+                    <li *ngFor="let service of selectedServices">
+                        {{ service.name }} - ${{ service.price }}
+                    </li>
+                </ul>
+                <p>Total: ${{ totalSum }}</p>
+                <p *ngIf="selectedTime">Time: {{ selectedTime }}</p>
+                <button class="btn btn-primary" *ngIf="selectedTime" (click)="goToConfirmPage()">Continue</button>
             </div>
         </div>
     </div>
