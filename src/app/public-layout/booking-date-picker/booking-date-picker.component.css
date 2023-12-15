@@ -90,10 +90,13 @@
   font-weight: bold;
 }
 
-.booking-summary {
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.col-lg-7 {
+  padding-right: 40px;
+}
+
+.col-lg-5 {
+  padding-top: 30px;
+  padding-left: 40px;
 }
 
 @media (max-width: 576px) {
@@ -121,14 +124,4 @@
     max-width: 100%;
     flex: 0 0 100%;
   }
-}
-
-.col-lg-7 {
-  padding-right: 40px;
-}
-
-.col-lg-5 {
-  padding-top: 30px;
-  padding-left: 40px;
-  
 }

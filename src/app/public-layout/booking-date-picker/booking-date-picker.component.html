@@ -1,6 +1,9 @@
 <!-- booking-datepicker.component.html -->
 <div class="container my-4">
 
+    <app-booking-breadcrumb [currentStep]="'pick-time'" [businessName]="businessName">
+    </app-booking-breadcrumb>
+
     <div class="row gx-5">
         <div class="col-lg-7">
             <h2 class="mb-3">Pick a date and time</h2>
@@ -44,17 +47,9 @@
         </div>
 
         <div class="col-lg-5">
-            <div class="booking-summary border p-3">
-                <h3>Booking Summary</h3>
-                <ul class="list-unstyled">
-                    <li *ngFor="let service of selectedServices">
-                        {{ service.name }} - ${{ service.price }}
-                    </li>
-                </ul>
-                <p>Total: ${{ totalSum }}</p>
-                <p *ngIf="selectedTime">Time: {{ selectedTime }}</p>
-                <button class="btn btn-primary" *ngIf="selectedTime" (click)="goToConfirmPage()">Continue</button>
-            </div>
+            <app-booking-summary [selectedServices]="selectedServices" [selectedTime]="selectedTime"
+                [totalSum]="totalSum" [buttonLabel]="'Continue'" (buttonClick)="continueToConfirmation()">
+            </app-booking-summary>
         </div>
     </div>
 </div>

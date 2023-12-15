@@ -18,8 +18,18 @@ export class BookingDatePickerComponent {
   selectedServices: { name: string, price: number }[] = [];
   totalSum: number = 0;
   selectedTime: string | null = null;
+  isTimeSelected: boolean = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+  businessName: string = '';
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+    // http://localhost:4200/booking/HealthHub/confirm-booking
+    //extract the business name from the url (HealthHub)
+    this.activatedRoute.url.subscribe(url => {
+      this.businessName = url[1].path;
+      console.log(this.businessName);
+    });
+  }
 
   ngOnInit() {
     this.loadWeekDates(new Date());
@@ -109,12 +119,12 @@ export class BookingDatePickerComponent {
 
   selectTimeSlot(slot: string) {
     this.selectedTime = slot;
-    // other logic...
+    this.isTimeSelected = true;
   }
 
-  goToConfirmPage() {
+  continueToConfirmation() {
     // Navigate to confirm page with necessary data
-    this.router.navigate(['../confirm-booking'], { relativeTo: this.activatedRoute});
+    this.router.navigate(['../confirm-booking'], { relativeTo: this.activatedRoute });
   }
 
 }

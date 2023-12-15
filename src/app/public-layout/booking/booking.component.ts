@@ -18,12 +18,22 @@ export class BookingComponent {
   filteredSubcategories: string[] = [];
   selectedServices: Service[] = [];
 
+  businessName: string = '';
+
   constructor(private route: ActivatedRoute, private businessServiceMock: BusinessServiceMockService,
     private router: Router) {
     const businessId = this.route.snapshot.paramMap.get('business-name');
     this.business = this.businessServiceMock.getBusinesses().find(b => b.name === businessId) as Business;
     this.services = this.business.services;
     this.subcategories = [...new Set(this.business.services.map(s => s.subCategoryName))];
+  }
+
+  ngOnInit(): void {
+    console.log('BookingComponent ngOnInit');
+    this.route.url.subscribe(url => {
+      this.businessName = url[1].path;
+      console.log(this.businessName);
+    });
   }
 
   filterBySubcategory(subcategory: any) {
@@ -45,7 +55,7 @@ export class BookingComponent {
 
   pickTime() {
     console.log('pick time');
-    this.router.navigate(['booking', this.business.name, 'pick-time'], { queryParams: { services: this.selectedServices} });
+    this.router.navigate(['booking', this.business.name, 'pick-time'], { queryParams: { services: this.selectedServices } });
   }
 
 }

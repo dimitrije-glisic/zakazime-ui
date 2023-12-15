@@ -1,0 +1,9 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" *ngFor="let step of steps">
+        <a *ngIf="canNavigateBack(step.action)" [routerLink]="step.route">{{ step.label }}</a>
+        <span *ngIf="!canNavigateBack(step.action) || isCurrentStep(step.action)">{{ step.label }}</span>
+      </li>
+    </ol>
+  </nav>
+  

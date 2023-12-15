@@ -63,7 +63,7 @@ export class BusinessDetailsComponent {
   }
 
   navigateToBooking() {
-    this.router.navigate(['/booking/HealthHub']); // Adjust the route as needed
+    this.router.navigate(['/booking/HealthHub/select-services']); // Adjust the route as needed
   }
 
 

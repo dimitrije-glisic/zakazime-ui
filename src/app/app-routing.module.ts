@@ -41,7 +41,7 @@ const routes: Routes = [
 
   { path: 'business/:id', component: BusinessDetailsComponent },
 
-  { path: 'booking/:business-name', component: BookingComponent },
+  { path: 'booking/:business-name/select-services', component: BookingComponent },
 
   { path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent },
 

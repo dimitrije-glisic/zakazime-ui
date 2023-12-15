@@ -41,6 +41,8 @@ import { BookingComponent } from './public-layout/booking/booking.component';
 import { FilterBySubcategoryPipe } from './public-layout/filter-by-subcategory.pipe';
 import { BookingDatePickerComponent } from './public-layout/booking-date-picker/booking-date-picker.component';
 import { ConfirmBookingComponent } from './public-layout/confirm-booking/confirm-booking.component';
+import { BookingSummaryComponent } from './public-layout/booking-summary/booking-summary.component';
+import { BookingBreadcrumbComponent } from './public-layout/booking-breadcrumb/booking-breadcrumb.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -81,7 +83,9 @@ export class XhrInterceptor implements HttpInterceptor {
     BookingComponent,
     FilterBySubcategoryPipe,
     BookingDatePickerComponent,
-    ConfirmBookingComponent
+    ConfirmBookingComponent,
+    BookingSummaryComponent,
+    BookingBreadcrumbComponent
   ],
   imports: [
     BrowserModule,

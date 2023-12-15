@@ -1,4 +1,10 @@
 <div class="container my-4">
+
+    <!-- Breadcrumb -->
+    <app-booking-breadcrumb [currentStep]="'select-services'"
+        [businessName]="businessName"
+    ></app-booking-breadcrumb>
+
     <!-- Subcategory Navigation Tabs -->
     <nav class="nav nav-pills nav-fill mb-3 sticky-subcategories">
         <a class="nav-item nav-link" *ngFor="let subcategory of subcategories"
