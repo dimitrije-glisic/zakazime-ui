@@ -5,11 +5,11 @@ import { Business } from 'src/app/interfaces/business.interface';
 import { Service } from 'src/app/interfaces/service.interface';
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.css']
+  selector: 'app-booking-select-services',
+  templateUrl: './booking-select-services.component.html',
+  styleUrls: ['./booking-select-services.component.css']
 })
-export class BookingComponent {
+export class BookingSelectServicesComponent {
   business: Business = {} as Business;
 
   services: Service[] = [];
