@@ -37,12 +37,12 @@ import { BusinessListingComponent } from './public-layout/business-listing/busin
 import { BreadcrumbComponent } from './public-layout/breadcrumb/breadcrumb.component';
 import { BusinessDetailsComponent } from './public-layout/business-details/business-details.component';
 import { NavbarComponent } from './public-layout/navbar/navbar.component';
-import { BookingComponent } from './public-layout/booking/booking.component';
+import { BookingSelectServicesComponent } from './public-layout/booking/booking-select-services/booking-select-services.component';
 import { FilterBySubcategoryPipe } from './public-layout/filter-by-subcategory.pipe';
-import { BookingDatePickerComponent } from './public-layout/booking-date-picker/booking-date-picker.component';
-import { ConfirmBookingComponent } from './public-layout/confirm-booking/confirm-booking.component';
-import { BookingSummaryComponent } from './public-layout/booking-summary/booking-summary.component';
-import { BookingBreadcrumbComponent } from './public-layout/booking-breadcrumb/booking-breadcrumb.component';
+import { BookingDatePickerComponent } from './public-layout/booking/booking-date-picker/booking-date-picker.component';
+import { ConfirmBookingComponent } from './public-layout/booking/confirm-booking/confirm-booking.component';
+import { BookingSummaryComponent } from './public-layout/booking/booking-summary/booking-summary.component';
+import { BookingBreadcrumbComponent } from './public-layout/booking/booking-breadcrumb/booking-breadcrumb.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -80,7 +80,7 @@ export class XhrInterceptor implements HttpInterceptor {
     BreadcrumbComponent,
     BusinessDetailsComponent,
     NavbarComponent,
-    BookingComponent,
+    BookingSelectServicesComponent,
     FilterBySubcategoryPipe,
     BookingDatePickerComponent,
     ConfirmBookingComponent,

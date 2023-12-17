@@ -34,7 +34,7 @@
             <div class="row" *ngIf="selectedDate">
                 <div class="col-12">
                     <div class="time-slots">
-                        <div *ngFor="let slot of availableSlots[dateString(selectedDate)]"
+                        <div *ngFor="let slot of getAvailableSlots(selectedDate)"
                             class="time-slot-card card mb-3" (click)="selectTimeSlot(slot)">
                             <div class="card-body">
                                 {{ slot }}
@@ -47,8 +47,7 @@
         </div>
 
         <div class="col-lg-5">
-            <app-booking-summary [selectedServices]="selectedServices" [selectedTime]="selectedTime"
-                [totalSum]="totalSum" [buttonLabel]="'Continue'" (buttonClick)="continueToConfirmation()">
+            <app-booking-summary [selectedServices]="selectedServices" [selectedTime]="getSelectedTimeSlot()" [buttonLabel]="'Continue'" (buttonClick)="continueToConfirmation()">
             </app-booking-summary>
         </div>
     </div>

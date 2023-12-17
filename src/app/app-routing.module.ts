@@ -15,9 +15,9 @@ import { CategoriesComponent } from './public-layout/categories/categories.compo
 import { SubCategoriesComponent } from './public-layout/sub-categories/sub-categories.component';
 import { BusinessListingComponent } from './public-layout/business-listing/business-listing.component';
 import { BusinessDetailsComponent } from './public-layout/business-details/business-details.component';
-import { BookingComponent } from './public-layout/booking/booking.component';
-import { BookingDatePickerComponent } from './public-layout/booking-date-picker/booking-date-picker.component';
-import { ConfirmBookingComponent } from './public-layout/confirm-booking/confirm-booking.component';
+import { BookingSelectServicesComponent } from './public-layout/booking/booking-select-services/booking-select-services.component';
+import { BookingDatePickerComponent } from './public-layout/booking/booking-date-picker/booking-date-picker.component';
+import { ConfirmBookingComponent } from './public-layout/booking/confirm-booking/confirm-booking.component';
 
 const routes: Routes = [
   { path: '', component: BusinessTypesComponent, data: { breadcrumb: 'pocetna' } },
@@ -41,7 +41,7 @@ const routes: Routes = [
 
   { path: 'business/:id', component: BusinessDetailsComponent },
 
-  { path: 'booking/:business-name/select-services', component: BookingComponent },
+  { path: 'booking/:business-name/select-services', component: BookingSelectServicesComponent },
 
   { path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent },
 

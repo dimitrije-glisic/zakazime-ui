@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessServiceMockService } from 'src/app/business-service-mock.service';
 import { Business } from 'src/app/interfaces/business.interface';
 import { Service } from 'src/app/interfaces/service.interface';
+import { BookingService } from '../booking.service';
 
 @Component({
   selector: 'app-booking-select-services',
@@ -11,29 +12,26 @@ import { Service } from 'src/app/interfaces/service.interface';
 })
 export class BookingSelectServicesComponent {
   business: Business = {} as Business;
-
   services: Service[] = [];
-
   subcategories: string[];
   filteredSubcategories: string[] = [];
-  selectedServices: Service[] = [];
-
   businessName: string = '';
 
   constructor(private route: ActivatedRoute, private businessServiceMock: BusinessServiceMockService,
-    private router: Router) {
-    const businessId = this.route.snapshot.paramMap.get('business-name');
-    this.business = this.businessServiceMock.getBusinesses().find(b => b.name === businessId) as Business;
+    private bookingService: BookingService) {
+    this.businessName = this.route.snapshot.paramMap.get('business-name') ?? '';
+    this.bookingService.setBusinessId(this.businessName);
+    this.business = this.businessServiceMock.getBusinesses().find(b => b.name === this.businessName) as Business;
     this.services = this.business.services;
     this.subcategories = [...new Set(this.business.services.map(s => s.subCategoryName))];
   }
 
-  ngOnInit(): void {
-    console.log('BookingComponent ngOnInit');
-    this.route.url.subscribe(url => {
-      this.businessName = url[1].path;
-      console.log(this.businessName);
-    });
+  ngOnInit() {
+    this.businessName = this.route.snapshot.paramMap.get('business-name') ?? '';
+  } 
+
+  getSelectedServices() {
+    return this.bookingService.getSelectedServices();
   }
 
   filterBySubcategory(subcategory: any) {
@@ -41,11 +39,11 @@ export class BookingSelectServicesComponent {
   }
 
   addService(service: Service) {
-    this.selectedServices.push(service);
+    this.bookingService.addService(service);
   }
 
   removeService(service: Service) {
-    this.selectedServices = this.selectedServices.filter(s => s !== service);
+    this.bookingService.removeService(service);
   }
 
   scrollToSubcategory(subcategory: string): void {
@@ -54,8 +52,7 @@ export class BookingSelectServicesComponent {
   }
 
   pickTime() {
-    console.log('pick time');
-    this.router.navigate(['booking', this.business.name, 'pick-time'], { queryParams: { services: this.selectedServices } });
+    this.bookingService.navigateToTimePicker();
   }
 
 }

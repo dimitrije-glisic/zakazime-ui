@@ -16,6 +16,9 @@ export class BookingBreadcrumbComponent {
   ];
 
   ngOnInit() {
+    console.log(this.businessName);
+    console.log(this.currentStep);
+
     // setup businessName in route for each step
     this.steps.forEach(step => {
       step.route = `/booking/${this.businessName}/${step.action}`;
@@ -29,9 +32,6 @@ export class BookingBreadcrumbComponent {
   }
 
   canNavigateBack(stepKey: string): boolean {
-    console.log('canNavigateBack');
-    console.log(stepKey);
-
     const stepOrder = ['select-services', 'pick-time', 'confirm-booking'];
     return stepOrder.indexOf(stepKey) < stepOrder.indexOf(this.currentStep);
   }

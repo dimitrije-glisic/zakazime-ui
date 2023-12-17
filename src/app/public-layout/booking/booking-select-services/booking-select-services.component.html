@@ -35,8 +35,8 @@
         <!-- Selected Services Box -->
         <div class="selected-services-box col-lg-4">
             <h4 class="mb-3">Selected Services</h4>
-            <div *ngIf="selectedServices.length > 0">
-                <div *ngFor="let selectedService of selectedServices" class="card selected-service-card mb-3">
+            <div *ngIf="getSelectedServices().length > 0">
+                <div *ngFor="let selectedService of getSelectedServices()" class="card selected-service-card mb-3">
                     <div class="card-body">
                         <span class="service-name">{{ selectedService.name }}</span>
                         <span class="service-duration">{{ selectedService.avgDuration }} min</span>
@@ -45,10 +45,10 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="selectedServices.length === 0" class="text-center no-services">
+            <div *ngIf="getSelectedServices().length === 0" class="text-center no-services">
                 <p>No services selected.</p>
             </div>
-            <div *ngIf="selectedServices.length > 0">
+            <div *ngIf="getSelectedServices().length > 0">
                 <button class="btn btn-primary" (click)="pickTime()">Pick time</button>
         </div>
     </div>

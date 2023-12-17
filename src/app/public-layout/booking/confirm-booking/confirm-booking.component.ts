@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BookingService } from '../booking.service';
+import { Service } from 'src/app/interfaces/service.interface';
 
 @Component({
   selector: 'app-confirm-booking',
@@ -7,34 +9,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./confirm-booking.component.css']
 })
 export class ConfirmBookingComponent {
-  bookingDetails: any; // Replace with the actual type of your booking details
+  businessName: string;
+  selectedServices: Service[];
+  totalSum: number;
+  selectedTime: string = '';
 
-  totalSum: number = 10; // Replace with the actual total sum
-  selectedTime: string = '10:00'; // Replace with the actual selected time
-  selectedDate: Date = new Date(); // Replace with the actual selected date
-  selectedServices: any[] = [{
-    name: 'Service 1',
-    price: 10
-  }]; // Replace with the actual selected services
-
-  businessName: string = '';
-
-  constructor(private route: ActivatedRoute) {
-    // http://localhost:4200/booking/HealthHub/confirm-booking
-    //extract the business name from the url (HealthHub)
-    this.route.url.subscribe(url => {
-      this.businessName = url[1].path;
-      console.log(this.businessName);
-    }
-    );
-
-  }
-
-  ngOnInit() {
-    // Retrieve booking details from route parameters or a service
-    this.route.queryParams.subscribe(params => {
-      // Logic to set bookingDetails based on params
-    });
+  constructor(private route: ActivatedRoute, private bookingService: BookingService) {
+    this.businessName = this.bookingService.getBusinessId();
+    this.selectedServices = this.bookingService.getSelectedServices();
+    this.totalSum = this.selectedServices.reduce((sum, service) => sum + service.price, 0);
+    this.selectedTime = this.bookingService.getSelectedTime() ?? '';
   }
 
   confirmBooking() {

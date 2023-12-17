@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Service } from 'src/app/interfaces/service.interface';
 
 @Component({
   selector: 'app-booking-summary',
@@ -6,13 +7,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./booking-summary.component.css']
 })
 export class BookingSummaryComponent {
-  @Input() selectedServices: any[] = [];
+  @Input() selectedServices: Service[] = [];
   @Input() selectedTime: string | null = null;
-  @Input() totalSum: number = 0;
   @Input() buttonLabel: string = 'Confirm booking';
+  
   @Output() buttonClick = new EventEmitter<void>();
 
+  totalSum: number | undefined;
+  
+  ngOnInit() {
+    this.totalSum = this.selectedServices.reduce((sum, service) => sum + service.price, 0);
+  }
+
   onButtonClick() {
-    this.buttonClick.emit(); // Emit the event when the button is clicked
+    this.buttonClick.emit();
   }
 }
