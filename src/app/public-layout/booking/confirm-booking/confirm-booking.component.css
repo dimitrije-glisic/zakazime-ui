@@ -1,0 +1,16 @@
+.booking-details {
+    background-color: #f8f9fa; /* Light background for the booking details */
+    border: 1px solid #dee2e6; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the box */
+}
+
+.booking-details .form-label {
+    font-weight: bold; /* Make labels bold */
+}
+
+#bookingNote {
+    height: 100px; /* Set a fixed height for the textarea */
+}
+
+/* You can also add more styles here as per your design requirements */

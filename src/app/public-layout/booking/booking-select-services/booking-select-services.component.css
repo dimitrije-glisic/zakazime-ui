@@ -1,0 +1,109 @@
+/* General Container and Padding */
+.container {
+    padding: 20px;
+    max-width: 100%;
+}
+
+/* Subcategory Navigation Tabs */
+.sticky-subcategories {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    background-color: white;
+}
+
+.nav-pills .nav-link {
+    color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.nav-pills .nav-link.active {
+    color: white;
+    background-color: #007bff;
+}
+
+/* Main Content Row */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+    /* Adjust for gutters */
+}
+
+.services-list {
+    padding: 0 15px;
+    /* Add gutters */
+}
+
+/* Service Cards */
+.card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.card-body {
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.service-duration,
+.service-price {
+    color: #666;
+}
+
+.btn-add-service {
+    color: #6c757d;
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Selected Services Box */
+.selected-services-box {
+    padding: 0 15px;
+    /* Add gutters */
+}
+
+.selected-service-card {
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.selected-service-card .btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.no-services {
+    color: #6c757d;
+    padding: 2rem;
+}
+
+@media (max-width: 991px) {
+    .services-list,
+    .selected-services-box {
+        max-width: 100%;
+        flex: 0 0 100%;
+        padding: 0 15px; /* Adjust padding */
+        margin-top: 20px; /* Add some top margin */
+    }
+
+    .selected-services-box {
+        order: -1; /* Place the selected services box above the services list on small screens */
+    }
+}

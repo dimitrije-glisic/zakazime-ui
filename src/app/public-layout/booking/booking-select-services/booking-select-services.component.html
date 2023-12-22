@@ -1,0 +1,55 @@
+<div class="container my-4">
+
+    <!-- Breadcrumb -->
+    <app-booking-breadcrumb [currentStep]="'select-services'"
+        [businessName]="businessName"
+    ></app-booking-breadcrumb>
+
+    <!-- Subcategory Navigation Tabs -->
+    <nav class="nav nav-pills nav-fill mb-3 sticky-subcategories">
+        <a class="nav-item nav-link" *ngFor="let subcategory of subcategories"
+            (click)="scrollToSubcategory(subcategory)">{{ subcategory }}</a>
+    </nav>
+
+    <!-- Main Content Row -->
+    <div class="row">
+        <!-- Services List -->
+        <div class="services-list col-lg-8">
+            <section *ngFor="let subcategory of subcategories; let i = index" [attr.id]="'subcategory-' + subcategory">
+                <h4>{{ subcategory }}</h4>
+                <div class="row">
+                    <div class="col-md-12" *ngFor="let service of services | filterBySubcategory:subcategory">
+                        <div class="d-flex justify-content-between align-items-center p-2 border rounded mb-2">
+                            <div>
+                                <h5 class="mb-1 service-name">{{ service.name }}</h5>
+                                <p class="mb-1 service-duration">{{ service.avgDuration }} min</p>
+                                <p class="mb-0 service-price">{{ service.price | currency }}</p>
+                            </div>
+                            <button class="btn btn-outline-secondary btn-add-service" (click)="addService(service)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Selected Services Box -->
+        <div class="selected-services-box col-lg-4">
+            <h4 class="mb-3">Selected Services</h4>
+            <div *ngIf="getSelectedServices().length > 0">
+                <div *ngFor="let selectedService of getSelectedServices()" class="card selected-service-card mb-3">
+                    <div class="card-body">
+                        <span class="service-name">{{ selectedService.name }}</span>
+                        <span class="service-duration">{{ selectedService.avgDuration }} min</span>
+                        <span class="service-price">${{ selectedService.price }}</span>
+                        <button class="btn btn-danger" (click)="removeService(selectedService)">-</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="getSelectedServices().length === 0" class="text-center no-services">
+                <p>No services selected.</p>
+            </div>
+            <div *ngIf="getSelectedServices().length > 0">
+                <button class="btn btn-primary" (click)="pickTime()">Pick time</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<!-- booking-summary.component.html -->
+<div class="booking-summary border p-3">
+    <h3>Booking Summary</h3>
+    <ul class="list-unstyled">
+      <li *ngFor="let service of selectedServices">
+        {{ service.name }} - ${{ service.price }}
+      </li>
+    </ul>
+    <p>Total: ${{ totalSum }}</p>
+    <p *ngIf="selectedTime">Time: {{ selectedTime }}</p>
+    <button class="btn btn-primary" *ngIf="buttonLabel" (click)="onButtonClick()">{{ buttonLabel }}</button>
+  </div>
+  
