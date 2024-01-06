@@ -1,6 +1,9 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { REGISTRATION_TYPE_SERVICE_PROVIDER, RegistrationComponent } from 'src/app/registration-login/registration/registration.component';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {
+  REGISTRATION_TYPE_SERVICE_PROVIDER,
+  RegistrationComponent
+} from 'src/app/registration-login/registration/registration.component';
 
 @Component({
   selector: 'app-how-it-works',
@@ -14,7 +17,7 @@ export class HowItWorksComponent {
 
   ngOnInit(): void {
   }
-  
+
   openSignUpDialog() {
     this.dialog.open(RegistrationComponent, {
       width: '500px',

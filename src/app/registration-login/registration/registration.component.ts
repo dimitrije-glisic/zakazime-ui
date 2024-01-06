@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Inject } from '@angular/core';
-import { RegistrationRequest } from 'src/app/interfaces/registration-dto.interface';
+import {Component, Inject} from '@angular/core';
+import {AuthService} from '../../auth.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {RegistrationRequest} from 'src/app/interfaces/registration-dto.interface';
 
 @Component({
   selector: 'app-registration',
@@ -62,7 +61,7 @@ export class RegistrationComponent {
 
   private handleSuccessfulBusinessRegistration() {
     this.dialogRef.close();
-    this.router.navigate(['/finish-registration'], { queryParams: { email: this.registerForm.value.email } });
+    this.router.navigate(['/finish-registration'], {queryParams: {email: this.registerForm.value.email}});
   }
 
   private handleSuccessfulUserRegistration() {

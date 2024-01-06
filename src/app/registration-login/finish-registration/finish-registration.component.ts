@@ -6,6 +6,7 @@ import { Business } from 'src/app/interfaces/business.interface';
 import { BusinessService } from 'src/app/business/services/business-service';
 import { User } from 'src/app/interfaces/user.interface';
 import { ServicesService } from 'src/app/services.service';
+import {BusinessType} from "../../interfaces/business-type.interface";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class FinishRegistrationComponent implements OnInit {
 
   finishRegistrationForm: FormGroup;
   loggedInUser: User | undefined;
-  businessTypes: string[] = [];
+  businessTypes: BusinessType[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,7 +45,7 @@ export class FinishRegistrationComponent implements OnInit {
     this.authService.fetchUser().subscribe((user: any) => {
       this.loggedInUser = user;
     });
-    this.bs.getBusinessTypes().subscribe((types: string[]) => {
+    this.bs.getBusinessTypes().subscribe((types: BusinessType[]) => {
       this.businessTypes = types;
     });
   }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { Business } from 'src/app/interfaces/business.interface';
 import { Service } from 'src/app/interfaces/service.interface';
+import {BusinessType} from "../../interfaces/business-type.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +26,15 @@ export class BusinessService {
         }
         return throwError(() => err);
       })
-    );  
+    );
   }
 
   createBusiness(business: Business): Observable<Business> {
     return this.http.post<Business>('/api/business', business);
   }
 
-  getBusinessTypes(): Observable<string[]> {
-    return this.http.get<string[]>('/api/business/types');
+  getBusinessTypes(): Observable<BusinessType[]> {
+    return this.http.get<BusinessType[]>('/api/business-types');
   }
 
   setServices(services: Service[]) {
