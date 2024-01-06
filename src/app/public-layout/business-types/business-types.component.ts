@@ -14,14 +14,17 @@ export class BusinessTypesComponent {
 
   businessTypes: BusinessType[] = [
     {
+      id:1,
       title: 'Ulepsavanje',
       imageUrl: 'assets/images/beauty.jpg'
     },
     {
+      id:2,
       title: 'Medicina',
       imageUrl: 'assets/images/health.jpg'
     },
     {
+      id:3,
       title: 'Drugo',
       imageUrl: 'assets/images/inprogress.jpg'
     },

@@ -1,5 +1,5 @@
 export interface BusinessType {
-    title: string;
-    imageUrl: string;
-  }
-  
+  id: number,
+  title: string;
+  imageUrl?: string;
+}

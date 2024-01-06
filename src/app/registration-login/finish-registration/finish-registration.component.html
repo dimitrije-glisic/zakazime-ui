@@ -53,10 +53,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="type" class="form-label">Tip biznisa</label>
+                        <label class="form-label">Tip biznisa</label>
                         <select class="form-select" formControlName="type" required>
                             <option *ngFor="let type of businessTypes" [value]="type">
-                                {{ type }}
+                                {{ type.title }}
                             </option>
                         </select>
                     </div>
