@@ -4,6 +4,7 @@ import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { Business } from 'src/app/interfaces/business.interface';
 import { Service } from 'src/app/interfaces/service.interface';
 import {BusinessType} from "../../interfaces/business-type.interface";
+import {CreateBusinessProfileRequest} from "../../openapi";
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class BusinessService {
     );
   }
 
-  createBusiness(business: Business): Observable<Business> {
-    return this.http.post<Business>('/api/business', business);
+  createBusiness(createBusinessProfileRequest: CreateBusinessProfileRequest): Observable<Business> {
+    return this.http.post<Business>('/api/business', createBusinessProfileRequest);
   }
 
   getBusinessTypes(): Observable<BusinessType[]> {

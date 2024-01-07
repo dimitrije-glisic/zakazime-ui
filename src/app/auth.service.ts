@@ -59,7 +59,7 @@ export class AuthService {
     // console.log('fetchUser called');
     if (this.userSubject.getValue() === null) {
       // console.log('fetchUser making HTTP request');
-      return this.http.get<User>('/api/user', { withCredentials: true }).pipe(
+      return this.http.get<User>('/api/login', { withCredentials: true }).pipe(
         tap(response => {
           this.userSubject.next(response);
         }),
