@@ -35,7 +35,10 @@ export class AddServiceFormComponent {
         throw new Error('Business not found');
       }
       this.businessName = business.name;
-      this.servicesService.getServiceTemplatesForBusinessType(business.type).subscribe(data => {
+      if(business.typeId == null) {
+        throw new Error('Business type not found');
+      }
+      this.servicesService.getServiceTemplatesForBusinessType(business.typeId).subscribe(data => {
         console.log('getServiceTemplatesForBusinessType', data);
         this.subcategories = [...new Set(data.map(service => '' + service.subcategoryId))];
       });

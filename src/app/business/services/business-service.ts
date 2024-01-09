@@ -1,17 +1,18 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, catchError, of, tap, throwError } from 'rxjs';
-import { Business } from 'src/app/interfaces/business.interface';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {catchError, Observable, of, tap, throwError} from 'rxjs';
 import {BusinessType} from "../../interfaces/business-type.interface";
-import {CreateBusinessProfileRequest, Service} from "../../openapi";
+import {Business, CreateBusinessProfileRequest, Service} from "../../openapi";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessService {
   private business: Business | null = null;
+  private services: Service[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getBusiness(): Observable<Business | null> {
     if (this.business) {
@@ -38,23 +39,42 @@ export class BusinessService {
   }
 
   setServices(services: Service[]) {
-    if (this.business) {
-      this.business.services = services;
+    if (this.business && this.business.id) {
+      this.loadServices(this.business.id)
     }
+  }
+
+  loadServices(id: number) {
+    // this.businessController.getServicesOfBusiness(id).subscribe(
+    this.http.get<Service[]>('/api/business/' + id + '/services').subscribe(
+      (services: Service[]) => {
+        this.services = services;
+      },
+      (error: any) => {
+        // Handle the error appropriately
+        console.error('Error fetching services:', error);
+      }
+    );
   }
 
   addServicesLocally(services: Service[]) {
     if (this.business) {
-      this.business.services.push(...services);
+      this.services.push(...services);
     }
   }
 
   updateServiceLocally(service: Service) {
     if (this.business) {
-      this.business.services.forEach((element, index) => {
-        if (element.title === service.title) this.business!.services[index] = service;
+      // @ts-ignore
+      this.services.forEach((element: { title: any; }, index: string | number) => {
+        if (element.title === service.title) { // @ts-ignore
+          this.services[index] = service;
+        }
       });
     }
   }
 
+  getServicesOfBusiness(id: number) {
+    return this.http.get<Service[]>('/api/business/' + id + '/services');
+  }
 }

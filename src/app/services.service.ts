@@ -56,14 +56,14 @@ export class ServicesService {
     );
   }
 
-  getServiceTemplatesForBusinessType(type: String): Observable<Service[]> {
-    return this.http.get<Service[]>(`/api/business/types/${type}/services`).pipe(
+  getServiceTemplatesForBusinessType(typeId: number): Observable<Service[]> {
+    return this.http.get<Service[]>(`/api/business/types/${typeId}/services`).pipe(
       tap(services => {
         console.log('getServiceTemplatesForBusinessType received services.services', services);
       }),
       catchError(err => {
         if (err.status === 404) {
-          console.log('No services found for business type ' + type);
+          console.log('No services found for business type ' + typeId);
         }
         return throwError(() => err);
       })

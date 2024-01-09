@@ -2,12 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Business} from 'src/app/interfaces/business.interface';
 import {BusinessService} from 'src/app/business/services/business-service';
 import {User} from 'src/app/interfaces/user.interface';
-import {ServicesService} from 'src/app/services.service';
 import {BusinessType} from "../../interfaces/business-type.interface";
-import {CreateBusinessProfileRequest} from "../../openapi";
+import {Business, CreateBusinessProfileRequest} from "../../openapi";
 
 
 @Component({
@@ -25,7 +23,6 @@ export class FinishRegistrationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private bs: BusinessService,
-    private ss: ServicesService,
     private route: ActivatedRoute,
     private router: Router
   ) {

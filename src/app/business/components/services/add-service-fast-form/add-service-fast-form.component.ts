@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ServicesService } from 'src/app/services.service';
-import { BusinessService } from 'src/app/business/services/business-service';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ServicesService} from 'src/app/services.service';
+import {BusinessService} from 'src/app/business/services/business-service';
 import {Service} from "../../../../openapi";
 
 @Component({
@@ -20,10 +20,10 @@ export class AddServiceFastFormComponent implements OnInit {
   userSelectedServices: Service[] = [];
 
   businessName: string | undefined;
-  businessType: string | undefined;
+  businessType: number | undefined;
 
   constructor(private http: HttpClient, private servicesService: ServicesService, private businessService: BusinessService,
-    private router: Router) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -33,18 +33,21 @@ export class AddServiceFastFormComponent implements OnInit {
           throw new Error('Business not found');
         }
         //to do: make sure business type is not null
-        if (!business.type) {
+        if (!business.typeId) {
           throw new Error('Business type not found');
         }
         this.businessName = business.name;
-        this.businessType = business.type;
-        this.existingServices = business.services;
-        this.loadTemplates(business.type);
+        this.businessType = business.typeId;
+        // this.existingServices = business.services;
+        if (business.typeId == null) {
+          throw new Error('Business type not found');
+        }
+        this.loadTemplates(business.typeId);
       }
     )
   }
 
-  loadTemplates(businessType: string): void {
+  loadTemplates(businessType: number): void {
     this.servicesService.getServiceTemplatesForBusinessType(businessType).subscribe(data => {
       this.serviceTemplates = data.filter(service => !this.existingServices.some(existingService => existingService.title === service.title));
       this.subcategories = [...new Set(this.serviceTemplates.map(service => service.subcategoryId))];

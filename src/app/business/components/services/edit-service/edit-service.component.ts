@@ -33,7 +33,8 @@ export class EditServiceComponent implements OnInit {
 
   loadServiceAndCategories(id: string) {
     this.businessService.getBusiness().subscribe(business => {
-      if (!business || !business.services) {
+      // if (!business || !business.services) {
+      if (!business) {
         throw new Error('Business not found with services');
       }
 
@@ -52,7 +53,9 @@ export class EditServiceComponent implements OnInit {
         'avgDuration': new FormControl(this.service.avgDuration),
         'category': new FormControl(this.service.subcategoryId),
       });
-      this.loadCategories(business.type);
+      if (business.typeId != null) {
+        this.loadCategories(business.typeId);
+      }
     });
   }
 
@@ -67,8 +70,8 @@ export class EditServiceComponent implements OnInit {
     });
   }
 
-  loadCategories(type: string) {
-    return this.servicesService.getServiceTemplatesForBusinessType(type).subscribe(data => {
+  loadCategories(typeId: number) {
+    return this.servicesService.getServiceTemplatesForBusinessType(typeId).subscribe(data => {
       this.subcategories = [...new Set(data.map(service => '' + service.subcategoryId))];
     }
     );

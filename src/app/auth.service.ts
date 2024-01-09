@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { User } from './interfaces/user.interface';
-import { RegistrationRequest } from './interfaces/registration-dto.interface';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
+import {User} from './interfaces/user.interface';
+import {RegistrationRequest} from './interfaces/registration-dto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class AuthService {
       authorization: 'Basic ' + btoa(credentials.email + ':' + credentials.password)
     } : {});
 
-    return this.http.get<User>('api/login', { headers: headers }).pipe(
+    return this.http.get<User>('api/login', {headers: headers}).pipe(
       tap(response => {
         if (response.email) {
           console.log('Login successful, setting userSubject');
@@ -59,7 +59,7 @@ export class AuthService {
     // console.log('fetchUser called');
     if (this.userSubject.getValue() === null) {
       // console.log('fetchUser making HTTP request');
-      return this.http.get<User>('/api/login', { withCredentials: true }).pipe(
+      return this.http.get<User>('/api/login', {withCredentials: true}).pipe(
         tap(response => {
           this.userSubject.next(response);
         }),
