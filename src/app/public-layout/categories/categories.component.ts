@@ -31,12 +31,12 @@ export class CategoriesComponent {
   loadData(title: string) {
     this.businessses = this.businessServiceMock.getBusinesses();
 
-    this.categories = [...new Set(
-      this.businessses
-        .filter((business: Business) => business.type === title)
-        .flatMap((business: Business) => business.services)
-        .map((service: Service) => service.categoryName) as string[]
-    )];
+    // this.categories = [...new Set(
+    //   this.businessses
+    //     .filter((business: Business) => business.type === title)
+    //     .flatMap((business: Business) => business.services)
+    //     .map((service: Service) => service.categoryName) as string[]
+    // )];
 
     this.backgroundImg = this.getBusinessesTypeImageUrl(title);
   }

@@ -1,26 +1,26 @@
 <div class="container mt-4">
 
-    <div *ngIf="categories.length == 0" class="mb-3">
+    <div *ngIf="subcategories.length == 0" class="mb-3">
         <h4>Popunili ste sve usluge za postojece kategorije za tip biznisa {{businessType}}</h4>
     </div>
 
-    <div *ngIf="categories.length > 0">
+    <div *ngIf="subcategories.length > 0">
 
         <div class="mb-3">
-            <select class="form-select" (change)="onCategorySelect($event)">
-                <option *ngFor="let category of categories" [value]="category">
+            <select class="form-select" (change)="onSubcategorySelect($event)">
+                <option *ngFor="let category of subcategories" [value]="category">
                     {{ category }}
                 </option>
             </select>
         </div>
 
         <!-- Services Checkboxes -->
-        <div *ngIf="selectedCategory" class="mb-3">
-            <div *ngFor="let service of categoryServices" class="form-check">
-                <input type="checkbox" class="form-check-input" id="{{service.name}}"
+        <div *ngIf="selectedSubcategory" class="mb-3">
+            <div *ngFor="let service of subcategoryServices" class="form-check">
+                <input type="checkbox" class="form-check-input" id="{{service.title}}"
                     (change)="onServiceSelect(service)">
-                <label class="form-check-label" for="{{service.name}}">
-                    {{ service.name }}
+                <label class="form-check-label" for="{{service.title}}">
+                    {{ service.title }}
                 </label>
             </div>
         </div>

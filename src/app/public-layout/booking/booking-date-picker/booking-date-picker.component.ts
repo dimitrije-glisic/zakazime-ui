@@ -1,8 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Service } from 'src/app/interfaces/service.interface';
 import { BookingService } from '../booking.service';
+import {Service} from "../../../openapi";
 
 @Component({
   selector: 'app-booking-date-picker',
@@ -123,6 +123,7 @@ export class BookingDatePickerComponent {
   }
 
   calculateTotalSum() {
+    // @ts-ignore
     this.totalSum = this.selectedServices.reduce((sum, service) => sum + service.price, 0);
   }
 

@@ -1,7 +1,6 @@
-import { Time } from '@angular/common';
-import { Injectable } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Service } from 'src/app/interfaces/service.interface';
+import {Injectable} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Service} from "../../openapi";
 
 @Injectable({
   providedIn: 'root'

@@ -3,6 +3,7 @@ import { AuthService } from '../../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user.interface';
+import {Account} from "../../openapi";
 
 
 @Component({
@@ -30,14 +31,15 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
       this.authService.login(credentials).subscribe({
-        next: (response: User) => this.handleSuccessfulLogin(response),
+        // next: (response: User) => this.handleSuccessfulLogin(response),
+        next: (response: Account) => this.handleSuccessfulLogin(response),
         error: (error: any) => this.handleLoginError(error)
       });
     }
   }
 
-  private handleSuccessfulLogin(response: User): void {
-    this.navigateToDashboard(response.role);
+  private handleSuccessfulLogin(response: Account): void {
+    this.navigateToDashboard(response.roleId);
   }
 
   private handleLoginError(error: any): void {
@@ -49,15 +51,15 @@ export class LoginComponent {
     }
   }
 
-  navigateToDashboard(role: string): void {
+  navigateToDashboard(role: number | undefined): void {
     switch (role) {
-      case 'ADMIN':
+      case 1:
         this.router.navigate(['/manage-users']);
         break;
-      case 'SERVICE_PROVIDER':
+      case 2:
         this.router.navigate(['/manage-business']);
         break;
-      case 'CUSTOMER':
+      case 3:
         this.router.navigate(['/home']);
         break;
       default:

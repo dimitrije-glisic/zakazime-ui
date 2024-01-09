@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BusinessServiceMockService } from 'src/app/business-service-mock.service';
-import { Business } from 'src/app/interfaces/business.interface';
-import { Service } from 'src/app/interfaces/service.interface';
-import { BookingService } from '../booking.service';
+import {Component} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {BusinessServiceMockService} from 'src/app/business-service-mock.service';
+import {Business} from 'src/app/interfaces/business.interface';
+import {BookingService} from '../booking.service';
+import {Service} from "../../../openapi";
 
 @Component({
   selector: 'app-booking-select-services',
@@ -23,19 +23,20 @@ export class BookingSelectServicesComponent {
     this.bookingService.setBusinessId(this.businessName);
     this.business = this.businessServiceMock.getBusinesses().find(b => b.name === this.businessName) as Business;
     this.services = this.business.services;
-    this.subcategories = [...new Set(this.business.services.map(s => s.subCategoryName))];
+    // this.subcategories = [...new Set(this.business.services.map(s => loadSubcategory(s)))];
+    this.subcategories = [];
   }
 
   ngOnInit() {
     this.businessName = this.route.snapshot.paramMap.get('business-name') ?? '';
-  } 
+  }
 
   getSelectedServices() {
     return this.bookingService.getSelectedServices();
   }
 
   filterBySubcategory(subcategory: any) {
-    this.filteredSubcategories = this.subcategories.filter(s => s === subcategory);
+    // this.filteredSubcategories = this.subcategories.filter(s => s === subcategory);
   }
 
   addService(service: Service) {

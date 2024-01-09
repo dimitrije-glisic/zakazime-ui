@@ -3,7 +3,7 @@
     <div class="mb-3 row">
       <label for="name" class="col-sm-2 col-form-label">Usluga:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" formControlName="name" [(ngModel)]="service.name">
+        <input type="text" class="form-control" id="name" formControlName="name" [(ngModel)]="service.title">
       </div>
     </div>
 
@@ -38,12 +38,12 @@
     <div class="mb-3 row">
       <label for="category" class="col-sm-2 col-form-label">Kategorija:</label>
       <div class="col-sm-10">
-        <select class="form-control" id="category" formControlName="category" [(ngModel)]="service.categoryName">
-          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        <select class="form-control" id="category" formControlName="category" [(ngModel)]="service.subcategoryId">
+          <option *ngFor="let category of subcategories" [value]="category">{{ category }}</option>
         </select>
       </div>
     </div>
-    
+
     <div class="mb-3 row">
       <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">Sacuvaj</button>

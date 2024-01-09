@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Service } from '../interfaces/service.interface';
+import {Service} from "../openapi";
 
 @Pipe({
   name: 'filterBySubcategory'
@@ -10,7 +10,8 @@ export class FilterBySubcategoryPipe implements PipeTransform {
     if (!services || !subcategory) {
       return services;
     }
-    return services.filter(service => service.subCategoryName === subcategory);
+    // return services.filter(service => service.subCategoryName === subcategory);
+    return [];
   }
 
 }

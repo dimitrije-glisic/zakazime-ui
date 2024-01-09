@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Business } from 'src/app/interfaces/business.interface';
 import { BusinessService } from '../../services/business-service';
+import {Business} from "../../../openapi";
 
 @Component({
   selector: 'app-business-profile',
@@ -8,17 +8,7 @@ import { BusinessService } from '../../services/business-service';
   styleUrls: ['./business-profile.component.css']
 })
 export class BusinessProfileComponent {
-  business: Business = {
-    name: '',
-    type: '',
-    phone: '',
-    city: '', 
-    postalCode: '',
-    address: '',
-    status: '',
-    ownerEmail: '',
-    services: [],
-  };
+  business: Business | undefined;
 
   constructor(private businessService: BusinessService) { }
 

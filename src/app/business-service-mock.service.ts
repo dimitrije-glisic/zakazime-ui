@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Business } from './interfaces/business.interface';
-import { Service } from './interfaces/service.interface';
+import {Service} from "./openapi";
 
 @Injectable({
   providedIn: 'root'
@@ -121,7 +121,8 @@ function generateMockData() {
     for (const mainCategory in mainCategories) {
       const subCategories = mainCategories[mainCategory];
       subCategories.forEach(subCategory => {
-        services = services.concat(generateServicesFor(businessName, mainCategory, subCategory));
+        // services = services.concat(generateServicesFor(businessName, mainCategory, subCategory));
+        services = services.concat([]);
       });
     }
     return services;

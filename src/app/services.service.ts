@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, catchError, of, take, tap, throwError } from 'rxjs';
-import { Service } from './interfaces/service.interface';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {catchError, Observable, tap, throwError} from 'rxjs';
+import {Service} from "./openapi";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class ServicesService {
 
   services: Service[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   createService(service: Service, businessName: string) {
     return this.createServices([service], businessName);
@@ -21,11 +22,11 @@ export class ServicesService {
   createServices(services: Service[], businessName: string) {
     return this.http.post(`/api/business/${businessName}/services`, services).pipe(
       catchError(err => {
-        if (err.status === 404) {
-          console.log('No services found for business type ' + businessName);
+          if (err.status === 404) {
+            console.log('No services found for business type ' + businessName);
+          }
+          return throwError(() => err);
         }
-        return throwError(() => err);
-      }
       )
     );
 
@@ -47,22 +48,22 @@ export class ServicesService {
   }
 
   updateService(service: Service) {
-    return this.http.put(`/api/business/${service.businessName}/services/${service.id}`, service).pipe(
+    return this.http.put(`/api/business/${service.businessId}/services/${service.id}`, service).pipe(
       catchError(err => {
-        return throwError(() => err);
-      }
+          return throwError(() => err);
+        }
       )
     );
   }
 
-  getServiceTemplatesForBusinessType(type: String): Observable<Service[]> {
-    return this.http.get<Service[]>(`/api/business/types/${type}/services`).pipe(
+  getServiceTemplatesForBusinessType(typeId: number): Observable<Service[]> {
+    return this.http.get<Service[]>(`/api/business/types/${typeId}/services`).pipe(
       tap(services => {
-       console.log('getServiceTemplatesForBusinessType received services.services', services);
+        console.log('getServiceTemplatesForBusinessType received services.services', services);
       }),
       catchError(err => {
         if (err.status === 404) {
-          console.log('No services found for business type ' + type);
+          console.log('No services found for business type ' + typeId);
         }
         return throwError(() => err);
       })

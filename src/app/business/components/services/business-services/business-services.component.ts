@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ServicesService } from 'src/app/services.service';
-import { Service } from 'src/app/interfaces/service.interface';
-import { ServicesFilterPipe } from '../services-filter.pipe';
-import { BusinessService } from 'src/app/business/services/business-service';
+import {Component, OnInit} from '@angular/core';
+import {BusinessService} from 'src/app/business/services/business-service';
+import {Service, ServiceSubcategory} from "../../../../openapi";
+import {SubcategoryService} from "../../../services/subcategory.service";
 
 @Component({
   selector: 'app-business-services',
@@ -12,34 +11,53 @@ import { BusinessService } from 'src/app/business/services/business-service';
 export class BusinessServicesComponent implements OnInit {
 
   services: Service[] = [];
-  categories: string[] = [];
+  subcategories: ServiceSubcategory[] = [];
   currentPage = 1;
   itemsPerPage = 10;
 
   textFilter = '';
   categoryFilter = '';
 
-  newService: Service = {
-    id: '',
-    name: '',
-    description: '',
-    price: 0,
-    avgDuration: 0,
-    categoryName: '',
-    subCategoryName: '',
-  };
-
-  constructor(private businessService: BusinessService, private servicesService: ServicesService) { }
+  constructor(private businessService: BusinessService, private subcategoryService: SubcategoryService) {
+  }
 
   ngOnInit(): void {
     this.businessService.getBusiness().subscribe(business => {
       if (!business) {
         throw new Error('Business not found');
       }
-      console.log(business.services);
-      this.services = business.services;
-      this.categories = [...new Set(this.services.map(service => service.categoryName))];
+      console.log(business);
+      if (business.id != null) {
+        this.loadServices(business.id)
+      } else {
+        throw new Error('Business id not found');
+      }
+      this.loadSubcategories(this.services);
     });
   }
 
+
+  loadSubcategories(services: Service[]): void {
+    this.subcategoryService.getAll().subscribe(subcategories => {
+        const serviceSubcategoryIds = new Set(services.map(service => service.subcategoryId));
+        this.subcategories = subcategories!.filter(subcategory => serviceSubcategoryIds.has(subcategory.id));
+      },
+      (error: any) => {
+        // Handle the error appropriately
+        console.error('Error fetching subcategories:', error);
+      }
+    );
+  }
+
+  private loadServices(id: number) {
+    this.businessService.getServicesOfBusiness(id).subscribe(
+      (services: Service[]) => {
+        this.services = services;
+      },
+      (error: any) => {
+        // Handle the error appropriately
+        console.error('Error fetching services:', error);
+      }
+    );
+  }
 }
