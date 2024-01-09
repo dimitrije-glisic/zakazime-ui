@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BusinessServiceMockService } from 'src/app/business-service-mock.service';
 import { Business } from 'src/app/interfaces/business.interface';
-import { Service } from 'src/app/interfaces/service.interface';
+import {Service} from "../../openapi";
 
 @Component({
   selector: 'app-business-details',
@@ -13,12 +13,12 @@ export class BusinessDetailsComponent {
 
   business: Business = {} as Business
   testimonials: any[] = [];
-  
+
   searchTerm: string = '';
 
   servicesGroupedBySubCategory: any = {};
 
-  constructor(private businessServiceMock: BusinessServiceMockService, private router: Router) { 
+  constructor(private businessServiceMock: BusinessServiceMockService, private router: Router) {
     //provide some mock data (message, clientName)
     this.testimonials = [
       {
@@ -37,23 +37,23 @@ export class BusinessDetailsComponent {
     console.log('BusinessDetailsComponent ngOnInit');
     this.business = this.businessServiceMock.getBusinesses()[0];
 
-    this.groupServicesBySubCategory();
+    this.groupServicesBySubcategory();
   }
 
-  groupServicesBySubCategory() {
-    this.business.services.forEach((service: Service) => {
-      if (!this.servicesGroupedBySubCategory[service.subCategoryName]) {
-        this.servicesGroupedBySubCategory[service.subCategoryName] = [];
-      }
-      this.servicesGroupedBySubCategory[service.subCategoryName].push(service);
-    });
+  groupServicesBySubcategory() {
+    // this.business.services.forEach((service: Service) => {
+    //   if (!this.servicesGroupedBySubCategory[service.subCategoryName]) {
+    //     this.servicesGroupedBySubCategory[service.subCategoryName] = [];
+    //   }
+    //   this.servicesGroupedBySubCategory[service.subCategoryName].push(service);
+    // });
   }
 
   getSubCategoryKeys() {
     return Object.keys(this.servicesGroupedBySubCategory);
   }
-  
-  
+
+
   filterServices(searchTerm: string, services: any[]): any[] {
       if (!searchTerm) return services;
       return services.filter(service => service.name.toLowerCase().includes(searchTerm.toLowerCase()));

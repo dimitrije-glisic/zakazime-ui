@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BusinessServiceMockService } from 'src/app/business-service-mock.service';
-import { Business } from 'src/app/interfaces/business.interface';
-import { Service } from 'src/app/interfaces/service.interface';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BusinessServiceMockService} from 'src/app/business-service-mock.service';
+import {Business} from 'src/app/interfaces/business.interface';
 
 @Component({
   selector: 'app-sub-categories',
@@ -18,7 +17,7 @@ export class SubCategoriesComponent {
   businessType: string | undefined;
   category: string | undefined;
 
-  businessses: Business[] | undefined;
+  businesses: Business[] | undefined;
   subCategories: string[] | undefined;
 
   constructor(private route: ActivatedRoute, private router: Router, private businessServiceMock: BusinessServiceMockService) {
@@ -32,17 +31,19 @@ export class SubCategoriesComponent {
   }
 
   loadData(typeTitle: string, categoryTitle: string) {
-    this.businessses = this.businessServiceMock.getBusinesses();
+    this.businesses = this.businessServiceMock.getBusinesses();
 
-    this.subCategories = [...new Set(
-      this.businessses
-        .filter((business: Business) => business.type === typeTitle)
-        .flatMap((business: Business) => business.services)
-        .filter((service: Service) => service.categoryName.toUpperCase() === categoryTitle)
-        .map((service: Service) => service.subCategoryName) as string[]
-    )];
+    // this.subCategories = [...new Set(
+    //   this.businesses
+    //     .filter((business: Business) => business.type === typeTitle)
+    //     .flatMap((business: Business) => business.services)
+    //     // .filter((service: Service) => loadSubcategory(service).toUpperCase() === categoryTitle)
+    //     // .map((service: Service) => loadSubcategory(service)) as string[]
+    // )];
 
-    this.backgroundImg = this.getSubCategoryImageUrl(this.subCategories[0]);
+    // this.subCategories = loadSubcategories();
+
+    // this.backgroundImg = this.getSubCategoryImageUrl(this.subCategories[0]);
     this.title = categoryTitle;
     this.subtitle = 'Sub Categories Subtitle';
 

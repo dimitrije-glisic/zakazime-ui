@@ -31,21 +31,21 @@ export class BusinessListingComponent {
     const typeTitleUpper = typeTitle.toUpperCase();
     const categoryTitleUpper = categoryTitle.toUpperCase();
     const subCategoryTitleUpper = subCategoryTitle.toUpperCase();
-  
-    const matchedBusinessNames = new Set(
-      businesses
-        .filter(business => business.type.toUpperCase() === typeTitleUpper)
-        .flatMap(business => business.services)
-        .filter(service => 
-          service.categoryName.toUpperCase() === categoryTitleUpper &&
-          service.subCategoryName?.toUpperCase() === subCategoryTitleUpper
-        )
-        .map(service => service.businessName)
-    );
 
-    this.businesses = businesses.filter(business => matchedBusinessNames.has(business.name));
+    // const matchedBusinessNames = new Set(
+    //   businesses
+    //     .filter(business => business.type.toUpperCase() === typeTitleUpper)
+    //     .flatMap(business => business.services)
+    //     .filter(service =>
+    //       service.categoryName.toUpperCase() === categoryTitleUpper &&
+    //       service.subCategoryName?.toUpperCase() === subCategoryTitleUpper
+    //     )
+    //     .map(service => service.businessName)
+    // );
+
+    // this.businesses = businesses.filter(business => matchedBusinessNames.has(business.name));
   }
-  
+
 
   getCityImageUrl(city: string): string {
     return this.businessServiceMock.getCityImageUrl(city);

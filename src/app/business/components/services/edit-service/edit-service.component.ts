@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessService } from 'src/app/business/services/business-service';
-import { Service } from 'src/app/interfaces/service.interface';
 import { ServicesService } from 'src/app/services.service';
+import {Service} from "../../../../openapi";
 
 @Component({
   selector: 'app-edit-service',
@@ -12,7 +12,7 @@ import { ServicesService } from 'src/app/services.service';
 export class EditServiceComponent implements OnInit {
   service: Service | undefined;
   serviceForm: FormGroup;
-  categories: string[] = [];
+  subcategories: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +37,7 @@ export class EditServiceComponent implements OnInit {
         throw new Error('Business not found with services');
       }
 
+      // @ts-ignore
       this.service = business.services.find(service => service.id == id);
 
       if (!this.service) {
@@ -44,12 +45,12 @@ export class EditServiceComponent implements OnInit {
       }
 
       this.serviceForm = new FormGroup({
-        'name': new FormControl(this.service.name),
+        'name': new FormControl(this.service.title),
         'note': new FormControl(this.service.note),
         'description': new FormControl(this.service.description),
         'price': new FormControl(this.service.price),
         'avgDuration': new FormControl(this.service.avgDuration),
-        'category': new FormControl(this.service.categoryName),
+        'category': new FormControl(this.service.subcategoryId),
       });
       this.loadCategories(business.type);
     });
@@ -59,7 +60,7 @@ export class EditServiceComponent implements OnInit {
     if (!this.service) {
       throw new Error('Service not defined on edit-service.component.ts onSave()');
     }
-    service.businessName = this.service.businessName;
+    service.businessId = this.service.businessId;
     this.servicesService.updateService(service).subscribe(result => {
       this.businessService.updateServiceLocally(service);
       this.router.navigate(['/manage-business/services']);
@@ -68,7 +69,7 @@ export class EditServiceComponent implements OnInit {
 
   loadCategories(type: string) {
     return this.servicesService.getServiceTemplatesForBusinessType(type).subscribe(data => {
-      this.categories = [...new Set(data.map(service => service.categoryName))];
+      this.subcategories = [...new Set(data.map(service => '' + service.subcategoryId))];
     }
     );
   }

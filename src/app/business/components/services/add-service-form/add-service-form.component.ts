@@ -12,7 +12,7 @@ import { ServicesService } from 'src/app/services.service';
 export class AddServiceFormComponent {
 
   businessName: string | undefined;
-  categories: string[] = [];
+  subcategories: string[] = [];
   serviceForm: FormGroup;
 
   constructor(private businessService: BusinessService, private servicesService: ServicesService, private router: Router) {
@@ -37,7 +37,7 @@ export class AddServiceFormComponent {
       this.businessName = business.name;
       this.servicesService.getServiceTemplatesForBusinessType(business.type).subscribe(data => {
         console.log('getServiceTemplatesForBusinessType', data);
-        this.categories = [...new Set(data.map(service => service.categoryName))];
+        this.subcategories = [...new Set(data.map(service => '' + service.subcategoryId))];
       });
 
     });
@@ -48,7 +48,7 @@ export class AddServiceFormComponent {
       if (!this.businessName) {
         throw new Error('Business name not found');
       }
-      
+
       console.log(`Trying to create service ${JSON.stringify(this.serviceForm.value)} for business ${this.businessName}`)
 
       this.servicesService.createService(this.serviceForm.value, this.businessName).subscribe(() => {

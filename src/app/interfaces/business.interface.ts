@@ -1,4 +1,4 @@
-import { Service } from "./service.interface";
+import {Service} from "../openapi";
 
 export interface Business {
     name: string;
@@ -11,4 +11,3 @@ export interface Business {
     type: string;
     services: Service[];
 }
-    

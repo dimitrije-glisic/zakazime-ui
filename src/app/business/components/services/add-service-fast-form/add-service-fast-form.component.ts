@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/services.service';
-import { Service } from 'src/app/interfaces/service.interface';
 import { BusinessService } from 'src/app/business/services/business-service';
+import {Service} from "../../../../openapi";
 
 @Component({
   selector: 'app-add-service-fast-form',
@@ -13,10 +13,10 @@ import { BusinessService } from 'src/app/business/services/business-service';
 export class AddServiceFastFormComponent implements OnInit {
   existingServices: Service[] = [];
 
-  categories: string[] = [];
+  subcategories: (number | undefined)[] = [];
   serviceTemplates: Service[] = [];
-  selectedCategory: string | null = null;
-  categoryServices: Service[] = [];
+  selectedSubcategory: string | number | undefined;
+  subcategoryServices: Service[] = [];
   userSelectedServices: Service[] = [];
 
   businessName: string | undefined;
@@ -46,19 +46,19 @@ export class AddServiceFastFormComponent implements OnInit {
 
   loadTemplates(businessType: string): void {
     this.servicesService.getServiceTemplatesForBusinessType(businessType).subscribe(data => {
-      this.serviceTemplates = data.filter(service => !this.existingServices.some(existingService => existingService.name === service.name));
-      this.categories = [...new Set(this.serviceTemplates.map(service => service.categoryName))];
-      this.selectedCategory = this.categories[0];
-      this.categoryServices = this.serviceTemplates
-        .filter(service => service.categoryName === this.selectedCategory);
+      this.serviceTemplates = data.filter(service => !this.existingServices.some(existingService => existingService.title === service.title));
+      this.subcategories = [...new Set(this.serviceTemplates.map(service => service.subcategoryId))];
+      this.selectedSubcategory = this.subcategories[0];
+      this.subcategoryServices = this.serviceTemplates
+        .filter(service => service.subcategoryId === this.selectedSubcategory);
     });
   }
 
-  onCategorySelect(event: Event): void {
+  onSubcategorySelect(event: Event): void {
     const selectElement = event.target;
     if (selectElement instanceof HTMLSelectElement) {
-      this.selectedCategory = selectElement.value;
-      this.categoryServices = this.serviceTemplates.filter(service => service.categoryName === this.selectedCategory);
+      this.selectedSubcategory = selectElement.value;
+      this.subcategoryServices = this.serviceTemplates.filter(service => service.subcategoryId === this.selectedSubcategory);
       this.userSelectedServices = [];
     }
   }

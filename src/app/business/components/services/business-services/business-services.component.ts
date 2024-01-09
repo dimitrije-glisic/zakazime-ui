@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ServicesService } from 'src/app/services.service';
-import { Service } from 'src/app/interfaces/service.interface';
-import { ServicesFilterPipe } from '../services-filter.pipe';
-import { BusinessService } from 'src/app/business/services/business-service';
+import {Component, OnInit} from '@angular/core';
+import {BusinessService} from 'src/app/business/services/business-service';
+import {Service} from "../../../../openapi";
 
 @Component({
   selector: 'app-business-services',
@@ -12,24 +10,15 @@ import { BusinessService } from 'src/app/business/services/business-service';
 export class BusinessServicesComponent implements OnInit {
 
   services: Service[] = [];
-  categories: string[] = [];
+  subCategories: string[] = [];
   currentPage = 1;
   itemsPerPage = 10;
 
   textFilter = '';
   categoryFilter = '';
 
-  newService: Service = {
-    id: '',
-    name: '',
-    description: '',
-    price: 0,
-    avgDuration: 0,
-    categoryName: '',
-    subCategoryName: '',
-  };
-
-  constructor(private businessService: BusinessService, private servicesService: ServicesService) { }
+  constructor(private businessService: BusinessService) {
+  }
 
   ngOnInit(): void {
     this.businessService.getBusiness().subscribe(business => {
@@ -38,8 +27,12 @@ export class BusinessServicesComponent implements OnInit {
       }
       console.log(business.services);
       this.services = business.services;
-      this.categories = [...new Set(this.services.map(service => service.categoryName))];
+      this.subCategories = this.loadSubcategories(this.services);
     });
+  }
+
+   loadSubcategories(services: Service[]) {
+    return [];
   }
 
 }

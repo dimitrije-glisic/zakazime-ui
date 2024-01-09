@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../booking.service';
-import { Service } from 'src/app/interfaces/service.interface';
+import {Service} from "../../../openapi";
 
 @Component({
   selector: 'app-confirm-booking',
@@ -17,7 +17,8 @@ export class ConfirmBookingComponent {
   constructor(private route: ActivatedRoute, private bookingService: BookingService) {
     this.businessName = this.bookingService.getBusinessId();
     this.selectedServices = this.bookingService.getSelectedServices();
-    this.totalSum = this.selectedServices.reduce((sum, service) => sum + service.price, 0);
+    // @ts-ignore
+    this.totalSum = this.selectedServices.reduce((sum, service) => service.price + sum, 0);
     this.selectedTime = this.bookingService.getSelectedTime() ?? '';
   }
 
