@@ -2,8 +2,6 @@
 
   <h2>Usluge ({{ services.length }})</h2>
 
-  <!-- filtering -->
-
   <div class="search-container pt-3">
     <input type="text" class="form-control search-input" placeholder="Pretraga po nazivu usluge..."
       [(ngModel)]="textFilter">
@@ -11,9 +9,9 @@
   </div>
 
   <div class="filter-dropdown mb-3">
-    <select class="form-control" [(ngModel)]="categoryFilter">
+    <select class="form-control" [(ngModel)]="subcategoryFilter">
       <option value="">Sve kategorije</option>
-      <option *ngFor="let category of subcategories" [value]="category">{{ category }}</option>
+      <option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.title }}</option>
     </select>
   </div>
 
@@ -31,9 +29,9 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let service of services | servicesFilter:textFilter:categoryFilter | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
-        <td>{{ service.name }}</td>
-        <td>{{ service.categoryName }}</td>
+        *ngFor="let service of services | servicesFilter:textFilter:subcategoryFilter | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+        <td>{{ service.title }}</td>
+        <td>{{ findSubCategory(service.subcategoryId).title }}</td>
         <td>{{ service.note ? service.note : '-' }}</td>
         <td>{{ service.description ? service.description : '-' }}</td>
         <td>{{ service.price }}</td>

@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { BusinessService } from 'src/app/business/services/business-service';
-import { ServicesService } from 'src/app/services.service';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {BusinessService} from 'src/app/business/services/business-service';
+import {ServicesService} from 'src/app/business/services/services.service';
+import {Business} from "../../../../interfaces/business";
+import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
+import {SubcategoryService} from "../../../services/subcategory.service";
 
 @Component({
   selector: 'app-add-service-form',
@@ -11,50 +14,44 @@ import { ServicesService } from 'src/app/services.service';
 })
 export class AddServiceFormComponent {
 
-  businessName: string | undefined;
-  subcategories: string[] = [];
+  business: Business | null = null;
+  subcategories: ServiceSubcategory[] = [];
   serviceForm: FormGroup;
 
-  constructor(private businessService: BusinessService, private servicesService: ServicesService, private router: Router) {
+  constructor(private businessService: BusinessService, private servicesService: ServicesService, private subcategoryService: SubcategoryService,
+              private router: Router) {
     this.serviceForm = new FormGroup({});
   }
 
   ngOnInit(): void {
-    console.log('AddServiceFormComponent ngOnInit');
     this.serviceForm = new FormGroup({
-      'name': new FormControl(null),
+      'title': new FormControl(null),
+      'subcategoryId': new FormControl(null),
       'note': new FormControl(null),
       'description': new FormControl(null),
       'price': new FormControl(null),
-      'avgDuration': new FormControl(null),
-      'categoryName': new FormControl(null),
+      'avgDuration': new FormControl(null)
     });
 
     this.businessService.getBusiness().subscribe(business => {
-      if (!business) {
-        throw new Error('Business not found');
+        this.business = business;
+        this.servicesService.getServiceTemplatesForBusinessType(business.typeId).subscribe(data => {
+            console.log('getServiceTemplatesForBusinessType', data);
+            // this.subcategories = [...new Set(data.map(service => '' + service.subcategoryId))];
+            this.subcategoryService.getAll().subscribe(subcategories => {
+              const subcategoryIds = [...new Set(data.map(service => service.subcategoryId))];
+              this.subcategories = subcategories.filter(subcategory => subcategoryIds.includes(subcategory.id));
+            });
+          }
+        );
       }
-      this.businessName = business.name;
-      if(business.typeId == null) {
-        throw new Error('Business type not found');
-      }
-      this.servicesService.getServiceTemplatesForBusinessType(business.typeId).subscribe(data => {
-        console.log('getServiceTemplatesForBusinessType', data);
-        this.subcategories = [...new Set(data.map(service => '' + service.subcategoryId))];
-      });
-
-    });
+    );
   }
 
   onSubmit() {
     if (this.serviceForm.valid) {
-      if (!this.businessName) {
-        throw new Error('Business name not found');
-      }
-
-      console.log(`Trying to create service ${JSON.stringify(this.serviceForm.value)} for business ${this.businessName}`)
-
-      this.servicesService.createService(this.serviceForm.value, this.businessName).subscribe(() => {
+      console.log(`Trying to create service ${JSON.stringify(this.serviceForm.value)} for business ${this.business?.name}`)
+      this.servicesService.createService(this.serviceForm.value, this.business!.id).subscribe(() => {
         this.businessService.addServicesLocally([this.serviceForm.value]);
         this.router.navigate(['manage-business', 'services']);
       });

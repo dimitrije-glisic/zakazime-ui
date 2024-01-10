@@ -1,26 +1,27 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
+import {Service} from "../../../interfaces/service";
 
 @Pipe({
   name: 'servicesFilter'
 })
 export class ServicesFilterPipe implements PipeTransform {
 
-  transform(items: any[], text: string, categoryName: string): any[] {
+  transform(items: Service[], text: string, subcategoryId: number | undefined): Service[] {
     if (!items) return [];
 
     let filteredItems = text ? this.filterByText(items, text) : items;
-    return categoryName ? this.filterByCategory(filteredItems, categoryName) : filteredItems;
+    return subcategoryId ? this.filterByCategory(filteredItems, subcategoryId) : filteredItems;
   }
 
-  private filterByText(items: any[], searchText: string): any[] {
+  private filterByText(items: Service[], searchText: string): any[] {
     searchText = searchText.toLowerCase();
     return items.filter(item => {
-      return item.name.toLowerCase().includes(searchText)
-          || item.description.toLowerCase().includes(searchText);
+      return item.title.toLowerCase().includes(searchText)
+        || item.description.toLowerCase().includes(searchText);
     });
   }
 
-  private filterByCategory(items: any[], categoryName: string): any[] {
-    return items.filter(item => item.categoryName === categoryName);
+  private filterByCategory(items: Service[], subcategoryId: number): Service[] {
+    return items.filter(service => service.subcategoryId === +subcategoryId);
   }
 }

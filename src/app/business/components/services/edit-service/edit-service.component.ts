@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessService } from 'src/app/business/services/business-service';
-import { ServicesService } from 'src/app/services.service';
+import { ServicesService } from 'src/app/business/services/services.service';
 import {Service} from "../../../../interfaces/service";
 
 @Component({

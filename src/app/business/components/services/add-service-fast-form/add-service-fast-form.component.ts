@@ -1,9 +1,12 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ServicesService} from 'src/app/services.service';
+import {ServicesService} from 'src/app/business/services/services.service';
 import {BusinessService} from 'src/app/business/services/business-service';
 import {Service} from "../../../../interfaces/service";
+import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
+import {SubcategoryService} from "../../../services/subcategory.service";
+import {Business} from "../../../../interfaces/business";
 
 @Component({
   selector: 'app-add-service-fast-form',
@@ -11,19 +14,19 @@ import {Service} from "../../../../interfaces/service";
   styleUrls: ['./add-service-fast-form.component.css']
 })
 export class AddServiceFastFormComponent implements OnInit {
+  // what is this????
   existingServices: Service[] = [];
 
-  subcategories: (number | undefined)[] = [];
+  subcategories: ServiceSubcategory[] = [];
   serviceTemplates: Service[] = [];
-  selectedSubcategory: string | number | undefined;
+  selectedSubcategory: ServiceSubcategory | undefined;
   subcategoryServices: Service[] = [];
   userSelectedServices: Service[] = [];
 
-  businessName: string | undefined;
-  businessType: number | undefined;
+  business: Business | undefined;
 
-  constructor(private http: HttpClient, private servicesService: ServicesService, private businessService: BusinessService,
-              private router: Router) {
+  constructor(private router: Router, private servicesService: ServicesService, private businessService: BusinessService,
+              private subcategoryService: SubcategoryService) {
   }
 
   ngOnInit(): void {
@@ -32,36 +35,31 @@ export class AddServiceFastFormComponent implements OnInit {
         if (!business) {
           throw new Error('Business not found');
         }
-        //to do: make sure business type is not null
-        if (!business.typeId) {
-          throw new Error('Business type not found');
-        }
-        this.businessName = business.name;
-        this.businessType = business.typeId;
-        // this.existingServices = business.services;
-        if (business.typeId == null) {
-          throw new Error('Business type not found');
-        }
+        this.business = business;
         this.loadTemplates(business.typeId);
       }
     )
   }
 
-  loadTemplates(businessType: number): void {
-    this.servicesService.getServiceTemplatesForBusinessType(businessType).subscribe(data => {
-      this.serviceTemplates = data.filter(service => !this.existingServices.some(existingService => existingService.title === service.title));
-      this.subcategories = [...new Set(this.serviceTemplates.map(service => service.subcategoryId))];
-      this.selectedSubcategory = this.subcategories[0];
-      this.subcategoryServices = this.serviceTemplates
-        .filter(service => service.subcategoryId === this.selectedSubcategory);
+  loadTemplates(businessTypeId: number): void {
+    this.servicesService.getServiceTemplatesForBusinessType(businessTypeId).subscribe(serviceTemplates => {
+      this.subcategoryService.getAll().subscribe(subcategories => {
+        this.serviceTemplates = serviceTemplates;
+        const subcategoryIds = [...new Set(serviceTemplates.map(service => service.subcategoryId))];
+        console.log(subcategoryIds);
+        this.subcategories = subcategories.filter(subcategory => subcategoryIds.includes(subcategory.id));
+        console.log(this.subcategories);
+        this.selectedSubcategory = this.subcategories[0];
+        this.subcategoryServices = this.serviceTemplates.filter(service => service.subcategoryId === this.selectedSubcategory?.id)
+      });
     });
   }
 
   onSubcategorySelect(event: Event): void {
     const selectElement = event.target;
     if (selectElement instanceof HTMLSelectElement) {
-      this.selectedSubcategory = selectElement.value;
-      this.subcategoryServices = this.serviceTemplates.filter(service => service.subcategoryId === this.selectedSubcategory);
+      this.selectedSubcategory = this.subcategories.find(subcategory => subcategory.id === Number(selectElement.value));
+      this.subcategoryServices = this.serviceTemplates.filter(service => service.subcategoryId === this.selectedSubcategory?.id);
       this.userSelectedServices = [];
     }
   }
@@ -73,10 +71,7 @@ export class AddServiceFastFormComponent implements OnInit {
   }
 
   onSaveServices(): void {
-    if (!this.businessName) {
-      throw new Error('Business name not found');
-    }
-    this.servicesService.createServices(this.userSelectedServices, this.businessName).subscribe(response => {
+    this.servicesService.createServices(this.userSelectedServices, this.business!.id).subscribe(response => {
       console.log('Services created');
       this.businessService.addServicesLocally(this.userSelectedServices);
       this.router.navigate(['manage-business', 'services']);

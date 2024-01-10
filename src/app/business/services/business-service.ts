@@ -16,7 +16,7 @@ export class BusinessService {
   constructor(private http: HttpClient) {
   }
 
-  getBusiness(): Observable<Business | null> {
+  getBusiness(): Observable<Business> {
     if (this.business) {
       return of(this.business); // Return cached value if available
     }
@@ -25,7 +25,7 @@ export class BusinessService {
       tap(business => this.business = business), // Cache the response
       catchError(err => {
         if (err.status === 404) {
-          return of(null);
+          throw new Error('No business found');
         }
         return throwError(() => err);
       })
