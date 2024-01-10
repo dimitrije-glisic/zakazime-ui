@@ -2,24 +2,24 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
-import {User} from './interfaces/user.interface';
-import {RegistrationRequest} from './interfaces/registration-dto.interface';
+import {Account} from "./interfaces/account";
+import {RegistrationRequest} from "./interfaces/registration-request";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  private userSubject: BehaviorSubject<Account | null> = new BehaviorSubject<Account | null>(null);
 
   isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
   }
 
-  registerUser(userData: RegistrationRequest): Observable<User> {
-    return this.http.post<User>('/api/register', userData)
+  registerUser(userData: RegistrationRequest): Observable<Account> {
+    return this.http.post<Account>('/api/register', userData)
       .pipe(
-        tap((response: User) => {
+        tap((response: Account) => {
           this.userSubject.next(response);
           this.isLoggedInSubject.next(true);
           this.doDummyPostToObtainCsrfToken();
@@ -32,7 +32,7 @@ export class AuthService {
       authorization: 'Basic ' + btoa(credentials.email + ':' + credentials.password)
     } : {});
 
-    return this.http.get<User>('api/login', {headers: headers}).pipe(
+    return this.http.get<Account>('api/login', {headers: headers}).pipe(
       tap(response => {
         if (response.email) {
           console.log('Login successful, setting userSubject');
@@ -55,11 +55,11 @@ export class AuthService {
     )
   }
 
-  fetchUser(): Observable<User | null> {
+  fetchUser(): Observable<Account | null> {
     // console.log('fetchUser called');
     if (this.userSubject.getValue() === null) {
       // console.log('fetchUser making HTTP request');
-      return this.http.get<User>('/api/login', {withCredentials: true}).pipe(
+      return this.http.get<Account>('/api/login', {withCredentials: true}).pipe(
         tap(response => {
           this.userSubject.next(response);
         }),
@@ -74,7 +74,7 @@ export class AuthService {
     }
   }
 
-  get user$(): Observable<User | null> {
+  get user$(): Observable<Account | null> {
     return this.userSubject.asObservable();
   }
 

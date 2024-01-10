@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Service} from "../../openapi";
+import {Service} from "../../interfaces/service";
 
 @Injectable({
   providedIn: 'root'

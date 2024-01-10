@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { BusinessServiceMockService } from 'src/app/business-service-mock.service';
-import { Business } from 'src/app/interfaces/business.interface';
-import {Service} from "../../openapi";
+import {Business} from "../../interfaces/business";
 
 @Component({
   selector: 'app-business-details',
@@ -18,7 +16,7 @@ export class BusinessDetailsComponent {
 
   servicesGroupedBySubCategory: any = {};
 
-  constructor(private businessServiceMock: BusinessServiceMockService, private router: Router) {
+  constructor(private router: Router) {
     //provide some mock data (message, clientName)
     this.testimonials = [
       {
@@ -35,7 +33,8 @@ export class BusinessDetailsComponent {
 
   ngOnInit(): void {
     console.log('BusinessDetailsComponent ngOnInit');
-    this.business = this.businessServiceMock.getBusinesses()[0];
+    // this.business = this.businessServiceMock.getBusinesses()[0];
+    this.business = {} as Business;
 
     this.groupServicesBySubcategory();
   }

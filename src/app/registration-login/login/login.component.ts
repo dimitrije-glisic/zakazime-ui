@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user.interface';
-import {Account} from "../../openapi";
+import {Account} from "../../interfaces/account";
 
 
 @Component({

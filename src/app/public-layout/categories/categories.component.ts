@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BusinessServiceMockService } from 'src/app/business-service-mock.service';
-import { Business } from 'src/app/interfaces/business.interface';
-import { Service } from 'src/app/interfaces/service.interface';
+import {Business} from "../../interfaces/business";
 
 @Component({
   selector: 'app-categories',
@@ -19,7 +17,7 @@ export class CategoriesComponent {
 
   businessType: string | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private businessServiceMock: BusinessServiceMockService) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(
       (params) => {
         this.businessType = params['title'].toUpperCase();
@@ -29,7 +27,8 @@ export class CategoriesComponent {
   }
 
   loadData(title: string) {
-    this.businessses = this.businessServiceMock.getBusinesses();
+    // this.businessses = this.businessServiceMock.getBusinesses();
+    this.businessses = [];
 
     // this.categories = [...new Set(
     //   this.businessses
@@ -42,11 +41,12 @@ export class CategoriesComponent {
   }
 
   getBusinessesTypeImageUrl(type: string): string {
-    return this.businessServiceMock.getTypeImageUrl(type);
+    // return this.businessServiceMock.getTypeImageUrl(type);
+    return '';
   }
 
   getCategoryImageUrl(category: string): string {
-    return this.businessServiceMock.getCategoryImageUrl(category);
+    return '';
   }
 
   onCategoryClick(category: string) {

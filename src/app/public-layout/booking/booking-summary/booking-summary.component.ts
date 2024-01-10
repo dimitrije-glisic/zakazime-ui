@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {Service} from "../../../openapi";
+import {Service} from "../../../interfaces/service";
 
 @Component({
   selector: 'app-booking-summary',
@@ -16,7 +16,6 @@ export class BookingSummaryComponent {
   totalSum: number | undefined;
 
   ngOnInit() {
-    // @ts-ignore
     this.totalSum = this.selectedServices.reduce((sum, service) => sum + service.price, 0);
   }
 

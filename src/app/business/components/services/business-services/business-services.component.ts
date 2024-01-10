@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {BusinessService} from 'src/app/business/services/business-service';
-import {Service, ServiceSubcategory} from "../../../../openapi";
 import {SubcategoryService} from "../../../services/subcategory.service";
+import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
+import {Service} from "../../../../interfaces/service";
 
 @Component({
   selector: 'app-business-services',

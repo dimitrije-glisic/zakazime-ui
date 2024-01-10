@@ -8,7 +8,7 @@
   <!-- Subcategory Navigation Tabs -->
   <nav class="nav nav-pills nav-fill mb-3 sticky-subcategories">
     <a class="nav-item nav-link" *ngFor="let subcategory of subcategories"
-       (click)="scrollToSubcategory(subcategory)">{{ subcategory }}</a>
+       (click)="scrollToSubcategory(subcategory.title)">{{ subcategory.title }}</a>
   </nav>
 
   <!-- Main Content Row -->
@@ -18,7 +18,7 @@
       <section *ngFor="let subcategory of subcategories; let i = index" [attr.id]="'subcategory-' + subcategory">
         <h4>{{ subcategory }}</h4>
         <div class="row">
-          <div class="col-md-12" *ngFor="let service of services | filterBySubcategory:subcategory">
+          <div class="col-md-12" *ngFor="let service of services | filterBySubcategory:subcategory.id">
             <div class="d-flex justify-content-between align-items-center p-2 border rounded mb-2">
               <div>
                 <h5 class="mb-1 service-name">{{ service.title }}</h5>

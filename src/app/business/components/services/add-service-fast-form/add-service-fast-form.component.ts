@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ServicesService} from 'src/app/services.service';
 import {BusinessService} from 'src/app/business/services/business-service';
-import {Service} from "../../../../openapi";
+import {Service} from "../../../../interfaces/service";
 
 @Component({
   selector: 'app-add-service-fast-form',

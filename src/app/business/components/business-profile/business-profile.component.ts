@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BusinessService } from '../../services/business-service';
-import {Business} from "../../../openapi";
+import {Business} from "../../../interfaces/business";
 
 @Component({
   selector: 'app-business-profile',

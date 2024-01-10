@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, Observable, tap, throwError} from 'rxjs';
-import {Service} from "./openapi";
+import {Service} from "./interfaces/service";
 
 @Injectable({
   providedIn: 'root'

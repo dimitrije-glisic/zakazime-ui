@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BusinessServiceMockService } from 'src/app/business-service-mock.service';
-import { Business } from 'src/app/interfaces/business.interface';
-import { Service } from 'src/app/interfaces/service.interface';
+import {Business} from "../../interfaces/business";
 
 @Component({
   selector: 'app-business-listing',
@@ -14,8 +12,7 @@ export class BusinessListingComponent {
   categories: string[] | undefined;
   businesses: Business[] | undefined;
 
-  constructor(private route: ActivatedRoute,
-    private businessServiceMock: BusinessServiceMockService) {
+  constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(
       (params) => {
         const typeTitle = params['title'].toUpperCase();
@@ -27,7 +24,7 @@ export class BusinessListingComponent {
   }
 
   loadData(typeTitle: string, categoryTitle: string, subCategoryTitle: string) {
-    const businesses = this.businessServiceMock.getBusinesses();
+    const businesses = [];
     const typeTitleUpper = typeTitle.toUpperCase();
     const categoryTitleUpper = categoryTitle.toUpperCase();
     const subCategoryTitleUpper = subCategoryTitle.toUpperCase();
@@ -48,15 +45,18 @@ export class BusinessListingComponent {
 
 
   getCityImageUrl(city: string): string {
-    return this.businessServiceMock.getCityImageUrl(city);
+    // return this.businessServiceMock.getCityImageUrl(city);
+    return '';
   }
 
   getCategoryImageUrl(category: string): string {
-    return this.businessServiceMock.getCategoryImageUrl(category);
+    // return this.businessServiceMock.getCategoryImageUrl(category);
+    return '';
   }
 
   getServiceImageUrl(serviceName: string): string {
-    return this.businessServiceMock.getServiceImageUrl(serviceName);
+    // return this.businessServiceMock.getServiceImageUrl(serviceName);
+    return '';
   }
 
 

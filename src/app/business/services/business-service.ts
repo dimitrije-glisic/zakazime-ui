@@ -2,7 +2,9 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, Observable, of, tap, throwError} from 'rxjs';
 import {BusinessType} from "../../interfaces/business-type.interface";
-import {Business, CreateBusinessProfileRequest, Service} from "../../openapi";
+import {Business} from "../../interfaces/business";
+import {Service} from "../../interfaces/service";
+import {CreateBusinessProfileRequest} from "../../interfaces/create-business-profile-request";
 
 @Injectable({
   providedIn: 'root'
@@ -65,9 +67,8 @@ export class BusinessService {
 
   updateServiceLocally(service: Service) {
     if (this.business) {
-      // @ts-ignore
-      this.services.forEach((element: { title: any; }, index: string | number) => {
-        if (element.title === service.title) { // @ts-ignore
+      this.services.forEach((element: { title: any; }, index: number) => {
+        if (element.title === service.title) {
           this.services[index] = service;
         }
       });

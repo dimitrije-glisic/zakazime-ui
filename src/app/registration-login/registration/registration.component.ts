@@ -3,7 +3,7 @@ import {AuthService} from '../../auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {RegistrationRequest} from 'src/app/interfaces/registration-dto.interface';
+import {RegistrationRequest} from "../../interfaces/registration-request";
 
 @Component({
   selector: 'app-registration',

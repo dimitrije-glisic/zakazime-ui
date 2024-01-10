@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BusinessServiceMockService} from 'src/app/business-service-mock.service';
-import {Business} from 'src/app/interfaces/business.interface';
+import {Business} from "../../interfaces/business";
 
 @Component({
   selector: 'app-sub-categories',
@@ -20,7 +19,7 @@ export class SubCategoriesComponent {
   businesses: Business[] | undefined;
   subCategories: string[] | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private businessServiceMock: BusinessServiceMockService) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(
       (params) => {
         this.businessType = params['title'].toUpperCase();
@@ -31,7 +30,8 @@ export class SubCategoriesComponent {
   }
 
   loadData(typeTitle: string, categoryTitle: string) {
-    this.businesses = this.businessServiceMock.getBusinesses();
+    // this.businesses = this.businessServiceMock.getBusinesses();
+    this.businesses = [];
 
     // this.subCategories = [...new Set(
     //   this.businesses
@@ -50,11 +50,13 @@ export class SubCategoriesComponent {
   }
 
   getCategoryImageUrl(category: string): string {
-    return this.businessServiceMock.getCategoryImageUrl(category);
+    // return this.businessServiceMock.getCategoryImageUrl(category);
+    return '';
   }
 
   getSubCategoryImageUrl(subCategory: string): string {
-    return this.businessServiceMock.getSubCategoryImageUrl(subCategory);
+    // return this.businessServiceMock.getSubCategoryImageUrl(subCategory);
+    return '';
   }
 
   onSubCategoryClick(subCategory: string) {

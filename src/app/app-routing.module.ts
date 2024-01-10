@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AdminComponent} from './admin/admin.component';
 import {RoleGuard} from './role.guard';
 import {BusinessDashboardComponent} from './business/components/business-dashboard/business-dashboard.component';
 import {StatisticsComponent} from './business/components/statistics/statistics.component';
@@ -60,7 +59,6 @@ const routes: Routes = [
 
   {path: 'booking/:business-name/confirm-booking', component: ConfirmBookingComponent},
 
-  {path: 'manage-users', component: AdminComponent, canActivate: [RoleGuard], data: {expectedRole: 'ADMIN'}},
   // { path: 'manage-business', component: BusinessComponent, canActivate: [RoleGuard], data: { expectedRole: 'SERVICE_PROVIDER' } },
 
   {

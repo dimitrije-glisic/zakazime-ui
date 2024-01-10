@@ -3,10 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BusinessService} from 'src/app/business/services/business-service';
-import {User} from 'src/app/interfaces/user.interface';
 import {BusinessType} from "../../interfaces/business-type.interface";
-import {Business, CreateBusinessProfileRequest} from "../../openapi";
-
+import {CreateBusinessProfileRequest} from "../../interfaces/create-business-profile-request";
+import {Business} from "../../interfaces/business";
+import {Account} from "../../interfaces/account";
 
 @Component({
   selector: 'app-finish-registration',
@@ -16,7 +16,7 @@ import {Business, CreateBusinessProfileRequest} from "../../openapi";
 export class FinishRegistrationComponent implements OnInit {
 
   finishRegistrationForm: FormGroup;
-  loggedInUser: User | undefined;
+  loggedInUser: Account | undefined;
   businessTypes: BusinessType[] = [];
 
   constructor(

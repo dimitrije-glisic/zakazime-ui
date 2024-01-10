@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BusinessServiceMockService} from 'src/app/business-service-mock.service';
-import {Business} from 'src/app/interfaces/business.interface';
 import {BookingService} from '../booking.service';
-import {Service} from "../../../openapi";
+import {Business} from "../../../interfaces/business";
+import {Service} from "../../../interfaces/service";
+import {ServiceSubcategory} from "../../../interfaces/service-subcategory";
 
 @Component({
   selector: 'app-booking-select-services',
@@ -13,16 +13,17 @@ import {Service} from "../../../openapi";
 export class BookingSelectServicesComponent {
   business: Business = {} as Business;
   services: Service[] = [];
-  subcategories: string[];
+  subcategories: ServiceSubcategory[];
   filteredSubcategories: string[] = [];
   businessName: string = '';
 
-  constructor(private route: ActivatedRoute, private businessServiceMock: BusinessServiceMockService,
-    private bookingService: BookingService) {
+  constructor(private route: ActivatedRoute, private bookingService: BookingService) {
     this.businessName = this.route.snapshot.paramMap.get('business-name') ?? '';
     this.bookingService.setBusinessId(this.businessName);
-    this.business = this.businessServiceMock.getBusinesses().find(b => b.name === this.businessName) as Business;
-    this.services = this.business.services;
+    // this.business = this.businessServiceMock.getBusinesses().find(b => b.name === this.businessName) as Business;
+    this.business = {} as Business;
+    // this.services = this.business.services;
+    this.services = [];
     // this.subcategories = [...new Set(this.business.services.map(s => loadSubcategory(s)))];
     this.subcategories = [];
   }

@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessService } from 'src/app/business/services/business-service';
 import { ServicesService } from 'src/app/services.service';
-import {Service} from "../../../../openapi";
+import {Service} from "../../../../interfaces/service";
 
 @Component({
   selector: 'app-edit-service',
@@ -38,8 +38,8 @@ export class EditServiceComponent implements OnInit {
         throw new Error('Business not found with services');
       }
 
-      // @ts-ignore
-      this.service = business.services.find(service => service.id == id);
+      // this.service = business.services.find(service => service.id == id);
+      this.service = {} as Service;
 
       if (!this.service) {
         throw new Error('Service not found');
