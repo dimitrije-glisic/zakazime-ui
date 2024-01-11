@@ -9,8 +9,7 @@ import {BusinessTypeService} from "./business-type.service";
 })
 export class ServicesService {
 
-  mockServices: Service[] = [];
-
+  businessTypeToServicesMap: Map<number, Service[]> = new Map<number, Service[]>();
   services: Service[] = [];
 
   constructor(private http: HttpClient, private businessTypeService: BusinessTypeService) {
@@ -38,7 +37,6 @@ export class ServicesService {
         }
       )
     );
-
   }
 
   getServices(name: string): Observable<Service[]> {
@@ -66,9 +64,15 @@ export class ServicesService {
   }
 
   getServiceTemplatesForBusinessType(typeId: number): Observable<Service[]> {
+
+    if (this.businessTypeToServicesMap.has(typeId)) {
+      return new Observable<Service[]>(subscriber => {
+        return subscriber.next(this.businessTypeToServicesMap.get(typeId)!);
+      });
+    }
+
     return this.businessTypeService.findBusinessTypeById(typeId).pipe(
       switchMap((businessType) => this.searchServiceTemplates(businessType.title)),
-      tap(services => console.log('getServiceTemplatesForBusinessType received services', services)),
       catchError(err => {
         if (err.status === 404) {
           console.log('No services found for business type ' + typeId);

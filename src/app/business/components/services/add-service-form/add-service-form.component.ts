@@ -6,6 +6,8 @@ import {ServicesService} from 'src/app/business/services/services.service';
 import {Business} from "../../../../interfaces/business";
 import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
 import {SubcategoryService} from "../../../services/subcategory.service";
+import {switchMap} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-add-service-form',
@@ -32,20 +34,26 @@ export class AddServiceFormComponent {
       'price': new FormControl(null),
       'avgDuration': new FormControl(null)
     });
+    this.loadData();
+  }
 
-    this.businessService.getBusiness().subscribe(business => {
+  loadData() {
+    this.businessService.getBusiness().pipe(
+      switchMap(business => {
         this.business = business;
-        this.servicesService.getServiceTemplatesForBusinessType(business.typeId).subscribe(data => {
-            console.log('getServiceTemplatesForBusinessType', data);
-            // this.subcategories = [...new Set(data.map(service => '' + service.subcategoryId))];
-            this.subcategoryService.getAll().subscribe(subcategories => {
-              const subcategoryIds = [...new Set(data.map(service => service.subcategoryId))];
-              this.subcategories = subcategories.filter(subcategory => subcategoryIds.includes(subcategory.id));
-            });
-          }
-        );
-      }
-    );
+        return this.servicesService.getServiceTemplatesForBusinessType(business.typeId);
+      }),
+      switchMap(serviceTemplates =>
+        this.businessService.getSubcategories(serviceTemplates.map(service => service.subcategoryId))
+      ),
+      catchError(error => {
+        console.error('Error occurred', error);
+        throw error;
+      })
+    ).subscribe(subcategories => {
+      this.subcategories = subcategories;
+      console.log(`Got subcategories ${JSON.stringify(subcategories)}`);
+    });
   }
 
   onSubmit() {

@@ -4,8 +4,8 @@
 
             <form (ngSubmit)="onSubmit()" [formGroup]="serviceForm" class="container mt-4">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Usluga:</label>
-                    <input type="text" class="form-control" id="name" formControlName="name">
+                    <label for="title" class="form-label">Usluga:</label>
+                    <input type="text" class="form-control" id="title" formControlName="title">
                 </div>
                 <div class="mb-3">
                     <label for="note" class="form-label">Napomena:</label>
@@ -26,9 +26,9 @@
 
                 <div class="mb-3">
                     <label for="category" class="form-label">Kategorija:</label>
-                    <select class="form-control" id="category" formControlName="categoryName">
+                    <select class="form-control" id="category" formControlName="subcategoryId">
                         <option value="" disabled selected>Selektujte kategoriju</option>
-                        <option *ngFor="let category of subcategories" [value]="category">{{ category }}</option>
+                        <option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.title }}</option>
                     </select>
                 </div>
 

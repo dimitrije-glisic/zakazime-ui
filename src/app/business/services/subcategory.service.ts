@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {catchError, map, Observable, of, tap, throwError} from "rxjs";
+import {catchError, Observable, of, tap, throwError} from "rxjs";
 import {ServiceSubcategory} from "../../interfaces/service-subcategory";
 
 @Injectable({
@@ -19,11 +19,7 @@ export class SubcategoryService {
     }
     console.log('contacting server for subcategories');
     return this.http.get<ServiceSubcategory[]>('/api/service-subcategory').pipe(
-      tap(subcategories => {
-          this.subcategories = subcategories
-          console.log('got subcategories: ', subcategories);
-        }
-      ), // Cache the response
+      tap(subcategories => this.subcategories = subcategories), // Cache the response
       catchError(err => {
         if (err.status === 404) {
           console.log('No subcategories found');

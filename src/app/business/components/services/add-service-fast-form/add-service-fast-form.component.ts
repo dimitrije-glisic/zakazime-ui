@@ -1,4 +1,3 @@
-import {HttpClient} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ServicesService} from 'src/app/business/services/services.service';
@@ -44,22 +43,38 @@ export class AddServiceFastFormComponent implements OnInit {
   loadTemplates(businessTypeId: number): void {
     this.servicesService.getServiceTemplatesForBusinessType(businessTypeId).subscribe(serviceTemplates => {
       this.subcategoryService.getAll().subscribe(subcategories => {
-        this.serviceTemplates = serviceTemplates;
-        const subcategoryIds = [...new Set(serviceTemplates.map(service => service.subcategoryId))];
-        console.log(subcategoryIds);
-        this.subcategories = subcategories.filter(subcategory => subcategoryIds.includes(subcategory.id));
-        console.log(this.subcategories);
-        this.selectedSubcategory = this.subcategories[0];
-        this.subcategoryServices = this.serviceTemplates.filter(service => service.subcategoryId === this.selectedSubcategory?.id)
+        this.loadSubcategories(subcategories, serviceTemplates);
       });
     });
+  }
+
+  private loadSubcategories(subcategories: ServiceSubcategory[], serviceTemplates: Service[]) {
+    this.serviceTemplates = serviceTemplates;
+    const subcategoryIds = [...new Set(serviceTemplates.map(service => service.subcategoryId))];
+    console.log(subcategoryIds);
+    this.subcategories = subcategories.filter(subcategory => subcategoryIds.includes(subcategory.id));
+    console.log(this.subcategories);
+    this.selectedSubcategory = this.subcategories[0];
+    this.loadSubcategoryServices(this.serviceTemplates, this.selectedSubcategory?.id);
+  }
+
+  private loadSubcategoryServices(serviceTemplates: Service[], subcategoryId: number | undefined) {
+    this.businessService.getServices(this.business!.id).subscribe(
+      (services: Service[]) => {
+        this.existingServices = services;
+        this.subcategoryServices = serviceTemplates.filter(service => service.subcategoryId === subcategoryId && !services.find(s => s.title === service.title));
+      },
+      (error: any) => {
+        console.error('Error fetching services:', error);
+      }
+    );
   }
 
   onSubcategorySelect(event: Event): void {
     const selectElement = event.target;
     if (selectElement instanceof HTMLSelectElement) {
       this.selectedSubcategory = this.subcategories.find(subcategory => subcategory.id === Number(selectElement.value));
-      this.subcategoryServices = this.serviceTemplates.filter(service => service.subcategoryId === this.selectedSubcategory?.id);
+      this.subcategoryServices = this.serviceTemplates.filter(service => service.subcategoryId === this.selectedSubcategory?.id && !this.existingServices.find(s => s.title === service.title));
       this.userSelectedServices = [];
     }
   }
