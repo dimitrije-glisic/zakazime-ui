@@ -19,7 +19,7 @@ export class BusinessService {
   constructor(private http: HttpClient, private subcategoryService: SubcategoryService) {
   }
 
-  getBusiness(): Observable<Business> {
+  loadBusiness(): Observable<Business> {
     if (this.business) {
       return of(this.business); // Return cached value if available
     }
@@ -43,11 +43,11 @@ export class BusinessService {
     return this.http.get<BusinessType[]>('/api/business-types');
   }
 
-  getServices(id: number): Observable<Service[]> {
+  loadServices(businessId: number): Observable<Service[]> {
     if (this.services) {
       return of(this.services);
     }
-    return this.http.get<Service[]>('/api/business/' + id + '/services').pipe(
+    return this.http.get<Service[]>('/api/business/' + businessId + '/services').pipe(
       tap(services => this.services = services),
       catchError(err => {
         if (err.status === 404) {
@@ -58,13 +58,14 @@ export class BusinessService {
     );
   }
 
-  getSubcategories(subcategoryIds: number[]): Observable<ServiceSubcategory[]> {
-    if (this.subcategories) {
-      return of(this.subcategories);
+  loadSubcategories(subcategoryIds: Set<number>): Observable<ServiceSubcategory[]> {
+    console.log('loading subcategories');
+    if (!subcategoryIds || subcategoryIds.size === 0) {
+      return throwError(() => new Error('No filter provided'));
     }
 
-    if (!subcategoryIds || subcategoryIds.length === 0) {
-      return throwError(() => new Error('No filter provided'));
+    if (this.subcategories) {
+      return of(this.subcategories.filter(subcategory => subcategoryIds.has(subcategory.id)));
     }
 
     return this.subcategoryService.getAll().pipe(
@@ -98,6 +99,17 @@ export class BusinessService {
         this.services![index] = service;
       }
     });
+  }
+
+  getService(id: string): Service {
+    if (!this.business) throw new Error('Business is null when getting service');
+    if (!this.services) throw new Error('Services is null when getting service');
+    return <Service>this.services.find(service => service.id === Number(id));
+  }
+
+  getSubcategories(): ServiceSubcategory[] {
+    if (!this.subcategories) throw new Error('Subcategories is null when getting subcategories');
+    return this.subcategories;
   }
 
 }

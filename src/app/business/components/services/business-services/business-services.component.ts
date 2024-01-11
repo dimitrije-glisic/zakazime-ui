@@ -23,13 +23,13 @@ export class BusinessServicesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.businessService.getBusiness().subscribe(business => {
+    this.businessService.loadBusiness().subscribe(business => {
       this.loadServices(business.id);
     });
   }
 
   loadServices(id: number) {
-    this.businessService.getServices(id).subscribe(
+    this.businessService.loadServices(id).subscribe(
       (services: Service[]) => {
         this.services = services;
         this.loadSubcategories(services); // Call loadSubcategories here after services are loaded
@@ -41,9 +41,9 @@ export class BusinessServicesComponent implements OnInit {
   }
 
   loadSubcategories(services: Service[]): void {
-    this.subcategoryService.getAll().subscribe(subcategories => {
-        const serviceSubcategoryIds = new Set(services.map(service => service.subcategoryId));
-        this.subcategories = subcategories!.filter(subcategory => serviceSubcategoryIds.has(subcategory.id));
+    const serviceSubcategoryIds = new Set(services.map(service => service.subcategoryId));
+    this.businessService.loadSubcategories(serviceSubcategoryIds).subscribe(subcategories => {
+        this.subcategories = subcategories;
       },
       (error: any) => {
         // Handle the error appropriately

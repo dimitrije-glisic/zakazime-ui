@@ -13,7 +13,7 @@ export class BusinessProfileComponent {
   constructor(private businessService: BusinessService) { }
 
   ngOnInit(): void {
-    this.businessService.getBusiness().subscribe(business => {
+    this.businessService.loadBusiness().subscribe(business => {
       if (business) {
         this.business = business;
       } else {

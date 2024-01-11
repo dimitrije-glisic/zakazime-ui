@@ -8,6 +8,7 @@ import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
 import {SubcategoryService} from "../../../services/subcategory.service";
 import {switchMap} from "rxjs";
 import {catchError} from "rxjs/operators";
+import {Service} from "../../../../interfaces/service";
 
 @Component({
   selector: 'app-add-service-form',
@@ -38,13 +39,13 @@ export class AddServiceFormComponent {
   }
 
   loadData() {
-    this.businessService.getBusiness().pipe(
+    this.businessService.loadBusiness().pipe(
       switchMap(business => {
         this.business = business;
         return this.servicesService.getServiceTemplatesForBusinessType(business.typeId);
       }),
       switchMap(serviceTemplates =>
-        this.businessService.getSubcategories(serviceTemplates.map(service => service.subcategoryId))
+        this.businessService.loadSubcategories(new Set(serviceTemplates.map(service => service.subcategoryId)))
       ),
       catchError(error => {
         console.error('Error occurred', error);
@@ -52,13 +53,13 @@ export class AddServiceFormComponent {
       })
     ).subscribe(subcategories => {
       this.subcategories = subcategories;
-      console.log(`Got subcategories ${JSON.stringify(subcategories)}`);
     });
   }
 
   onSubmit() {
     if (this.serviceForm.valid) {
-      console.log(`Trying to create service ${JSON.stringify(this.serviceForm.value)} for business ${this.business?.name}`)
+      const service: Service = this.serviceForm.value;
+      console.log(`Service is ${JSON.stringify(service)}`);
       this.servicesService.createService(this.serviceForm.value, this.business!.id).subscribe(() => {
         this.businessService.addServicesLocally([this.serviceForm.value]);
         this.router.navigate(['manage-business', 'services']);

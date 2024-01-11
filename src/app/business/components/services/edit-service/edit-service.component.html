@@ -1,9 +1,9 @@
 <div class="container my-4" *ngIf="service">
   <form (ngSubmit)="onSave(service)" [formGroup]="serviceForm">
     <div class="mb-3 row">
-      <label for="name" class="col-sm-2 col-form-label">Usluga:</label>
+      <label for="title" class="col-sm-2 col-form-label">Usluga:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="name" formControlName="name" [(ngModel)]="service.title">
+        <input type="text" class="form-control" id="title" formControlName="title" [(ngModel)]="service.title">
       </div>
     </div>
 
@@ -36,10 +36,10 @@
     </div>
 
     <div class="mb-3 row">
-      <label for="category" class="col-sm-2 col-form-label">Kategorija:</label>
+      <label for="subcategory" class="col-sm-2 col-form-label">Kategorija:</label>
       <div class="col-sm-10">
-        <select class="form-control" id="category" formControlName="category" [(ngModel)]="service.subcategoryId">
-          <option *ngFor="let category of subcategories" [value]="category">{{ category }}</option>
+        <select class="form-control" id="subcategory" formControlName="subcategory" [(ngModel)]="service.subcategoryId">
+          <option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.title }}</option>
         </select>
       </div>
     </div>

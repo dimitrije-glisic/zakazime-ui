@@ -28,20 +28,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr
-        *ngFor="let service of services | servicesFilter:textFilter:subcategoryFilter | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
-        <td>{{ service.title }}</td>
-        <td>{{ findSubCategory(service.subcategoryId).title }}</td>
-        <td>{{ service.note ? service.note : '-' }}</td>
-        <td>{{ service.description ? service.description : '-' }}</td>
-        <td>{{ service.price }}</td>
-        <td>{{ service.avgDuration }}</td>
-        <td>
-          <a class="btn btn-primary btn-sm" [routerLink]="['edit', service.id]">
-            Uredi
-          </a>
-        </td>
-      </tr>
+    <tr *ngFor="let service of services | servicesFilter:textFilter:subcategoryFilter | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+      <td>{{ service.title }}</td>
+      <td>{{ findSubCategory(service.subcategoryId)?.title || '-' }}</td>
+      <td>{{ service.note ? service.note : '-' }}</td>
+      <td>{{ service.description ? service.description : '-' }}</td>
+      <td>{{ service.price }}</td>
+      <td>{{ service.avgDuration }}</td>
+      <td>
+        <a class="btn btn-primary btn-sm" [routerLink]="['edit', service.id]">
+          Uredi
+        </a>
+      </td>
+    </tr>
     </tbody>
   </table>
 

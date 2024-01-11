@@ -6,6 +6,8 @@ import {Service} from "../../../../interfaces/service";
 import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
 import {SubcategoryService} from "../../../services/subcategory.service";
 import {Business} from "../../../../interfaces/business";
+import {of, switchMap, throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-add-service-fast-form',
@@ -13,7 +15,7 @@ import {Business} from "../../../../interfaces/business";
   styleUrls: ['./add-service-fast-form.component.css']
 })
 export class AddServiceFastFormComponent implements OnInit {
-  // what is this????
+  // already existing services for this business
   existingServices: Service[] = [];
 
   subcategories: ServiceSubcategory[] = [];
@@ -29,40 +31,37 @@ export class AddServiceFastFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const businessType = this.businessService.getBusiness().subscribe(
-      business => {
+    this.businessService.loadBusiness().pipe(
+      switchMap(business => {
         if (!business) {
-          throw new Error('Business not found');
+          return throwError(() => new Error('Business not found'));
         }
         this.business = business;
-        this.loadTemplates(business.typeId);
-      }
-    )
-  }
-
-  loadTemplates(businessTypeId: number): void {
-    this.servicesService.getServiceTemplatesForBusinessType(businessTypeId).subscribe(serviceTemplates => {
-      this.subcategoryService.getAll().subscribe(subcategories => {
-        this.loadSubcategories(subcategories, serviceTemplates);
-      });
+        return this.servicesService.getServiceTemplatesForBusinessType(business.typeId);
+      }),
+      switchMap(serviceTemplates => {
+        this.serviceTemplates = serviceTemplates;
+        return this.businessService.loadSubcategories(new Set(serviceTemplates.map(service => service.subcategoryId)));
+      }),
+      catchError(error => {
+        console.error('Error occurred', error);
+        return of([]); // handle the error as appropriate
+      })
+    ).subscribe(subcategories => {
+      this.processSelectedSubcategory();
     });
   }
 
-  private loadSubcategories(subcategories: ServiceSubcategory[], serviceTemplates: Service[]) {
-    this.serviceTemplates = serviceTemplates;
-    const subcategoryIds = [...new Set(serviceTemplates.map(service => service.subcategoryId))];
-    console.log(subcategoryIds);
-    this.subcategories = subcategories.filter(subcategory => subcategoryIds.includes(subcategory.id));
-    console.log(this.subcategories);
+  private processSelectedSubcategory(): void {
     this.selectedSubcategory = this.subcategories[0];
-    this.loadSubcategoryServices(this.serviceTemplates, this.selectedSubcategory?.id);
+    this.loadSubcategoryServices(this.selectedSubcategory!.id);
   }
 
-  private loadSubcategoryServices(serviceTemplates: Service[], subcategoryId: number | undefined) {
-    this.businessService.getServices(this.business!.id).subscribe(
+  private loadSubcategoryServices(subcategoryId: number): void {
+    this.businessService.loadServices(this.business!.id).subscribe(
       (services: Service[]) => {
         this.existingServices = services;
-        this.subcategoryServices = serviceTemplates.filter(service => service.subcategoryId === subcategoryId && !services.find(s => s.title === service.title));
+        this.subcategoryServices = this.serviceTemplates.filter(service => service.subcategoryId === subcategoryId && !services.find(s => s.title === service.title));
       },
       (error: any) => {
         console.error('Error fetching services:', error);

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BusinessService } from 'src/app/business/services/business-service';
-import { ServicesService } from 'src/app/business/services/services.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BusinessService} from 'src/app/business/services/business-service';
+import {ServicesService} from 'src/app/business/services/services.service';
 import {Service} from "../../../../interfaces/service";
+import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
 
 @Component({
   selector: 'app-edit-service',
@@ -11,8 +12,9 @@ import {Service} from "../../../../interfaces/service";
 })
 export class EditServiceComponent implements OnInit {
   service: Service | undefined;
+  serviceSubcategory: ServiceSubcategory | undefined;
+  subcategories: ServiceSubcategory[] | undefined;
   serviceForm: FormGroup;
-  subcategories: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,37 +28,35 @@ export class EditServiceComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const serviceId = params['id'];
-      console.log('EditServiceComponent ngOnInit', serviceId);
-      this.loadServiceAndCategories(serviceId);
+      this.loadServiceAndCategories(serviceId)
     });
   }
 
   loadServiceAndCategories(id: string) {
-    this.businessService.getBusiness().subscribe(business => {
-      // if (!business || !business.services) {
-      if (!business) {
-        throw new Error('Business not found with services');
-      }
+    this.service = this.businessService.getService(id);
+    if (!this.service) {
+      throw new Error('Service not found');
+    }
 
-      // this.service = business.services.find(service => service.id == id);
-      this.service = {} as Service;
+    this.subcategories = this.businessService.getSubcategories();
+    if (!this.subcategories) {
+      throw new Error('Subcategories not found');
+    }
 
-      if (!this.service) {
-        throw new Error('Service not found');
-      }
+    this.serviceSubcategory = this.subcategories.find(subcategory => subcategory.id === this.service!.subcategoryId);
+    if(!this.serviceSubcategory) {
+      throw new Error('Service subcategory not found');
+    }
 
-      this.serviceForm = new FormGroup({
-        'name': new FormControl(this.service.title),
-        'note': new FormControl(this.service.note),
-        'description': new FormControl(this.service.description),
-        'price': new FormControl(this.service.price),
-        'avgDuration': new FormControl(this.service.avgDuration),
-        'category': new FormControl(this.service.subcategoryId),
-      });
-      if (business.typeId != null) {
-        this.loadCategories(business.typeId);
-      }
+    this.serviceForm = new FormGroup({
+      'title': new FormControl(this.service.title),
+      'note': new FormControl(this.service.note),
+      'description': new FormControl(this.service.description),
+      'price': new FormControl(this.service.price),
+      'avgDuration': new FormControl(this.service.avgDuration),
+      'subcategory': new FormControl(this.serviceSubcategory!.title),
     });
+
   }
 
   onSave(service: Service): void {
@@ -68,13 +68,6 @@ export class EditServiceComponent implements OnInit {
       this.businessService.updateServiceLocally(service);
       this.router.navigate(['/manage-business/services']);
     });
-  }
-
-  loadCategories(typeId: number) {
-    return this.servicesService.getServiceTemplatesForBusinessType(typeId).subscribe(data => {
-      this.subcategories = [...new Set(data.map(service => '' + service.subcategoryId))];
-    }
-    );
   }
 
 }
