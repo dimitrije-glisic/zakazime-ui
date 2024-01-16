@@ -6,19 +6,36 @@
     <div class="navbar-brand text-center" style="padding: 10px;">
       <h1 style="font-size: 1.5rem; font-weight: bold; color: white;">Admin panel</h1>
     </div>
+
     <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link text-white" href="#templates" style="color: white;" onmouseover="this.style.background='#004494'" onmouseout="this.style.background='transparent'">
+      <li class="nav-item submenu">
+        <a class="nav-link text-white" data-bs-toggle="collapse" data-toggle="sub-menu">
           <i class="bi bi-layout-text-sidebar-reverse"></i> Templates
         </a>
+        <ul id="templatesSubmenu" class="collapse list-unstyled">
+          <li class="nav-item">
+            <a class="nav-link text-white submenu-item" routerLinkActive="active" routerLink="templates/business-types">Business Types</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white submenu-item" routerLink="templates/categories">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white submenu-item" routerLink="templates/subcategories">Subcategories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white submenu-item" routerLink="templates/service-templates">Service Templates</a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#users" style="color: white;" onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='transparent'">
+        <a class="nav-link text-white" href="#users" style="color: white;" onmouseover="this.style.background='#0056b3'"
+           onmouseout="this.style.background='transparent'">
           <i class="bi bi-people"></i> Users
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#businesses" style="color: white;" onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='transparent'">
+        <a class="nav-link text-white" href="#businesses" style="color: white;"
+           onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='transparent'">
           <i class="bi bi-shop"></i> Businesses
         </a>
       </li>
@@ -43,8 +60,7 @@
 
     <!-- Main Dashboard Content -->
     <div class="container-fluid mt-4">
-      <h2 style="color: #003366;">Main Dashboard Area</h2>
-      <!-- Your dynamic content will go here -->
+      <router-outlet></router-outlet>
     </div>
 
   </div>

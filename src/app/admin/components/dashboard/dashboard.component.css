@@ -1,0 +1,20 @@
+.nav-item.submenu:hover .collapse {
+  display: block;
+}
+
+.submenu-item {
+  padding-left: 30px; /* Adjust padding as needed */
+}
+
+.submenu-item:hover {
+  background-color: #0056b3; /* Adjust hover color as needed */
+}
+
+.nav-item > a:hover {
+  background-color: #004494; /* Adjust hover color as needed */
+}
+
+.nav-item > a:hover .fa {
+  color: #fff; /* Adjust hover color as needed */
+}
+

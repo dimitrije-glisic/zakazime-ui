@@ -40,6 +40,7 @@ import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/c
 import {BookingSummaryComponent} from './public-layout/booking/booking-summary/booking-summary.component';
 import {BookingBreadcrumbComponent} from './public-layout/booking/booking-breadcrumb/booking-breadcrumb.component';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
+import { BusinessTypeListComponent } from './admin/components/business-type-list/business-type-list.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -82,6 +83,7 @@ export class XhrInterceptor implements HttpInterceptor {
     BookingSummaryComponent,
     BookingBreadcrumbComponent,
     DashboardComponent,
+    BusinessTypeListComponent,
   ],
   imports: [
     BrowserModule,

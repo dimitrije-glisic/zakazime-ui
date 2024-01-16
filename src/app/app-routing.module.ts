@@ -24,6 +24,7 @@ import {LoginComponent} from './registration-login/login/login.component';
 import {HowItWorksComponent} from "./public-layout/how-it-works/how-it-works.component";
 import {FinishRegistrationComponent} from "./registration-login/finish-registration/finish-registration.component";
 import {DashboardComponent} from "./admin/components/dashboard/dashboard.component";
+import {BusinessTypeListComponent} from "./admin/components/business-type-list/business-type-list.component";
 
 const routes: Routes = [
   {path: '', component: BusinessTypesComponent, data: {breadcrumb: 'pocetna'}},
@@ -75,7 +76,16 @@ const routes: Routes = [
   },
 
   // {path: 'admin-dash', component: DashboardComponent, canActivate: [RoleGuard]},
-  {path: 'admin-dash', component: DashboardComponent},
+  // {path: 'admin-dash', component: DashboardComponent},
+  // {path: 'business-types', component: BusinessTypeListComponent},
+
+  {
+    path: 'admin', component: DashboardComponent,
+    children: [
+      {path: 'templates/business-types', component: BusinessTypeListComponent},
+    ]
+  },
+
 
   // otherwise redirect to home
   {path: '**', redirectTo: ''}
