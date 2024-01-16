@@ -39,6 +39,7 @@ import {BookingDatePickerComponent} from './public-layout/booking/booking-date-p
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
 import {BookingSummaryComponent} from './public-layout/booking/booking-summary/booking-summary.component';
 import {BookingBreadcrumbComponent} from './public-layout/booking/booking-breadcrumb/booking-breadcrumb.component';
+import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -79,7 +80,8 @@ export class XhrInterceptor implements HttpInterceptor {
     BookingDatePickerComponent,
     ConfirmBookingComponent,
     BookingSummaryComponent,
-    BookingBreadcrumbComponent
+    BookingBreadcrumbComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,7 @@ export class XhrInterceptor implements HttpInterceptor {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}],
   // { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true }],

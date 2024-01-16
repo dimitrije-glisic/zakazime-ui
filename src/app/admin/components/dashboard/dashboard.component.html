@@ -1,0 +1,51 @@
+<!-- dashboard.component.html -->
+<div class="d-flex" style="height: 100vh;">
+
+  <!-- Sidebar -->
+  <div class="bg-dark text-white" style="width: 200px; height: 100vh; position: fixed;">
+    <div class="navbar-brand text-center" style="padding: 10px;">
+      <h1 style="font-size: 1.5rem; font-weight: bold; color: white;">Admin panel</h1>
+    </div>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#templates" style="color: white;" onmouseover="this.style.background='#004494'" onmouseout="this.style.background='transparent'">
+          <i class="bi bi-layout-text-sidebar-reverse"></i> Templates
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#users" style="color: white;" onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='transparent'">
+          <i class="bi bi-people"></i> Users
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#businesses" style="color: white;" onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='transparent'">
+          <i class="bi bi-shop"></i> Businesses
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main content area -->
+  <div class="flex-grow-1" style="margin-left: 200px;">
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg"
+         style="background-color: #003366; color: white; width: calc(100% - 200px); position: fixed; z-index: 1020;">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-end" style="width: 100%;">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="button">Logout</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Placeholder for navbar height -->
+    <div style="height: 56px;"></div>
+
+    <!-- Main Dashboard Content -->
+    <div class="container-fluid mt-4">
+      <h2 style="color: #003366;">Main Dashboard Area</h2>
+      <!-- Your dynamic content will go here -->
+    </div>
+
+  </div>
+</div>

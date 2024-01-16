@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RoleGuard} from './role.guard';
 import {BusinessDashboardComponent} from './business/components/business-dashboard/business-dashboard.component';
 import {StatisticsComponent} from './business/components/statistics/statistics.component';
 import {BusinessServicesComponent} from './business/components/services/business-services/business-services.component';
@@ -24,6 +23,7 @@ import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/c
 import {LoginComponent} from './registration-login/login/login.component';
 import {HowItWorksComponent} from "./public-layout/how-it-works/how-it-works.component";
 import {FinishRegistrationComponent} from "./registration-login/finish-registration/finish-registration.component";
+import {DashboardComponent} from "./admin/components/dashboard/dashboard.component";
 
 const routes: Routes = [
   {path: '', component: BusinessTypesComponent, data: {breadcrumb: 'pocetna'}},
@@ -73,6 +73,9 @@ const routes: Routes = [
       {path: 'services/edit/:id', component: EditServiceComponent},
     ]
   },
+
+  // {path: 'admin-dash', component: DashboardComponent, canActivate: [RoleGuard]},
+  {path: 'admin-dash', component: DashboardComponent},
 
   // otherwise redirect to home
   {path: '**', redirectTo: ''}
