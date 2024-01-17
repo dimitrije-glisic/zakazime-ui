@@ -1,1 +1,47 @@
-<p>business-type-list works!</p>
+<div class="container mt-4">
+<!--  <h2 class="mb-3">Tipovi biznisa</h2>-->
+
+  <div class="row">
+    <div class="col">
+      <div class="form-border">
+        <h3>Dodajte novi tip biznisa</h3>
+        <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="mb-3">
+          <div class="mb-3">
+            <label for="title" class="form-label">Naziv:</label>
+            <input id="title" type="text" class="form-control" formControlName="title">
+          </div>
+          <button type="submit" class="btn btn-primary">Kreiraj novi</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col" *ngIf="editingBusinessTypeId !== null">
+      <div class="form-border">
+        <h3>Izmeni</h3>
+        <form [formGroup]="editForm" (ngSubmit)="onEditSubmit()">
+          <input type="hidden" formControlName="id">
+
+          <div class="mb-3">
+            <label for="title" class="form-label">Naziv:</label>
+            <input type="text" class="form-control" formControlName="title">
+          </div>
+
+          <button type="submit" class="btn btn-success">Sacuvaj</button>
+          <button type="button" class="btn btn-secondary ms-2" (click)="editingBusinessTypeId = null">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="mb-3">Trenutni</h2>
+  <ul class="list-group">
+    <li *ngFor="let businessType of businessTypes"
+        class="list-group-item d-flex justify-content-between align-items-center">
+      {{ businessType.title }}
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" (click)="startEdit(businessType)">Uredi</button>
+        <button class="btn btn-sm btn-outline-danger ms-2" (click)="deleteBusinessType(businessType.id)">Izbrisi</button>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -10,8 +10,9 @@ import { AuthService } from 'src/app/auth.service';
 export class BusinessDashboardComponent implements OnInit {
 
   constructor(public authService: AuthService, private router: Router) { }
-  
+
   ngOnInit(): void {
+    // workaround - fix this later
     this.authService.setInitialLoginState();
   }
 

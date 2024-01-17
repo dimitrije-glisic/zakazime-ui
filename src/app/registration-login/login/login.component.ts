@@ -30,7 +30,6 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
       this.authService.login(credentials).subscribe({
-        // next: (response: User) => this.handleSuccessfulLogin(response),
         next: (response: Account) => this.handleSuccessfulLogin(response),
         error: (error: any) => this.handleLoginError(error)
       });
@@ -51,9 +50,10 @@ export class LoginComponent {
   }
 
   navigateToDashboard(role: number | undefined): void {
+    console.log('role: ' + role);
     switch (role) {
       case 1:
-        this.router.navigate(['/manage-users']);
+        this.router.navigate(['/admin']);
         break;
       case 2:
         this.router.navigate(['/manage-business']);
