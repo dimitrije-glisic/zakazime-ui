@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BusinessType} from "../../../interfaces/business-type";
 import {BusinessTypeService} from "../../services/business-type.service";
 
@@ -13,19 +13,22 @@ export class BusinessTypeListComponent implements OnInit {
   addForm: FormGroup;
   editForm: FormGroup;
   editingBusinessTypeId: number | null = null;
+  selectedImage: File | null = null;
 
   constructor(
     private businessTypeService: BusinessTypeService,
     private formBuilder: FormBuilder
   ) {
     this.addForm = this.formBuilder.group({
-      title: ['', Validators.required, Validators.minLength(3)],
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      imageUrl: ['', Validators.required],
       // Add other fields as needed
     });
 
     this.editForm = this.formBuilder.group({
       id: [''],
-      title: ['', Validators.required, Validators.minLength(3)],
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      imageUrl: ['', Validators.required],
       // Add other fields as needed
     });
   }
@@ -46,10 +49,33 @@ export class BusinessTypeListComponent implements OnInit {
   }
 
   onAddSubmit() {
-    this.businessTypeService.createBusinessType(this.addForm.value)
+    console.log('addForm', this.addForm.value);
+    if (this.selectedImage) {
+      console.log('selectedImage', this.selectedImage);
+      console.log('addForm', this.addForm.value);
+      const formData = new FormData();
+      formData.append('image', this.selectedImage);
+
+      this.businessTypeService.uploadImage(formData).subscribe(res => {
+        console.log('received imageUrl', res.imageUrl);
+        const imageUrl = res.imageUrl;
+        console.log('title', this.addForm.value.title);
+        const businessTypeData = {...this.addForm.value, imageUrl} as BusinessType;
+        console.log('businessTypeData', businessTypeData);
+        this.createBusinessType(businessTypeData);
+      });
+    } else {
+      // image must be provided
+      this.addForm.get('imageUrl')!.setErrors({required: true});
+    }
+  }
+
+  private createBusinessType(businessTypeData: BusinessType) {
+    this.businessTypeService.createBusinessType(businessTypeData)
       .subscribe(() => {
         this.loadBusinessTypes();
         this.addForm.reset();
+        this.selectedImage = null; // Reset the image file
       });
   }
 
@@ -67,4 +93,13 @@ export class BusinessTypeListComponent implements OnInit {
       this.loadBusinessTypes();
     });
   }
+
+  handleImageChange(event: Event) {
+    // @ts-ignore
+    const file = (event.target as HTMLInputElement).files[0];
+    if (file) {
+      this.selectedImage = file;
+    }
+  }
+
 }

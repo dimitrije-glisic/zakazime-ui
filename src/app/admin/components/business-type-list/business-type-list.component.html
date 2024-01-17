@@ -5,19 +5,28 @@
     <div class="col">
       <div class="form-border">
         <h3>Dodajte novi tip biznisa</h3>
+
         <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="mb-3">
+
           <div class="mb-3">
             <label for="title" class="form-label">Naziv:</label>
             <input id="title" type="text" class="form-control" formControlName="title">
           </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Slika:</label>
+            <input id="image" type="file" (change)="handleImageChange($event)" class="form-control">
+          </div>
+
           <button type="submit" class="btn btn-primary">Kreiraj novi</button>
         </form>
+
       </div>
     </div>
 
     <div class="col" *ngIf="editingBusinessTypeId !== null">
       <div class="form-border">
         <h3>Izmeni</h3>
+
         <form [formGroup]="editForm" (ngSubmit)="onEditSubmit()">
           <input type="hidden" formControlName="id">
 
@@ -25,10 +34,15 @@
             <label for="title" class="form-label">Naziv:</label>
             <input type="text" class="form-control" formControlName="title">
           </div>
+          <div class="mb-3">
+            <label for="editImage" class="form-label">Foto:</label>
+            <input id="editImage" type="file" (change)="handleImageChange($event)" class="form-control">
+          </div>
 
           <button type="submit" class="btn btn-success">Sacuvaj</button>
           <button type="button" class="btn btn-secondary ms-2" (click)="editingBusinessTypeId = null">Cancel</button>
         </form>
+
       </div>
     </div>
   </div>

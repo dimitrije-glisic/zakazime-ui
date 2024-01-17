@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {BusinessType} from "../../interfaces/business-type";
+import {ImageUploadResponse} from "../../interfaces/image-upload-response";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import {BusinessType} from "../../interfaces/business-type";
 export class BusinessTypeService {
   private apiPath = '/api/business-types'; // Adjust as needed
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getBusinessTypes(): Observable<BusinessType[]> {
     return this.http.get<BusinessType[]>(this.apiPath);
@@ -31,6 +33,10 @@ export class BusinessTypeService {
     // omit for now because of safety concerns
     return this.http.delete(`${this.apiPath}/${id}`);
     // return new Observable();
+  }
+
+  uploadImage(imageData: FormData): Observable<ImageUploadResponse> {
+    return this.http.post<ImageUploadResponse>(`${this.apiPath}/upload-image`, imageData);
   }
 
 }
