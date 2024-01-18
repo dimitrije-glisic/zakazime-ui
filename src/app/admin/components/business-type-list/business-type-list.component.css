@@ -38,3 +38,28 @@
   align-items: center;
   cursor: pointer;
 }
+
+.img-fluid {
+  max-width: 100%;   /* ensures the image is not wider than its container */
+  max-height: 300px; /* adjust this value to the maximum height you prefer */
+  height: auto;      /* maintains the aspect ratio */
+  width: auto;       /* maintains the aspect ratio */
+  display: block;    /* prevents extra space below the image */
+  margin: 0 auto;    /* centers the image if it's smaller than the container */
+}
+
+.upload-label {
+  cursor: pointer;
+  /* Style as you please, it will become the visible UI component. */
+}
+
+.upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload-instruction {
+  font-size: 0.9em;
+  color: #777;
+}

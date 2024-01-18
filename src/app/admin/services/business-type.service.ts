@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BusinessType} from "../../interfaces/business-type";
 import {ImageUploadResponse} from "../../interfaces/image-upload-response";
+import {MessageResponse} from "../../interfaces/message-response";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class BusinessTypeService {
 
   updateBusinessType(id: number, businessType: BusinessType): Observable<any> {
     return this.http.put(`${this.apiPath}/${id}`, businessType);
+  }
+
+  updateBusinessTypeWithImage(id: number, businessWithImageData: FormData): Observable<MessageResponse> {
+    return this.http.put<MessageResponse>(`${this.apiPath}/${id}/with-image`, businessWithImageData);
   }
 
   deleteBusinessType(id: number): Observable<any> {

@@ -73,27 +73,45 @@ export class BusinessTypeListComponent implements OnInit {
         }
       );
     } else {
-      // image must be provided
-      this.addForm.setErrors({required: true});
+      this.businessTypeService.createBusinessType(this.addForm.value)
+        .subscribe(() => {
+          this.loadBusinessTypes();
+          this.addForm.reset();
+        });
     }
   }
 
-  private createBusinessType(businessTypeData: BusinessType) {
-    this.businessTypeService.createBusinessType(businessTypeData)
-      .subscribe(() => {
-        this.loadBusinessTypes();
-        this.addForm.reset();
-        this.selectedImage = null; // Reset the image file
-      });
-  }
-
   onEditSubmit() {
-    this.businessTypeService.updateBusinessType(this.editForm.value.id, this.editForm.value)
-      .subscribe(() => {
-        this.loadBusinessTypes();
-        this.editForm.reset();
-        this.editingBusinessTypeId = null;
+    if (this.selectedImage) {
+      const formData = new FormData();
+      formData.append('image', this.selectedImage);
+
+      // Convert the form data to a blob and append it to the FormData object
+      const businessTypeBlob = new Blob([JSON.stringify(this.editForm.value)], {
+        type: 'application/json'
       });
+      formData.append('businessType', businessTypeBlob);
+
+      this.businessTypeService.updateBusinessTypeWithImage(this.editForm.value.id, formData).subscribe(
+        res => {
+          this.loadBusinessTypes();
+          this.editForm.reset();
+          this.editingBusinessTypeId = null;
+          this.selectedImage = null; // Reset the image file
+        },
+        error => {
+          // Handle any errors
+        }
+      );
+    } else {
+      // image must be provided
+      this.businessTypeService.updateBusinessType(this.editForm.value.id, this.editForm.value)
+        .subscribe(() => {
+          this.loadBusinessTypes();
+          this.editForm.reset();
+          this.editingBusinessTypeId = null;
+        });
+    }
   }
 
   deleteBusinessType(id: number) {

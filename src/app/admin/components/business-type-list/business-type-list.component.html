@@ -13,8 +13,10 @@
             <input id="title" type="text" class="form-control" formControlName="title">
           </div>
           <div class="mb-3">
-            <label for="image" class="form-label">Slika:</label>
-            <input id="image" type="file" (change)="handleImageChange($event)" class="form-control">
+            <label for="image" class="form-label upload-label">Dodajte sliku...
+              <span class="upload-instruction">(Kliknuti)</span>
+            </label>
+            <input id="image" type="file" (change)="handleImageChange($event)" class="form-control upload-photo">
           </div>
 
           <button type="submit" class="btn btn-primary">Kreiraj novi</button>
@@ -35,8 +37,10 @@
             <input type="text" class="form-control" formControlName="title">
           </div>
           <div class="mb-3">
-            <label for="editImage" class="form-label">Foto:</label>
-            <input id="editImage" type="file" (change)="handleImageChange($event)" class="form-control">
+            <label for="image" class="form-label upload-label">Dodajte sliku...
+              <span class="upload-instruction">(Kliknuti)</span>
+            </label>
+            <input id="imageEdit" type="file" (change)="handleImageChange($event)" class="form-control upload-photo">
           </div>
 
           <button type="submit" class="btn btn-success">Sacuvaj</button>
@@ -61,9 +65,8 @@
         </div>
       </div>
       <div *ngIf="expandedBusinessTypeId === businessType.id" class="expanded-area">
-        <!-- Conditionally display the image if the imageUrl property is set -->
+        Prikaz na web stranici:
         <img *ngIf="businessType.imageUrl" [src]="businessType.imageUrl" alt="Image of {{ businessType.title }}" class="img-fluid">
-        <!-- Add other details here if needed -->
       </div>
     </li>
   </ul>
