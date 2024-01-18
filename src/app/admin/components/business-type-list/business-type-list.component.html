@@ -49,13 +49,24 @@
 
   <h2 class="mb-3">Trenutni</h2>
   <ul class="list-group">
-    <li *ngFor="let businessType of businessTypes"
-        class="list-group-item d-flex justify-content-between align-items-center">
-      {{ businessType.title }}
-      <div>
-        <button class="btn btn-sm btn-outline-secondary" (click)="startEdit(businessType)">Uredi</button>
-        <button class="btn btn-sm btn-outline-danger ms-2" (click)="deleteBusinessType(businessType.id)">Izbrisi</button>
+    <li *ngFor="let businessType of businessTypes" class="list-group-item">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="title-container" (click)="toggleExpand(businessType.id)">
+          <span class="arrow" [class.down]="expandedBusinessTypeId === businessType.id"></span>
+          {{ businessType.title }}
+        </div>
+        <div>
+          <button class="btn btn-sm btn-outline-secondary" (click)="startEdit(businessType)">Uredi</button>
+          <button class="btn btn-sm btn-outline-danger ms-2" (click)="deleteBusinessType(businessType.id)">Izbrisi</button>
+        </div>
+      </div>
+      <div *ngIf="expandedBusinessTypeId === businessType.id" class="expanded-area">
+        <!-- Conditionally display the image if the imageUrl property is set -->
+        <img *ngIf="businessType.imageUrl" [src]="businessType.imageUrl" alt="Image of {{ businessType.title }}" class="img-fluid">
+        <!-- Add other details here if needed -->
       </div>
     </li>
   </ul>
+
+
 </div>

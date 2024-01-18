@@ -25,6 +25,10 @@ export class BusinessTypeService {
     return this.http.post<BusinessType>(this.apiPath, businessType);
   }
 
+  createBusinessTypeWithImage(businessWithImageData: FormData): Observable<BusinessType> {
+    return this.http.post<BusinessType>(`${this.apiPath}/with-image`, businessWithImageData);
+  }
+
   updateBusinessType(id: number, businessType: BusinessType): Observable<any> {
     return this.http.put(`${this.apiPath}/${id}`, businessType);
   }
@@ -35,8 +39,19 @@ export class BusinessTypeService {
     // return new Observable();
   }
 
-  uploadImage(imageData: FormData): Observable<ImageUploadResponse> {
-    return this.http.post<ImageUploadResponse>(`${this.apiPath}/upload-image`, imageData);
+  uploadImage(id: number, imageData: FormData): Observable<ImageUploadResponse> {
+    return this.http.post<ImageUploadResponse>(`${this.apiPath}/${id}/upload-image`, imageData);
   }
 
+  getBusinessTypeImageUrl(id: number): Observable<string> {
+    // Replace the URL with the actual endpoint where images are served
+    const imageUrl = `${this.apiPath}/${id}/image-url`;
+    return this.http.get(imageUrl, {responseType: 'text'});
+  }
+
+  getBusinessTypeImage(id: number): Observable<Blob> {
+    // Replace the URL with the actual endpoint where images are served
+    const imageUrl = `${this.apiPath}/${id}/image`;
+    return this.http.get(imageUrl, {responseType: 'blob'});
+  }
 }

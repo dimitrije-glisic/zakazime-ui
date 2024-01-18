@@ -41,6 +41,7 @@ import {BookingSummaryComponent} from './public-layout/booking/booking-summary/b
 import {BookingBreadcrumbComponent} from './public-layout/booking/booking-breadcrumb/booking-breadcrumb.component';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { BusinessTypeListComponent } from './admin/components/business-type-list/business-type-list.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -94,6 +95,7 @@ export class XhrInterceptor implements HttpInterceptor {
     BrowserAnimationsModule,
     MatDialogModule,
     NgxPaginationModule,
+    NgOptimizedImage,
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true}],
   // { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true }],

@@ -14,6 +14,7 @@ export class BusinessTypeListComponent implements OnInit {
   editForm: FormGroup;
   editingBusinessTypeId: number | null = null;
   selectedImage: File | null = null;
+  expandedBusinessTypeId: number | null = null;
 
   constructor(
     private businessTypeService: BusinessTypeService,
@@ -49,24 +50,31 @@ export class BusinessTypeListComponent implements OnInit {
   }
 
   onAddSubmit() {
-    console.log('addForm', this.addForm.value);
+    console.log('onAddSubmit', this.addForm.value);
     if (this.selectedImage) {
-      console.log('selectedImage', this.selectedImage);
-      console.log('addForm', this.addForm.value);
       const formData = new FormData();
       formData.append('image', this.selectedImage);
 
-      this.businessTypeService.uploadImage(formData).subscribe(res => {
-        console.log('received imageUrl', res.imageUrl);
-        const imageUrl = res.imageUrl;
-        console.log('title', this.addForm.value.title);
-        const businessTypeData = {...this.addForm.value, imageUrl} as BusinessType;
-        console.log('businessTypeData', businessTypeData);
-        this.createBusinessType(businessTypeData);
+      // Convert the form data to a blob and append it to the FormData object
+      const businessTypeBlob = new Blob([JSON.stringify(this.addForm.value)], {
+        type: 'application/json'
       });
+      formData.append('businessType', businessTypeBlob);
+
+      this.businessTypeService.createBusinessTypeWithImage(formData).subscribe(
+        res => {
+          // Handle the response, the backend should return the created business type with ID and imageUrl
+          this.loadBusinessTypes();
+          this.addForm.reset();
+          this.selectedImage = null; // Reset the image file
+        },
+        error => {
+          // Handle any errors
+        }
+      );
     } else {
       // image must be provided
-      this.addForm.get('imageUrl')!.setErrors({required: true});
+      this.addForm.setErrors({required: true});
     }
   }
 
@@ -100,6 +108,36 @@ export class BusinessTypeListComponent implements OnInit {
     if (file) {
       this.selectedImage = file;
     }
+  }
+
+  toggleExpand(id: number) {
+    if (this.expandedBusinessTypeId === id) {
+      this.expandedBusinessTypeId = null;
+    } else {
+      this.expandedBusinessTypeId = id;
+      const businessType = this.businessTypes.find(bt => bt.id === id);
+      if (businessType) {
+        this.loadBusinessTypeImage(businessType);
+      }
+    }
+  }
+
+  loadBusinessTypeImage(businessType: BusinessType) {
+    this.businessTypeService.getBusinessTypeImage(businessType.id).subscribe(
+      imageBlob => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => {
+          businessType.imageUrl = reader.result as string;
+        }, false);
+
+        if (imageBlob) {
+          reader.readAsDataURL(imageBlob);
+        }
+      },
+      error => {
+        console.error('Error loading image:', error);
+      }
+    );
   }
 
 }
