@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <div class="row">
+
+    <div class="col">
+      <app-business-type-add
+        (businessTypeAdded)="loadBusinessTypes()">
+      </app-business-type-add>
+    </div>
+
+    <div class="col">
+      <app-business-type-edit
+        *ngIf="editingBusinessType"
+        [businessType]="editingBusinessType"
+        (businessTypeUpdated)="loadBusinessTypes()"
+        (cancelEdit)="editingBusinessType = null">
+      </app-business-type-edit>
+    </div>
+
+  </div>
+
+  <app-business-type-list
+    [businessTypes]="businessTypes"
+    (startEditing)="editingBusinessType = $event"
+    (onDelete)="loadBusinessTypes()">
+  </app-business-type-list>
+
+</div>

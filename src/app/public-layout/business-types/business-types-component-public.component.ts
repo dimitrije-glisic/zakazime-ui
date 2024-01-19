@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { BusinessType } from 'src/app/interfaces/business-type.interface';
 
 @Component({
-  selector: 'app-business-types',
-  templateUrl: './business-types.component.html',
-  styleUrls: ['./business-types.component.css']
+  selector: 'app-business-type-management',
+  templateUrl: './business-types-component-public.component.html',
+  styleUrls: ['./business-types-component-public.component.css']
 })
 export class BusinessTypesComponent {
   backgroundImg = '/assets/images/gradient.jpeg';

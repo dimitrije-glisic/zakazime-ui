@@ -24,7 +24,7 @@ import {EditServiceComponent} from './business/components/services/edit-service/
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {AddServiceFormComponent} from './business/components/services/add-service-form/add-service-form.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {BusinessTypesComponent} from './public-layout/business-types/business-types.component';
+import {BusinessTypesComponent} from './public-layout/business-types/business-types-component-public.component';
 import {CategoriesComponent} from './public-layout/categories/categories.component';
 import {SubCategoriesComponent} from './public-layout/sub-categories/sub-categories.component';
 import {BusinessListingComponent} from './public-layout/business-listing/business-listing.component';
@@ -40,8 +40,11 @@ import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/c
 import {BookingSummaryComponent} from './public-layout/booking/booking-summary/booking-summary.component';
 import {BookingBreadcrumbComponent} from './public-layout/booking/booking-breadcrumb/booking-breadcrumb.component';
 import {DashboardComponent} from './admin/components/dashboard/dashboard.component';
-import {BusinessTypeListComponent} from './admin/components/business-type-list/business-type-list.component';
+import {BusinessTypeListComponent} from './admin/components/business-types/business-type-list/business-type-list.component';
 import {NgOptimizedImage} from "@angular/common";
+import { BusinessTypeAddComponent } from './admin/components/business-types/business-type-add/business-type-add.component';
+import { BusinessTypeEditComponent } from './admin/components/business-types/business-type-edit/business-type-edit.component';
+import { BusinessTypeManagement } from './admin/components/business-types/business-type-management/business-type-management.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -85,6 +88,9 @@ export class XhrInterceptor implements HttpInterceptor {
     BookingBreadcrumbComponent,
     DashboardComponent,
     BusinessTypeListComponent,
+    BusinessTypeAddComponent,
+    BusinessTypeEditComponent,
+    BusinessTypeManagement,
   ],
   imports: [
     BrowserModule,

@@ -39,9 +39,7 @@ export class BusinessTypeService {
   }
 
   deleteBusinessType(id: number): Observable<any> {
-    // omit for now because of safety concerns
     return this.http.delete(`${this.apiPath}/${id}`);
-    // return new Observable();
   }
 
   uploadImage(id: number, imageData: FormData): Observable<ImageUploadResponse> {

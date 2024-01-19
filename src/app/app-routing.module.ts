@@ -10,7 +10,7 @@ import {
 import {EditServiceComponent} from './business/components/services/edit-service/edit-service.component';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {FinishedRegistrationGuard} from './finished.registration.guard';
-import {BusinessTypesComponent} from './public-layout/business-types/business-types.component';
+import {BusinessTypesComponent} from './public-layout/business-types/business-types-component-public.component';
 import {CategoriesComponent} from './public-layout/categories/categories.component';
 import {SubCategoriesComponent} from './public-layout/sub-categories/sub-categories.component';
 import {BusinessListingComponent} from './public-layout/business-listing/business-listing.component';
@@ -24,7 +24,9 @@ import {LoginComponent} from './registration-login/login/login.component';
 import {HowItWorksComponent} from "./public-layout/how-it-works/how-it-works.component";
 import {FinishRegistrationComponent} from "./registration-login/finish-registration/finish-registration.component";
 import {DashboardComponent} from "./admin/components/dashboard/dashboard.component";
-import {BusinessTypeListComponent} from "./admin/components/business-type-list/business-type-list.component";
+import {
+  BusinessTypeManagement
+} from "./admin/components/business-types/business-type-management/business-type-management.component";
 
 const routes: Routes = [
   {path: '', component: BusinessTypesComponent, data: {breadcrumb: 'pocetna'}},
@@ -77,12 +79,12 @@ const routes: Routes = [
 
   // {path: 'admin-dash', component: DashboardComponent, canActivate: [RoleGuard]},
   // {path: 'admin-dash', component: DashboardComponent},
-  // {path: 'business-types', component: BusinessTypeListComponent},
+  // {path: 'business-type-management', component: BusinessTypeListComponent},
 
   {
     path: 'admin', component: DashboardComponent,
     children: [
-      {path: 'templates/business-types', component: BusinessTypeListComponent},
+      {path: 'templates/business-types', component: BusinessTypeManagement},
     ]
   },
 
