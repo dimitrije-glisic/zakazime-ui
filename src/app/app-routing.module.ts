@@ -27,6 +27,9 @@ import {DashboardComponent} from "./admin/components/dashboard/dashboard.compone
 import {
   BusinessTypeManagement
 } from "./admin/components/business-types/business-type-management/business-type-management.component";
+import {
+  CategoryManagementComponent
+} from "./admin/components/categories/category-management/category-management.component";
 
 const routes: Routes = [
   {path: '', component: BusinessTypesComponent, data: {breadcrumb: 'pocetna'}},
@@ -85,6 +88,7 @@ const routes: Routes = [
     path: 'admin', component: DashboardComponent,
     children: [
       {path: 'templates/business-types', component: BusinessTypeManagement},
+      {path: 'templates/categories', component: CategoryManagementComponent},
     ]
   },
 

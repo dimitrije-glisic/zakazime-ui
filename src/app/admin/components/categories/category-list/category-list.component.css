@@ -1,0 +1,65 @@
+.form-border {
+  border: 1px solid #dee2e6; /* Bootstrap's border color */
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.list-group-item {
+  border-left: 5px solid #007bff; /* A blue left border for list items */
+}
+
+.expanded-area {
+  padding: 10px;
+  margin-top: 10px;
+  border-top: 1px solid #ddd; /* A light divider between the header and expanded content */
+}
+
+.arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-right: 5px;
+  vertical-align: middle;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black; /* Arrow pointing down */
+  border-bottom: none;
+  cursor: pointer;
+}
+
+.arrow.down {
+  border-top: none;
+  border-bottom: 5px solid black;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.img-fluid {
+  max-width: 100%;   /* ensures the image is not wider than its container */
+  max-height: 300px; /* adjust this value to the maximum height you prefer */
+  height: auto;      /* maintains the aspect ratio */
+  width: auto;       /* maintains the aspect ratio */
+  display: block;    /* prevents extra space below the image */
+  margin: 0 auto;    /* centers the image if it's smaller than the container */
+}
+
+.upload-label {
+  cursor: pointer;
+  /* Style as you please, it will become the visible UI component. */
+}
+
+.upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload-instruction {
+  font-size: 0.9em;
+  color: #777;
+}

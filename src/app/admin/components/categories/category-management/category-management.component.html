@@ -1,0 +1,12 @@
+<app-category-add
+  [businessTypes]="businessTypes"
+  (onAdd)="add($event)"
+  *ngIf="!categoryInEditMode">
+</app-category-add>
+
+
+<app-category-list
+  [categories]="categories"
+  (startEditing)="categoryInEditMode = $event"
+  (onDelete)="delete($event)">
+</app-category-list>

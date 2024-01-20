@@ -45,6 +45,9 @@ import {NgOptimizedImage} from "@angular/common";
 import { BusinessTypeAddComponent } from './admin/components/business-types/business-type-add/business-type-add.component';
 import { BusinessTypeEditComponent } from './admin/components/business-types/business-type-edit/business-type-edit.component';
 import { BusinessTypeManagement } from './admin/components/business-types/business-type-management/business-type-management.component';
+import { CategoryManagementComponent } from './admin/components/categories/category-management/category-management.component';
+import { CategoryListComponent } from './admin/components/categories/category-list/category-list.component';
+import { CategoryAddComponent } from './admin/components/categories/category-add/category-add.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -91,6 +94,9 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessTypeAddComponent,
     BusinessTypeEditComponent,
     BusinessTypeManagement,
+    CategoryManagementComponent,
+    CategoryListComponent,
+    CategoryAddComponent,
   ],
   imports: [
     BrowserModule,

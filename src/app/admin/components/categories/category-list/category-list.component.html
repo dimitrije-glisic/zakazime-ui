@@ -1,0 +1,22 @@
+<h2 class="mb-3">Trenutni</h2>
+<ul class="list-group">
+  <li *ngFor="let category of categories" class="list-group-item">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="title-container" (click)="toggleExpand(category.id)">
+        <span class="arrow" [class.down]="expandedCategoryId === category.id"></span>
+        {{ category.title }}
+      </div>
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" (click)="startEdit(category)">Uredi</button>
+        <button class="btn btn-sm btn-outline-danger ms-2" (click)="delete(category.id)">Izbrisi
+        </button>
+      </div>
+    </div>
+    <div *ngIf="expandedCategoryId === category.id" class="expanded-area">
+      Prikaz na web stranici:
+      <img *ngIf="category.imageUrl" [src]="category.imageUrl" alt="Image of {{ category.title }}"
+           class="img-fluid">
+    </div>
+  </li>
+</ul>
+
