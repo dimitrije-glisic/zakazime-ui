@@ -13,31 +13,31 @@ export class BusinessTypeService {
   constructor(private http: HttpClient) {
   }
 
-  getBusinessTypes(): Observable<BusinessType[]> {
+  getAll(): Observable<BusinessType[]> {
     return this.http.get<BusinessType[]>(this.apiPath);
   }
 
-  createBusinessType(businessType: BusinessType): Observable<BusinessType> {
+  create(businessType: BusinessType): Observable<BusinessType> {
     return this.http.post<BusinessType>(this.apiPath, businessType);
   }
 
-  createBusinessTypeWithImage(businessWithImageData: FormData): Observable<BusinessType> {
+  createWithImage(businessWithImageData: FormData): Observable<BusinessType> {
     return this.http.post<BusinessType>(`${this.apiPath}/with-image`, businessWithImageData);
   }
 
-  updateBusinessType(id: number, businessType: BusinessType): Observable<any> {
+  update(id: number, businessType: BusinessType): Observable<any> {
     return this.http.put(`${this.apiPath}/${id}`, businessType);
   }
 
-  updateBusinessTypeWithImage(id: number, businessWithImageData: FormData): Observable<MessageResponse> {
+  updateWithImage(id: number, businessWithImageData: FormData): Observable<MessageResponse> {
     return this.http.put<MessageResponse>(`${this.apiPath}/${id}/with-image`, businessWithImageData);
   }
 
-  deleteBusinessType(id: number): Observable<any> {
+  delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiPath}/${id}`);
   }
 
-  getBusinessTypeImage(id: number): Observable<Blob> {
+  getImage(id: number): Observable<Blob> {
     // Replace the URL with the actual endpoint where images are served
     const imageUrl = `${this.apiPath}/${id}/image`;
     return this.http.get(imageUrl, {responseType: 'blob'});

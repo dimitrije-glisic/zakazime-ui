@@ -28,7 +28,7 @@
                 <div class="navbar-nav ml-auto">
                     <a class="nav-item nav-link" routerLink="profile">Biznis Profil</a>
                 </div>
-                
+
                 <div *ngIf="this.authService.isLoggedInSubject | async" class="navbar-nav ml-auto">
                     <a class="nav-item nav-link" (click)="logout()">Logout</a>
                 </div>
@@ -40,7 +40,6 @@
 
             <!-- Central Content Area -->
             <div class="central-content">
-                <!-- Content goes here -->
                 <router-outlet></router-outlet>
             </div>
         </main>

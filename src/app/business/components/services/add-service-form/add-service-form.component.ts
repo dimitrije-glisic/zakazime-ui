@@ -17,7 +17,7 @@ import {Service} from "../../../../interfaces/service";
 })
 export class AddServiceFormComponent {
 
-  business: Business | null = null;
+  business: Business | undefined;
   subcategories: ServiceSubcategory[] = [];
   serviceForm: FormGroup;
 
@@ -42,7 +42,7 @@ export class AddServiceFormComponent {
     this.businessService.loadBusiness().pipe(
       switchMap(business => {
         this.business = business;
-        return this.servicesService.getServiceTemplatesForBusinessType(business.typeId);
+        return this.servicesService.getServiceTemplatesForBusinessType(business!.typeId);
       }),
       switchMap(serviceTemplates =>
         this.businessService.loadSubcategories(new Set(serviceTemplates.map(service => service.subcategoryId)))

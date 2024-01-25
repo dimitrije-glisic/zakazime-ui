@@ -50,7 +50,7 @@ export class BusinessTypeEditComponent {
       });
       formData.append('businessType', businessTypeBlob);
 
-      this.businessTypeService.updateBusinessTypeWithImage(this.editForm.value.id, formData).subscribe(
+      this.businessTypeService.updateWithImage(this.editForm.value.id, formData).subscribe(
         res => {
           // this.loadBusinessTypes();
           this.editForm.reset();
@@ -64,7 +64,7 @@ export class BusinessTypeEditComponent {
       );
     } else {
       // image must be provided
-      this.businessTypeService.updateBusinessType(this.editForm.value.id, this.editForm.value)
+      this.businessTypeService.update(this.editForm.value.id, this.editForm.value)
         .subscribe(() => {
           // this.loadBusinessTypes();
           this.editForm.reset();

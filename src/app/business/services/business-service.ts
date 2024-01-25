@@ -19,7 +19,7 @@ export class BusinessService {
   constructor(private http: HttpClient, private subcategoryService: SubcategoryService) {
   }
 
-  loadBusiness(): Observable<Business> {
+  loadBusiness(): Observable<Business | undefined> {
     if (this.business) {
       return of(this.business); // Return cached value if available
     }
@@ -28,7 +28,7 @@ export class BusinessService {
       tap(business => this.business = business), // Cache the response
       catchError(err => {
         if (err.status === 404) {
-          throw new Error('No business found');
+          return of(undefined); // Return null if business not found
         }
         return throwError(() => err);
       })

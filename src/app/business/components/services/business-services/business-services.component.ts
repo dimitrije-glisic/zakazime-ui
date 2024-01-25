@@ -24,7 +24,7 @@ export class BusinessServicesComponent implements OnInit {
 
   ngOnInit(): void {
     this.businessService.loadBusiness().subscribe(business => {
-      this.loadServices(business.id);
+      this.loadServices(business!.id);
     });
   }
 

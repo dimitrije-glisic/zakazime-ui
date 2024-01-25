@@ -4,7 +4,6 @@ import {ServicesService} from 'src/app/business/services/services.service';
 import {BusinessService} from 'src/app/business/services/business-service';
 import {Service} from "../../../../interfaces/service";
 import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
-import {SubcategoryService} from "../../../services/subcategory.service";
 import {Business} from "../../../../interfaces/business";
 import {of, switchMap, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
@@ -26,8 +25,7 @@ export class AddServiceFastFormComponent implements OnInit {
 
   business: Business | undefined;
 
-  constructor(private router: Router, private servicesService: ServicesService, private businessService: BusinessService,
-              private subcategoryService: SubcategoryService) {
+  constructor(private router: Router, private servicesService: ServicesService, private businessService: BusinessService) {
   }
 
   ngOnInit(): void {

@@ -35,7 +35,7 @@ export class BusinessTypeAddComponent {
       });
       formData.append('businessType', businessTypeBlob);
 
-      this.businessTypeService.createBusinessTypeWithImage(formData).subscribe(
+      this.businessTypeService.createWithImage(formData).subscribe(
         res => {
           this.addForm.reset();
           this.selectedImage = null;
@@ -46,7 +46,7 @@ export class BusinessTypeAddComponent {
         }
       );
     } else {
-      this.businessTypeService.createBusinessType(this.addForm.value)
+      this.businessTypeService.create(this.addForm.value)
         .subscribe(() => {
           this.addForm.reset();
           this.businessTypeAdded.emit();

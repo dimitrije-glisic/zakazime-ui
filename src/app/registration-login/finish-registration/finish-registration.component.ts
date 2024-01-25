@@ -7,6 +7,7 @@ import {CreateBusinessProfileRequest} from "../../interfaces/create-business-pro
 import {Business} from "../../interfaces/business";
 import {Account} from "../../interfaces/account";
 import {BusinessType} from "../../interfaces/business-type";
+import {BusinessTypeService} from "../../admin/services/business-type.service";
 
 @Component({
   selector: 'app-finish-registration',
@@ -22,7 +23,8 @@ export class FinishRegistrationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private bs: BusinessService,
+    private businessService: BusinessService,
+    private businessTypeService: BusinessTypeService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -44,7 +46,7 @@ export class FinishRegistrationComponent implements OnInit {
     this.authService.fetchUser().subscribe((user: any) => {
       this.loggedInUser = user;
     });
-    this.bs.getBusinessTypes().subscribe((types: BusinessType[]) => {
+    this.businessTypeService.getAll().subscribe((types: BusinessType[]) => {
       this.businessTypes = types;
     });
   }
@@ -55,7 +57,7 @@ export class FinishRegistrationComponent implements OnInit {
       if (!this.loggedInUser) {
         throw new Error('User not found');
       }
-      this.bs.createBusiness(business).subscribe((created: Business) => {
+      this.businessService.createBusiness(business).subscribe((created: Business) => {
         console.log('business created', created);
         this.router.navigate(['/manage-business']);
       });

@@ -24,7 +24,7 @@ export class BusinessTypeListComponent {
   }
 
   deleteBusinessType(id: number) {
-    this.businessTypeService.deleteBusinessType(id).subscribe(() => {
+    this.businessTypeService.delete(id).subscribe(() => {
       this.onDelete.emit();
     });
   }
@@ -42,7 +42,7 @@ export class BusinessTypeListComponent {
   }
 
   loadBusinessTypeImage(businessType: BusinessType) {
-    this.businessTypeService.getBusinessTypeImage(businessType.id).subscribe(
+    this.businessTypeService.getImage(businessType.id).subscribe(
       imageBlob => {
         const reader = new FileReader();
         reader.addEventListener("load", () => {

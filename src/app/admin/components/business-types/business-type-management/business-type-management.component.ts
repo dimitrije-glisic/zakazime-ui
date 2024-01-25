@@ -28,7 +28,7 @@ export class BusinessTypeManagement implements OnInit {
   }
 
   loadBusinessTypes() {
-    this.businessTypeService.getBusinessTypes().subscribe(data => {
+    this.businessTypeService.getAll().subscribe(data => {
       this.businessTypes = data;
     });
   }
