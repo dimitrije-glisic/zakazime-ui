@@ -1,12 +1,29 @@
-<app-category-add
-  [businessTypes]="businessTypes"
-  (onAdd)="add($event)"
-  *ngIf="!categoryInEditMode">
-</app-category-add>
+<div class="container mt-4">
+  <div class="row">
 
+    <div class="col">
+      <app-category-add
+        [businessTypes]="businessTypes"
+        (onAdd)="add($event)">
+      </app-category-add>
+    </div>
 
-<app-category-list
-  [categories]="categories"
-  (startEditing)="categoryInEditMode = $event"
-  (onDelete)="delete($event)">
-</app-category-list>
+    <div class="col">
+      <app-category-edit
+        *ngIf="categoryInEditMode"
+        [category]="categoryInEditMode"
+        [businessTypes]="businessTypes"
+        (categoryUpdated)="loadCategories()"
+        (cancelEdit)="categoryInEditMode = null">
+      </app-category-edit>
+    </div>
+
+    <app-category-list
+      [categories]="categories"
+      [businessTypes]="businessTypes"
+      (startEditing)="categoryInEditMode = $event"
+      (onDelete)="delete($event)">
+    </app-category-list>
+
+  </div>
+</div>

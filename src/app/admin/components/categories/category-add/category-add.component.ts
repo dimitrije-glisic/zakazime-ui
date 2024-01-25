@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ServiceCategory} from "../../../../interfaces/service-category";
+import {PredefinedCategory} from "../../../../interfaces/predefined-category";
 import {BusinessType} from "../../../../interfaces/business-type";
 
 @Component({
@@ -13,7 +13,7 @@ export class CategoryAddComponent {
   @Input() businessTypes: BusinessType[] | null = null;
   addForm: FormGroup;
   selectedImage: File | null = null;
-  @Output() onAdd = new EventEmitter<ServiceCategory | FormData>();
+  @Output() onAdd = new EventEmitter<PredefinedCategory | FormData>();
 
   constructor(
     private formBuilder: FormBuilder
@@ -21,7 +21,6 @@ export class CategoryAddComponent {
     this.addForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       businessTypeId: ['', Validators.required],
-      imageUrl: ['', Validators.required],
     });
   }
 
@@ -40,12 +39,13 @@ export class CategoryAddComponent {
 
     } else {
       console.log(this.addForm.value);
-      this.onAdd.emit(this.addForm.value as ServiceCategory);
+      this.onAdd.emit(this.addForm.value as PredefinedCategory);
       this.addForm.reset();
     }
   }
 
   handleImageChange(event: Event) {
+    console.log(' handleImageChange: ', event);
     // @ts-ignore
     const file = (event.target as HTMLInputElement).files[0];
     if (file) {

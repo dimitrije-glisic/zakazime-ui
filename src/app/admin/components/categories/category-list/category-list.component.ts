@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ServiceCategory} from "../../../../interfaces/service-category";
-import {CategoryService} from "../../../services/category.service";
+import {PredefinedCategory} from "../../../../interfaces/predefined-category";
+import {PredefinedCategoryService} from "../../../services/predefined-category.service";
+import {BusinessType} from "../../../../interfaces/business-type";
 
 @Component({
   selector: 'app-category-list',
@@ -9,19 +10,46 @@ import {CategoryService} from "../../../services/category.service";
 })
 export class CategoryListComponent {
 
-  expandedCategoryId: number | null = null;
+  @Input() set categories(value: PredefinedCategory[]) {
+    this.filteredCategories = value;
+    this.allCategories = value;
+  }
 
-  @Input() categories: ServiceCategory[] = [];
-
-  @Output() startEditing = new EventEmitter<ServiceCategory>();
+  @Input() businessTypes: BusinessType[] = [];
+  @Output() startEditing = new EventEmitter<PredefinedCategory>();
   @Output() onDelete = new EventEmitter<number>();
 
+  allCategories: PredefinedCategory[] = [];
+  expandedCategoryId: number | null = null;
+  selectedBusinessType: BusinessType | null = null;
+  filteredCategories: PredefinedCategory[] = [];
+
   constructor(
-    private categoryService: CategoryService,
+    private categoryService: PredefinedCategoryService,
   ) {
   }
 
-  startEdit(serviceCategory: ServiceCategory) {
+  filterByBusinessType(businessType: BusinessType | null) {
+    if (this.selectedBusinessType === businessType) {
+      this.resetFilter();
+    } else {
+      this.selectedBusinessType = businessType;
+      this.filteredCategories = this.filterCategories(businessType);
+    }
+  }
+
+  resetFilter() {
+    this.selectedBusinessType = null;
+    this.filteredCategories = this.allCategories;
+  }
+
+  filterCategories(businessType: BusinessType | null): PredefinedCategory[] {
+    return this.allCategories.filter(c => {
+      return businessType ? c.businessTypeId === businessType.id : true;
+    });
+  }
+
+  startEdit(serviceCategory: PredefinedCategory) {
     this.startEditing.emit(serviceCategory);
   }
 
@@ -34,14 +62,14 @@ export class CategoryListComponent {
       this.expandedCategoryId = null;
     } else {
       this.expandedCategoryId = id;
-      const category = this.categories.find(c => c.id === id);
+      const category = this.allCategories.find(c => c.id === id);
       if (category) {
         this.loadImage(category);
       }
     }
   }
 
-  loadImage(category: ServiceCategory) {
+  loadImage(category: PredefinedCategory) {
     this.categoryService.getImage(category.id).subscribe(
       imageBlob => {
         const reader = new FileReader();

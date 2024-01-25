@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { BusinessType } from 'src/app/interfaces/business-type.interface';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {BusinessType} from "../../interfaces/business-type";
 
 @Component({
   selector: 'app-business-type-management',
@@ -14,23 +14,27 @@ export class BusinessTypesComponent {
 
   businessTypes: BusinessType[] = [
     {
-      id:1,
+      id: 1,
       title: 'Ulepsavanje',
+      slug: 'ulepsavanje',
       imageUrl: 'assets/images/beauty.jpg'
     },
     {
-      id:2,
+      id: 2,
       title: 'Medicina',
+      slug: 'medicina',
       imageUrl: 'assets/images/health.jpg'
     },
     {
-      id:3,
+      id: 3,
       title: 'Drugo',
+      slug: 'drugo',
       imageUrl: 'assets/images/inprogress.jpg'
     },
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   onBusinessTypeClick(type: BusinessType) {
     console.log('onBusinessTypeClick', type);

@@ -1,12 +1,12 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, map, Observable, of, tap, throwError} from 'rxjs';
-import {BusinessType} from "../../interfaces/business-type.interface";
 import {Business} from "../../interfaces/business";
 import {Service} from "../../interfaces/service";
 import {CreateBusinessProfileRequest} from "../../interfaces/create-business-profile-request";
 import {SubcategoryService} from "./subcategory.service";
 import {ServiceSubcategory} from "../../interfaces/service-subcategory";
+import {BusinessType} from "../../interfaces/business-type";
 
 @Injectable({
   providedIn: 'root'

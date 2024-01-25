@@ -1,6 +1,17 @@
 <h2 class="mb-3">Trenutni</h2>
+<!--a list of small tag filters in one row-->
+
+<div class="mb-3">
+  <a *ngFor="let businessType of businessTypes" class="btn btn-sm btn-outline-secondary me-2 mb-2"
+     [class.active]="businessType === selectedBusinessType"
+     (click)="selectedBusinessType === businessType ? resetFilter() : filterByBusinessType(businessType)">
+    {{ businessType.title }}
+  </a>
+</div>
+
+
 <ul class="list-group">
-  <li *ngFor="let category of categories" class="list-group-item">
+  <li *ngFor="let category of filteredCategories" class="list-group-item">
     <div class="d-flex justify-content-between align-items-center">
       <div class="title-container" (click)="toggleExpand(category.id)">
         <span class="arrow" [class.down]="expandedCategoryId === category.id"></span>

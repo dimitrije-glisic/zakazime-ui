@@ -48,6 +48,7 @@ import { BusinessTypeManagement } from './admin/components/business-types/busine
 import { CategoryManagementComponent } from './admin/components/categories/category-management/category-management.component';
 import { CategoryListComponent } from './admin/components/categories/category-list/category-list.component';
 import { CategoryAddComponent } from './admin/components/categories/category-add/category-add.component';
+import { CategoryEditComponent } from './admin/components/categories/category-edit/category-edit.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -97,6 +98,7 @@ export class XhrInterceptor implements HttpInterceptor {
     CategoryManagementComponent,
     CategoryListComponent,
     CategoryAddComponent,
+    CategoryEditComponent,
   ],
   imports: [
     BrowserModule,

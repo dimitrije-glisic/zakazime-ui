@@ -4,16 +4,16 @@
   <form [formGroup]="editForm" (ngSubmit)="onEditSubmit()">
 
     <div class="mb-3">
-      <label for="title" class="form-label">Naziv:</label>
-      <input id="title" type="text" class="form-control" formControlName="title">
+      <label for="title-edit" class="form-label">Naziv:</label>
+      <input id="title-edit" type="text" class="form-control" formControlName="title">
     </div>
     <div class="mb-3">
-      <label for="image" class="form-label upload-label">
+      <label for="image-edit" class="form-label upload-label">
         <span *ngIf="businessType?.imageUrl">Izmenite sliku...</span>
         <span *ngIf="!businessType?.imageUrl">Dodajte sliku...</span>
         <span class="upload-instruction">(Kliknuti)</span>
       </label>
-      <input id="image" type="file" (change)="handleImageChange($event)" class="form-control upload-photo">
+      <input id="image-edit" type="file" (change)="handleImageChange($event)" class="form-control upload-photo">
     </div>
 
     <button type="submit" class="btn btn-success">Sacuvaj</button>

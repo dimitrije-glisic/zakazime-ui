@@ -4,21 +4,20 @@
   <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="mb-3">
 
     <div class="mb-3">
-      <label for="title" class="form-label">Naziv:</label>
-      <input id="title" type="text" class="form-control" formControlName="title">
+      <label for="title-on-add" class="form-label">Naziv:</label>
+      <input id="title-on-add" type="text" class="form-control" formControlName="title">
     </div>
     <div class="mb-3">
-      <label for="image" class="form-label upload-label">Dodajte sliku...
+      <label for="image-on-add" class="form-label upload-label">Dodajte sliku...
         <span class="upload-instruction">(Kliknuti)</span>
       </label>
-      <input id="image" type="file" (change)="handleImageChange($event)" class="form-control upload-photo">
+      <input id="image-on-add" type="file" (change)="handleImageChange($event)" class="form-control upload-photo">
     </div>
     <div class="mb-3">
       <label for="businessType" class="form-label">Tip biznisa:</label>
       <select id="businessType" class="form-select" formControlName="businessTypeId">
         <option *ngFor="let businessType of businessTypes" [value]="businessType.id">{{ businessType.title }}</option>
       </select>
-
     </div>
 
     <button type="submit" class="btn btn-primary">Sacuvaj</button>

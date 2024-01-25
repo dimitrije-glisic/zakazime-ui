@@ -3,10 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BusinessService} from 'src/app/business/services/business-service';
-import {BusinessType} from "../../interfaces/business-type.interface";
 import {CreateBusinessProfileRequest} from "../../interfaces/create-business-profile-request";
 import {Business} from "../../interfaces/business";
 import {Account} from "../../interfaces/account";
+import {BusinessType} from "../../interfaces/business-type";
 
 @Component({
   selector: 'app-finish-registration',

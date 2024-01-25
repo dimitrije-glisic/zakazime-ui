@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {CategoryService} from "../../../services/category.service";
-import {ServiceCategory} from "../../../../interfaces/service-category";
+import {PredefinedCategoryService} from "../../../services/predefined-category.service";
+import {PredefinedCategory} from "../../../../interfaces/predefined-category";
 import {BusinessTypeService} from "../../../services/business-type.service";
 import {BusinessType} from "../../../../interfaces/business-type";
 
@@ -10,12 +10,12 @@ import {BusinessType} from "../../../../interfaces/business-type";
   styleUrls: ['./category-management.component.css']
 })
 export class CategoryManagementComponent {
-  categories: ServiceCategory[] = [];
+  categories: PredefinedCategory[] = [];
   businessTypes: BusinessType[] = [];
 
-  categoryInEditMode: ServiceCategory | null = null;
+  categoryInEditMode: PredefinedCategory | null = null;
 
-  constructor(private categoryService: CategoryService, private businessTypeService: BusinessTypeService) {
+  constructor(private categoryService: PredefinedCategoryService, private businessTypeService: BusinessTypeService) {
   }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class CategoryManagementComponent {
     this.loadBusinessTypes();
   }
 
-  private loadCategories() {
+  loadCategories() {
     this.categoryService.getAll().subscribe(data => {
       this.categories = data;
     });
@@ -42,7 +42,7 @@ export class CategoryManagementComponent {
     this.loadCategories();
   }
 
-  add(serviceCategory: ServiceCategory | FormData) {
+  add(serviceCategory: PredefinedCategory | FormData) {
     if (serviceCategory instanceof FormData) {
       console.log('add with image');
 

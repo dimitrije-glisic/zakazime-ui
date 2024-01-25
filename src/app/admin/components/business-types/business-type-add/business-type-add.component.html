@@ -4,14 +4,14 @@
   <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="mb-3">
 
     <div class="mb-3">
-      <label for="title" class="form-label">Naziv:</label>
-      <input id="title" type="text" class="form-control" formControlName="title">
+      <label for="title-add" class="form-label">Naziv:</label>
+      <input id="title-add" type="text" class="form-control" formControlName="title">
     </div>
     <div class="mb-3">
-      <label for="image" class="form-label upload-label">Dodajte sliku...
+      <label for="image-add" class="form-label upload-label">Dodajte sliku...
         <span class="upload-instruction">(Kliknuti)</span>
       </label>
-      <input id="image" type="file" (change)="handleImageChange($event)" class="form-control upload-photo">
+      <input id="image-add" type="file" (change)="handleImageChange($event)" class="form-control upload-photo">
     </div>
 
     <button type="submit" class="btn btn-primary">Kreiraj novi</button>
