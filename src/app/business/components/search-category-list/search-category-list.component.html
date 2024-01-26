@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h3>Kategorije usluga koje pruzate</h3>
+      <h6>Kategorije usluga koje pruzate i preko kojih mozete biti pronadjeni.
+        Bitno je da selektujete sve usluge koje pruzate inace krajnji korisnici nece biti u mogucnosti da nadju vasu radnju.
+      </h6>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <ng-container *ngFor="let entry of categoriesByBusinessType | keyvalue">
+      <ng-container *ngIf="entry.value.length > 0">
+        <div class="col-md-3">
+          <h4>{{ entry.key.title }}</h4>
+          <ul *ngFor="let category of entry.value">
+            <li>
+              {{ category.title }}
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

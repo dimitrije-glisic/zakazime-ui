@@ -1,38 +1,57 @@
 <div class="container">
-    <h2>Podaci o biznisu</h2>
+  <h2>Podaci o biznisu</h2>
 
-    <table class="table">
-        <tr>
-            <td>Naziv</td>
-            <td>{{business?.name}}</td>
-        </tr>
-        <tr>
-            <td>Tip biznisa</td>
-            <td>todo maybe</td>
-        <tr>
-            <td>Telefon</td>
-            <td>{{business?.phoneNumber}}</td>
-        </tr>
-        <tr>
-            <td>Grad</td>
-            <td>{{business?.city}}</td>
-        </tr>
-        <tr>
-            <td>Postanski kod</td>
-            <td>{{business?.postalCode}}</td>
-        </tr>
-        <tr>
-            <td>Adresa</td>
-            <td>{{business?.address}}</td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td>{{business?.status}}</td>
-        </tr>
-        <tr>
-            <td>Vlasnik</td>
-            <td>maybe todo</td>
-        </tr>
-    </table>
+  <table class="table">
+    <tr>
+      <td>Naziv</td>
+      <td>{{ business?.name }}</td>
+    </tr>
+    <tr>
+      <td>Tip biznisa</td>
+      <td>todo maybe</td>
+    <tr>
+      <td>Telefon</td>
+      <td>{{ business?.phoneNumber }}</td>
+    </tr>
+    <tr>
+      <td>Grad</td>
+      <td>{{ business?.city }}</td>
+    </tr>
+    <tr>
+      <td>Postanski kod</td>
+      <td>{{ business?.postalCode }}</td>
+    </tr>
+    <tr>
+      <td>Adresa</td>
+      <td>{{ business?.address }}</td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>{{ business?.status }}</td>
+    </tr>
+    <tr>
+      <td>Vlasnik</td>
+      <td>maybe todo</td>
+    </tr>
+  </table>
+
+</div>
+
+<div class="container m-5 p-5" style="border: 1px solid">
+
+  <app-search-category-list
+    [categories]="existingPredefinedCategories"
+    [businessTypes]="businessTypes"
+  ></app-search-category-list>
+
+</div>
+
+<div class="container m-5 p-5" style="border: 1px solid">
+  <app-add-search-category
+    [businessTypes]="businessTypes"
+    [categories]="categories"
+    (selectedCategoriesEmitter)="saveSelectedCategories($event)"
+  >
+  </app-add-search-category>
 
 </div>

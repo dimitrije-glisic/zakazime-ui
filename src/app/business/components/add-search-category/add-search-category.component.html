@@ -1,0 +1,48 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col">
+      <h3>Nova kategorija</h3>
+      <h6>Dodajte novu kategoriju usluga koju pruzate kako bi korisnici mogli da vas pronadju</h6>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col">
+      <div class="mb-3">
+        <a *ngFor="let businessType of businessTypes" class="btn btn-sm btn-outline-secondary me-2 mb-2"
+           [class.active]="businessType === selectedBusinessType"
+           (click)="selectedBusinessType === businessType ? resetFilter() : filterByBusinessType(businessType)">
+          {{ businessType.title }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <ul class="list-group">
+        <ng-container *ngIf="filteredCategories.length === 0">
+          <li class="list-group-item">Dodali ste sve kategorije za ovaj tip posla</li>
+        </ng-container>
+        <ng-container *ngIf="filteredCategories.length > 0">
+          <li *ngFor="let category of filteredCategories" class="list-group-item">
+            <mat-checkbox [checked]="selectedCategories.includes(category)" (change)="toggleCategory(category)">
+              {{ category.title }}
+            </mat-checkbox>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h3 class="mt-4">Za cuvanje:
+        <span *ngFor="let category of selectedCategories" class="badge bg-secondary me-2">{{ category.title }}</span>
+      </h3>
+      <button class="btn btn-primary" (click)="saveAll()">Sacuvaj</button>
+    </div>
+  </div>
+
+</div>

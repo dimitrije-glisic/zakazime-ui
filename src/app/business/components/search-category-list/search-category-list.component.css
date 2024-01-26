@@ -1,0 +1,11 @@
+.container {
+  margin: 20px;
+}
+
+mat-card {
+  width: 100%; /* Adjust based on your layout requirements */
+}
+
+mat-card-title {
+  font-size: 1.2em; /* Adjust title size as needed */
+}

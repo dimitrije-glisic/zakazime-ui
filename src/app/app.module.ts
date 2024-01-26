@@ -49,6 +49,13 @@ import { CategoryManagementComponent } from './admin/components/categories/categ
 import { CategoryListComponent } from './admin/components/categories/category-list/category-list.component';
 import { CategoryAddComponent } from './admin/components/categories/category-add/category-add.component';
 import { CategoryEditComponent } from './admin/components/categories/category-edit/category-edit.component';
+import { AddSearchCategoryComponent } from './business/components/add-search-category/add-search-category.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import { SearchCategoryListComponent } from './business/components/search-category-list/search-category-list.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatCardModule} from "@angular/material/card";
+import {MatListModule} from "@angular/material/list";
+import {MatInputModule} from "@angular/material/input";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -99,6 +106,8 @@ export class XhrInterceptor implements HttpInterceptor {
     CategoryListComponent,
     CategoryAddComponent,
     CategoryEditComponent,
+    AddSearchCategoryComponent,
+    SearchCategoryListComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +119,11 @@ export class XhrInterceptor implements HttpInterceptor {
     MatDialogModule,
     NgxPaginationModule,
     NgOptimizedImage,
+    MatCheckboxModule,
+    MatGridListModule,
+    MatCardModule,
+    MatListModule,
+    MatInputModule,
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,}],
   bootstrap: [AppComponent]

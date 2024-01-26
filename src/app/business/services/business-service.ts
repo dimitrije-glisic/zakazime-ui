@@ -7,6 +7,8 @@ import {CreateBusinessProfileRequest} from "../../interfaces/create-business-pro
 import {SubcategoryService} from "./subcategory.service";
 import {ServiceSubcategory} from "../../interfaces/service-subcategory";
 import {BusinessType} from "../../interfaces/business-type";
+import {PredefinedCategory} from "../../interfaces/predefined-category";
+import {MessageResponse} from "../../interfaces/message-response";
 
 @Injectable({
   providedIn: 'root'
@@ -112,4 +114,12 @@ export class BusinessService {
     return this.subcategories;
   }
 
+  loadPredefinedCategories(id: number) {
+    return this.http.get<PredefinedCategory[]>('/api/business/' + id + '/predefined-categories');
+  }
+
+  savePredefinedCategories(id: number, categories: PredefinedCategory[]) {
+    const ids = categories.map(category => category.id);
+    return this.http.post<MessageResponse>('/api/business/' + id + '/predefined-categories', ids);
+  }
 }
