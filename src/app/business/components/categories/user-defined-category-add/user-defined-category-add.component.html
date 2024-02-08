@@ -1,0 +1,14 @@
+<div class="form-border">
+  <h3>Dodaj novu kategoriju</h3>
+
+  <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="mb-3">
+
+    <div class="mb-3">
+      <label for="title-on-add" class="form-label">Naziv:</label>
+      <input id="title-on-add" type="text" class="form-control" formControlName="title">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sacuvaj</button>
+  </form>
+
+</div>

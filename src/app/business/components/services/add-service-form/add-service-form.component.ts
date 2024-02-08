@@ -4,11 +4,10 @@ import {Router} from '@angular/router';
 import {BusinessService} from 'src/app/business/services/business-service';
 import {ServicesService} from 'src/app/business/services/services.service';
 import {Business} from "../../../../interfaces/business";
-import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
-import {SubcategoryService} from "../../../services/subcategory.service";
 import {switchMap} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {Service} from "../../../../interfaces/service";
+import {UserDefinedCategory} from "../../../../interfaces/user-defined-category";
 
 @Component({
   selector: 'app-add-service-form',
@@ -18,10 +17,10 @@ import {Service} from "../../../../interfaces/service";
 export class AddServiceFormComponent {
 
   business: Business | undefined;
-  subcategories: ServiceSubcategory[] = [];
+  categories: UserDefinedCategory[] = [];
   serviceForm: FormGroup;
 
-  constructor(private businessService: BusinessService, private servicesService: ServicesService, private subcategoryService: SubcategoryService,
+  constructor(private businessService: BusinessService, private servicesService: ServicesService,
               private router: Router) {
     this.serviceForm = new FormGroup({});
   }
@@ -29,8 +28,7 @@ export class AddServiceFormComponent {
   ngOnInit(): void {
     this.serviceForm = new FormGroup({
       'title': new FormControl(null),
-      'subcategoryId': new FormControl(null),
-      'note': new FormControl(null),
+      'categoryId': new FormControl(null),
       'description': new FormControl(null),
       'price': new FormControl(null),
       'avgDuration': new FormControl(null)
@@ -45,14 +43,13 @@ export class AddServiceFormComponent {
         return this.servicesService.getServiceTemplatesForBusinessType(business!.typeId);
       }),
       switchMap(serviceTemplates =>
-        this.businessService.loadSubcategories(new Set(serviceTemplates.map(service => service.subcategoryId)))
-      ),
+        this.businessService.loadCategories()),
       catchError(error => {
         console.error('Error occurred', error);
         throw error;
       })
-    ).subscribe(subcategories => {
-      this.subcategories = subcategories;
+    ).subscribe(categories => {
+      this.categories = categories;
     });
   }
 

@@ -54,8 +54,8 @@ export class ServicesService {
     );
   }
 
-  updateService(service: Service) {
-    return this.http.put(`/api/business/${service.businessId}/services/${service.id}`, service).pipe(
+  updateService(businessId: number, serviceId: number, service: Service) {
+    return this.http.put(`/api/business/${businessId}/services/${serviceId}`, service).pipe(
       catchError(err => {
           return throwError(() => err);
         }

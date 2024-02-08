@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {BusinessService} from 'src/app/business/services/business-service';
-import {SubcategoryService} from "../../../services/subcategory.service";
 import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
 import {Service} from "../../../../interfaces/service";
+import {UserDefinedCategoryService} from "../../../services/user-defined-category.service";
+import {UserDefinedCategory} from 'src/app/interfaces/user-defined-category';
 
 @Component({
   selector: 'app-business-services',
@@ -17,13 +18,16 @@ export class BusinessServicesComponent implements OnInit {
   itemsPerPage = 10;
 
   textFilter = '';
-  subcategoryFilter : number | undefined;
+  subcategoryFilter: number | undefined;
 
-  constructor(private businessService: BusinessService, private subcategoryService: SubcategoryService) {
+  businessId: number | undefined;
+
+  constructor(private businessService: BusinessService) {
   }
 
   ngOnInit(): void {
     this.businessService.loadBusiness().subscribe(business => {
+      this.businessId = business!.id;
       this.loadServices(business!.id);
     });
   }
@@ -32,7 +36,7 @@ export class BusinessServicesComponent implements OnInit {
     this.businessService.loadServices(id).subscribe(
       (services: Service[]) => {
         this.services = services;
-        this.loadSubcategories(services); // Call loadSubcategories here after services are loaded
+        this.businessService.loadCategories(); // Call loadSubcategories here after services are loaded
       },
       (error: any) => {
         console.error('Error fetching services:', error);
@@ -40,19 +44,4 @@ export class BusinessServicesComponent implements OnInit {
     );
   }
 
-  loadSubcategories(services: Service[]): void {
-    const serviceSubcategoryIds = new Set(services.map(service => service.subcategoryId));
-    this.businessService.loadSubcategories(serviceSubcategoryIds).subscribe(subcategories => {
-        this.subcategories = subcategories;
-      },
-      (error: any) => {
-        // Handle the error appropriately
-        console.error('Error fetching subcategories:', error);
-      }
-    );
-  }
-
-  findSubCategory(subcategoryId: number): ServiceSubcategory {
-    return this.subcategories.find(subcategory => subcategory.id === subcategoryId)!;
-  }
 }

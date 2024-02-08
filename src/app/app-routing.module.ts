@@ -4,15 +4,10 @@ import {BusinessDashboardComponent} from './business/components/business-dashboa
 import {StatisticsComponent} from './business/components/statistics/statistics.component';
 import {BusinessServicesComponent} from './business/components/services/business-services/business-services.component';
 import {AddServiceFormComponent} from './business/components/services/add-service-form/add-service-form.component';
-import {
-  AddServiceFastFormComponent
-} from './business/components/services/add-service-fast-form/add-service-fast-form.component';
-import {EditServiceComponent} from './business/components/services/edit-service/edit-service.component';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {FinishedRegistrationGuard} from './finished.registration.guard';
 import {BusinessTypesComponent} from './public-layout/business-types/business-types-component-public.component';
 import {CategoriesComponent} from './public-layout/categories/categories.component';
-import {SubCategoriesComponent} from './public-layout/sub-categories/sub-categories.component';
 import {BusinessListingComponent} from './public-layout/business-listing/business-listing.component';
 import {BusinessDetailsComponent} from './public-layout/business-details/business-details.component';
 import {
@@ -45,11 +40,6 @@ const routes: Routes = [
     component: CategoriesComponent,
     data: {breadcrumb: 'title'}
   },
-  {
-    path: 'business-type/:title/:categoryTitle',
-    component: SubCategoriesComponent,
-    data: {breadcrumb: 'categoryTitle'}
-  },
 
   {
     path: 'business-type/:title/:categoryTitle/:subCategoryTitle',
@@ -75,8 +65,6 @@ const routes: Routes = [
       {path: '', component: StatisticsComponent},
       {path: 'services', component: BusinessServicesComponent},
       {path: 'services/create', component: AddServiceFormComponent},
-      {path: 'services/create-fast', component: AddServiceFastFormComponent},
-      {path: 'services/edit/:id', component: EditServiceComponent},
     ]
   },
 

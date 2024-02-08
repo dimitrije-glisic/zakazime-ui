@@ -1,0 +1,16 @@
+<h2 class="mb-3">Trenutne kategorije</h2>
+
+<ul class="list-group">
+  <li *ngFor="let category of categories" class="list-group-item">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="title-container">
+        {{ category.title }}
+      </div>
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" (click)="startEdit(category)">Uredi</button>
+        <button class="btn btn-sm btn-outline-danger ms-2" (click)="delete(category.id)">Izbrisi</button>
+      </div>
+    </div>
+  </li>
+</ul>
+

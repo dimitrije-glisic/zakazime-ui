@@ -1,14 +1,15 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {catchError, map, Observable, of, tap, throwError} from 'rxjs';
+import {catchError, Observable, of, tap, throwError} from 'rxjs';
 import {Business} from "../../interfaces/business";
 import {Service} from "../../interfaces/service";
 import {CreateBusinessProfileRequest} from "../../interfaces/create-business-profile-request";
-import {SubcategoryService} from "./subcategory.service";
 import {ServiceSubcategory} from "../../interfaces/service-subcategory";
 import {BusinessType} from "../../interfaces/business-type";
 import {PredefinedCategory} from "../../interfaces/predefined-category";
 import {MessageResponse} from "../../interfaces/message-response";
+import {UserDefinedCategory} from "../../interfaces/user-defined-category";
+import {UserDefinedCategoryService} from "./user-defined-category.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,9 @@ import {MessageResponse} from "../../interfaces/message-response";
 export class BusinessService {
   private business: Business | null = null;
   private services: Service[] | null = null;
-  private subcategories: ServiceSubcategory[] | undefined;
+  private userDefinedCategories: UserDefinedCategory[] | undefined;
 
-  constructor(private http: HttpClient, private subcategoryService: SubcategoryService) {
+  constructor(private http: HttpClient, private userDefinedCategoryService: UserDefinedCategoryService) {
   }
 
   loadBusiness(): Observable<Business | undefined> {
@@ -60,25 +61,17 @@ export class BusinessService {
     );
   }
 
-  loadSubcategories(subcategoryIds: Set<number>): Observable<ServiceSubcategory[]> {
-    console.log('loading subcategories');
-    if (!subcategoryIds || subcategoryIds.size === 0) {
-      return throwError(() => new Error('No filter provided'));
+  loadCategories(): Observable<UserDefinedCategory[]> {
+    console.log('loading categories');
+
+    if (this.userDefinedCategories) {
+      return of(this.userDefinedCategories);
     }
 
-    if (this.subcategories) {
-      return of(this.subcategories.filter(subcategory => subcategoryIds.has(subcategory.id)));
-    }
-
-    return this.subcategoryService.getAll().pipe(
-      map(subcategories => {
-        const filter = new Set(subcategoryIds);
-        return subcategories.filter(subcategory => filter.has(subcategory.id));
-      }),
-      tap(subcategories => this.subcategories = subcategories),
+    return this.userDefinedCategoryService.getAll(this.business!.id).pipe(
       catchError(err => {
         // Handle different error scenarios here
-        console.error('Error occurred while fetching subcategories', err);
+        console.error('Error occurred while fetching categories', err);
         return throwError(() => err);
       })
     );
@@ -109,10 +102,6 @@ export class BusinessService {
     return <Service>this.services.find(service => service.id === Number(id));
   }
 
-  getSubcategories(): ServiceSubcategory[] {
-    if (!this.subcategories) throw new Error('Subcategories is null when getting subcategories');
-    return this.subcategories;
-  }
 
   loadPredefinedCategories(id: number) {
     return this.http.get<PredefinedCategory[]>('/api/business/' + id + '/predefined-categories');

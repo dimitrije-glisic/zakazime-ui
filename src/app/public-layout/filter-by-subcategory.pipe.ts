@@ -2,15 +2,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {Service} from "../interfaces/service";
 
 @Pipe({
-  name: 'filterBySubcategory'
+  name: 'filterByCategory'
 })
-export class FilterBySubcategoryPipe implements PipeTransform {
+export class FilterByCategoryPipe implements PipeTransform {
 
-  transform(services: Service[], subcategoryId: number): Service[] {
-    if (!services || !subcategoryId) {
+  transform(services: Service[], categoryId: number): Service[] {
+    if (!services || !categoryId) {
       return services;
     }
-    return services.filter(service => service.subcategoryId === subcategoryId);
+    return services.filter(service => service.categoryId === categoryId);
   }
 
 }

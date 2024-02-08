@@ -33,27 +33,6 @@ export class CategoryEditComponent {
     });
   }
 
-  onInit() {
-    console.log(' onInit: ', this.selectedImage);
-  }
-
-  ngOnChanges() {
-    console.log(' ngOnChanges: ', this.selectedImage);
-  }
-
-  onAfterViewInit() {
-    console.log(' onAfterViewInit: ', this.selectedImage);
-  }
-
-  onAfterContentInit() {
-    console.log(' onAfterContentInit: ', this.selectedImage);
-  }
-
-  onAfterContentChecked() {
-    console.log(' onAfterContentChecked: ', this.selectedImage);
-  }
-
-
   onEditSubmit() {
     console.log('selectedImage: ', this.selectedImage);
     const resetFormAndEmit = () => {

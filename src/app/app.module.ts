@@ -16,17 +16,12 @@ import {AuthService} from "./auth.service";
 import {BusinessDashboardComponent} from './business/components/business-dashboard/business-dashboard.component';
 import {BusinessServicesComponent} from './business/components/services/business-services/business-services.component';
 import {StatisticsComponent} from './business/components/statistics/statistics.component';
-import {
-  AddServiceFastFormComponent
-} from './business/components/services/add-service-fast-form/add-service-fast-form.component';
 import {ServicesFilterPipe} from './business/components/services/services-filter.pipe';
-import {EditServiceComponent} from './business/components/services/edit-service/edit-service.component';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {AddServiceFormComponent} from './business/components/services/add-service-form/add-service-form.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {BusinessTypesComponent} from './public-layout/business-types/business-types-component-public.component';
 import {CategoriesComponent} from './public-layout/categories/categories.component';
-import {SubCategoriesComponent} from './public-layout/sub-categories/sub-categories.component';
 import {BusinessListingComponent} from './public-layout/business-listing/business-listing.component';
 import {BreadcrumbComponent} from './public-layout/breadcrumb/breadcrumb.component';
 import {BusinessDetailsComponent} from './public-layout/business-details/business-details.component';
@@ -34,7 +29,7 @@ import {NavbarComponent} from './public-layout/navbar/navbar.component';
 import {
   BookingSelectServicesComponent
 } from './public-layout/booking/booking-select-services/booking-select-services.component';
-import {FilterBySubcategoryPipe} from './public-layout/filter-by-subcategory.pipe';
+import {FilterByCategoryPipe} from './public-layout/filter-by-subcategory.pipe';
 import {BookingDatePickerComponent} from './public-layout/booking/booking-date-picker/booking-date-picker.component';
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
 import {BookingSummaryComponent} from './public-layout/booking/booking-summary/booking-summary.component';
@@ -56,6 +51,12 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {MatInputModule} from "@angular/material/input";
+import { UserDefinedCategoryListComponent } from './business/components/categories/user-defined-category-list/user-defined-category-list.component';
+import {
+  UserDefinedCategoryManagementComponent
+} from "./business/components/categories/user-defined-category-management/user-defined-category-management.component";
+import { UserDefinedCategoryAddComponent } from './business/components/categories/user-defined-category-add/user-defined-category-add.component';
+import { UserDefinedCategoryEditComponent } from './business/components/categories/user-defined-category-edit/user-defined-category-edit.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -80,19 +81,16 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessServicesComponent,
     AddServiceFormComponent,
     StatisticsComponent,
-    AddServiceFastFormComponent,
-    EditServiceComponent,
     ServicesFilterPipe,
     BusinessProfileComponent,
     BusinessTypesComponent,
     CategoriesComponent,
-    SubCategoriesComponent,
     BusinessListingComponent,
     BreadcrumbComponent,
     BusinessDetailsComponent,
     NavbarComponent,
     BookingSelectServicesComponent,
-    FilterBySubcategoryPipe,
+    FilterByCategoryPipe,
     BookingDatePickerComponent,
     ConfirmBookingComponent,
     BookingSummaryComponent,
@@ -108,6 +106,11 @@ export class XhrInterceptor implements HttpInterceptor {
     CategoryEditComponent,
     AddSearchCategoryComponent,
     SearchCategoryListComponent,
+    UserDefinedCategoryListComponent,
+    CategoryManagementComponent,
+    UserDefinedCategoryManagementComponent,
+    UserDefinedCategoryAddComponent,
+    UserDefinedCategoryEditComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,30 @@
+
+
+
+<div class="container-fluid mt-4">
+  <div class="row">
+
+    <div class="col">
+      <app-user-defined-category-add
+        (onAdd)="add($event)">
+      </app-user-defined-category-add>
+    </div>
+
+    <div class="col">
+      <app-user-defined-category-edit
+        *ngIf="categoryInEditMode"
+        [category]="categoryInEditMode"
+        (categoryUpdated)="update($event)"
+        (cancelEdit)="categoryInEditMode = null">
+      </app-user-defined-category-edit>
+    </div>
+
+    <app-user-defined-category-list
+      [categories]="userDefinedCategories"
+      (startEditing)="categoryInEditMode = $event"
+    >
+    </app-user-defined-category-list>
+
+
+  </div>
+</div>

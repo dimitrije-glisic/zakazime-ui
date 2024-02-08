@@ -26,9 +26,9 @@
 
                 <div class="mb-3">
                     <label for="category" class="form-label">Kategorija:</label>
-                    <select class="form-control" id="category" formControlName="subcategoryId">
+                    <select class="form-control" id="category" formControlName="categoryId">
                         <option value="" disabled selected>Selektujte kategoriju</option>
-                        <option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.title }}</option>
+                        <option *ngFor="let category of categories" [value]="category.id">{{ category.title }}</option>
                     </select>
                 </div>
 
