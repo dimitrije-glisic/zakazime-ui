@@ -3,13 +3,21 @@
 <ul class="list-group">
   <li *ngFor="let category of categories" class="list-group-item">
     <div class="d-flex justify-content-between align-items-center">
-      <div class="title-container">
+      <div class="title-container" (click)="toggleExpand(category)">
+        <span class="arrow" [class.down]="expandedCategory?.id! === category.id"></span>
         {{ category.title }}
       </div>
       <div>
         <button class="btn btn-sm btn-outline-secondary" (click)="startEdit(category)">Uredi</button>
-        <button class="btn btn-sm btn-outline-danger ms-2" (click)="delete(category.id)">Izbrisi</button>
+        <button class="btn btn-sm btn-outline-success" (click)="openAddModal(category)">Nova usluga</button>
+        <button class="btn btn-sm btn-outline-danger ms-2" (click)="delete(category.id)">Izbrisi
+        </button>
       </div>
+    </div>
+    <div *ngIf="expandedCategory?.id! === category.id" class="expanded-area">
+      <app-service-list
+        [category]="expandedCategory">
+      </app-service-list>
     </div>
   </li>
 </ul>

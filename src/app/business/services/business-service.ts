@@ -46,19 +46,11 @@ export class BusinessService {
     return this.http.get<BusinessType[]>('/api/business-types');
   }
 
-  loadServices(businessId: number): Observable<Service[]> {
+  getServices(businessId: number): Observable<Service[]> {
     if (this.services) {
       return of(this.services);
     }
-    return this.http.get<Service[]>('/api/business/' + businessId + '/services').pipe(
-      tap(services => this.services = services),
-      catchError(err => {
-        if (err.status === 404) {
-          throw new Error('No services found');
-        }
-        return throwError(() => err);
-      })
-    );
+    return this.loadServices();
   }
 
   loadCategories(): Observable<UserDefinedCategory[]> {
@@ -110,5 +102,17 @@ export class BusinessService {
   savePredefinedCategories(id: number, categories: PredefinedCategory[]) {
     const ids = categories.map(category => category.id);
     return this.http.post<MessageResponse>('/api/business/' + id + '/predefined-categories', ids);
+  }
+
+  loadServices() {
+    return this.http.get<Service[]>('/api/business/' + this.business!.id! + '/services').pipe(
+      tap(services => this.services = services),
+      catchError(err => {
+        if (err.status === 404) {
+          throw new Error('No services found');
+        }
+        return throwError(() => err);
+      })
+    );
   }
 }

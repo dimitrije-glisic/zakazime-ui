@@ -57,6 +57,10 @@ import {
 } from "./business/components/categories/user-defined-category-management/user-defined-category-management.component";
 import { UserDefinedCategoryAddComponent } from './business/components/categories/user-defined-category-add/user-defined-category-add.component';
 import { UserDefinedCategoryEditComponent } from './business/components/categories/user-defined-category-edit/user-defined-category-edit.component';
+import { ServiceListComponent } from './business/components/categories/service-list/service-list.component';
+import { AddServiceModalComponent } from './business/components/categories/add-service-modal/add-service-modal.component';
+import {MatButtonModule} from "@angular/material/button";
+import {FlexModule} from "@angular/flex-layout";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -111,6 +115,8 @@ export class XhrInterceptor implements HttpInterceptor {
     UserDefinedCategoryManagementComponent,
     UserDefinedCategoryAddComponent,
     UserDefinedCategoryEditComponent,
+    ServiceListComponent,
+    AddServiceModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -127,6 +133,8 @@ export class XhrInterceptor implements HttpInterceptor {
     MatCardModule,
     MatListModule,
     MatInputModule,
+    MatButtonModule,
+    FlexModule,
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,}],
   bootstrap: [AppComponent]

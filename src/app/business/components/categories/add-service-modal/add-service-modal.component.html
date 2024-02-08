@@ -1,0 +1,28 @@
+<mat-dialog-content [formGroup]="form" fxLayout="column" fxLayoutGap="20px">
+  <h2 mat-dialog-title>Add New Service</h2>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Service Title</mat-label>
+    <input matInput formControlName="title">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Price</mat-label>
+    <input matInput formControlName="price" type="number">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Average Duration (minutes)</mat-label>
+    <input matInput formControlName="avgDuration" type="number">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button color="primary" (click)="save()">Add</button>
+</mat-dialog-actions>

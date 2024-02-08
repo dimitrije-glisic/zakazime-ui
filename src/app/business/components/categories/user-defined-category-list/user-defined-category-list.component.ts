@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {PredefinedCategory} from "../../../../interfaces/predefined-category";
 import {UserDefinedCategory} from "../../../../interfaces/user-defined-category";
 import {UserDefinedCategoryService} from "../../../services/user-defined-category.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AddServiceModalComponent} from "../add-service-modal/add-service-modal.component";
 
 @Component({
   selector: 'app-user-defined-category-list',
@@ -14,9 +15,11 @@ export class UserDefinedCategoryListComponent {
 
   @Output() startEditing = new EventEmitter<UserDefinedCategory>();
   @Output() onDelete = new EventEmitter<number>();
+  expandedCategory: UserDefinedCategory | null = null;
 
   constructor(
     private categoryService: UserDefinedCategoryService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -28,5 +31,24 @@ export class UserDefinedCategoryListComponent {
     this.onDelete.emit(id);
   }
 
+  toggleExpand(category: UserDefinedCategory) {
+    if (this.expandedCategory === category) {
+      this.expandedCategory = null;
+    } else {
+      this.expandedCategory = category;
+    }
+  }
+
+  openAddModal(category: UserDefinedCategory) {
+    const dialogRef = this.dialog.open(AddServiceModalComponent, {
+      width: '500px',
+      data: {category: category}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+
+  }
 }
 
