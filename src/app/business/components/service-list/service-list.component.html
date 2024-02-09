@@ -1,0 +1,3 @@
+<div *ngFor="let service of _services">
+  <app-service-list-item [service]="service" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-service-list-item>
+</div>

@@ -46,7 +46,7 @@ import { CategoryAddComponent } from './admin/components/categories/category-add
 import { CategoryEditComponent } from './admin/components/categories/category-edit/category-edit.component';
 import { AddSearchCategoryComponent } from './business/components/add-search-category/add-search-category.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import { SearchCategoryListComponent } from './business/components/search-category-list/search-category-list.component';
+import { SearchCategoryListComponent } from './business/components/predefined-category-list/search-category-list.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
@@ -57,10 +57,12 @@ import {
 } from "./business/components/categories/user-defined-category-management/user-defined-category-management.component";
 import { UserDefinedCategoryAddComponent } from './business/components/categories/user-defined-category-add/user-defined-category-add.component';
 import { UserDefinedCategoryEditComponent } from './business/components/categories/user-defined-category-edit/user-defined-category-edit.component';
-import { ServiceListComponent } from './business/components/categories/service-list/service-list.component';
+import { ServiceListComponent } from './business/components/service-list/service-list.component';
 import { AddServiceModalComponent } from './business/components/categories/add-service-modal/add-service-modal.component';
 import {MatButtonModule} from "@angular/material/button";
 import {FlexModule} from "@angular/flex-layout";
+import { ServiceListItemComponent } from './business/components/service-list-item/service-list-item.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -117,6 +119,7 @@ export class XhrInterceptor implements HttpInterceptor {
     UserDefinedCategoryEditComponent,
     ServiceListComponent,
     AddServiceModalComponent,
+    ServiceListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,6 +138,7 @@ export class XhrInterceptor implements HttpInterceptor {
     MatInputModule,
     MatButtonModule,
     FlexModule,
+    MatIconModule,
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,}],
   bootstrap: [AppComponent]

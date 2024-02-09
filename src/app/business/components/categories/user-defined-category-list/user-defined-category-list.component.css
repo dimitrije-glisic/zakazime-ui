@@ -46,3 +46,23 @@
   cursor: pointer;
 }
 
+.category-title {
+  font-weight: bold; /* Ensures the title is bolder */
+  font-size: 1.25rem; /* Larger font size for category titles */
+  margin-left: 10px; /* Space between arrow and title */
+}
+
+/* Ensuring the icons are larger and more prominent */
+.btn .bi {
+  font-size: 1.5rem; /* Increases the icon size */
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa; /* Light hover effect for list items */
+}
+
+.arrow:hover {
+  transform: scale(1.1); /* Slightly enlarges the arrow on hover */
+  transition: transform 0.2s ease-in-out;
+}
+

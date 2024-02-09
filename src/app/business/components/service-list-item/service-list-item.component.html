@@ -1,0 +1,22 @@
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-9">
+      <div class="card-body">
+        <h5 class="card-title">{{ service?.title }}</h5>
+        <p class="card-text"><strong>${{ service?.price }}</strong></p>
+        <p class="card-text"><small class="text-muted">{{ service?.avgDuration }} min</small></p>
+        <p class="card-text">{{ service?.description }}</p>
+      </div>
+    </div>
+    <div class="col-md-3 d-flex flex-column justify-content-end">
+      <div class="text-end p-3">
+        <button type="button" class="btn btn-primary me-1" (click)="onEdit()">
+          <i class="bi bi-pencil-square"></i> Uredi
+        </button>
+        <button type="button" class="btn btn-danger" (click)="onDelete()">
+          <i class="bi bi-trash"></i> Izbrisi
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

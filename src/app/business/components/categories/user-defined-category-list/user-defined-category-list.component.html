@@ -1,24 +1,26 @@
-<h2 class="mb-3">Trenutne kategorije</h2>
+<h2 class="mb-4">Trenutne kategorije</h2>
 
 <ul class="list-group">
   <li *ngFor="let category of categories" class="list-group-item">
     <div class="d-flex justify-content-between align-items-center">
       <div class="title-container" (click)="toggleExpand(category)">
-        <span class="arrow" [class.down]="expandedCategory?.id! === category.id"></span>
-        {{ category.title }}
+        <span class="arrow" [ngClass]="{'down': expandedCategory?.id === category.id}"></span>
+        <span class="category-title fw-bold">{{ category.title }}</span>
       </div>
       <div>
-        <button class="btn btn-sm btn-outline-secondary" (click)="startEdit(category)">Uredi</button>
-        <button class="btn btn-sm btn-outline-success" (click)="openAddModal(category)">Nova usluga</button>
-        <button class="btn btn-sm btn-outline-danger ms-2" (click)="delete(category.id)">Izbrisi
+        <button class="btn btn-sm btn-outline-secondary me-2" (click)="startEdit(category)"> <!-- Added me-2 for spacing -->
+          <i class="bi bi-pencil-square fs-5"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-success me-2" (click)="openAddModal(category)"> <!-- Added me-2 for spacing -->
+          <i class="bi bi-plus-circle fs-5"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger" (click)="delete(category.id)">
+          <i class="bi bi-trash fs-5"></i>
         </button>
       </div>
     </div>
-    <div *ngIf="expandedCategory?.id! === category.id" class="expanded-area">
-      <app-service-list
-        [category]="expandedCategory">
-      </app-service-list>
+    <div *ngIf="expandedCategory?.id === category.id" class="expanded-area">
+      <app-service-list [category]="expandedCategory"></app-service-list>
     </div>
   </li>
 </ul>
-

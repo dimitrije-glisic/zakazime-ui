@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {Service} from "../../../../interfaces/service";
-import {UserDefinedCategory} from "../../../../interfaces/user-defined-category";
-import {BusinessService} from "../../../services/business-service";
+import {Service} from "../../../interfaces/service";
+import {UserDefinedCategory} from "../../../interfaces/user-defined-category";
+import {BusinessService} from "../../services/business-service";
 
 @Component({
   selector: 'app-service-list',
@@ -25,7 +25,15 @@ export class ServiceListComponent {
   }
 
   private loadServices() {
-    this.businessService.loadServices().subscribe(services =>
+    this.businessService.getServices().subscribe(services =>
       this._services = services.filter(service => service.categoryId === this._category!.id));
+  }
+
+  onEdit($event: Service) {
+
+  }
+
+  onDelete($event: number) {
+
   }
 }

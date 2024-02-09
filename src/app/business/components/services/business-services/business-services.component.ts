@@ -33,7 +33,7 @@ export class BusinessServicesComponent implements OnInit {
   }
 
   loadServices(id: number) {
-    this.businessService.getServices(id).subscribe(
+    this.businessService.getServices().subscribe(
       (services: Service[]) => {
         this.services = services;
         this.businessService.loadCategories(); // Call loadSubcategories here after services are loaded
