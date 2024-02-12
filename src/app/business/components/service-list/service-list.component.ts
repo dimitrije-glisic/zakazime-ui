@@ -1,7 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Service} from "../../../interfaces/service";
-import {UserDefinedCategory} from "../../../interfaces/user-defined-category";
-import {BusinessService} from "../../services/business-service";
 
 @Component({
   selector: 'app-service-list',
@@ -9,31 +7,22 @@ import {BusinessService} from "../../services/business-service";
   styleUrls: ['./service-list.component.css']
 })
 export class ServiceListComponent {
-
-  _category: UserDefinedCategory | null = null;
   _services: Service[] | undefined;
-
-  @Input() set category(category: UserDefinedCategory | null) {
-    this._category = category;
-    if (category) {
-      console.log(`Loading services for category ${category.title}...`);
-      this.loadServices();
-    }
+  @Input() set services(services: Service[] | undefined) {
+    this._services = services;
   }
 
-  constructor(private businessService: BusinessService) {
-  }
+  @Output() editEvent = new EventEmitter<Service>();
+  @Output() deleteEvent = new EventEmitter<number>(); // Emitting only the ID for deletion
 
-  private loadServices() {
-    this.businessService.getServices().subscribe(services =>
-      this._services = services.filter(service => service.categoryId === this._category!.id));
+  constructor() {
   }
 
   onEdit($event: Service) {
-
+    this.editEvent.emit($event);
   }
 
   onDelete($event: number) {
-
+    this.deleteEvent.emit($event);
   }
 }

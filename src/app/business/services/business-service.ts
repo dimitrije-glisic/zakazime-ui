@@ -94,11 +94,10 @@ export class BusinessService {
   }
 
   addService(service: Service) {
-    return this.http.post<Service>('/api/business/' + this.business!.id! + '/services', service).pipe(
+    return this.http.post<Service>('/api/business/' + this.business!.id! + '/single-service', service).pipe(
       catchError(err => {
         console.error('Error occurred while adding service', err);
         return throwError(() => err);
-
       })
     );
   }
@@ -112,8 +111,8 @@ export class BusinessService {
     );
   }
 
-  deleteService(service: Service) {
-    return this.http.delete('/api/business/' + this.business!.id! + '/services/' + service.id).pipe(
+  deleteService(serviceId: number) {
+    return this.http.delete('/api/business/' + this.business!.id! + '/services/' + serviceId).pipe(
       catchError(err => {
         console.error('Error occurred while deleting service', err);
         return throwError(() => err);

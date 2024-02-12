@@ -2,6 +2,8 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserDefinedCategory} from "../../../../interfaces/user-defined-category";
+import {BusinessService} from "../../../services/business-service";
+import {Service} from "../../../../interfaces/service";
 
 @Component({
   selector: 'app-add-service-modal',
@@ -16,7 +18,8 @@ export class AddServiceModalComponent {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddServiceModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private businessService: BusinessService) {
 
     this._category = data.category;
 
@@ -29,7 +32,12 @@ export class AddServiceModalComponent {
   }
 
   save() {
-    this.dialogRef.close(this.form.value);
+    const service = this.form.value as Service;
+    service.categoryId = this._category!.id;
+    this.businessService.addService(service).subscribe(
+      () => this.close(),
+      err => console.error('Error occurred while adding service', err)
+    );
   }
 
   close() {

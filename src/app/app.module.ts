@@ -63,6 +63,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {FlexModule} from "@angular/flex-layout";
 import { ServiceListItemComponent } from './business/components/service-list-item/service-list-item.component';
 import {MatIconModule} from "@angular/material/icon";
+import { EditServiceModalComponent } from './business/components/categories/edit-service-modal/edit-service-modal.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -120,6 +121,7 @@ export class XhrInterceptor implements HttpInterceptor {
     ServiceListComponent,
     AddServiceModalComponent,
     ServiceListItemComponent,
+    EditServiceModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,10 @@
       </div>
     </div>
     <div *ngIf="expandedCategory?.id === category.id" class="expanded-area">
-      <app-service-list [category]="expandedCategory"></app-service-list>
+      <app-service-list [services]="expandedServices"
+      (editEvent)="openEditModal($event)"
+      (deleteEvent)="deleteService($event)">
+      </app-service-list>
     </div>
   </li>
 </ul>

@@ -1,5 +1,5 @@
 <mat-dialog-content [formGroup]="form" fxLayout="column" fxLayoutGap="20px">
-  <h2 mat-dialog-title>Dodaj novu uslugu</h2>
+  <h2 mat-dialog-title>Izmeni Uslugu</h2>
 
   <mat-form-field appearance="outline">
     <mat-label>Service Title</mat-label>
@@ -24,5 +24,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()">Prekini</button>
-  <button mat-button color="primary" (click)="save()">Sacuvaj</button>
+  <button mat-button color="primary" (click)="update()">Sacuvaj</button>
 </mat-dialog-actions>
