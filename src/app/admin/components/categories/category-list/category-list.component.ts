@@ -11,8 +11,8 @@ import {BusinessType} from "../../../../interfaces/business-type";
 export class CategoryListComponent {
 
   @Input() set categories(value: PredefinedCategory[]) {
-    this.filteredCategories = value;
     this.allCategories = value;
+    this.filteredCategories = this.filterCategories(this.selectedBusinessType);
   }
 
   @Input() businessTypes: BusinessType[] = [];

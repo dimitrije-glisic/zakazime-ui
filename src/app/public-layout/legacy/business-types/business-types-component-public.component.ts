@@ -38,6 +38,6 @@ export class BusinessTypesComponent {
 
   onBusinessTypeClick(type: BusinessType) {
     console.log('onBusinessTypeClick', type);
-    this.router.navigate(['/business-type', type.title.toLowerCase()]);
+    this.router.navigate(['/', type.title.toLowerCase()]);
   }
 }

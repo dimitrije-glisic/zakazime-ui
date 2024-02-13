@@ -2,34 +2,27 @@ import {Injectable, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {HowItWorksComponent} from './public-layout/how-it-works/how-it-works.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegistrationComponent} from './registration-login/registration/registration.component';
 import {LoginComponent} from './registration-login/login/login.component';
-import {PublicHeaderComponent} from './public-layout/public-header/public-header.component';
+import {PublicHeaderComponent} from './public-layout/legacy/public-header/public-header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FinishRegistrationComponent} from './registration-login/finish-registration/finish-registration.component';
 import {AuthService} from "./auth.service";
 import {BusinessDashboardComponent} from './business/components/business-dashboard/business-dashboard.component';
-import {BusinessServicesComponent} from './business/components/services/business-services/business-services.component';
+import {ServiceManagementComponent} from './business/components/service-management/service-management.component';
 import {StatisticsComponent} from './business/components/statistics/statistics.component';
 import {ServicesFilterPipe} from './business/components/services/services-filter.pipe';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
-import {AddServiceFormComponent} from './business/components/services/add-service-form/add-service-form.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {BusinessTypesComponent} from './public-layout/business-types/business-types-component-public.component';
-import {CategoriesComponent} from './public-layout/categories/categories.component';
-import {BusinessListingComponent} from './public-layout/business-listing/business-listing.component';
-import {BreadcrumbComponent} from './public-layout/breadcrumb/breadcrumb.component';
-import {BusinessDetailsComponent} from './public-layout/business-details/business-details.component';
-import {NavbarComponent} from './public-layout/navbar/navbar.component';
+import {NavbarComponent} from './public-layout/legacy/navbar/navbar.component';
 import {
   BookingSelectServicesComponent
 } from './public-layout/booking/booking-select-services/booking-select-services.component';
-import {FilterByCategoryPipe} from './public-layout/filter-by-subcategory.pipe';
+import {FilterByCategoryPipe} from './public-layout/legacy/filter-by-subcategory.pipe';
 import {BookingDatePickerComponent} from './public-layout/booking/booking-date-picker/booking-date-picker.component';
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
 import {BookingSummaryComponent} from './public-layout/booking/booking-summary/booking-summary.component';
@@ -64,6 +57,9 @@ import {FlexModule} from "@angular/flex-layout";
 import { ServiceListItemComponent } from './business/components/service-list-item/service-list-item.component';
 import {MatIconModule} from "@angular/material/icon";
 import { EditServiceModalComponent } from './business/components/categories/edit-service-modal/edit-service-modal.component';
+import { DiscoverComponent } from './public-layout/discover/discover.component';
+import { BusinessesOverviewComponent } from './public-layout/businesses-overview/businesses-overview.component';
+import { BusinessProfileImageManagementComponent } from './business/components/business-profile-image-management/business-profile-image-management.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -79,22 +75,15 @@ export class XhrInterceptor implements HttpInterceptor {
 @NgModule({
   declarations: [
     AppComponent,
-    HowItWorksComponent,
     RegistrationComponent,
     LoginComponent,
     PublicHeaderComponent,
     FinishRegistrationComponent,
     BusinessDashboardComponent,
-    BusinessServicesComponent,
-    AddServiceFormComponent,
+    ServiceManagementComponent,
     StatisticsComponent,
     ServicesFilterPipe,
     BusinessProfileComponent,
-    BusinessTypesComponent,
-    CategoriesComponent,
-    BusinessListingComponent,
-    BreadcrumbComponent,
-    BusinessDetailsComponent,
     NavbarComponent,
     BookingSelectServicesComponent,
     FilterByCategoryPipe,
@@ -122,6 +111,9 @@ export class XhrInterceptor implements HttpInterceptor {
     AddServiceModalComponent,
     ServiceListItemComponent,
     EditServiceModalComponent,
+    DiscoverComponent,
+    BusinessesOverviewComponent,
+    BusinessProfileImageManagementComponent,
   ],
   imports: [
     BrowserModule,

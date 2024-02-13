@@ -35,7 +35,6 @@ export class FinishRegistrationComponent implements OnInit {
       city: ['', [Validators.required]],
       postalCode: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      businessTypeId: ['', [Validators.required]],
     });
     this.route.queryParams.subscribe(params => {
       const data = params['email'];

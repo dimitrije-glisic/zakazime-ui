@@ -1,57 +1,58 @@
-<div class="container">
-  <h2>Podaci o biznisu</h2>
+<div class="container my-4">
+  <h2 class="mb-3">Podaci o biznisu</h2>
 
-  <table class="table">
+  <table class="table table-bordered table-hover">
+    <tbody>
     <tr>
-      <td>Naziv</td>
+      <th scope="row">Naziv</th>
       <td>{{ business?.name }}</td>
     </tr>
     <tr>
-      <td>Tip biznisa</td>
+      <th scope="row">Tip biznisa</th>
       <td>todo maybe</td>
+    </tr>
     <tr>
-      <td>Telefon</td>
+      <th scope="row">Telefon</th>
       <td>{{ business?.phoneNumber }}</td>
     </tr>
     <tr>
-      <td>Grad</td>
+      <th scope="row">Grad</th>
       <td>{{ business?.city }}</td>
     </tr>
     <tr>
-      <td>Postanski kod</td>
+      <th scope="row">Poštanski kod</th>
       <td>{{ business?.postalCode }}</td>
     </tr>
     <tr>
-      <td>Adresa</td>
+      <th scope="row">Adresa</th>
       <td>{{ business?.address }}</td>
     </tr>
     <tr>
-      <td>Status</td>
-      <td>{{ business?.status }}</td>
-    </tr>
-    <tr>
-      <td>Vlasnik</td>
+      <th scope="row">Vlasnik</th>
       <td>maybe todo</td>
     </tr>
+    </tbody>
   </table>
 
-</div>
+  <app-business-profile-image-management
+    [profileImageUrl]="currentProfileImageUrl"
+    (submitImage)="submitImage($event)">
+  </app-business-profile-image-management>
 
-<div class="container m-5 p-5" style="border: 1px solid">
+  <div class="mt-5 pt-3" style="border: 1px solid">
+    <app-search-category-list
+      [categories]="existingPredefinedCategories"
+      [businessTypes]="businessTypes"
+    ></app-search-category-list>
+  </div>
 
-  <app-search-category-list
-    [categories]="existingPredefinedCategories"
-    [businessTypes]="businessTypes"
-  ></app-search-category-list>
-
-</div>
-
-<div class="container m-5 p-5" style="border: 1px solid">
-  <app-add-search-category
-    [businessTypes]="businessTypes"
-    [categories]="categories"
-    (selectedCategoriesEmitter)="saveSelectedCategories($event)"
-  >
-  </app-add-search-category>
+  <div class="mt-5 pt-3 pb-3" style="border: 1px solid">
+    <app-add-search-category
+      [businessTypes]="businessTypes"
+      [categories]="categories"
+      (selectedCategoriesEmitter)="saveSelectedCategories($event)"
+    >
+    </app-add-search-category>
+  </div>
 
 </div>

@@ -1,0 +1,57 @@
+.cities-list .col-md-3 {
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  margin-bottom: 10px; /* Spacing between rows */
+  cursor: pointer;
+}
+
+.cities-list .col-md-3:hover {
+  background-color: #f5f5f5;
+}
+
+
+
+
+
+/* ==================== */
+
+/* Adjust the image size and aspect ratio */
+.business-type-item img {
+  width: 100%; /* make the image responsive */
+  object-fit: cover; /* cover the container without stretching */
+}
+
+/* Style for the overlay text */
+.overlay-text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Ensure the text below the image is centered and responsive */
+.text-below-image {
+  margin-top: 10px; /* space between image and text */
+  text-align: center;
+  font-size: 1rem; /* or use responsive font size units like vw */
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  margin-bottom: 20px; /* Spacing between the cards */
+  cursor: pointer; /* Changes the cursor to a pointer on hover */
+}
+
+.container {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 15px;
+}
+
+

@@ -1,32 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {BusinessService} from 'src/app/business/services/business-service';
-import {ServiceSubcategory} from "../../../../interfaces/service-subcategory";
-import {Service} from "../../../../interfaces/service";
-import {UserDefinedCategoryService} from "../../../services/user-defined-category.service";
-import {UserDefinedCategory} from 'src/app/interfaces/user-defined-category';
+import {Service} from "../../../interfaces/service";
 
 @Component({
-  selector: 'app-business-services',
-  templateUrl: './business-services.component.html',
-  styleUrls: ['./business-services.component.css']
+  selector: 'app-service-management',
+  templateUrl: './service-management.component.html',
+  styleUrls: ['./service-management.component.css']
 })
-export class BusinessServicesComponent implements OnInit {
+export class ServiceManagementComponent implements OnInit {
 
   services: Service[] = [];
-  subcategories: ServiceSubcategory[] = [];
-  currentPage = 1;
-  itemsPerPage = 10;
-
-  textFilter = '';
-  subcategoryFilter: number | undefined;
-
   businessId: number | undefined;
 
   constructor(private businessService: BusinessService) {
   }
 
   ngOnInit(): void {
-    this.businessService.loadBusiness().subscribe(business => {
+    this.businessService.getBusinessCached().subscribe(business => {
       this.businessId = business!.id;
       this.loadServices(business!.id);
     });

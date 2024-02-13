@@ -1,0 +1,23 @@
+<ng-container *ngIf="_profileImageUrl">
+  <div class="card my-3" style="width: 20rem; position: relative;">
+    <h3 class="card-header">Profilna fotografija</h3>
+    <img class="card-img-top" [src]="'http://localhost:8080/images/' + _profileImageUrl"
+         alt="Profilna fotografija" style="width: 100%; height: auto;">
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!_profileImageUrl">
+  <div class="alert alert-warning" role="alert">
+    Nema postavljenu profilnu fotografiju
+  </div>
+</ng-container>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="form" class="mb-3">
+  <div class="mb-3">
+    <label for="profileImageInput" class="form-label">Selektujte profilnu fotografiju</label>
+    <input formControlName="profileImage" id="profileImageInput" type="file" (change)="handleImageChange($event)" class="form-control">
+  </div>
+  <ng-container *ngIf="selectedImage">
+    <button type="submit" class="btn btn-primary">Sačuvaj</button>
+  </ng-container>
+</form>

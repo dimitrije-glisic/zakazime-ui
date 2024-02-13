@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+
+<ng-container *ngIf="!businessTypeFilter">
+  <div class="mb-3">
+    <a *ngFor="let businessType of businessTypes" class="btn btn-sm btn-outline-secondary me-2 mb-2"
+       (click)="filterByBusinessType(businessType)">
+      {{ businessType.title }}
+    </a>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="businessTypeFilter && !categoryFilter">
+  <div class="mb-3">
+    <a *ngFor="let category of predefinedCategories" class="btn btn-sm btn-outline-secondary me-2 mb-2"
+       (click)="filterByCategory(category)">
+      {{ category.title }}
+    </a>
+  </div>
+</ng-container>
+
+<h1>Saloni lepote u {{ cityFilter }}</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let business of businesses">
+      <div class="card">
+        <img class="card-img-top" [src]="'http://localhost:8080/images/' + business.profileImageUrl"
+             alt="{{business.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{ business.name }}</h5>
+          <p class="card-text">{{ business.address }}</p>
+          <a href="#" class="btn btn-primary">Pogledaj</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

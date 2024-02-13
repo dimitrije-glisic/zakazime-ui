@@ -36,13 +36,15 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col">
-      <h3 class="mt-4">Za cuvanje:
-        <span *ngFor="let category of selectedCategories" class="badge bg-secondary me-2">{{ category.title }}</span>
-      </h3>
-      <button class="btn btn-primary" (click)="saveAll()">Sacuvaj</button>
+  <ng-container *ngIf="selectedCategories.length > 0">
+    <div class="row">
+      <div class="col">
+        <h3 class="mt-4">Za cuvanje:
+          <span *ngFor="let category of selectedCategories" class="badge bg-secondary me-2">{{ category.title }}</span>
+        </h3>
+        <button class="btn btn-primary" (click)="saveAll()">Sacuvaj</button>
+      </div>
     </div>
-  </div>
+  </ng-container>
 
 </div>

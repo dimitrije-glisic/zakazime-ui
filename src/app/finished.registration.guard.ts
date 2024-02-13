@@ -13,7 +13,7 @@ export class FinishedRegistrationGuard implements CanActivate {
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     console.log('FinishedRegistrationGuard#canActivate called');
-    return this.businessService.loadBusiness().pipe(
+    return this.businessService.getBusinessCached().pipe(
       map(business => {
         if (business) {
           return true;

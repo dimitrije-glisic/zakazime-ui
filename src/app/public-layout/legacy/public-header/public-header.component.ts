@@ -4,7 +4,7 @@ import {
   REGISTRATION_TYPE_CUSTOMER,
   RegistrationComponent
 } from 'src/app/registration-login/registration/registration.component';
-import { AuthService } from "../../auth.service";
+import { AuthService } from "../../../auth.service";
 import { Router } from "@angular/router";
 
 

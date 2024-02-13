@@ -20,17 +20,18 @@ export class BusinessService {
   constructor(private http: HttpClient, private userDefinedCategoryService: UserDefinedCategoryService) {
   }
 
-  loadBusiness(): Observable<Business | undefined> {
+  getBusinessCached(): Observable<Business | undefined> {
     if (this.business) {
       return of(this.business); // Return cached value if available
     }
+    return this.loadBusiness();
+  }
+
+  loadBusiness(): Observable<Business> {
     console.log('contacting server for business');
     return this.http.get<Business>('/api/business').pipe(
       tap(business => this.business = business), // Cache the response
       catchError(err => {
-        if (err.status === 404) {
-          return of(undefined); // Return null if business not found
-        }
         return throwError(() => err);
       })
     );
@@ -120,5 +121,23 @@ export class BusinessService {
     );
   }
 
+  getAll() {
+    return this.http.get<Business[]>('/api/business/all');
+  }
 
+  searchBusinesses(city: string, businessType: string | undefined, category: string | undefined) {
+    //city, businessType, category should be url parameters and not part of the path
+    return this.http.get<Business[]>('/api/business/search?city=' + city + '&businessType=' + businessType + (category ? '&category=' + category : ''));
+  }
+
+  getBusinessesInCity(city: string) {
+    return this.http.get<Business[]>(`/api/business/all/${city}`);
+  }
+
+  uploadProfileImage(id: number, image: File) {
+    console.log('uploading image');
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post<MessageResponse>('/api/business/' + id + '/upload-image?imageType=PROFILE', formData);
+  }
 }

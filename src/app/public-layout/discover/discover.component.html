@@ -1,0 +1,56 @@
+<div class="container mt-5">
+
+  <app-navbar></app-navbar>
+
+  <h1 class="mb-3">
+    Pronađite i zakažite najbolje salone u
+    <a href="#" (click)="toggleCitiesList($event)">
+      {{ city }}u
+      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+    </a>
+  </h1>
+  <div *ngIf="showCitiesList" class="row cities-list">
+    <div class="col-md-3" *ngFor="let c of cities" (click)="selectCity(c)">
+      <span *ngIf="c === city" class="selected-city">✔</span>
+      {{ c }}
+    </div>
+  </div>
+
+  <h3>Kategorije usluga</h3>
+  <div class="container">
+    <div class="card-container">
+      <div class="row">
+        <div class="col-md-3 mb-4" *ngFor="let type of businessTypes">
+          <div class="card">
+            <div class="position-relative business-type-item" (click)="onBusinessTypeClick(type)">
+              <img [src]="'http://localhost:8080/images/' + type.imageUrl" class="card-img-top" alt="{{ type.title }}">
+              <div class="overlay-text">{{ type.title }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Popularno za februar</h3>
+  <div class="container">
+    <div class="card-container">
+      <div class="row">
+        <div class="col-md-3 mb-4" *ngFor="let category of topCategories">
+          <div class="card">
+            <div class="position-relative business-type-item" (click)="onCategoryClick(category)">
+              <img [src]="'http://localhost:8080/images/' + category.imageUrl" class="card-img-top" alt="{{ category.title }}">
+              <div class="overlay-text">{{ category.title }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+

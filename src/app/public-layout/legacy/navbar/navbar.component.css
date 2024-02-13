@@ -1,0 +1,54 @@
+/* Add this to your app.component.css or equivalent stylesheet */
+
+/* Style the navigation bar */
+.navbar {
+  background-color: transparent; /* No background color */
+  border-bottom: 1px solid #dee2e6; /* A light bottom border */
+}
+
+.navbar-brand {
+  color: #333; /* Dark grey color for the brand name */
+}
+
+.navbar-toggler {
+  border-color: #dee2e6; /* Light border for the toggler */
+}
+
+/* Style for navbar links */
+.nav-link {
+  color: #333; /* Dark grey color for nav links */
+  margin-right: 15px; /* Spacing between nav links */
+}
+
+.nav-link:hover {
+  color: #555; /* Slightly lighter grey on hover */
+}
+
+/* Style for the active nav item */
+.nav-item.active .nav-link {
+  color: #555; /* Slightly lighter grey for the active link */
+  border-bottom: 2px solid #555; /* Underline active item */
+}
+
+/* Style the registration button as a link */
+button.nav-link {
+  background: none;
+  border: none;
+  color: #333; /* Inherits the dark grey color */
+  cursor: pointer;
+  padding: 0;
+}
+
+button.nav-link:hover {
+  text-decoration: underline; /* Underline text on hover */
+}
+
+/* Remove specific styling for the list business action */
+.list-business-action {
+  color: #007bff; /* Bootstrap primary blue */
+  text-decoration: none; /* No underline */
+}
+
+.list-business-action:hover {
+  color: #0056b3; /* A darker blue on hover */
+}
