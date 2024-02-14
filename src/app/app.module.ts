@@ -60,6 +60,12 @@ import { EditServiceModalComponent } from './business/components/categories/edit
 import { DiscoverComponent } from './public-layout/discover/discover.component';
 import { BusinessesOverviewComponent } from './public-layout/businesses-overview/businesses-overview.component';
 import { BusinessProfileImageManagementComponent } from './business/components/business-profile-image-management/business-profile-image-management.component';
+import { BusinessProfileSummaryComponent } from './public-layout/business-profile-summary/business-profile-summary.component';
+import { BusinessesFilterModalComponent } from './public-layout/businesses-filter-modal/businesses-filter-modal.component';
+import { BusinessFilterComponent } from './public-layout/business-filter/business-filter.component';
+import {MatRadioModule} from "@angular/material/radio";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -114,6 +120,9 @@ export class XhrInterceptor implements HttpInterceptor {
     DiscoverComponent,
     BusinessesOverviewComponent,
     BusinessProfileImageManagementComponent,
+    BusinessProfileSummaryComponent,
+    BusinessesFilterModalComponent,
+    BusinessFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,6 +142,9 @@ export class XhrInterceptor implements HttpInterceptor {
     MatButtonModule,
     FlexModule,
     MatIconModule,
+    MatRadioModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,}],
   bootstrap: [AppComponent]

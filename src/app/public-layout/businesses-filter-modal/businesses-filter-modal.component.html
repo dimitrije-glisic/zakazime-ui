@@ -1,0 +1,32 @@
+  <div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h2>Lokacija</h2>
+      <mat-button-toggle-group [(ngModel)]="selectedCity" (change)="onCityChange($event)">
+          <mat-button-toggle *ngFor="let city of cities" [value]="city.toLowerCase().split(' ').join('-')">
+            {{ city }}
+          </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h2>Vrsta usluge</h2>
+      <mat-button-toggle-group [(ngModel)]="selectedBusinessType" (change)="onBusinessTypeChange($event)">
+        <mat-button-toggle *ngFor="let businessType of businessTypes" [value]="businessType">
+          {{ businessType.title }}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <div *ngIf="selectedBusinessType">
+        <mat-radio-group [(ngModel)]="selectedCategory" (change)="onCategoryChange($event)">
+          <mat-radio-button *ngFor="let category of categoriesByBusinessType!.get(selectedBusinessType.id)"
+                            [value]="category">
+            {{ category.title }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </div>
+</div>
+
