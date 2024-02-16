@@ -8,6 +8,7 @@ import {PredefinedCategory} from "../../interfaces/predefined-category";
 import {MessageResponse} from "../../interfaces/message-response";
 import {UserDefinedCategory} from "../../interfaces/user-defined-category";
 import {UserDefinedCategoryService} from "./user-defined-category.service";
+import {BusinessRichObject} from "../../interfaces/business-rich-object";
 
 @Injectable({
   providedIn: 'root'
@@ -139,5 +140,9 @@ export class BusinessService {
     const formData = new FormData();
     formData.append('image', image);
     return this.http.post<MessageResponse>('/api/business/' + id + '/upload-image?imageType=PROFILE', formData);
+  }
+
+  loadRichBusinessObject(city: string, businessName: string): Observable<BusinessRichObject> {
+    return this.http.get<BusinessRichObject>('/api/business/' + city + '/' + businessName);
   }
 }

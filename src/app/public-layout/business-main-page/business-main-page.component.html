@@ -1,0 +1,50 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-9">
+            <h2 class="pricing-header-title">Cenovnik salona
+            <span>{{business?.name}}</span>
+            </h2>
+            <div class="pricing-header mt-3">
+                <p class="pricing-header-subtitle">Slobodni termini i zakazivanje bez telefoniranja!</p>
+                <p>Izaberite usluge koje želite da zakažete i dobićete listu slobodnih termina. Možete zakazati željeni
+                    termin direktno na sajtu - bez pozivanja salona telefonom i čekanja na liniji. U bilo koje doba dana
+                    ili
+                    noći, 24h dnevno na SrediMe :)</p>
+            </div>
+            <div class="search-container pt-3">
+                <input type="text" class="form-control search-input" placeholder="Pretraga po nazivu usluge..."
+                       [(ngModel)]="textFilter">
+                <button class="clear-btn" *ngIf="textFilter" (click)="textFilter = ''">&times;</button>
+            </div>
+
+            <section *ngFor="let entry of categoriesWithServices | keyvalue" [attr.id]="'category-' + entry.key.title">
+                <h4 class="mb-3">{{ entry.key.title }}</h4>
+
+                <div class="row service-entry" *ngFor="let service of entry.value">
+                    <div class="col-md-1">
+                        <input type="checkbox" name="service" value="{{service.id}}" (change)="selectService(service)">
+                    </div>
+                    <div class="col-md-5">
+                        <h5 class="mb-1">{{ service.title }}</h5>
+                        <span class="duration">{{ service.avgDuration }} min</span>
+                    </div>
+
+                    <div class="col-md-5 offset-md-1 text-end">
+                        <span class="price">{{ service.price }}</span> <span class="price-label">RSD</span>
+                    </div>
+
+                    <div class="col-md-11 mt-2">
+                        <p class="service-description">{{ service.description }}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-3 pt-3">
+            <nav class="nav nav-pills nav-fill  sticky-subcategories">
+                <a class="nav-item nav-link" *ngFor="let category of business?.userDefinedCategories"
+                   (click)="scrollToCategory(category.title)">{{ category.title }}</a>
+            </nav>
+        </div>
+    </div>
+</div>

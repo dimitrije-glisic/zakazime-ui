@@ -23,6 +23,7 @@ import {HowItWorksComponent} from "./public-layout/legacy/how-it-works/how-it-wo
 import {LoginComponent} from "./registration-login/login/login.component";
 import {FinishRegistrationComponent} from "./registration-login/finish-registration/finish-registration.component";
 import {BusinessesOverviewComponent} from "./public-layout/businesses-overview/businesses-overview.component";
+import {BusinessMainPageComponent} from "./public-layout/business-main-page/business-main-page.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/select-services', component: BookingSelectServicesComponent},
@@ -59,11 +60,13 @@ const routes: Routes = [
 
   //================================================================================================
 
-  {path: ':city/svi-saloni', component: BusinessesOverviewComponent},
+  {path: 'discover/:city/svi-saloni', component: BusinessesOverviewComponent},
 
-  {path: ':city/:business-type', component: BusinessesOverviewComponent},
+  {path: 'discover/:city/:business-type', component: BusinessesOverviewComponent},
 
-  {path: ':city/:business-type/:category', component: BusinessesOverviewComponent},
+  {path: 'discover/:city/:business-type/:category', component: BusinessesOverviewComponent},
+
+  {path: 'business/:city/:business-name', component: BusinessMainPageComponent},
 
   // otherwise redirect to home
   {path: '**', redirectTo: ''}

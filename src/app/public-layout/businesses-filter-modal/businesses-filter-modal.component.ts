@@ -29,7 +29,6 @@ export class BusinessesFilterModalComponent {
   ) {
 
     this.selectedCity = data.cityFilter;
-    console.log('selectedCity', this.selectedCity);
     this.selectedBusinessType = data.businessTypeFilter;
     this.selectedCategory = data.categoryFilter;
     this.businessTypes = data.businessTypes;
@@ -72,7 +71,7 @@ export class BusinessesFilterModalComponent {
   }
 
   doRoute() {
-    const pathArray: string[] = [this.selectedCity!]
+    const pathArray: string[] = ['discover', this.selectedCity!]
     if (this.selectedBusinessType) {
       pathArray.push(this.selectedBusinessType.slug);
       if (this.selectedCategory) {

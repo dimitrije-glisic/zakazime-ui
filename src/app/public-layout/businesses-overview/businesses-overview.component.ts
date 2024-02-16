@@ -108,4 +108,10 @@ export class BusinessesOverviewComponent implements OnInit {
     this.router.navigate([this.cityFilter, this.businessTypeFilterString, categoryFilter]);
   }
 
+  formatUrl(businessName: string) {
+    const formattedCity = this.cityFilter!.toLowerCase().split(' ').join('-');
+    const formattedName = businessName.toLowerCase().split(' ').join('-');
+    return `/business/${formattedCity}/${formattedName}`;
+  }
+
 }

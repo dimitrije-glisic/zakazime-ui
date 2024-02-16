@@ -47,7 +47,7 @@ export class DiscoverComponent implements OnInit {
     //go to page for all businesses that provide this type of service in city
     const city = this.city.toLowerCase();
     const businessType = type.slug;
-    this.router.navigate([city, businessType]);
+    this.router.navigate(['discover', city, businessType]);
   }
 
   onCategoryClick(category: PredefinedCategory) {
@@ -57,7 +57,7 @@ export class DiscoverComponent implements OnInit {
     const businessTypeSlug = businessType!.slug;
     const categorySlug = category.slug;
 
-    this.router.navigate([city, businessTypeSlug, categorySlug]);
+    this.router.navigate(['discover', city, businessTypeSlug, categorySlug]);
   }
 
   toggleCitiesList(event: Event) {
@@ -69,6 +69,6 @@ export class DiscoverComponent implements OnInit {
     this.city = selectedCity;
     this.showCitiesList = false;
     const city = this.city.toLowerCase().split(' ').join('-');
-    this.router.navigate([city, 'svi-saloni']);
+    this.router.navigate(['discover', city, 'svi-saloni']);
   }
 }
