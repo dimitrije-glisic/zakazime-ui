@@ -6,11 +6,9 @@ import {Service} from "../../../interfaces/service";
 })
 export class ServicesFilterPipe implements PipeTransform {
 
-  transform(items: Service[], text: string, categoryId: number | undefined): Service[] {
+  transform(items: Service[], text: string): Service[] {
     if (!items) return [];
-
-    let filteredItems = text ? this.filterByText(items, text) : items;
-    return categoryId ? this.filterByCategory(filteredItems, categoryId) : filteredItems;
+    return text ? this.filterByText(items, text) : items;
   }
 
   private filterByText(items: Service[], searchText: string): any[] {
@@ -21,7 +19,4 @@ export class ServicesFilterPipe implements PipeTransform {
     });
   }
 
-  private filterByCategory(items: Service[], categoryId: number): Service[] {
-    return items.filter(service => service.categoryId === +categoryId);
-  }
 }
