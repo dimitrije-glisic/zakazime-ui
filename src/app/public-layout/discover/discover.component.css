@@ -11,9 +11,6 @@
 }
 
 
-
-
-
 /* ==================== */
 
 /* Adjust the image size and aspect ratio */
@@ -47,11 +44,5 @@
   cursor: pointer; /* Changes the cursor to a pointer on hover */
 }
 
-.container {
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 15px;
-}
 
 

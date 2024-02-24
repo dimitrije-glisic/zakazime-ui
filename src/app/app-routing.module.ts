@@ -24,6 +24,8 @@ import {LoginComponent} from "./registration-login/login/login.component";
 import {FinishRegistrationComponent} from "./registration-login/finish-registration/finish-registration.component";
 import {BusinessesOverviewComponent} from "./public-layout/businesses-overview/businesses-overview.component";
 import {BusinessMainPageComponent} from "./public-layout/business-main-page/business-main-page.component";
+import {RegistrationComponent} from "./registration-login/registration/registration.component";
+import {ProfileComponent} from "./registration-login/profile/profile.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/select-services', component: BookingSelectServicesComponent},
@@ -55,6 +57,10 @@ const routes: Routes = [
   {path: 'how-it-works', component: HowItWorksComponent},
 
   {path: 'login', component: LoginComponent},
+
+  {path: 'me/register', component: RegistrationComponent},
+
+  {path: 'me', component: ProfileComponent},
 
   {path: 'finish-registration', component: FinishRegistrationComponent},
 

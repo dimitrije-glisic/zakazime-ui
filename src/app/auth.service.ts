@@ -14,6 +14,7 @@ export class AuthService {
   isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
+    this.checkLocalStorage();
   }
 
   registerUser(userData: RegistrationRequest): Observable<Account> {
@@ -21,6 +22,7 @@ export class AuthService {
       .pipe(
         tap((response: Account) => {
           this.userSubject.next(response);
+          localStorage.setItem('account', JSON.stringify(response)); // Store in local storage
           this.isLoggedInSubject.next(true);
           this.doDummyPostToObtainCsrfToken();
         })
@@ -37,8 +39,10 @@ export class AuthService {
         if (response.email) {
           console.log('Login successful, setting userSubject');
           this.userSubject.next(response);
+          localStorage.setItem('account', JSON.stringify(response)); // Store in local storage
           this.isLoggedInSubject.next(true);
           this.doDummyPostToObtainCsrfToken();
+
         } else {
           console.log('Login failed');
         }
@@ -50,6 +54,7 @@ export class AuthService {
     return this.http.post('api/logout', {}).pipe(
       tap(() => {
         this.userSubject.next(null);
+        localStorage.removeItem('account'); // Remove from local storage
         this.isLoggedInSubject.next(false);
       })
     )
@@ -62,6 +67,7 @@ export class AuthService {
       return this.http.get<Account>('/api/login', {withCredentials: true}).pipe(
         tap(response => {
           this.userSubject.next(response);
+          localStorage.setItem('account', JSON.stringify(response)); // Store in local storage
         }),
         catchError(error => {
           // console.log('fetchUser error', error);
@@ -90,6 +96,18 @@ export class AuthService {
     this.http.post('api/dummy-post', {}).subscribe();
   }
 
+  private checkLocalStorage() {
+    const storedAccount = localStorage.getItem('account');
+    if (storedAccount) {
+      const account: Account = JSON.parse(storedAccount);
+      this.userSubject.next(account);
+      this.isLoggedInSubject.next(true);
+    }
+  }
+
+  isLoggedIn() {
+    return this.isLoggedInSubject.getValue();
+  }
 }
 
 

@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth.service';
-import { RegistrationComponent } from 'src/app/registration-login/registration/registration.component';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from 'src/app/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,9 +8,7 @@ import { RegistrationComponent } from 'src/app/registration-login/registration/r
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  registrationType: any;
-
-  constructor(private dialog: MatDialog, public authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
 
   }
 
@@ -20,14 +16,6 @@ export class NavbarComponent {
     this.authService.setInitialLoginState();
   }
 
-  openSignUpDialog() {
-    this.dialog.open(RegistrationComponent, {
-      width: '500px',
-      height: '500px',
-      data: { 'registrationType': this.registrationType }
-    });
-
-  }
 
   logout() {
     this.authService.logout().subscribe(() => {

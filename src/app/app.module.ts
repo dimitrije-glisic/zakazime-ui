@@ -67,6 +67,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { BusinessMainPageComponent } from './public-layout/business-main-page/business-main-page.component';
+import { ProfileComponent } from './registration-login/profile/profile.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -125,6 +126,7 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessesFilterModalComponent,
     BusinessFilterComponent,
     BusinessMainPageComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

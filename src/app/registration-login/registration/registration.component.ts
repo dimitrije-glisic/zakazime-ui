@@ -1,8 +1,7 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../../auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {RegistrationRequest} from "../../interfaces/registration-request";
 
 @Component({
@@ -19,8 +18,6 @@ export class RegistrationComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private dialogRef: MatDialogRef<RegistrationComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any
   ) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -33,17 +30,10 @@ export class RegistrationComponent {
   registerUser() {
     if (this.registerForm.valid) {
       const userData: RegistrationRequest = this.registerForm.value;
-      const registrationType = this.data.registrationType;
-      userData.role = registrationType;
       console.log('Registering user', userData);
       this.authService.registerUser(userData).subscribe({
         next: response => {
           console.log('Registration successful', response);
-          if (registrationType === REGISTRATION_TYPE_SERVICE_PROVIDER) {
-            this.handleSuccessfulBusinessRegistration();
-          } else if (registrationType === REGISTRATION_TYPE_CUSTOMER) {
-            this.handleSuccessfulUserRegistration();
-          }
         },
         error: error => {
           console.log('registration failed', error);
@@ -60,12 +50,10 @@ export class RegistrationComponent {
   }
 
   private handleSuccessfulBusinessRegistration() {
-    this.dialogRef.close();
     this.router.navigate(['/finish-registration'], {queryParams: {email: this.registerForm.value.email}});
   }
 
   private handleSuccessfulUserRegistration() {
-    this.dialogRef.close();
   }
 
 }

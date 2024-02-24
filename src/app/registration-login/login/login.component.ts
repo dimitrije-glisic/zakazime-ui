@@ -6,7 +6,7 @@ import {Account} from "../../interfaces/account";
 
 
 @Component({
-  selector: 'app-login-modal',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
