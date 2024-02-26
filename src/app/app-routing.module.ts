@@ -19,14 +19,18 @@ import {
 } from "./admin/components/categories/category-management/category-management.component";
 
 import {DiscoverComponent} from "./public-layout/discover/discover.component";
-import {HowItWorksComponent} from "./public-layout/legacy/how-it-works/how-it-works.component";
 import {LoginComponent} from "./registration-login/login/login.component";
 import {FinishRegistrationComponent} from "./registration-login/finish-registration/finish-registration.component";
 import {BusinessesOverviewComponent} from "./public-layout/businesses-overview/businesses-overview.component";
 import {BusinessMainPageComponent} from "./public-layout/business-main-page/business-main-page.component";
 import {RegistrationComponent} from "./registration-login/registration/registration.component";
 import {ProfileComponent} from "./registration-login/profile/profile.component";
-import {BusinessesManagementComponent} from "./admin/components/businesses/businesses-management/businesses-management.component";
+import {
+  BusinessesManagementComponent
+} from "./admin/components/businesses/businesses-management/businesses-management.component";
+import {
+  BusinessRegistrationComponent
+} from "./registration-login/business-registration/business-registration.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/select-services', component: BookingSelectServicesComponent},
@@ -56,7 +60,7 @@ const routes: Routes = [
 
   {path: '', component: DiscoverComponent},
 
-  {path: 'how-it-works', component: HowItWorksComponent},
+  {path: 'become-partner', component: BusinessRegistrationComponent},
 
   {path: 'login', component: LoginComponent},
 

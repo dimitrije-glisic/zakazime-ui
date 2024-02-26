@@ -1,14 +1,9 @@
 import {UserDefinedCategory} from "./user-defined-category";
 import {Service} from "./service";
+import {Business} from "./business";
 
 export interface BusinessRichObject {
-  id: number;
-  name: string;
-  phoneNumber: string;
-  city: string;
-  postalCode: string;
-  address: string;
-  profileImageUrl?: string;
+  business: Business;
   services: Service[];
   userDefinedCategories: UserDefinedCategory[];
 }

@@ -1,0 +1,179 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div *ngIf="showSuccessAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Uspešno poslato!</strong> Vaš zahtev je evidentiran. Naš tim će ga pregledati i poslati vam podatke za
+        prijavu na email.
+        <button type="button" class="close" (click)="showSuccessAlert = false" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <div class="container">
+        <div class="row">
+          <h1 class="main-headline">
+            <strong>Izlistajte vaš biznis</strong>
+          </h1>
+        </div>
+        <h4 class="main-subheadline">
+          Besplatno je i traje 5 minuta!
+        </h4>
+
+        <div>
+          <h3>Kako funkcioniše?</h3>
+          <ul>
+            <li>Unesite osnovne podatke o vasem biznisu</li>
+            <li>Naš tim će to verifikovati</li>
+            <li>Vaš profil je kreiran i vi dobijate podatke za prijavu</li>
+            <li>Možete dodavati usluge, radnike, termine i još mnogo toga</li>
+            <li>Kada ste spremni objavite vaš salon on postaje vidljiv hiljadama korisnika i možete početi da primate
+              rezervacije
+            </li>
+          </ul>
+          <div style="padding-top: 7px;">
+            <span>Vec imate nalog?</span><span style="padding-left: 5px;"><a routerLink="/login">Ulogujte
+                            se</a></span>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div class="col-md-6">
+
+
+      <div class="container border p-3" style="max-width: 500px;">
+
+        <div class="row">
+          <div class="col">
+            <h4>
+              Postanite partner - izlistajte vaš salon
+            </h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <p>
+              Dobrodošli u ZakaziMe, inovativni servis za marketing salona lepote i online i
+              mobilno
+              zakazivanje usluga. Pridružite nam se besplatno i otvorite vrata svog salona hiljadama novih i redovnih
+              klijenata.
+
+              Molimo Vas da nam pružite osnovne podatke o Vašem salonu lepote / estetskom centru / klinici
+            </p>
+            <hr>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <form [formGroup]="businessRegistrationForm" (ngSubmit)="sendRequest()">
+              <div class="mb-3">
+                <label for="name" class="form-label">Naziv salona</label>
+                <input type="text" class="form-control" id="name" formControlName="name" required>
+                <div
+                  *ngIf="businessRegistrationForm.controls['name'].invalid && businessRegistrationForm.controls['name'].touched">
+                  Neispravno ime biznisa.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="city" class="form-label">Grad</label>
+                <input type="text" class="form-control" id="city" formControlName="city" required>
+                <div
+                  *ngIf="businessRegistrationForm.controls['city'].invalid && businessRegistrationForm.controls['city'].touched">
+                  Neispravan grad
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="address" class="form-label">Ulica i broj</label>
+                <input type="text" class="form-control" id="address" formControlName="address" required>
+                <div
+                  *ngIf="businessRegistrationForm.controls['address'].invalid && businessRegistrationForm.controls['address'].touched">
+                  Neispravna adresa
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email" required>
+                <div
+                  *ngIf="businessRegistrationForm.controls['email'].invalid && businessRegistrationForm.controls['email'].touched">
+                  Neispravan email
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="contactPerson" class="form-label">Kontakt osoba</label>
+                <input type="text" class="form-control" id="contactPerson" formControlName="contactPerson"
+                       required>
+                <div
+                  *ngIf="businessRegistrationForm.controls['contactPerson'].invalid && businessRegistrationForm.controls['contactPerson'].touched">
+                  Neispravno ime kontakt osobe
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="phoneNumber" class="form-label">Broj telefona</label>
+                <input type="number" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                       required>
+                <div
+                  *ngIf="businessRegistrationForm.controls['phoneNumber'].invalid && businessRegistrationForm.controls['phoneNumber'].touched">
+                  Neispravan broj telefona
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Vrste usluga</label>
+                <div class="row">
+                  <div class="col" *ngFor="let sk of serviceKinds">
+                    <mat-checkbox [checked]="selectedServiceKinds.includes(sk.key)"
+                                  (change)="toggleServiceKind(sk.key)">
+                      {{ sk.value }}
+                    </mat-checkbox>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="year" class="form-label">Godina osnivanja</label>
+                <input type="number" class="form-control" id="year" formControlName="yearOfEstablishment"
+                       required>
+                <div
+                  *ngIf="businessRegistrationForm.controls['yearOfEstablishment'].invalid && businessRegistrationForm.controls['yearOfEstablishment'].touched">
+                  Neispravna godina
+                </div>
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;"
+                        [disabled]="businessRegistrationForm.invalid">Prijava
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

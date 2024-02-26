@@ -14,7 +14,7 @@ export class BusinessMainPageComponent implements OnInit {
 
   city: string | undefined;
   businessName: string | undefined;
-  business: BusinessRichObject | undefined;
+  businessRichObj: BusinessRichObject | undefined;
 
   categoriesWithServices: Map<UserDefinedCategory, Service[]> = new Map<UserDefinedCategory, Service[]>();
 
@@ -38,15 +38,15 @@ export class BusinessMainPageComponent implements OnInit {
 
   loadBusinessData(city: string, businessName: string): void {
     this.businessService.loadRichBusinessObject(city, businessName).subscribe(business => {
-      this.business = business;
+      this.businessRichObj = business;
       this.updateCategoriesWithServices();
     });
   }
 
   private updateCategoriesWithServices() {
     this.categoriesWithServices.clear();
-    this.business!.userDefinedCategories.forEach(category => {
-      const services = this.business!.services.filter(service => service.categoryId === category.id);
+    this.businessRichObj!.userDefinedCategories.forEach(category => {
+      const services = this.businessRichObj!.services.filter(service => service.categoryId === category.id);
       this.categoriesWithServices.set(category, services);
     });
   }

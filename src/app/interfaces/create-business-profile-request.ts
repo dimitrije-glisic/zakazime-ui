@@ -1,9 +1,11 @@
 export interface CreateBusinessProfileRequest {
   name: string;
-  businessTypeId: number;
   phoneNumber: string;
+  contactPerson: string;
+  email: string;
   city: string;
-  postalCode: string;
   address: string;
+  serviceKinds: string[];
+  yearOfEstablishment: number;
 }
 

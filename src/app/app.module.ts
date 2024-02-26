@@ -99,6 +99,9 @@ import {
 import {ConfirmationModalComponent} from "./admin/components/confirmation-modal/confirmation-modal.component";
 import {BusinessesManagementComponent} from "./admin/components/businesses/businesses-management/businesses-management.component";
 import {BusinessesListComponent} from "./admin/components/businesses/businesses-list/businesses-list.component";
+import {
+  BusinessRegistrationComponent
+} from "./registration-login/business-registration/business-registration.component";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -161,7 +164,8 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessesWaitingForApprovalComponent,
     BusinessesManagementComponent,
     BusinessesListComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    BusinessRegistrationComponent
   ],
   imports: [
     BrowserModule,

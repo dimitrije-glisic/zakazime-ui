@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-9">
             <h2 class="pricing-header-title">Cenovnik salona
-                <span>{{ business?.name }}</span>
+                <span>{{ businessRichObj?.business!.name }}</span>
             </h2>
             <div class="pricing-header mt-3">
                 <p class="pricing-header-subtitle">Slobodni termini i zakazivanje bez telefoniranja!</p>
@@ -47,7 +47,7 @@
         </div>
         <div class="col-md-3 pt-3">
             <nav class="nav nav-pills nav-fill  sticky-subcategories">
-                <a class="nav-item nav-link" *ngFor="let category of business?.userDefinedCategories"
+                <a class="nav-item nav-link" *ngFor="let category of businessRichObj?.userDefinedCategories"
                    (click)="scrollToCategory(category.title)">{{ category.title }}</a>
             </nav>
         </div>
