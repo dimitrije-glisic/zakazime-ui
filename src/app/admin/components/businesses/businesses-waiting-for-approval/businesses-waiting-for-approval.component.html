@@ -1,0 +1,56 @@
+<div class="container mt-3">
+  <h1>Zahtevi za registraciju
+  <span *ngIf="businesses && businesses.length > 0" class="badge bg-primary">{{ businesses.length }}</span>
+  </h1>
+
+  <div *ngIf="businesses && businesses.length > 0" class="mt-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ businesses[currentBusinessIndex].name }}</h5>
+        <dl class="row">
+          <dt class="col-sm-3">Grad</dt>
+          <dd class="col-sm-9">{{ businesses[currentBusinessIndex].city }}</dd>
+
+          <dt class="col-sm-3">Adresa</dt>
+          <dd class="col-sm-9">{{ businesses[currentBusinessIndex].address }}</dd>
+
+          <dt class="col-sm-3">Tip salona</dt>
+          <dd class="col-sm-9">{{ businesses[currentBusinessIndex].serviceKind }}</dd>
+
+          <dt class="col-sm-3">Email</dt>
+          <dd class="col-sm-9">{{ businesses[currentBusinessIndex].email }}</dd>
+
+          <dt class="col-sm-3">Osoba za kontakt</dt>
+          <dd class="col-sm-9">{{ businesses[currentBusinessIndex].contactPerson }}</dd>
+
+          <dt class="col-sm-3">Telefon</dt>
+          <dd class="col-sm-9">{{ businesses[currentBusinessIndex].phoneNumber }}</dd>
+        </dl>
+        <button class="btn btn-success me-2" (click)="approveBusiness(businesses[currentBusinessIndex])">Odobri
+        </button>
+        <button class="btn btn-danger" (click)="rejectBusiness(businesses[currentBusinessIndex])">Odbaci</button>
+      </div>
+    </div>
+
+
+
+    <nav class="mt-3" *ngIf="businesses.length > 1">
+      <div class="business-navigation">
+        <span class="arrow-left" [class.disabled]="currentBusinessIndex === 0" (click)="previousBusiness()">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="arrow-right" [class.disabled]="currentBusinessIndex === businesses.length - 1"
+              (click)="nextBusiness()">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+      </div>
+    </nav>
+
+  </div>
+
+
+  <div *ngIf="!businesses || businesses.length === 0" class="alert alert-info mt-3">
+    No businesses waiting for approval.
+  </div>
+</div>
+

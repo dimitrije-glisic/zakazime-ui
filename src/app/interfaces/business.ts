@@ -6,5 +6,10 @@ export interface Business {
   postalCode: string;
   address: string;
   profileImageUrl?: string;
+  description?: string;
+  email?: string;
+  contactPerson?: string;
+  serviceKind?: string;
+  status?: string;
 }
 

@@ -1,0 +1,15 @@
+/* businesses-waiting-for-approval.component.css */
+.business-navigation {
+  display: flex;
+  justify-content: space-between; /* Space out the arrows */
+}
+
+.arrow-left, .arrow-right {
+  cursor: pointer;
+  font-size: 30px; /* Adjust the size of the arrows if needed */
+}
+
+.arrow-left.disabled, .arrow-right.disabled {
+  opacity: 0.5; /*  Dim disabled arrows */
+  cursor: default;
+}

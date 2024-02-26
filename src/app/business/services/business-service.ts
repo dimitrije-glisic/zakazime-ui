@@ -17,6 +17,7 @@ export class BusinessService {
   private business: Business | null = null;
   private services: Service[] | null = null;
   private userDefinedCategories: UserDefinedCategory[] | undefined;
+  private allBusinesses: Business[] | undefined;
 
   constructor(private http: HttpClient, private userDefinedCategoryService: UserDefinedCategoryService) {
   }
@@ -63,15 +64,6 @@ export class BusinessService {
         return throwError(() => err);
       })
     );
-  }
-
-  addServicesLocally(services: Service[]) {
-    if (!this.business) throw new Error('Business is null when adding services');
-    if (!this.services) {
-      this.services = services;
-    } else {
-      this.services = this.services.concat(services);
-    }
   }
 
   loadPredefinedCategories(id: number) {
@@ -124,6 +116,13 @@ export class BusinessService {
 
   getAll() {
     return this.http.get<Business[]>('/api/business/all');
+  }
+
+  getAllCached(): Observable<Business[]> {
+    if (this.allBusinesses) {
+      return of(this.allBusinesses);
+    }
+    return this.getAll();
   }
 
   searchBusinesses(city: string, businessType: string | undefined, category: string | undefined) {

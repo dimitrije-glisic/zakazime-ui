@@ -93,6 +93,12 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {BusinessMainPageComponent} from './public-layout/business-main-page/business-main-page.component';
 import {ProfileComponent} from './registration-login/profile/profile.component';
+import {
+  BusinessesWaitingForApprovalComponent
+} from "./admin/components/businesses/businesses-waiting-for-approval/businesses-waiting-for-approval.component";
+import {ConfirmationModalComponent} from "./admin/components/confirmation-modal/confirmation-modal.component";
+import {BusinessesManagementComponent} from "./admin/components/businesses/businesses-management/businesses-management.component";
+import {BusinessesListComponent} from "./admin/components/businesses/businesses-list/businesses-list.component";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -152,6 +158,10 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessFilterComponent,
     BusinessMainPageComponent,
     ProfileComponent,
+    BusinessesWaitingForApprovalComponent,
+    BusinessesManagementComponent,
+    BusinessesListComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -176,6 +186,9 @@ export class XhrInterceptor implements HttpInterceptor {
     ReactiveFormsModule
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,}],
+  exports: [
+    BusinessesWaitingForApprovalComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

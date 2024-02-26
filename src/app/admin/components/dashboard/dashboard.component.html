@@ -1,6 +1,5 @@
 <!-- dashboard.component.html -->
 <div class="d-flex" style="height: 100vh;">
-
   <!-- Sidebar -->
   <div class="bg-dark text-white" style="width: 200px; height: 100vh; position: fixed;">
     <div class="navbar-brand text-center" style="padding: 10px;">
@@ -22,31 +21,25 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#users" style="color: white;" onmouseover="this.style.background='#0056b3'"
+        <a class="nav-link text-white" href="#" style="color: white;" onmouseover="this.style.background='#0056b3'"
            onmouseout="this.style.background='transparent'">
           <i class="bi bi-people"></i> Users
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#businesses" style="color: white;"
+        <a class="nav-link text-white" href="admin/businesses" style="color: white;"
            onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='transparent'">
-          <i class="bi bi-shop"></i> Businesses
+          <i class="bi bi-shop"></i> Saloni
         </a>
       </li>
     </ul>
   </div>
 
-  <!-- Main content area -->
   <div class="flex-grow-1" style="margin-left: 200px;">
     <!-- Navbar -->
-
     <nav class="navbar navbar-expand-lg"
          style="background-color: #003366; color: white; width: calc(100% - 200px); position: fixed; z-index: 1020;">
       <div class="container-fluid">
-        <!--        <div class="d-flex justify-content-end" style="width: 100%;">-->
-        <!--          <button class="btn btn-outline-light my-2 my-sm-0" type="button">Logout</button>-->
-        <!--        </div>-->
-
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <div>
             <ul class="navbar-nav mr-auto">
@@ -62,10 +55,8 @@
       </div>
     </nav>
 
-    <!-- Placeholder for navbar height -->
     <div style="height: 56px;"></div>
 
-    <!-- Main Dashboard Content -->
     <div class="container-fluid mt-4">
       <router-outlet></router-outlet>
     </div>

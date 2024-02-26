@@ -26,6 +26,7 @@ import {BusinessesOverviewComponent} from "./public-layout/businesses-overview/b
 import {BusinessMainPageComponent} from "./public-layout/business-main-page/business-main-page.component";
 import {RegistrationComponent} from "./registration-login/registration/registration.component";
 import {ProfileComponent} from "./registration-login/profile/profile.component";
+import {BusinessesManagementComponent} from "./admin/components/businesses/businesses-management/businesses-management.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/select-services', component: BookingSelectServicesComponent},
@@ -49,6 +50,7 @@ const routes: Routes = [
     children: [
       {path: 'templates/business-types', component: BusinessTypeManagement},
       {path: 'templates/categories', component: CategoryManagementComponent},
+      {path: 'businesses', component: BusinessesManagementComponent},
     ]
   },
 
