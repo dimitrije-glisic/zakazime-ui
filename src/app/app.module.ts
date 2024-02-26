@@ -28,46 +28,71 @@ import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/c
 import {BookingSummaryComponent} from './public-layout/booking/booking-summary/booking-summary.component';
 import {BookingBreadcrumbComponent} from './public-layout/booking/booking-breadcrumb/booking-breadcrumb.component';
 import {DashboardComponent} from './admin/components/dashboard/dashboard.component';
-import {BusinessTypeListComponent} from './admin/components/business-types/business-type-list/business-type-list.component';
+import {
+  BusinessTypeListComponent
+} from './admin/components/business-types/business-type-list/business-type-list.component';
 import {NgOptimizedImage} from "@angular/common";
-import { BusinessTypeAddComponent } from './admin/components/business-types/business-type-add/business-type-add.component';
-import { BusinessTypeEditComponent } from './admin/components/business-types/business-type-edit/business-type-edit.component';
-import { BusinessTypeManagement } from './admin/components/business-types/business-type-management/business-type-management.component';
-import { CategoryManagementComponent } from './admin/components/categories/category-management/category-management.component';
-import { CategoryListComponent } from './admin/components/categories/category-list/category-list.component';
-import { CategoryAddComponent } from './admin/components/categories/category-add/category-add.component';
-import { CategoryEditComponent } from './admin/components/categories/category-edit/category-edit.component';
-import { AddSearchCategoryComponent } from './business/components/add-search-category/add-search-category.component';
+import {
+  BusinessTypeAddComponent
+} from './admin/components/business-types/business-type-add/business-type-add.component';
+import {
+  BusinessTypeEditComponent
+} from './admin/components/business-types/business-type-edit/business-type-edit.component';
+import {
+  BusinessTypeManagement
+} from './admin/components/business-types/business-type-management/business-type-management.component';
+import {
+  CategoryManagementComponent
+} from './admin/components/categories/category-management/category-management.component';
+import {CategoryListComponent} from './admin/components/categories/category-list/category-list.component';
+import {CategoryAddComponent} from './admin/components/categories/category-add/category-add.component';
+import {CategoryEditComponent} from './admin/components/categories/category-edit/category-edit.component';
+import {AddSearchCategoryComponent} from './business/components/add-search-category/add-search-category.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import { SearchCategoryListComponent } from './business/components/predefined-category-list/search-category-list.component';
+import {
+  SearchCategoryListComponent
+} from './business/components/predefined-category-list/search-category-list.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatCardModule} from "@angular/material/card";
 import {MatListModule} from "@angular/material/list";
 import {MatInputModule} from "@angular/material/input";
-import { UserDefinedCategoryListComponent } from './business/components/categories/user-defined-category-list/user-defined-category-list.component';
+import {
+  UserDefinedCategoryListComponent
+} from './business/components/categories/user-defined-category-list/user-defined-category-list.component';
 import {
   UserDefinedCategoryManagementComponent
 } from "./business/components/categories/user-defined-category-management/user-defined-category-management.component";
-import { UserDefinedCategoryAddComponent } from './business/components/categories/user-defined-category-add/user-defined-category-add.component';
-import { UserDefinedCategoryEditComponent } from './business/components/categories/user-defined-category-edit/user-defined-category-edit.component';
-import { ServiceListComponent } from './business/components/service-list/service-list.component';
-import { AddServiceModalComponent } from './business/components/categories/add-service-modal/add-service-modal.component';
+import {
+  UserDefinedCategoryAddComponent
+} from './business/components/categories/user-defined-category-add/user-defined-category-add.component';
+import {
+  UserDefinedCategoryEditComponent
+} from './business/components/categories/user-defined-category-edit/user-defined-category-edit.component';
+import {ServiceListComponent} from './business/components/service-list/service-list.component';
+import {AddServiceModalComponent} from './business/components/categories/add-service-modal/add-service-modal.component';
 import {MatButtonModule} from "@angular/material/button";
-import {FlexModule} from "@angular/flex-layout";
-import { ServiceListItemComponent } from './business/components/service-list-item/service-list-item.component';
+import {ServiceListItemComponent} from './business/components/service-list-item/service-list-item.component';
 import {MatIconModule} from "@angular/material/icon";
-import { EditServiceModalComponent } from './business/components/categories/edit-service-modal/edit-service-modal.component';
-import { DiscoverComponent } from './public-layout/discover/discover.component';
-import { BusinessesOverviewComponent } from './public-layout/businesses-overview/businesses-overview.component';
-import { BusinessProfileImageManagementComponent } from './business/components/business-profile-image-management/business-profile-image-management.component';
-import { BusinessProfileSummaryComponent } from './public-layout/business-profile-summary/business-profile-summary.component';
-import { BusinessesFilterModalComponent } from './public-layout/businesses-filter-modal/businesses-filter-modal.component';
-import { BusinessFilterComponent } from './public-layout/business-filter/business-filter.component';
+import {
+  EditServiceModalComponent
+} from './business/components/categories/edit-service-modal/edit-service-modal.component';
+import {DiscoverComponent} from './public-layout/discover/discover.component';
+import {BusinessesOverviewComponent} from './public-layout/businesses-overview/businesses-overview.component';
+import {
+  BusinessProfileImageManagementComponent
+} from './business/components/business-profile-image-management/business-profile-image-management.component';
+import {
+  BusinessProfileSummaryComponent
+} from './public-layout/business-profile-summary/business-profile-summary.component';
+import {
+  BusinessesFilterModalComponent
+} from './public-layout/businesses-filter-modal/businesses-filter-modal.component';
+import {BusinessFilterComponent} from './public-layout/business-filter/business-filter.component';
 import {MatRadioModule} from "@angular/material/radio";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { BusinessMainPageComponent } from './public-layout/business-main-page/business-main-page.component';
-import { ProfileComponent } from './registration-login/profile/profile.component';
+import {BusinessMainPageComponent} from './public-layout/business-main-page/business-main-page.component';
+import {ProfileComponent} from './registration-login/profile/profile.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -144,11 +169,11 @@ export class XhrInterceptor implements HttpInterceptor {
     MatListModule,
     MatInputModule,
     MatButtonModule,
-    FlexModule,
     MatIconModule,
     MatRadioModule,
     MatExpansionModule,
     MatButtonToggleModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,}],
   bootstrap: [AppComponent]
