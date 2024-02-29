@@ -6,7 +6,7 @@ import {catchError, map, Observable, of} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class FinishedRegistrationGuard implements CanActivate {
+export class IsBusinessUser implements CanActivate {
 
   constructor(private router: Router, private businessService: BusinessService) {
   }
@@ -19,7 +19,7 @@ export class FinishedRegistrationGuard implements CanActivate {
           return true;
         } else {
           console.log('Business not found');
-          this.router.navigate(['/finish-registration']);
+          this.router.navigate(['/home']);
           return false;
         }
       }),
@@ -29,7 +29,6 @@ export class FinishedRegistrationGuard implements CanActivate {
         return of(false);
       })
     );
-
   }
 
 }

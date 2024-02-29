@@ -1,4 +1,4 @@
-<div class="container my-4">
+<div class="container-fluid m-5 p-5 mt-2 pt-2">
   <h2 class="mb-3">Podaci o biznisu</h2>
 
   <table class="table table-bordered table-hover">
@@ -9,30 +9,49 @@
     </tr>
     <tr>
       <th scope="row">Tip biznisa</th>
-      <td>todo maybe</td>
-    </tr>
-    <tr>
-      <th scope="row">Telefon</th>
-      <td>{{ business?.phoneNumber }}</td>
+      <td>{{ business?.serviceKind }}</td>
     </tr>
     <tr>
       <th scope="row">Grad</th>
       <td>{{ business?.city }}</td>
     </tr>
     <tr>
-      <th scope="row">Poštanski kod</th>
-      <td>{{ business?.postalCode }}</td>
-    </tr>
-    <tr>
       <th scope="row">Adresa</th>
       <td>{{ business?.address }}</td>
     </tr>
     <tr>
-      <th scope="row">Vlasnik</th>
-      <td>maybe todo</td>
+      <th scope="row">Email</th>
+      <td>{{ business?.email }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Kontakt osoba</th>
+      <td>{{ business?.contactPerson }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Telefon</th>
+      <td>{{ business?.phoneNumber }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Status</th>
+      <td>
+        <span *ngIf="business?.status === 'APPROVED'" class="badge bg-warning">Neaktivan</span>
+        <span *ngIf="business?.status === 'ACTIVE'" class="badge bg-success">Aktivan</span>
+      </td>
     </tr>
     </tbody>
   </table>
+
+  <ng-container *ngIf="business?.status === 'APPROVED'">
+    <div class="info-box">
+      <h4 class="info-title mb-3"><i class="bi bi-info-circle-fill"></i> Vaš salon nije objavljen</h4>
+      <p>Kako bi vaš salon bio vidljiv korisnicima, potrebno je da ga 'objavite' klikom na dugme ispod.</p>
+      <p><strong>Prethodno je potrebno da unesete slike i kategorije koje opisuju vaš salon.</strong></p>
+      <button class="btn btn-emphasize" (click)="submitBusiness()">Objavi biznis</button>
+    </div>
+    <div *ngIf="showError" class="error-message">
+      <i class="bi bi-exclamation-triangle-fill"></i> Molimo vas da ispunite sve potrebne informacije pre objavljivanja.
+    </div>
+  </ng-container>
 
   <app-business-profile-image-management
     [profileImageUrl]="currentProfileImageUrl"

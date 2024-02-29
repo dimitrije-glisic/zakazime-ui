@@ -1,47 +1,57 @@
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" routerLink="/manage-business">Pocetna</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="services">Usluge</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Zakazivanje</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Zaposleni</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Main content -->
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand navbar-light bg-light">
-                <a class="navbar-brand" href="#">Logo</a>
-                <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" routerLink="profile">Biznis Profil</a>
-                </div>
-
-                <div *ngIf="this.authService.isLoggedInSubject | async" class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" (click)="logout()">Logout</a>
-                </div>
-                <div *ngIf="!(this.authService.isLoggedInSubject | async)"class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" routerLink="/login">Login</a>
-                </div>
-
-            </nav>
-
-            <!-- Central Content Area -->
-            <div class="central-content">
-                <router-outlet></router-outlet>
-            </div>
-        </main>
+<div class="d-flex" style="height: 100vh;">
+  <!-- Sidebar -->
+  <div class="bg-dark text-white" style="width: 250px; height: 100vh; position: fixed;">
+    <div class="navbar-brand text-center" style="padding: 10px;">
+      <h1 style="font-size: 1.5rem; font-weight: bold; color: white;">Upravljanje salonom</h1>
     </div>
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="home" style="color: white;" onmouseover="this.style.background='#0056b3'"
+           onmouseout="this.style.background='transparent'">
+          <i class="bi bi-house"></i> Pocetna
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="services" style="color: white;"
+           onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='transparent'">
+          <i class="bi bi-card-checklist"></i> Usluge
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#" style="color: white;"
+           onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='transparent'">
+          <i class="bi bi-calendar"></i> Zakazivanje
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="flex-grow-1" style="margin-left: 250px;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg"
+         style="background-color: #003366; color: white; width: calc(100% - 200px); position: fixed; z-index: 1020;">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <div>
+            <ul class="navbar-nav mr-auto me-5">
+              <li *ngIf="this.authService.isLoggedInSubject | async" class="nav-item">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="button" (click)="logout()">Logout</button>
+              </li>
+              <li *ngIf="!(this.authService.isLoggedInSubject | async)" class="nav-item">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="button" routerLink="/login">Login</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div style="height: 56px;"></div>
+
+    <div class="container-fluid mt-4">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
 </div>

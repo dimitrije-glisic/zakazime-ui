@@ -114,15 +114,20 @@ export class BusinessService {
     );
   }
 
+  //not used - could be removed probably
   getAll() {
     return this.http.get<Business[]>('/api/business/all');
+  }
+
+  getAllActive() {
+    return this.http.get<Business[]>('/api/business/all-active');
   }
 
   getAllCached(): Observable<Business[]> {
     if (this.allBusinesses) {
       return of(this.allBusinesses);
     }
-    return this.getAll();
+    return this.getAllActive();
   }
 
   searchBusinesses(city: string, businessType: string | undefined, category: string | undefined) {
@@ -143,5 +148,9 @@ export class BusinessService {
 
   loadRichBusinessObject(city: string, businessName: string): Observable<BusinessRichObject> {
     return this.http.get<BusinessRichObject>('/api/business/' + city + '/' + businessName);
+  }
+
+  submitBusiness(id: number) {
+    return this.http.post<MessageResponse>('/api/business/' + id + '/submit', {});
   }
 }

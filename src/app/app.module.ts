@@ -96,7 +96,7 @@ import {ProfileComponent} from './registration-login/profile/profile.component';
 import {
   BusinessesWaitingForApprovalComponent
 } from "./admin/components/businesses/businesses-waiting-for-approval/businesses-waiting-for-approval.component";
-import {ConfirmationModalComponent} from "./admin/components/confirmation-modal/confirmation-modal.component";
+import {ConfirmationModalComponent} from "./admin/components/businesses/confirmation-modal/confirmation-modal.component";
 import {BusinessesManagementComponent} from "./admin/components/businesses/businesses-management/businesses-management.component";
 import {BusinessesListComponent} from "./admin/components/businesses/businesses-list/businesses-list.component";
 import {

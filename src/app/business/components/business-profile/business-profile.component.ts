@@ -92,10 +92,36 @@ export class BusinessProfileComponent implements OnInit {
       this.businessService.loadBusiness().subscribe(business => {
         this.business = business;
         this.currentProfileImageUrl = business!.profileImageUrl;
-        console.log('this.currentProfileImageUrl', this.currentProfileImageUrl);
       });
     });
   }
+
+
+  showError = false; // Initially, the error is not shown
+
+  submitBusiness() {
+    // Example condition check
+    if (!this.areConditionsMet()) {
+      this.showError = true; // Show the error message if conditions are not met
+      setTimeout(() => {
+        this.showError = false;
+      }, 3000);
+    } else {
+      this.showError = false;
+      this.businessService.submitBusiness(this.business!.id).subscribe(() => {
+        // show success message and reload the page/business
+        this.businessService.loadBusiness().subscribe(business => {
+          this.business = business;
+        });
+      });
+    }
+  }
+
+  areConditionsMet(): boolean {
+    return this.business!.profileImageUrl !== undefined && this.existingPredefinedCategories!.length > 0;
+  }
+
+
 }
 
 interface PredefinedData {

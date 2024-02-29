@@ -1,10 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BusinessDashboardComponent} from './business/components/business-dashboard/business-dashboard.component';
-import {StatisticsComponent} from './business/components/statistics/statistics.component';
 import {ServiceManagementComponent} from './business/components/service-management/service-management.component';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
-import {FinishedRegistrationGuard} from './finished.registration.guard';
+import {IsBusinessUser} from './is-business-user';
 import {
   BookingSelectServicesComponent
 } from './public-layout/booking/booking-select-services/booking-select-services.component';
@@ -40,11 +39,10 @@ const routes: Routes = [
   {path: 'booking/:business-name/confirm-booking', component: ConfirmBookingComponent},
 
   {
-    path: 'manage-business', component: BusinessDashboardComponent, canActivate: [FinishedRegistrationGuard],
+    path: 'manage-business', component: BusinessDashboardComponent, canActivate: [IsBusinessUser],
     children: [
-      {path: 'profile', component: BusinessProfileComponent},
-
-      {path: '', component: StatisticsComponent},
+      {path: '', component: BusinessProfileComponent},
+      {path: 'home', component: BusinessProfileComponent},
       {path: 'services', component: ServiceManagementComponent},
     ]
   },

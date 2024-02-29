@@ -38,7 +38,7 @@ export class BusinessesFilterModalComponent {
   }
 
   private loadCities() {
-    this.businessService.getAll().subscribe(businesses => {
+    this.businessService.getAllActive().subscribe(businesses => {
       this.cities = businesses.map(business => business.city).filter((value, index, self) => self.indexOf(value) === index);
     });
   }

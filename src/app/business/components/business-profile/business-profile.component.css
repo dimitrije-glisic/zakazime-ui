@@ -1,0 +1,45 @@
+.info-box {
+  padding: 20px;
+  background-color: #fff3cd; /* Light yellow background */
+  border-left: 6px solid #ffeeba; /* Darker yellow border */
+  margin-bottom: 20px;
+  border-radius: 5px;
+  color: #856404; /* Dark yellow text for contrast */
+}
+
+.info-title {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.info-title i {
+  margin-right: 10px;
+  color: #ffc107; /* Bootstrap warning color for the icon */
+}
+
+.btn-emphasize {
+  background-color: #ffc107; /* Bootstrap warning color for the button */
+  border: none;
+  color: #ffffff;
+}
+
+.btn-emphasize:hover {
+  background-color: #e0a800;
+}
+
+.error-message {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8d7da; /* Light red background */
+  border-left: 6px solid #f5c6cb; /* Darker red border */
+  color: #721c24; /* Dark red text for contrast */
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.error-message i {
+  margin-right: 10px;
+  color: #d9534f; /* Bootstrap danger color for the icon */
+}

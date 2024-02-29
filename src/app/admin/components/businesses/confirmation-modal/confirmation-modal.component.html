@@ -1,0 +1,12 @@
+<mat-dialog-content class="mat-typography dialog-content">
+  <p>{{ message }}</p>
+  <ng-container *ngIf="action === 'reject'">
+    <mat-form-field class="wide-form-field">
+      <input matInput [(ngModel)]="rejectReason" placeholder="Unesite razlog odbijanja" required>
+    </mat-form-field>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button [mat-dialog-close]="false">Prekini</button>
+  <button mat-button color="primary" (click)="confirm()">Potvrdi</button>
+</mat-dialog-actions>

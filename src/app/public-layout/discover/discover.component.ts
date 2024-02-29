@@ -35,7 +35,7 @@ export class DiscoverComponent implements OnInit {
       //randomly select 16 categories
       this.topCategories = categories.sort(() => Math.random() - Math.random()).slice(0, 16);
     });
-    this.businessService.getAll().subscribe(businesses => {
+    this.businessService.getAllActive().subscribe(businesses => {
       this.businesses = businesses;
       // this.cities = new Set(...businesses.map(business => business.city));
       this.cities = businesses.map(business => business.city).filter((value, index, self) => self.indexOf(value) === index);

@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Business} from "../../../../interfaces/business";
 import {AdminService} from "../../../services/admin.service";
-import {ConfirmationModalComponent} from "../../confirmation-modal/confirmation-modal.component";
+import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 
 
@@ -49,7 +49,7 @@ export class BusinessesWaitingForApprovalComponent implements OnInit {
     let message = action === 'approve' ? 'Da li ste sigurni da želite da odobrite ovaj zahtev?' : 'Da li ste sigurni da želite da odbijete ovaj zahtev?';
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
-      data: {message: message}
+      data: {action:action, message: message}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -60,8 +60,9 @@ export class BusinessesWaitingForApprovalComponent implements OnInit {
             this.businesses = this.businesses?.filter(b => b.id !== business.id);
           });
         } else if (action === 'reject') {
+          const rejectReason = result.rejectReason;
           console.log('Rejection confirmed for:', business.id);
-          this.adminService.rejectBusiness(business.id).subscribe(() => {
+          this.adminService.rejectBusiness(business.id, rejectReason).subscribe(() => {
             this.businesses = this.businesses?.filter(b => b.id !== business.id);
           });
         }

@@ -1,0 +1,8 @@
+.nav-item > a:hover {
+  background-color: #004494;
+}
+
+.nav-item > a:hover .fa {
+  color: #fff;
+}
+
