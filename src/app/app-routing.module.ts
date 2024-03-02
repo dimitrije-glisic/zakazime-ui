@@ -30,6 +30,10 @@ import {
 import {
   BusinessRegistrationComponent
 } from "./registration-login/business-registration/business-registration.component";
+import {
+  EmployeeManagementComponent
+} from "./business/components/employees/employee-management/employee-management.component";
+import {EmployeeDetailsComponent} from "./business/components/employees/employee-details/employee-details.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/select-services', component: BookingSelectServicesComponent},
@@ -44,6 +48,8 @@ const routes: Routes = [
       {path: '', component: BusinessProfileComponent},
       {path: 'home', component: BusinessProfileComponent},
       {path: 'services', component: ServiceManagementComponent},
+      {path: 'employees', component: EmployeeManagementComponent},
+      {path: 'employees/:employeeId', component: EmployeeDetailsComponent}
     ]
   },
 

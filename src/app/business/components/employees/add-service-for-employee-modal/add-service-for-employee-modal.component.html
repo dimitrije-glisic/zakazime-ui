@@ -1,0 +1,14 @@
+<ul class="list-group">
+  <ng-container *ngIf="potentialServices.length === 0">
+    <li class="list-group-item">Nema usluga za dodavanje</li>
+  </ng-container>
+  <ng-container *ngIf="potentialServices.length > 0">
+    <li *ngFor="let service of potentialServices; trackBy: trackByService" class="list-group-item">
+    <mat-checkbox [checked]="selectedServices.includes(service)" (change)="toggleService(service)">
+        {{ service.title }}
+      </mat-checkbox>
+    </li>
+  </ng-container>
+</ul>
+
+<button class="btn btn-primary" (click)="saveAll()">Sacuvaj</button>

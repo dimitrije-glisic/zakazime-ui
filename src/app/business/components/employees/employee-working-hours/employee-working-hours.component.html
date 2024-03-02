@@ -1,0 +1,29 @@
+<div class="container mt-5 mb-5">
+  <h2 class="mb-4">Radno vreme</h2>
+
+  <div class="col-md-12">
+    <div *ngFor="let wh of _employee?.workingHours" class="card mb-3">
+      <div class="card-body">
+        <div class="row form-group align-items-center">
+          <div class="col-md-3 col-sm-6">
+            <strong>{{ getDayName(wh.dayOfWeek) }}</strong>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <input type="time" class="form-control" [(ngModel)]="wh.startTime"/>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <input type="time" class="form-control" [(ngModel)]="wh.endTime"/>
+          </div>
+          <div class="col-md-3 col-sm-6 form-check">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="wh.workingDay"/>
+            <label class="form-check-label">Radni dan</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 text-center mb-5">
+    <button class="btn btn-primary btn-lg" (click)="saveWorkingHours()">Sačuvaj</button>
+  </div>
+</div>
