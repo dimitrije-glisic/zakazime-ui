@@ -40,4 +40,5 @@ export class EmployeeWorkingHoursComponent {
   saveWorkingHours() {
     this.workingHoursChanged.emit(this._employee!.workingHours);
   }
+
 }
