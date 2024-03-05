@@ -1,0 +1,22 @@
+.card {
+  background: #f9f9f9; /* Light grey background for the card */
+  border: 1px solid #ddd; /* Light border for the card */
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-check-label {
+  margin-left: 0.5rem; /* Align the checkbox label nicely */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Adjust the button color if needed */
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  border-color: #004085;
+}

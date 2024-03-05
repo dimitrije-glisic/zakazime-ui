@@ -147,7 +147,7 @@ export class BusinessService {
   }
 
   loadRichBusinessObject(city: string, businessName: string): Observable<BusinessRichObject> {
-    return this.http.get<BusinessRichObject>('/api/business/' + city + '/' + businessName);
+    return this.http.get<BusinessRichObject>('/api/business/full' + city + '/' + businessName);
   }
 
   submitBusiness(id: number) {

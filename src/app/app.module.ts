@@ -14,7 +14,6 @@ import {FinishRegistrationComponent} from './registration-login/finish-registrat
 import {AuthService} from "./auth.service";
 import {BusinessDashboardComponent} from './business/components/business-dashboard/business-dashboard.component';
 import {ServiceManagementComponent} from './business/components/service-management/service-management.component';
-import {StatisticsComponent} from './business/components/statistics/statistics.component';
 import {ServicesFilterPipe} from './business/components/services/services-filter.pipe';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -102,6 +101,13 @@ import {BusinessesListComponent} from "./admin/components/businesses/businesses-
 import {
   BusinessRegistrationComponent
 } from "./registration-login/business-registration/business-registration.component";
+import {
+  EmployeeManagementComponent
+} from "./business/components/employees/employee-management/employee-management.component";
+import {
+  EmployeeWorkingHoursComponent
+} from "./business/components/employees/employee-working-hours/employee-working-hours.component";
+import {EmployeeDetailsComponent} from "./business/components/employees/employee-details/employee-details.component";
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -123,7 +129,6 @@ export class XhrInterceptor implements HttpInterceptor {
     FinishRegistrationComponent,
     BusinessDashboardComponent,
     ServiceManagementComponent,
-    StatisticsComponent,
     ServicesFilterPipe,
     BusinessProfileComponent,
     NavbarComponent,
@@ -165,7 +170,10 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessesManagementComponent,
     BusinessesListComponent,
     ConfirmationModalComponent,
-    BusinessRegistrationComponent
+    BusinessRegistrationComponent,
+    EmployeeManagementComponent,
+    EmployeeDetailsComponent,
+    EmployeeWorkingHoursComponent
   ],
   imports: [
     BrowserModule,

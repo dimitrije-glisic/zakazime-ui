@@ -1,0 +1,17 @@
+/* Style for the list container */
+.list-group {
+  max-height: 300px; /* Adjust as needed */
+  overflow-y: auto;    /* Add a scrollbar if content exceeds height */
+  border: 1px solid #ddd; /* Optional border */
+  padding: 10px;          /* Optional padding */
+}
+
+/* Style for list items */
+.list-group-item {
+  word-wrap: break-word;  /* Allow long service titles to wrap */
+}
+
+/* Modal Button (modify as needed) */
+.btn-primary {
+  /* Your existing button styles */
+}
