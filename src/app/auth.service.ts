@@ -9,7 +9,7 @@ import {RegistrationRequest} from "./interfaces/registration-request";
   providedIn: 'root'
 })
 export class AuthService {
-  private userSubject: BehaviorSubject<Account | null> = new BehaviorSubject<Account | null>(null);
+  private userSubject: BehaviorSubject<Account | undefined> = new BehaviorSubject<Account | undefined>(undefined);
 
   isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -53,14 +53,15 @@ export class AuthService {
   logout() {
     return this.http.post('api/logout', {}).pipe(
       tap(() => {
-        this.userSubject.next(null);
+        console.log('Logout successful, clearing userSubject');
+        this.userSubject.next(undefined);
         localStorage.removeItem('account'); // Remove from local storage
         this.isLoggedInSubject.next(false);
       })
     )
   }
 
-  fetchUser(): Observable<Account | null> {
+  fetchUser(): Observable<Account | undefined> {
     // console.log('fetchUser called');
     if (this.userSubject.getValue() === null) {
       // console.log('fetchUser making HTTP request');
@@ -71,8 +72,8 @@ export class AuthService {
         }),
         catchError(error => {
           // console.log('fetchUser error', error);
-          this.userSubject.next(null);
-          return of(null);
+          this.userSubject.next(undefined);
+          return of(undefined);
         })
       );
     } else {
@@ -80,7 +81,7 @@ export class AuthService {
     }
   }
 
-  get user$(): Observable<Account | null> {
+  get user$(): Observable<Account | undefined> {
     return this.userSubject.asObservable();
   }
 

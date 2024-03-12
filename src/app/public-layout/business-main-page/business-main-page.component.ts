@@ -4,7 +4,7 @@ import {BusinessService} from "../../business/services/business-service";
 import {BusinessRichObject} from "../../interfaces/business-rich-object";
 import {Service} from "../../interfaces/service";
 import {UserDefinedCategory} from "../../interfaces/user-defined-category";
-import {BookingService} from "../booking/booking.service";
+import {BookingService} from "../booking/services/booking.service";
 
 @Component({
   selector: 'app-business-main-page',

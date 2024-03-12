@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {BookingService} from "../booking.service";
+import {BookingService} from "../services/booking.service";
 import {Router} from "@angular/router";
 
 @Component({

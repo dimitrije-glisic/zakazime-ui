@@ -18,9 +18,6 @@ import {ServicesFilterPipe} from './business/components/services/services-filter
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NavbarComponent} from './public-layout/legacy/navbar/navbar.component';
-import {
-  BookingSelectServicesComponent
-} from './public-layout/booking/booking-select-services/booking-select-services.component';
 import {FilterByCategoryPipe} from './public-layout/legacy/filter-by-subcategory.pipe';
 import {BookingDatePickerComponent} from './public-layout/booking/booking-date-picker/booking-date-picker.component';
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
@@ -119,6 +116,9 @@ import {BookingManagementComponent} from "./public-layout/booking/booking-manage
 import {AvailableSlotsComponent} from "./public-layout/booking/available-slots/available-slots.component";
 import {MatOption, MatSelect} from "@angular/material/select";
 import localeSrLatn from '@angular/common/locales/sr-Latn';
+import {
+  BookingConfirmationComponent
+} from "./public-layout/booking/booking-confirmation/booking-confirmation.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -145,7 +145,6 @@ export class XhrInterceptor implements HttpInterceptor {
     ServicesFilterPipe,
     BusinessProfileComponent,
     NavbarComponent,
-    BookingSelectServicesComponent,
     FilterByCategoryPipe,
     BookingDatePickerComponent,
     ConfirmBookingComponent,
@@ -189,7 +188,8 @@ export class XhrInterceptor implements HttpInterceptor {
     EmployeeWorkingHoursComponent,
     ServiceEmployeePairComponent,
     BookingManagementComponent,
-    AvailableSlotsComponent
+    AvailableSlotsComponent,
+    BookingConfirmationComponent,
   ],
   imports: [
     BrowserModule,
