@@ -1,9 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {BusinessService} from "../../business/services/business-service";
 import {BusinessRichObject} from "../../interfaces/business-rich-object";
 import {Service} from "../../interfaces/service";
 import {UserDefinedCategory} from "../../interfaces/user-defined-category";
+import {BookingService} from "../booking/booking.service";
 
 @Component({
   selector: 'app-business-main-page',
@@ -21,13 +22,13 @@ export class BusinessMainPageComponent implements OnInit {
   textFilter = '';
   categoryFilter: number | undefined;
 
+  showPicker = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private businessService: BusinessService) {
-    console.log('BusinessMainPageComponent.constructor');
+
+  constructor(private activatedRoute: ActivatedRoute, private businessService: BusinessService, private bookingService: BookingService) {
   }
 
   ngOnInit(): void {
-    console.log('BusinessMainPageComponent.ngOnInit');
     this.activatedRoute.params.subscribe(params => {
       const {city, 'business-name': businessName} = params;
       this.city = city;
@@ -51,15 +52,26 @@ export class BusinessMainPageComponent implements OnInit {
     });
   }
 
-
   scrollToCategory(categoryTitle: string) {
     const targetElement = document.getElementById('category-' + categoryTitle);
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      targetElement.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
   }
 
   selectService(service: Service) {
-    console.log('BusinessMainPageComponent.selectService');
+    if (this.bookingService.getSelectedServices().find(s => s.id === service.id)) {
+      this.bookingService.removeService(service);
+      if (this.bookingService.getSelectedServices().length === 0) {
+        this.showPicker = false;
+      }
+    } else {
+      this.bookingService.addService(service);
+      this.showPicker = true;
+    }
+  }
+
+  isServiceSelected(id: number) {
+    return this.bookingService.getSelectedServices().find(s => s.id === id);
   }
 }

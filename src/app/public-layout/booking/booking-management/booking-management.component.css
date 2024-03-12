@@ -1,0 +1,8 @@
+.app-header h1 {
+  color: coral; /* Adjust the text color as needed */
+  padding: 10px 0; /* Add some vertical padding */
+  margin-left: 10px;
+  margin-bottom: 20px; /* Add some space below the header */
+  text-align: left; /* Align the text to the left */
+  font-size: 32px; /* Adjust the font size as needed */
+}

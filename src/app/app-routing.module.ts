@@ -34,6 +34,7 @@ import {
   EmployeeManagementComponent
 } from "./business/components/employees/employee-management/employee-management.component";
 import {EmployeeDetailsComponent} from "./business/components/employees/employee-details/employee-details.component";
+import {BookingManagementComponent} from "./public-layout/booking/booking-management/booking-management.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/select-services', component: BookingSelectServicesComponent},
@@ -83,6 +84,8 @@ const routes: Routes = [
   {path: 'discover/:city/:business-type/:category', component: BusinessesOverviewComponent},
 
   {path: 'business/:city/:business-name', component: BusinessMainPageComponent},
+
+  {path: 'business/:city/:business-name/checkout/cart', component: BookingManagementComponent},
 
   // otherwise redirect to home
   {path: '**', redirectTo: ''}

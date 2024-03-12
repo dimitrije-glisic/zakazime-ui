@@ -1,0 +1,59 @@
+.total-section h6 {
+  font-weight: bold; /* Make the font bolder */
+  padding: 10px 0; /* Add some padding above and below the text */
+  border-top: 1px solid #dee2e6; /* Add a light border above the total section, similar to a Bootstrap table */
+  margin-top: 20px; /* Add some space above the total section */
+  text-align: right; /* Align the total to the right */
+}
+
+.price-text {
+  text-align: right;
+}
+
+.service-title {
+  font-weight: bold; /* Make the font bolder */
+  color: #343a40; /* Dark grey color for the service title */
+}
+
+/*--------------------------------------------*/
+
+.summary-block {
+  padding: 15px; /* Adds padding inside the border */
+  border: 1px solid #dee2e6; /* Light grey border, similar to Bootstrap's default border color */
+  border-radius: 5px; /* Slightly rounded corners for a softer look */
+  margin-bottom: 15px; /* Adds space below the business info section */
+}
+
+.business-info {
+  padding: 5px; /* Adds padding inside the border */
+  border-bottom: 1px solid #dee2e6; /* Light grey border, similar to Bootstrap's default border color */
+  border-radius: 5px; /* Slightly rounded corners for a softer look */
+  margin-bottom: 15px; /* Adds space below the business info section */
+}
+
+.business-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #343a40;
+}
+
+.business-address {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+  color: #ffffff;
+}
+
+
