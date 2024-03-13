@@ -9,8 +9,11 @@ import {AppointmentService} from "../services/appointment.service";
 import {CustomerData} from "../../../interfaces/customer-data";
 import {SingleServiceAppointmentRequest} from "../../../interfaces/single-service-appointment-request";
 import {ActivatedRoute, Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {format} from 'date-fns';
+import {
+  EmployeeServiceIdPair,
+  MultiServiceAppointmentRequest
+} from "../../../interfaces/multi-service-appointment-request";
 
 
 @Component({
@@ -23,6 +26,7 @@ export class BookingConfirmationComponent implements OnInit {
   business: Business | undefined;
   selectedService: Service | undefined;
   selectedEmployeeName: string | undefined;
+  selectedService2EmployeeNameMap: Map<number, string | undefined> | undefined;
   selectedDate: Date | undefined;
   selectedTime: string | undefined;
 
@@ -40,7 +44,7 @@ export class BookingConfirmationComponent implements OnInit {
 
   constructor(private bookingService: BookingService, private authService: AuthService,
               private location: Location, private appointmentService: AppointmentService,
-              private snackBar: MatSnackBar, private router: Router, private activatedRoute: ActivatedRoute) {
+              private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -48,6 +52,16 @@ export class BookingConfirmationComponent implements OnInit {
     this.selectedService = this.bookingService.getSelectedServices()[0];
     this.selectedEmployeeName = this.bookingService.getSelectedEmployee() ?
       this.bookingService.getSelectedEmployee()?.name : 'Prvi slobodan zaposleni';
+
+
+    const selectedServiceEmployeePair = this.bookingService.getSelectedService2EmployeeMap();
+    console.log('selectedServiceEmployeePair: ' + JSON.stringify(selectedServiceEmployeePair));
+    this.selectedService2EmployeeNameMap = new Map<number, string | undefined>();
+    selectedServiceEmployeePair.forEach((employee, service) => {
+      const employeeName = employee ? employee.name : 'Prvi slobodan zaposleni';
+      this.selectedService2EmployeeNameMap!.set(service, employeeName);
+    });
+
     this.selectedDate = this.bookingService.getSelectedDate();
     this.selectedTime = this.bookingService.getSelectedTime()
     this.loadUser();
@@ -93,8 +107,18 @@ export class BookingConfirmationComponent implements OnInit {
       phone: this.phoneNumber!,
       password: this.passwordInput
     }
+
     const selectedDate = new Date(this.selectedDate!.toISOString().split('T')[0] + 'T' + this.selectedTime);
     const formattedStartTime = format(selectedDate, 'dd-MM-yyyy HH:mm');
+
+    if (this.bookingService.getSelectedServices().length === 1) {
+      this.confirmBookingSingle(customerData, formattedStartTime);
+    } else {
+      this.confirmBookingMulti(customerData, formattedStartTime);
+    }
+  }
+
+  confirmBookingSingle(customerData: CustomerData, formattedStartTime: string) {
     const request: SingleServiceAppointmentRequest = {
       businessId: this.business!.id,
       employeeId: this.bookingService.getSelectedEmployee()!.id,
@@ -103,24 +127,54 @@ export class BookingConfirmationComponent implements OnInit {
       startTime: formattedStartTime
     }
 
+    console.log('confirmBookingSingle Request: ' + JSON.stringify(request));
+
     this.appointmentService
       .createAppointment(request)
       .subscribe(() => {
         console.log('Appointment created');
         this.showSuccessAlert = true;
+        this.bookingService.reset();
         setTimeout(() => {
           this.showSuccessAlert = false;
-          this.bookingService.reset();
           this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
         }, 2000);
       });
   }
 
-  // showPanel() {
-  //   this.showSuccessAlert = true;
-  //   setTimeout(() => {
-  //     this.showSuccessAlert = false;
-  //     this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
-  //   }, 2000); // Hide the alert after 3 seconds
-  // }
+  confirmBookingMulti(customerData: CustomerData, formattedStartTime: string) {
+    let empServicePairs: EmployeeServiceIdPair[] = [];
+    this.bookingService.getSelectedService2EmployeeMap().forEach((employee, serviceId) => {
+      const employeeId = employee ? employee.id : undefined;
+      empServicePairs.push({employeeId: employeeId, serviceId: serviceId});
+    });
+
+    const request: MultiServiceAppointmentRequest = {
+      businessId: this.business!.id,
+      employeeServicePairs: empServicePairs,
+      customerData: customerData,
+      startTime: formattedStartTime
+    }
+
+    console.log('MultiServiceAppointmentRequest: ' + JSON.stringify(request));
+
+    this.appointmentService
+      .createMultiServiceAppointment(request)
+      .subscribe(() => {
+        this.bookingService.reset();
+        this.showSuccessAlert = true;
+        setTimeout(() => {
+          this.showSuccessAlert = false;
+          this.router.navigate(['../../'], {relativeTo: this.activatedRoute});
+        }, 2000);
+      });
+  }
+
+  getService(serviceId: number) {
+    return this.bookingService.getSelectedServices().find(s => s.id === serviceId);
+  }
+
+  totalAmount() {
+    return this.bookingService.getSelectedServices().reduce((acc, s) => acc + s.price, 0);
+  }
 }

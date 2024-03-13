@@ -21,8 +21,10 @@
       <app-service-employee-pair
         [service]="this.selectedService"
         [employees]="employeesForService"
+        [selectedServicePossibleEmployeesMap]="selectedServicePossibleEmployeesMap"
         [business]="business"
-        (employeeSelected)="onEmployeeSelected($event)">
+        (employeeSelected)="onEmployeeSelected($event)"
+        (serviceEmployeePairSelected)="onServiceEmployeePairSelected($event)">
       </app-service-employee-pair>
     </div>
 

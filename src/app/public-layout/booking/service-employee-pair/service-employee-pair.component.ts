@@ -25,11 +25,18 @@ export class ServiceEmployeePairComponent {
   selectedEmployee: Employee | undefined;
   @Output() employeeSelected = new EventEmitter<Employee>();
 
+  @Input() selectedServicePossibleEmployeesMap: Map<Service, Employee[]> | undefined;
+  @Output() serviceEmployeePairSelected = new EventEmitter<{ employee: Employee, service: Service }>();
+
   constructor(private location: Location) {
   }
 
+  onServiceEmployeePairSelected(service: Service, employee: Employee) {
+    this.serviceEmployeePairSelected.emit({employee, service});
+  }
+
+  //to be removed
   onEmployeeSelected($event: MatSelectChange) {
-    console.log('Employee selected: ' + $event.value);
     this.employeeSelected.emit($event.value);
   }
 
