@@ -119,6 +119,11 @@ import localeSrLatn from '@angular/common/locales/sr-Latn';
 import {
   BookingConfirmationComponent
 } from "./public-layout/booking/booking-confirmation/booking-confirmation.component";
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {
+  AppointmentCalendarComponent
+} from "./business/components/calendar/appointment-calendar/appointment-calendar.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -190,6 +195,7 @@ export class XhrInterceptor implements HttpInterceptor {
     BookingManagementComponent,
     AvailableSlotsComponent,
     BookingConfirmationComponent,
+    AppointmentCalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -213,7 +219,8 @@ export class XhrInterceptor implements HttpInterceptor {
     MatButtonToggleModule,
     ReactiveFormsModule,
     MatSelect,
-    MatOption
+    MatOption,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
 
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,},
