@@ -10,28 +10,43 @@
       <button mat-raised-button color="primary" class="edit-button" (click)="goBack()">Izmeni</button>
     </div>
   </div>
-  <div class="row align-items-center">
-    <div class="col">
-      <h2 class="h6 d-inline mb-0 service-title">{{ _service?.title }}</h2>
-      <span class="text-secondary ms-2"><small>{{ _service?.avgDuration }} min</small></span>
-    </div>
-    <div class="col-auto">
-      <p class="mb-0">{{ _service?.price }} RSD</p>
-    </div>
-  </div>
-  <div class="row mt-2">
-    <div class="col-12">
-      <mat-form-field appearance="fill" class="w-100">
-        <mat-label>Izaberite zaposlenog</mat-label>
-        <mat-select [(value)]="selectedEmployee" (selectionChange)="onEmployeeSelected($event)">
-          <mat-option value="">Prvi slobodan zaposleni</mat-option>
-          <mat-option *ngFor="let employee of employees" [value]="employee">
-            {{ employee.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
+
+  <ng-container *ngIf="selectedServicePossibleEmployeesMap">
+
+    <ng-container *ngFor="let pair of selectedServicePossibleEmployeesMap | keyvalue">
+
+      <div class="row align-items-center">
+        <div class="col">
+          <h2 class="h6 d-inline mb-0 service-title">{{ pair.key.title }}</h2>
+          <span class="text-secondary ms-2"><small>{{ pair.key.avgDuration }} min</small></span>
+        </div>
+        <div class="col-auto">
+          <p class="mb-0">{{ pair.key.price }} RSD</p>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-12">
+<!--          <mat-form-field appearance="fill" class="w-100">-->
+<!--            <mat-label>Izaberite zaposlenog</mat-label>-->
+<!--            <mat-select [(value)]="selectedEmployee" (selectionChange)="onEmployeeSelected($event)">-->
+<!--              <mat-option value="">Prvi slobodan zaposleni</mat-option>-->
+<!--              <mat-option *ngFor="let employee of employees" [value]="employee">-->
+<!--                {{ employee.name }}-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Izaberite zaposlenog</mat-label>
+            <mat-select (selectionChange)="serviceEmployeePairSelected.emit({ employee: $event.value, service: pair.key })">
+              <mat-option *ngFor="let employee of pair.value" [value]="employee">
+                {{ employee.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
 
   <div class="row">
     <div class="col-12 total-section">

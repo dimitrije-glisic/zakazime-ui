@@ -7,8 +7,8 @@
 
   <div class="ms-2">
 
-<!--    testing-->
-<!--    <button class="btn btn-link p-0 m-0 align-baseline" (click)="showPanel()">Prikaži panel</button>-->
+    <!--    testing-->
+    <!--    <button class="btn btn-link p-0 m-0 align-baseline" (click)="showPanel()">Prikaži panel</button>-->
 
     <h3 class="mb-2">Potvrdite i pošaljite: Zakazujete kod {{ business?.name }}</h3>
     <div class="date-time mb-4 text-secondary fs-5">{{ selectedDate | date: 'fullDate' }} {{ selectedTime }}</div>
@@ -37,34 +37,47 @@
     <form #registrationForm="ngForm" autocomplete="off" (ngSubmit)="registrationForm.valid && confirmBooking()">
       <div class="form-group">
         <label for="firstName">Ime</label>
-        <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName" #firstNameRef="ngModel" required>
-        <div *ngIf="firstNameRef.errors?.['required'] && firstNameRef.touched" class="text-danger">Ime je obavezno.</div>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName"
+               #firstNameRef="ngModel" required>
+        <div *ngIf="firstNameRef.errors?.['required'] && firstNameRef.touched" class="text-danger">Ime je obavezno.
+        </div>
       </div>
       <div class="form-group">
         <label for="lastName">Prezime</label>
-        <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName" #lastNameRef="ngModel" required>
-        <div *ngIf="lastNameRef.errors?.['required'] && lastNameRef.touched" class="text-danger">Prezime je obavezno.</div>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName"
+               #lastNameRef="ngModel" required>
+        <div *ngIf="lastNameRef.errors?.['required'] && lastNameRef.touched" class="text-danger">Prezime je obavezno.
+        </div>
       </div>
       <div class="form-group">
         <label for="phone">Telefon</label>
-        <input type="text" class="form-control" id="phone" [(ngModel)]="phoneNumber" name="phone" #phoneRef="ngModel" required>
+        <input type="text" class="form-control" id="phone" [(ngModel)]="phoneNumber" name="phone" #phoneRef="ngModel"
+               required>
         <div *ngIf="phoneRef.errors?.['required'] && phoneRef.touched" class="text-danger">Telefon je obavezan.</div>
       </div>
       <div class="form-group">
         <label for="emailInput">Email</label>
-        <input type="email" class="form-control" id="emailInput" [(ngModel)]="emailInput" name="emailInput" #emailInputRef="ngModel" required>
-        <div *ngIf="emailInputRef.errors?.['required'] && emailInputRef.touched" class="text-danger">Email je obavezan.</div>
+        <input type="email" class="form-control" id="emailInput" [(ngModel)]="emailInput" name="emailInput"
+               #emailInputRef="ngModel" required>
+        <div *ngIf="emailInputRef.errors?.['required'] && emailInputRef.touched" class="text-danger">Email je
+          obavezan.
+        </div>
       </div>
 
       <ng-container *ngIf="!user">
         <div class="form-group">
           <label for="passwordInput">Unesite lozinku za sledeći put</label>
-          <input type="password" class="form-control" id="passwordInput" [(ngModel)]="passwordInput" name="passwordInput" #passwordInputRef="ngModel" required>
-          <div *ngIf="passwordInputRef.errors?.['required'] && passwordInputRef.touched" class="text-danger">Lozinka je obavezna.</div>
+          <input type="password" class="form-control" id="passwordInput" [(ngModel)]="passwordInput"
+                 name="passwordInput" #passwordInputRef="ngModel" required>
+          <div *ngIf="passwordInputRef.errors?.['required'] && passwordInputRef.touched" class="text-danger">Lozinka je
+            obavezna.
+          </div>
         </div>
       </ng-container>
       <div class="form-group mt-3 mb-4">
-        <button type="submit" class="btn btn-warning d-block w-100 confirm-button" [disabled]="!registrationForm.valid">Zakažite moj termin!</button>
+        <button type="submit" class="btn btn-warning d-block w-100 confirm-button" [disabled]="!registrationForm.valid">
+          Zakažite moj termin!
+        </button>
       </div>
     </form>
 
@@ -91,27 +104,32 @@
         </div>
       </div>
 
-      <div class="row align-items-center mt-3">
-        <div class="col">
-          <h2 class="h6 d-inline mb-0 service-title">{{ selectedService?.title }}</h2>
-          <span class="text-secondary ms-2"><small>{{ selectedService?.avgDuration }} min</small></span>
-          <p><small>{{ selectedEmployeeName }}</small></p>
-        </div>
-        <div class="col-auto">
-          <p class="mb-0">{{ selectedService?.price }} RSD</p>
-        </div>
-      </div>
+      <ng-container *ngIf="selectedService2EmployeeNameMap">
+        <ng-container *ngFor="let pair of selectedService2EmployeeNameMap | keyvalue">
+          <div class="row align-items-center mt-3">
+            <div class="col">
+              <h2 class="h6 d-inline mb-0 service-title">{{ getService(pair.key)?.title }}</h2>
+              <span class="text-secondary ms-2"><small>{{ getService(pair.key)?.avgDuration }} min</small></span>
+              <p><small>{{ pair.value }}</small></p>
+            </div>
+            <div class="col-auto">
+              <p class="mb-5">{{ getService(pair.key)?.price }} RSD</p>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
 
       <div class="row">
         <div class="col-12 total-section">
-          <h6>Ukupno: {{ selectedService?.price }} RSD</h6>
+          <h6>Ukupno: {{ totalAmount() }} RSD</h6>
         </div>
       </div>
 
     </div>
   </div>
 
-  <div *ngIf="showSuccessAlert" class="alert alert-success alert-dismissible fixed-bottom w-100 mb-0 text-center" role="alert">
+  <div *ngIf="showSuccessAlert" class="alert alert-success alert-dismissible fixed-bottom w-100 mb-0 text-center"
+       role="alert">
     Termin zakazan! Očekujte email sa konačnom potvrdom
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="showSuccessAlert = false">
       <span aria-hidden="true">&times;</span>

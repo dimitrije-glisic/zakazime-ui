@@ -126,3 +126,7 @@
   align-items: center;   /* Vertical centering */
   justify-content: center; /* Horizontal centering */
 }
+
+.fixed-bottom {
+  z-index: 1030; /* Adjust the z-index if needed to ensure it's above other elements */
+}

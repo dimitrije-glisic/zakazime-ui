@@ -76,11 +76,26 @@ export class BookingService {
     return JSON.parse(localStorage.getItem('employee') || '{}');
   }
 
+  setSelectedService2EmployeeMap(map: Map<number, Employee | undefined>) {
+    console.log('setSelectedServiceEmployeePair', map);
+    localStorage.setItem('service-employee-pair', JSON.stringify(Array.from(map.entries())));
+  }
+
+  getSelectedService2EmployeeMap(): Map<number, Employee | undefined> {
+    console.log('getSelectedServiceEmployeePair');
+    const entries = JSON.parse(localStorage.getItem('service-employee-pair') || '[]');
+    console.log('entries', entries);
+    // to be in the same order as we see in UI
+    entries.reverse();
+    return new Map<number, Employee | undefined>(entries);
+  }
+
   reset() {
     localStorage.removeItem('services');
     localStorage.removeItem('date');
     localStorage.removeItem('time');
     localStorage.removeItem('business');
     localStorage.removeItem('employee');
+    localStorage.removeItem('service-employee-pair');
   }
 }

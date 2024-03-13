@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BusinessService} from "../../business/services/business-service";
 import {BusinessRichObject} from "../../interfaces/business-rich-object";
 import {Service} from "../../interfaces/service";
@@ -25,7 +25,8 @@ export class BusinessMainPageComponent implements OnInit {
   showPicker = false;
 
 
-  constructor(private activatedRoute: ActivatedRoute, private businessService: BusinessService, private bookingService: BookingService) {
+  constructor(private activatedRoute: ActivatedRoute, private businessService: BusinessService, private bookingService: BookingService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -71,7 +72,19 @@ export class BusinessMainPageComponent implements OnInit {
     }
   }
 
+  getSelectedServices() {
+    return this.bookingService.getSelectedServices();
+  }
+
+  getTotalAmount() {
+    return this.bookingService.getSelectedServices().reduce((acc, s) => acc + s.price, 0);
+  }
+
   isServiceSelected(id: number) {
     return this.bookingService.getSelectedServices().find(s => s.id === id);
+  }
+
+  openTimePicker() {
+    this.router.navigate(['checkout', 'cart'], {relativeTo: this.activatedRoute});
   }
 }
