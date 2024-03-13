@@ -1,4 +1,4 @@
-import {Injectable, NgModule} from '@angular/core';
+import {Injectable, LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
@@ -18,9 +18,6 @@ import {ServicesFilterPipe} from './business/components/services/services-filter
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NavbarComponent} from './public-layout/legacy/navbar/navbar.component';
-import {
-  BookingSelectServicesComponent
-} from './public-layout/booking/booking-select-services/booking-select-services.component';
 import {FilterByCategoryPipe} from './public-layout/legacy/filter-by-subcategory.pipe';
 import {BookingDatePickerComponent} from './public-layout/booking/booking-date-picker/booking-date-picker.component';
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
@@ -30,7 +27,7 @@ import {DashboardComponent} from './admin/components/dashboard/dashboard.compone
 import {
   BusinessTypeListComponent
 } from './admin/components/business-types/business-type-list/business-type-list.component';
-import {NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage, registerLocaleData} from "@angular/common";
 import {
   BusinessTypeAddComponent
 } from './admin/components/business-types/business-type-add/business-type-add.component';
@@ -95,8 +92,12 @@ import {ProfileComponent} from './registration-login/profile/profile.component';
 import {
   BusinessesWaitingForApprovalComponent
 } from "./admin/components/businesses/businesses-waiting-for-approval/businesses-waiting-for-approval.component";
-import {ConfirmationModalComponent} from "./admin/components/businesses/confirmation-modal/confirmation-modal.component";
-import {BusinessesManagementComponent} from "./admin/components/businesses/businesses-management/businesses-management.component";
+import {
+  ConfirmationModalComponent
+} from "./admin/components/businesses/confirmation-modal/confirmation-modal.component";
+import {
+  BusinessesManagementComponent
+} from "./admin/components/businesses/businesses-management/businesses-management.component";
 import {BusinessesListComponent} from "./admin/components/businesses/businesses-list/businesses-list.component";
 import {
   BusinessRegistrationComponent
@@ -108,6 +109,18 @@ import {
   EmployeeWorkingHoursComponent
 } from "./business/components/employees/employee-working-hours/employee-working-hours.component";
 import {EmployeeDetailsComponent} from "./business/components/employees/employee-details/employee-details.component";
+import {
+  ServiceEmployeePairComponent
+} from "./public-layout/booking/service-employee-pair/service-employee-pair.component";
+import {BookingManagementComponent} from "./public-layout/booking/booking-management/booking-management.component";
+import {AvailableSlotsComponent} from "./public-layout/booking/available-slots/available-slots.component";
+import {MatOption, MatSelect} from "@angular/material/select";
+import localeSrLatn from '@angular/common/locales/sr-Latn';
+import {
+  BookingConfirmationComponent
+} from "./public-layout/booking/booking-confirmation/booking-confirmation.component";
+
+registerLocaleData(localeSrLatn, 'sr-Latn');
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -132,7 +145,6 @@ export class XhrInterceptor implements HttpInterceptor {
     ServicesFilterPipe,
     BusinessProfileComponent,
     NavbarComponent,
-    BookingSelectServicesComponent,
     FilterByCategoryPipe,
     BookingDatePickerComponent,
     ConfirmBookingComponent,
@@ -173,7 +185,11 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessRegistrationComponent,
     EmployeeManagementComponent,
     EmployeeDetailsComponent,
-    EmployeeWorkingHoursComponent
+    EmployeeWorkingHoursComponent,
+    ServiceEmployeePairComponent,
+    BookingManagementComponent,
+    AvailableSlotsComponent,
+    BookingConfirmationComponent,
   ],
   imports: [
     BrowserModule,
@@ -195,11 +211,16 @@ export class XhrInterceptor implements HttpInterceptor {
     MatRadioModule,
     MatExpansionModule,
     MatButtonToggleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelect,
+    MatOption
   ],
-  providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,}],
+
+  providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,},
+    {provide: LOCALE_ID, useValue: 'sr-Latn'}],
   exports: [
-    BusinessesWaitingForApprovalComponent
+    BusinessesWaitingForApprovalComponent,
+    BookingDatePickerComponent
   ],
   bootstrap: [AppComponent]
 })

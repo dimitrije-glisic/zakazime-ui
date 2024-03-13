@@ -8,5 +8,6 @@ export interface Account {
   roleId: number;
   createdOn: string;
   lastLogin: string;
+  phone: string;
 }
 

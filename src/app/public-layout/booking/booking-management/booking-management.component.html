@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row app-header">
+    <div class="col-12">
+      <h1>ZakaziMe</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <app-booking-date-picker
+        (dateSelected)="onDateSelected($event)">
+      </app-booking-date-picker>
+
+      <app-available-slots
+        [availableSlots]="availableSlots"
+        (onSelectedTime)="onTimeSelected($event)">
+      </app-available-slots>
+
+    </div>
+
+    <div class="col-md-5">
+      <app-service-employee-pair
+        [service]="this.selectedService"
+        [employees]="employeesForService"
+        [business]="business"
+        (employeeSelected)="onEmployeeSelected($event)">
+      </app-service-employee-pair>
+    </div>
+
+  </div>
+</div>

@@ -4,9 +4,6 @@ import {BusinessDashboardComponent} from './business/components/business-dashboa
 import {ServiceManagementComponent} from './business/components/service-management/service-management.component';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {IsBusinessUser} from './is-business-user';
-import {
-  BookingSelectServicesComponent
-} from './public-layout/booking/booking-select-services/booking-select-services.component';
 import {BookingDatePickerComponent} from './public-layout/booking/booking-date-picker/booking-date-picker.component';
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
 import {DashboardComponent} from "./admin/components/dashboard/dashboard.component";
@@ -34,10 +31,12 @@ import {
   EmployeeManagementComponent
 } from "./business/components/employees/employee-management/employee-management.component";
 import {EmployeeDetailsComponent} from "./business/components/employees/employee-details/employee-details.component";
+import {BookingManagementComponent} from "./public-layout/booking/booking-management/booking-management.component";
+import {
+  BookingConfirmationComponent
+} from "./public-layout/booking/booking-confirmation/booking-confirmation.component";
 
 const routes: Routes = [
-  {path: 'booking/:business-name/select-services', component: BookingSelectServicesComponent},
-
   {path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent},
 
   {path: 'booking/:business-name/confirm-booking', component: ConfirmBookingComponent},
@@ -83,6 +82,10 @@ const routes: Routes = [
   {path: 'discover/:city/:business-type/:category', component: BusinessesOverviewComponent},
 
   {path: 'business/:city/:business-name', component: BusinessMainPageComponent},
+
+  {path: 'business/:city/:business-name/checkout/cart', component: BookingManagementComponent},
+
+  {path: 'business/:city/:business-name/checkout/confirmation', component: BookingConfirmationComponent},
 
   // otherwise redirect to home
   {path: '**', redirectTo: ''}

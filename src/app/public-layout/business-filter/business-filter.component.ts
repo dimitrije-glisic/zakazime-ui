@@ -14,7 +14,6 @@ export class BusinessFilterComponent {
   selectedCity: string | undefined;
 
   @Input() set cityFilter(city: string | undefined) {
-    console.log('in cityFilter setter', city)
     this.selectedCity = city;
     this.updateFilterCount();
   }
@@ -22,7 +21,6 @@ export class BusinessFilterComponent {
   selectedBusinessType: BusinessType | undefined;
 
   @Input() set businessTypeFilter(businessType: BusinessType | undefined) {
-    console.log('in businessTypeFilter setter', businessType)
     this.selectedBusinessType = businessType;
     this.updateFilterCount();
   }
@@ -30,7 +28,6 @@ export class BusinessFilterComponent {
   selectedCategory: PredefinedCategory | undefined;
 
   @Input() set categoryFilter(category: PredefinedCategory | undefined) {
-    console.log('in categoryFilter setter', category)
     this.selectedCategory = category;
     this.updateFilterCount();
   }
@@ -57,7 +54,6 @@ export class BusinessFilterComponent {
   }
 
   showFilterModal() {
-    console.log(`all data: ${this.selectedCity}, ${this.selectedBusinessType}, ${this.selectedCategory}, ${this.businessTypes}, ${this.predefinedCategories}`);
     const dialogRef = this.dialog.open(BusinessesFilterModalComponent, {
       width: 'auto',
       // data: {category: category}
@@ -71,7 +67,6 @@ export class BusinessFilterComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

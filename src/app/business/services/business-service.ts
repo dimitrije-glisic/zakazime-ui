@@ -9,6 +9,7 @@ import {MessageResponse} from "../../interfaces/message-response";
 import {UserDefinedCategory} from "../../interfaces/user-defined-category";
 import {UserDefinedCategoryService} from "./user-defined-category.service";
 import {BusinessRichObject} from "../../interfaces/business-rich-object";
+import {Employee} from "../../interfaces/employee";
 
 @Injectable({
   providedIn: 'root'
@@ -147,10 +148,19 @@ export class BusinessService {
   }
 
   loadRichBusinessObject(city: string, businessName: string): Observable<BusinessRichObject> {
-    return this.http.get<BusinessRichObject>('/api/business/full' + city + '/' + businessName);
+    return this.http.get<BusinessRichObject>('/api/business/full/' + city + '/' + businessName);
   }
 
   submitBusiness(id: number) {
     return this.http.post<MessageResponse>('/api/business/' + id + '/submit', {});
   }
+
+  getEmployees(businessId: number) {
+    return this.http.get<Employee[]>('/api/business/' + businessId + '/employees/all');
+  }
+
+  getEmployeesForService(businessId: number, serviceId: number) {
+    return this.http.get<Employee[]>('/api/business/' + businessId + '/employees/for-service/' + serviceId);
+  }
+
 }

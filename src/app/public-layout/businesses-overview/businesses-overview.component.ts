@@ -39,8 +39,6 @@ export class BusinessesOverviewComponent implements OnInit {
       this.businessTypeFilterString = businessType;
       this.categoryFilterString = category;
 
-      console.log(`city: ${city}, businessType: ${businessType}, category: ${category}`);
-
       this.loadBusinesses(city, businessType, category);
       this.loadBusinessTypesAndCategories();
 

@@ -1,0 +1,18 @@
+.time-slot-card {
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.3s ease;
+  width: 80px; /* Adjust the width as needed */
+  margin: 2px auto; /* Decrease the margin for less space around cards */
+}
+
+.time-slot-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.time-slot-card .card-body {
+  text-align: center;
+  font-weight: bold;
+  padding: 5px; /* Reduce padding for less space inside the card */
+  font-size: 14px; /* Adjust the font size as needed */
+}

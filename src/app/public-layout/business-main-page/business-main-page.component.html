@@ -4,6 +4,9 @@
     <app-navbar></app-navbar>
   </div>
 
+  <a routerLink="checkout/cart" class="btn btn-primary">Booking management</a>
+
+
     <div class="row">
         <div class="col-md-9">
             <h2 class="pricing-header-title">Cenovnik salona
@@ -28,7 +31,9 @@
                 </div>
                 <div class="row service-entry" *ngFor="let service of entry.value |  servicesFilter:textFilter">
                     <div class="col-sm-1">
-                        <input type="checkbox" name="service" value="{{service.id}}" (change)="selectService(service)">
+                        <input type="checkbox" name="service" value="{{service.id}}"
+                               [checked]="isServiceSelected(service.id)"
+                               (change)="selectService(service)">
                     </div>
                     <div class="col-md-5">
                         <h5 class="mb-1">{{ service.title }}</h5>
@@ -52,4 +57,10 @@
             </nav>
         </div>
     </div>
+
+
+  <a routerLink="checkout/cart" class="btn btn-primary">Booking management</a>
+
+
 </div>
+

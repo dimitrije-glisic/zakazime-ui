@@ -1,0 +1,11 @@
+<div class="col-12">
+  <div class="row">
+    <div *ngFor="let slot of availableSlots" class="col-md-1 ms-2">
+      <div class="time-slot-card card" (click)="onTimeSelected(slot)">
+        <div class="card-body">
+          {{ slot }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
