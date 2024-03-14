@@ -124,6 +124,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {
   AppointmentCalendarComponent
 } from "./business/components/calendar/appointment-calendar/appointment-calendar.component";
+import {CalendarHeaderComponent} from "./business/components/calendar/calendar-header/calendar-header.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -195,7 +196,8 @@ export class XhrInterceptor implements HttpInterceptor {
     BookingManagementComponent,
     AvailableSlotsComponent,
     BookingConfirmationComponent,
-    AppointmentCalendarComponent
+    AppointmentCalendarComponent,
+    CalendarHeaderComponent
   ],
   imports: [
     BrowserModule,
