@@ -1,6 +1,14 @@
 <!--<calendar-header [(view)]="view" [(viewDate)]="viewDate">-->
 <!--</calendar-header>-->
 
+<div class="employee-container">
+  <div *ngFor="let employee of business?.employees; let i = index">
+    <div class="employee-tile" [class.selected]="selectedEmployee === employee" (click)="onEmployeeClick(employee)">
+      <div class="employee-name">{{ employee.name }}</div>
+    </div>
+  </div>
+</div>
+
 <div [ngSwitch]="view">
   <mwl-calendar-month-view
     *ngSwitchCase="'month'"
@@ -12,8 +20,9 @@
     *ngSwitchCase="'week'"
     [viewDate]="viewDate"
     [events]="events"
+    [daysInWeek]="5"
     [hourSegments]="4"
-    [dayStartHour]="6"
+    [dayStartHour]="7"
   >
   </mwl-calendar-week-view>
   <mwl-calendar-day-view
