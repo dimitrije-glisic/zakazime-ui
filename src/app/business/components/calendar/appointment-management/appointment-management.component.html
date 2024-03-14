@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="appointment-list">
+        <h3>Potvrdite zakazivanja</h3>
+        <div class="list-group">
+          <div *ngFor="let a of waitingAppointments" class="list-group-item">
+            <div class="appointment-info">
+              <span class="service-title">{{ a.service.title }}</span> -
+              <span class="appointment-date">{{ a.appointment.startTime | date: 'dd.MM' }}</span>
+              |
+              <span class="appointment-time">{{ a.appointment.startTime | date: 'HH:mm' }}</span>
+            </div>
+            <div class="customer-info">
+              <span class="customer-name">{{a.customer.firstName}} {{a.customer.lastName}}</span>,
+              <span class="employee-name">{{a.employee.name}}</span>
+            </div>
+            <div class="appointment-actions">
+              <button class="btn btn-danger btn-sm" (click)="cancelAppointment(a)">Otkazi</button>
+              <button class="btn btn-primary btn-sm" (click)="confirmAppointment(a)">Potvrdi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <app-appointment-calendar
+        [_allAppointments]="appointmentsForCalendar"
+      >
+
+      </app-appointment-calendar>
+    </div>
+  </div>
+</div>

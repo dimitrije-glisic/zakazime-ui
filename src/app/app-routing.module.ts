@@ -38,6 +38,9 @@ import {
 import {
   AppointmentCalendarComponent
 } from "./business/components/calendar/appointment-calendar/appointment-calendar.component";
+import {
+  AppointmentManagementComponent
+} from "./business/components/calendar/appointment-management/appointment-management.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent},
@@ -52,7 +55,8 @@ const routes: Routes = [
       {path: 'services', component: ServiceManagementComponent},
       {path: 'employees', component: EmployeeManagementComponent},
       {path: 'employees/:employeeId', component: EmployeeDetailsComponent},
-      {path: 'appointments', component: AppointmentCalendarComponent}
+      {path: 'appointments', component: AppointmentCalendarComponent},
+      {path: 'appointmentsNew', component: AppointmentManagementComponent}
     ]
   },
 

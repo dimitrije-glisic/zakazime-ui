@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent, CalendarView} from 'angular-calendar';
 import {EventColor} from 'calendar-utils';
 import {AppointmentService} from "../../../../public-layout/booking/services/appointment.service";
-import {Appointment} from "../../../../interfaces/appointment";
 import {BusinessService} from "../../../services/business-service";
 import {Business} from "../../../../interfaces/business";
 import {BusinessRichObject} from "../../../../interfaces/business-rich-object";
 import {Employee} from "../../../../interfaces/employee";
+import {AppointmentRichObject} from "../../../../interfaces/appointment-rich-object";
 
 @Component({
   selector: 'app-appointment-calendar',
@@ -21,24 +21,15 @@ export class AppointmentCalendarComponent implements OnInit {
 
   viewDate: Date = new Date();
 
-  yellowColor: EventColor = {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  };
-
-  blueColor: EventColor = {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  };
-
-  redColor: EventColor = {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  };
-
   events: CalendarEvent[] = [];
-  allAppointments: Appointment[] = [];
-  showingAppointments: Appointment[] = [];
+  allAppointments: AppointmentRichObject[] = [];
+
+  @Input() set _allAppointments(value: AppointmentRichObject[]) {
+    this.allAppointments = value;
+    this.reloadEvents();
+  }
+
+  showingAppointments: AppointmentRichObject[] = [];
   selectedEmployee: Employee | undefined;
   business: BusinessRichObject | undefined;
 
@@ -74,18 +65,34 @@ export class AppointmentCalendarComponent implements OnInit {
   }
 
   private reloadEvents() {
-    this.showingAppointments = this.allAppointments.filter((appointment: Appointment) => {
-      return this.selectedEmployee?.id === appointment.employeeId;
+    this.showingAppointments = this.allAppointments.filter((appointment: AppointmentRichObject) => {
+      return this.selectedEmployee?.id === appointment.appointment.employeeId;
     });
 
-    this.events = this.showingAppointments.map((appointment: Appointment) => {
+    this.events = this.showingAppointments.map((appointment: AppointmentRichObject) => {
       return {
-        start: new Date(appointment.startTime),
-        end: new Date(appointment.endTime),
-        title: 'Appointment done by ' + appointment.employeeId,
-        color: appointment.employeeId % 2 === 0 ? this.yellowColor : this.blueColor
+        start: new Date(appointment.appointment.startTime),
+        end: new Date(appointment.appointment.endTime),
+        title: 'Appointment done by ' + appointment.employee.name,
+        color: this.getColorForStatus(appointment.appointment.status)
       };
     });
+  }
+
+  private getColorForStatus(status: string) {
+    switch (status) {
+      case 'SCHEDULED':
+        return {primary: '#1e90ff', secondary: '#D1E8FF'} as EventColor;
+      case 'CONFIRMED':
+        return {primary: '#e3bc08', secondary: '#FDF1BA'} as EventColor;
+      case 'CANCELLED':
+        return {primary: '#ad2121', secondary: '#FAE3E3'} as EventColor;
+      case 'COMPLETED': //GREEN
+        return {primary: '#008000', secondary: '#32CD32'} as EventColor;
+      default:
+        return {primary: '#1e90ff', secondary: '#D1E8FF'} as EventColor;
+    }
+
   }
 
   onEmployeeClick(employee: Employee): void {

@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {SingleServiceAppointmentRequest} from "../../../interfaces/single-service-appointment-request";
 import {MultiServiceAppointmentRequest} from "../../../interfaces/multi-service-appointment-request";
 import {formatDate} from "@angular/common";
+import {AppointmentRichObject} from "../../../interfaces/appointment-rich-object";
+import {Appointment} from "../../../interfaces/appointment";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +31,25 @@ export class AppointmentService {
 
   public getAllAppointments(businessId: number, date: Date) {
     const dateStr = formatDate(date, 'yyyy-MM-dd', 'en-US');
-    return this.http.get(`${this.basePath}/${businessId}/all?date=${dateStr}`);
+    return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/all-full-info?date=${dateStr}`);
   }
 
+  confirmAppointment(appointment: Appointment) {
+    const appointmentRequestContext = {
+      businessId: appointment.businessId,
+      employeeId: appointment.employeeId,
+      appointmentId: appointment.id
+    }
+    console.log('confirming appointment', appointmentRequestContext);
+    return this.http.post(`${this.basePath}/confirm`, appointmentRequestContext);
+  }
+
+  cancelAppointment(appointment: Appointment) {
+    const appointmentRequestContext = {
+      businessId: appointment.businessId,
+      employeeId: appointment.employeeId,
+      appointmentId: appointment.id
+    }
+    return this.http.post(`${this.basePath}/cancel`, appointmentRequestContext);
+  }
 }
