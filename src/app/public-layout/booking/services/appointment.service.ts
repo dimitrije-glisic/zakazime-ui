@@ -31,7 +31,8 @@ export class AppointmentService {
 
   public getAllAppointments(businessId: number, date: Date) {
     const dateStr = formatDate(date, 'yyyy-MM-dd', 'en-US');
-    return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/all-full-info?date=${dateStr}`);
+    console.log('Getting all appointments for business', businessId, 'on date', dateStr);
+    return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/all-full-info?fromDate=${dateStr}`);
   }
 
   confirmAppointment(appointment: Appointment) {

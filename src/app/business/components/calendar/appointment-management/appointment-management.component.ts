@@ -34,8 +34,7 @@ export class AppointmentManagementComponent implements OnInit {
       this.waitingAppointments = this.allAppointments
         .filter((appointment: AppointmentRichObject) => appointment.appointment.status === 'SCHEDULED')
         .filter((appointment: AppointmentRichObject) => this.fromStringDate(appointment.appointment.startTime) > new Date());
-      this.appointmentsForCalendar = this.allAppointments = this.allAppointments.filter((appointment: AppointmentRichObject) =>
-        appointment.appointment.status !== 'SCHEDULED' || this.fromStringDate(appointment.appointment.startTime) < new Date());
+      this.appointmentsForCalendar = this.allAppointments.filter((appointment: AppointmentRichObject) => !this.waitingAppointments.includes(appointment));
     });
   }
 

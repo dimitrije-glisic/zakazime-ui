@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent, CalendarView} from 'angular-calendar';
 import {EventColor} from 'calendar-utils';
 import {AppointmentService} from "../../../../public-layout/booking/services/appointment.service";
@@ -15,7 +15,7 @@ import {AppointmentRichObject} from "../../../../interfaces/appointment-rich-obj
   encapsulation: ViewEncapsulation.None,
   styleUrl: './appointment-calendar.component.css'
 })
-export class AppointmentCalendarComponent implements OnInit {
+export class AppointmentCalendarComponent implements OnInit, OnChanges {
 
   view: CalendarView = CalendarView.Week;
 
@@ -23,12 +23,6 @@ export class AppointmentCalendarComponent implements OnInit {
 
   events: CalendarEvent[] = [];
   allAppointments: AppointmentRichObject[] = [];
-
-  @Input() set _allAppointments(value: AppointmentRichObject[]) {
-    this.allAppointments = value;
-    this.reloadEvents();
-  }
-
   showingAppointments: AppointmentRichObject[] = [];
   selectedEmployee: Employee | undefined;
   business: BusinessRichObject | undefined;
@@ -36,8 +30,11 @@ export class AppointmentCalendarComponent implements OnInit {
   constructor(private businessService: BusinessService, private appointmentService: AppointmentService) {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
+
   ngOnInit(): void {
-    const date = new Date();
     this.businessService.getBusinessCached().subscribe((business: Business | undefined) => {
       if (business) {
         this.loadData(business.id);
@@ -48,7 +45,7 @@ export class AppointmentCalendarComponent implements OnInit {
   }
 
   private loadData(businessId: number) {
-    const date = new Date();
+    const date = this.viewDate;
     this.businessService.getBusinessRichObjectCached(businessId).subscribe((business: BusinessRichObject | undefined) => {
       this.business = business;
       this.selectedEmployee = business?.employees[0];
@@ -57,6 +54,7 @@ export class AppointmentCalendarComponent implements OnInit {
   }
 
   private loadAppointments(businessId: number, date: Date) {
+    console.log('Loading appointments for business', businessId, 'on date', date);
     this.appointmentService.getAllAppointments(businessId, date).subscribe((appointments: any) => {
       this.allAppointments = appointments;
       this.reloadEvents();
@@ -100,4 +98,9 @@ export class AppointmentCalendarComponent implements OnInit {
     this.reloadEvents();
   }
 
+  onViewDateChange($event: Date) {
+    this.viewDate = $event;
+    console.log('View date changed', $event);
+    this.loadAppointments(this.business!.business.id, $event);
+  }
 }
