@@ -5,7 +5,6 @@ import {Observable} from "rxjs";
 import {EmployeeRichObject} from "../../interfaces/employee-rich-object";
 import {MessageResponse} from "../../interfaces/message-response";
 import {Service} from "../../interfaces/service";
-import {WorkingHours} from "../../interfaces/working-hours";
 import {WorkingHoursRequest} from "../../interfaces/working-hours-request";
 
 @Injectable({

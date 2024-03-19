@@ -53,4 +53,9 @@ export class AppointmentService {
     }
     return this.http.post(`${this.basePath}/cancel`, appointmentRequestContext);
   }
+
+  getAppointmentsForCustomer(businessId: number, customerId: number) {
+    return this.http.get<AppointmentRichObject[]>(`${this.basePath}/${businessId}/customer/${customerId}`);
+  }
+
 }

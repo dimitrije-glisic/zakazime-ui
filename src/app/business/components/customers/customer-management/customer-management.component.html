@@ -1,0 +1,58 @@
+<div>
+  <h3>Dodajte novog klijenta</h3>
+
+  <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="mb-3">
+
+    <div class="mb-3">
+      <label for="fname" class="form-label">Ime:</label>
+      <input id="fname" type="text" class="form-control" formControlName="fname">
+    </div>
+
+    <div class="mb-3">
+      <label for="lname" class="form-label">Prezime:</label>
+      <input id="lname" type="text" class="form-control" formControlName="lname">
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Telefon:</label>
+      <input id="phone" type="text" class="form-control" formControlName="phone">
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input id="email" type="text" class="form-control" formControlName="email">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Dodaj novog klijenta</button>
+  </form>
+
+</div>
+
+<div class="mt-5">
+  <h3>Klijenti</h3>
+
+  <input type="text" class="form-control mt-3 mb-3" placeholder="Pretraži klijente po imenu ili broju telefona..." [(ngModel)]="searchTerm" (keyup)="onSearch()">
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Ime</th>
+      <th>Prezime</th>
+      <th>Telefon</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let customer of filteredCustomers" (click)="onCustomerClick(customer)">
+      <td>{{ customer.firstName }}</td>
+      <td>{{ customer.lastName }}</td>
+      <td>{{ customer.phone }}</td>
+      <td>{{ customer.email }}</td>
+      <td>
+        <button class="btn btn-info small" (click)="detailsCustomer(customer)">Detalji</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
