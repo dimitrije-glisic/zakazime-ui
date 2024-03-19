@@ -131,6 +131,9 @@ import {
 import {CustomerManagementComponent} from "./business/components/customers/customer-management/customer-management.component";
 import {CustomerDetailsComponent} from "./business/components/customers/customer-details/customer-details.component";
 import {CustomerPageComponent} from "./business/components/customers/customer-page/customer-page.component";
+import {
+  CreateAppointmentModalComponent
+} from "./business/components/calendar/create-appointment-modal/create-appointment-modal.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -208,6 +211,7 @@ export class XhrInterceptor implements HttpInterceptor {
     CustomerManagementComponent,
     CustomerPageComponent,
     CustomerDetailsComponent,
+    CreateAppointmentModalComponent
   ],
   imports: [
     BrowserModule,

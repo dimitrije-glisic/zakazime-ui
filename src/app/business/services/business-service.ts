@@ -180,4 +180,8 @@ export class BusinessService {
     return this.http.get<Employee[]>('/api/business/' + businessId + '/employees/for-service/' + serviceId);
   }
 
+  getServicesForEmployee(businessId: number, employeeId: number) {
+    return this.http.get<Service[]>('/api/business/' + businessId + '/services/for-employee/' + employeeId);
+  }
+
 }
