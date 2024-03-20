@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {CalendarEvent, CalendarView} from 'angular-calendar';
 import {EventColor} from 'calendar-utils';
 import {AppointmentService} from "../../../../public-layout/booking/services/appointment.service";

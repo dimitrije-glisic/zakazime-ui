@@ -3,6 +3,8 @@ import {AppointmentService} from "../../../../public-layout/booking/services/app
 import {BusinessService} from "../../../services/business-service";
 import {Business} from "../../../../interfaces/business";
 import {AppointmentRichObject} from "../../../../interfaces/appointment-rich-object";
+import {MatDialog} from "@angular/material/dialog";
+import {CreateAppointmentModalComponent} from "../create-appointment-modal/create-appointment-modal.component";
 
 @Component({
   selector: 'app-appointment-management',
@@ -17,7 +19,7 @@ export class AppointmentManagementComponent implements OnInit {
 
   business: Business | undefined;
 
-  constructor(private businessService: BusinessService, private appointmentService: AppointmentService) {
+  constructor(private businessService: BusinessService, private appointmentService: AppointmentService, private matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -53,5 +55,17 @@ export class AppointmentManagementComponent implements OnInit {
       this.loadAppointments(this.business!.id, new Date());
     });
   }
+
+  openCreateAppointmentModal() {
+    const dialogRef = this.matDialog.open(CreateAppointmentModalComponent, {
+      data: {businessId: this.business!.id}
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadAppointments(this.business!.id, new Date());
+    });
+
+  }
+
 
 }

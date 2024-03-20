@@ -5,6 +5,8 @@ import {Service} from "../../../../interfaces/service";
 import {AppointmentService} from "../../../../public-layout/booking/services/appointment.service";
 import {SingleServiceAppointmentRequest} from "../../../../interfaces/single-service-appointment-request";
 import {Employee} from "../../../../interfaces/employee";
+import {format} from "date-fns";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-create-appointment-modal',
@@ -12,7 +14,7 @@ import {Employee} from "../../../../interfaces/employee";
   styleUrl: './create-appointment-modal.component.css'
 })
 export class CreateAppointmentModalComponent implements OnInit {
-  // form: FormGroup;
+  appointmentForm: FormGroup;
 
   businessId: number | undefined;
 
@@ -21,10 +23,7 @@ export class CreateAppointmentModalComponent implements OnInit {
   allEmployees: Employee[] = [];
   selectableEmployees: Employee[] = [];
 
-  selectedDate: Date = new Date();
   selectedService: Service | undefined;
-  selectedTime: string | undefined;
-  selectedEmployee: Employee | undefined;
 
   constructor(
     private dialogRef: MatDialogRef<CreateAppointmentModalComponent>,
@@ -33,7 +32,15 @@ export class CreateAppointmentModalComponent implements OnInit {
     private appointmentService: AppointmentService) {
 
     this.businessId = data.businessId;
-
+    // Initialize the form group with form controls
+    this.appointmentForm = new FormGroup({
+      date: new FormControl(null, Validators.required),
+      service: new FormControl(null, Validators.required),
+      price: new FormControl({value: '', disabled: true}), // if the price is not editable
+      startTime: new FormControl(null, Validators.required),
+      endTime: new FormControl({value: '', disabled: true}), // end time can be calculated
+      employee: new FormControl(null, Validators.required)
+    });
   }
 
   ngOnInit(): void {
@@ -47,44 +54,34 @@ export class CreateAppointmentModalComponent implements OnInit {
     });
   }
 
-  save() {
-    const request: SingleServiceAppointmentRequest = {
-      businessId: this.businessId!,
-      employeeId: this.selectedEmployee!.id,
-      serviceId: this.selectedService!.id,
-      customerData: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: ''
-      },
-      startTime: this.selectedDate.toISOString() + 'T' + this.selectedTime
-    };
+  onServiceChange() {
+    const serviceId = this.appointmentForm.get('service')?.value.id;
+    this.selectedService = this.allServices.find(s => s.id === serviceId);
+    console.log('Service id:', serviceId);
+    this.reloadSelectableEmployees(serviceId);
+    this.setPrice();
+    this.setEndTime();
+  }
 
-    this.appointmentService.createAppointment(request).subscribe(() => {
-      this.dialogRef.close();
+
+  setPrice() {
+    this.appointmentForm.patchValue({
+      price: this.selectedService?.price
     });
-
-  }
-
-  onDateChange(event: Date) {
-    this.selectedDate = event;
-  }
-
-  onServiceChange(event: Service) {
-    this.selectedService = event;
-    this.reloadSelectableEmployees(event.id);
   }
 
   reloadSelectableEmployees(serviceId: number) {
     this.businessService.getEmployeesForService(this.businessId!, serviceId).subscribe(employees => {
       this.selectableEmployees = employees;
+      this.appointmentForm.patchValue({
+        employee: employees[0]
+      });
     });
   }
 
-  onEmployeeChange(event: Employee) {
-    this.selectedEmployee = event;
-    this.reloadSelectableServices(event.id);
+  onEmployeeChange() {
+    const employeeId = this.appointmentForm.get('employee')?.value.id;
+    this.reloadSelectableServices(+employeeId);
   }
 
   reloadSelectableServices(employeeId: number) {
@@ -93,9 +90,62 @@ export class CreateAppointmentModalComponent implements OnInit {
     });
   }
 
-  onTimeChange(event: string) {
-    this.selectedTime = event;
+  onStartTimeChange() {
+    const startTime = this.appointmentForm.get('startTime')?.value;
+    console.log('Start time:', startTime);
+    this.setEndTime();
   }
+
+  setEndTime() {
+    const service = this.appointmentForm.get('service')?.value;
+    const date = this.appointmentForm.get('date')?.value;
+    const startTime = this.appointmentForm.get('startTime')?.value;
+
+    if (service && date && startTime) {
+      const serviceDuration = service.avgDuration;
+      console.log('Service duration:', serviceDuration);
+      // Assuming date is in 'YYYY-MM-DD' format if it's coming from a date input
+      const startTimeDate = new Date(`${date}T${startTime}`);
+      const endTime = new Date(startTimeDate.getTime() + serviceDuration * 60000);
+
+      // Ensure that you have imported the format function correctly
+      // and that the endTime is a valid date object.
+      if (!isNaN(endTime.getTime())) {
+        this.appointmentForm.patchValue({
+          endTime: format(endTime, 'HH:mm')
+        });
+      } else {
+        // Handle invalid date object here
+        console.error('Invalid end time calculated');
+      }
+    }
+  }
+
+  save() {
+    if (this.appointmentForm.valid) {
+      const formValue = this.appointmentForm.value;
+      const date = formValue.date;
+      const startTime = formValue.startTime;
+      const startTimeDate = new Date(`${date}T${startTime}`);
+      const request: SingleServiceAppointmentRequest = {
+        businessId: this.businessId!,
+        employeeId: formValue.employee.id,
+        serviceId: formValue.service.id,
+        customerData: {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: ''
+        },
+        startTime: format(startTimeDate, 'dd-MM-yyyy HH:mm'),
+      };
+
+      this.appointmentService.createAppointment(request).subscribe(() => {
+        this.dialogRef.close();
+      });
+    }
+  }
+
 
   close() {
     this.dialogRef.close();
