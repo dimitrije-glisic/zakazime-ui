@@ -1,50 +1,30 @@
 <div class="container mt-3 mb-3">
-  <form [formGroup]="appointmentForm" (ngSubmit)="save()">
 
-    <!-- Date row -->
-    <div class="form-row mb-3">
-      <div class="col-md-12">
-        <label for="inputDate">Datum</label>
-        <input type="date" class="form-control" id="inputDate" formControlName="date">
-      </div>
+  <div class="row">
+    <div class="col-md-7">
+      <h3>Novi termin</h3>
+      <app-create-appointment-form
+        [businessId]="businessId"
+        [allServices]="allServices"
+        (appointmentDataOutput)="create($event)">
+      </app-create-appointment-form>
+
     </div>
 
-    <!-- Service and Price row -->
-    <div class="form-row mb-3">
-      <div class="col-md-8">
-        <label for="serviceSelect">Usluga</label>
-        <select id="serviceSelect" class="form-control" formControlName="service" (change)="onServiceChange()">
-          <option *ngFor="let service of selectableServices" [ngValue]="service">{{ service.title }}</option>
-        </select>
-      </div>
-      <div class="col-md-4">
-        <label for="inputPrice">Cena</label>
-        <input type="text" class="form-control" id="inputPrice" formControlName="price" readonly>
-      </div>
+    <div class="col-md-5">
+      <h3>Klijent</h3>
+      <app-search-customers
+        (customerSelected)="onCustomerSelected($event)">
+      </app-search-customers>
+
+
+      <ng-container *ngIf="selectedCustomer">
+        <h4 class="mt-3">Izabrani klijent</h4>
+        <app-customer-details
+          [customer]="selectedCustomer">
+        </app-customer-details>
+      </ng-container>
     </div>
 
-    <!-- Start Time, End Time, and Employee row -->
-    <div class="form-row mb-3">
-      <div class="col-md-3">
-        <label for="startTime">Od</label>
-        <input type="time" class="form-control" id="startTime" formControlName="startTime" (change)="onStartTimeChange()">
-      </div>
-      <div class="col-md-3">
-        <label for="endTime">Do</label>
-        <input type="text" class="form-control" id="endTime" formControlName="endTime" readonly>
-      </div>
-      <div class="col-md-6">
-        <label for="employeeSelect">Zaposleni</label>
-        <select id="employeeSelect" class="form-control" formControlName="employee" (change)="onEmployeeChange()">
-          <option *ngFor="let employee of selectableEmployees" [ngValue]="employee">{{ employee.name }}</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Action buttons -->
-    <div class="form-group d-flex justify-content-start">
-      <button type="submit" class="btn btn-primary" [disabled]="!appointmentForm.valid">Sacuvaj</button>
-    </div>
-
-  </form>
+  </div>
 </div>

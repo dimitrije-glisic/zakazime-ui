@@ -58,7 +58,9 @@ export class AppointmentManagementComponent implements OnInit {
 
   openCreateAppointmentModal() {
     const dialogRef = this.matDialog.open(CreateAppointmentModalComponent, {
-      data: {businessId: this.business!.id}
+      data: {businessId: this.business!.id},
+      width: '60%',
+      height: '80%'
     });
 
     dialogRef.afterClosed().subscribe(() => {

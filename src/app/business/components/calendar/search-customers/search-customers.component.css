@@ -1,0 +1,24 @@
+/* Styles for the search bar container */
+.search-bar-container {
+  position: relative;
+}
+
+/* Styles for the list-group */
+.search-results {
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  max-height: 200px; /* Set a max height for the list with overflow */
+  overflow-y: auto; /* Enable scroll if the list is too long */
+}
+
+/* Styles for each list item */
+.list-group-item {
+  cursor: pointer; /* Changes the cursor to a pointer */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+/* Styles for list item on hover */
+.list-group-item:hover {
+  background-color: #f8f9fa; /* Light grey background on hover */
+}

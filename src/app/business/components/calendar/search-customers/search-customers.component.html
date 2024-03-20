@@ -1,0 +1,9 @@
+<div class="search-bar-container">
+  <input id="customerSearch" type="text" class="form-control" placeholder="Nađi mušteriju..."
+         (input)="onSearchChange($event)">
+  <ul class="list-group search-results">
+    <li class="list-group-item" *ngFor="let customer of filteredCustomers" (click)="onCustomerSelect(customer)">
+      {{ customer.firstName }} {{ customer.lastName }} - {{ customer.phone }}
+    </li>
+  </ul>
+</div>
