@@ -5,6 +5,8 @@ import {MultiServiceAppointmentRequest} from "../../../interfaces/multi-service-
 import {formatDate} from "@angular/common";
 import {AppointmentRichObject} from "../../../interfaces/appointment-rich-object";
 import {Appointment} from "../../../interfaces/appointment";
+import {Observable} from "rxjs";
+import {AppointmentRequestContext} from "../../../interfaces/appointment-request-context";
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +58,35 @@ export class AppointmentService {
 
   getAppointmentsForCustomer(businessId: number, customerId: number) {
     return this.http.get<AppointmentRichObject[]>(`${this.basePath}/${businessId}/customer/${customerId}`);
+  }
+
+  getAppointmentFull(businessId: number, appointmentId: number): Observable<AppointmentRichObject> {
+    return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/${appointmentId}/full`);
+  }
+
+  updateStatus(businessId: number, employeeId: number, appointmentId: number, status: string) {
+    const request: AppointmentRequestContext = {
+      businessId: businessId,
+      employeeId: employeeId,
+      appointmentId: appointmentId
+    }
+    let action = '';
+    switch (status) {
+      case 'confirmed':
+        action = 'confirm';
+        break;
+      case 'cancelled':
+        action = 'cancel';
+        break;
+      case 'noshow':
+        action = 'no-show';
+        break;
+      default:
+        throw new Error('Invalid status');
+    }
+    const url = `${this.basePath}/${action}`;
+
+    return this.http.post(url, request);
   }
 
 }

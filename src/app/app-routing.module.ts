@@ -62,8 +62,7 @@ const routes: Routes = [
       {path: 'employees/:employeeId', component: EmployeeDetailsComponent},
       {path: 'customers', component: CustomerManagementComponent},
       {path: 'customers/:customerId', component: CustomerPageComponent},
-      {path: 'appointments', component: AppointmentCalendarComponent},
-      {path: 'appointmentsNew', component: AppointmentManagementComponent}
+      {path: 'appointments', component: AppointmentManagementComponent}
     ]
   },
 

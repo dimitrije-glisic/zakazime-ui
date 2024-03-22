@@ -138,6 +138,9 @@ import {SearchCustomersComponent} from "./business/components/calendar/search-cu
 import {
   CreateAppointmentFormComponent
 } from "./business/components/calendar/create-appointment-form/create-appointment-form.component";
+import {
+  AppointmentInfoModalComponent
+} from "./business/components/calendar/appointment-info-modal/appointment-info-modal.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -217,7 +220,8 @@ export class XhrInterceptor implements HttpInterceptor {
     CustomerDetailsComponent,
     CreateAppointmentModalComponent,
     SearchCustomersComponent,
-    CreateAppointmentFormComponent
+    CreateAppointmentFormComponent,
+    AppointmentInfoModalComponent
   ],
   imports: [
     BrowserModule,

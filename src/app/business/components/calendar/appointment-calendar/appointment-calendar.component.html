@@ -4,7 +4,7 @@
 </app-calendar-header>
 
 <div class="employee-container">
-  <div *ngFor="let employee of business?.employees; let i = index">
+  <div *ngFor="let employee of businessData?.employees; let i = index">
     <div class="employee-tile" [class.selected]="selectedEmployee === employee" (click)="onEmployeeClick(employee)">
       <div class="employee-name">{{ employee.name }}</div>
     </div>
@@ -16,16 +16,17 @@
     *ngSwitchCase="'week'"
     [viewDate]="viewDate"
     [events]="events"
-    [daysInWeek]="5"
-    [hourSegments]="2"
+    [daysInWeek]="7"
+    [hourSegments]="4"
     [dayStartHour]="7"
+    (eventClicked)="handleEvent($event.event)"
   >
   </mwl-calendar-week-view>
   <mwl-calendar-day-view
     *ngSwitchCase="'day'"
     [viewDate]="viewDate"
     [events]="events"
-    [hourSegments]="2"
+    [hourSegments]="4"
     [dayStartHour]="7"
   >
   </mwl-calendar-day-view>
