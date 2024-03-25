@@ -58,9 +58,6 @@ export class LoginComponent {
       case 3:
         this.router.navigate(['/manage-business']);
         break;
-      case 2:
-        this.router.navigate(['/home']);
-        break;
       default:
         this.router.navigate(['/']);
         break;

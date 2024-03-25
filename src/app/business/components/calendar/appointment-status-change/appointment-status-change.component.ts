@@ -1,7 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
-import {AppointmentService} from "../../../../public-layout/booking/services/appointment.service";
-import {AppointmentRichObject} from "../../../../interfaces/appointment-rich-object";
 import {Appointment} from "../../../../interfaces/appointment";
 
 interface StatusOption {
@@ -16,15 +13,33 @@ interface StatusOption {
 })
 export class AppointmentStatusChangeComponent {
 
+  @Input() userRole: string | undefined = 'USER';
   @Input() appointment: Appointment | undefined;
   @Output() statusChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  statusOptions: { [key: string]: StatusOption } = {
-    scheduled: {next: ['confirmed', 'cancelled', 'no_show']},
-    confirmed: {next: ['cancelled', 'no_show']},
-    cancelled: {next: []},
-    no_show: {next: []},
-  };
+  // statusOptions: { [key: string]: StatusOption } = {
+  //   scheduled: {next: ['confirmed', 'cancelled', 'no_show']},
+  //   confirmed: {next: ['cancelled', 'no_show']},
+  //   cancelled: {next: []},
+  //   no_show: {next: []},
+  // };
+
+  statusOptions = (): { [key: string]: StatusOption } => {
+    if (this.userRole === 'SERVICE_PROVIDER') {
+      return {
+        scheduled: {next: ['confirmed', 'cancelled', 'no_show']},
+        confirmed: {next: ['cancelled', 'no_show']},
+        cancelled: {next: []},
+        no_show: {next: []},
+      };
+    }
+    return {
+      scheduled: {next: ['cancelled']},
+      confirmed: {next: ['cancelled']},
+      cancelled: {next: []},
+      no_show: {next: []},
+    };
+  }
 
   statusLabels: { [key: string]: string } = {
     scheduled: 'Zakazano',
@@ -49,8 +64,8 @@ export class AppointmentStatusChangeComponent {
   }
 
   getStatusNextOptions(status: string): string[] {
-    if (status in this.statusOptions) {
-      const statusProperties = this.statusOptions[status as keyof typeof this.statusOptions];
+    if (status in this.statusOptions()) {
+      const statusProperties = this.statusOptions()[status as keyof typeof this.statusOptions];
       return statusProperties.next || []; // Return the 'next' array if it exists, otherwise return an empty array
     }
     return []; // Return an empty array if the status is not found

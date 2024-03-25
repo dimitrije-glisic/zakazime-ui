@@ -1,6 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Account} from "./interfaces/account";
 import {RegistrationRequest} from "./interfaces/registration-request";
@@ -30,11 +30,13 @@ export class AuthService {
       authorization: 'Basic ' + btoa(credentials.email + ':' + credentials.password)
     } : {});
 
-    return this.http.get<Account>('api/login', { headers }).pipe(
+    return this.http.get<Account>('api/login', {headers}).pipe(
       tap(response => {
         if (response.email) {
           this.setUser(response);
         } else {
+          this.clearUser();
+          throw new Error('Login failed');
         }
       }),
       catchError(error => {
@@ -54,21 +56,42 @@ export class AuthService {
 
   initializeUserState(): void {
     this.currentUser = this.getStoredUser();
+    if (!this.currentUser) {
+      this.useSession();
+    }
+    this.doDummyPostToObtainCsrfToken();
   }
 
   private setUser(user: Account): void {
+    console.log('Setting user', user);
     this.currentUser = user;
     localStorage.setItem('account', JSON.stringify(user));
   }
 
   private clearUser(): void {
+    console.log('Clearing user');
     this.currentUser = undefined;
     localStorage.removeItem('account');
   }
 
   private getStoredUser(): Account | undefined {
+    console.log('Getting stored user')
     const storedAccount = localStorage.getItem('account');
+    console.log('Stored account:', storedAccount);
     return storedAccount ? JSON.parse(storedAccount) : undefined;
+  }
+
+  private useSession(): void {
+    console.log('Using session');
+    this.http.get<Account>('api/login')
+      .pipe(
+        catchError(() => {
+          return new Observable<Account>();
+        })
+      )
+      .subscribe(user => {
+        this.setUser(user);
+      });
   }
 
   doDummyPostToObtainCsrfToken(): void {

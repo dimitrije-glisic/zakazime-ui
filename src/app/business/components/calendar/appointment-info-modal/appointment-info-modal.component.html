@@ -6,6 +6,7 @@
       <div class="row">
 
         <app-appointment-status-change
+          [userRole]="'SERVICE_PROVIDER'"
           [appointment]="appointmentData?.appointment"
           (statusChanged)="onStatusChanged($event)"
         >

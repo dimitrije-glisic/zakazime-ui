@@ -13,10 +13,19 @@
 
 .status-cancelled {
   background-color: red;
+  color: white; /* Ensure text is readable on red background */
+  border: none; /* Optional: Remove border for flat disabled look */
+  cursor: not-allowed; /* Change cursor to indicate not clickable */
+  opacity: 0.7; /* Optional: Reduce opacity to enhance disabled appearance */
 }
+
 
 .status-no_show {
   background-color: purple;
+  color: white; /* Ensure text is readable on red background */
+  border: none; /* Optional: Remove border for flat disabled look */
+  cursor: not-allowed; /* Change cursor to indicate not clickable */
+  opacity: 0.7; /* Optional: Reduce opacity to enhance disabled appearance */
 }
 
 .status-options {

@@ -9,7 +9,7 @@
         </h3>
       </div>
 
-      <ng-container *ngIf="waitingAppointments.length === 0">
+      <ng-container *ngIf="waitingAppointments.length > 0">
         <div class="appointment-list mt-5 me-5">
           <h3>Potvrdite zakazivanja</h3>
           <div class="list-group">
@@ -26,7 +26,7 @@
               </div>
               <div class="appointment-actions">
                 <button class="btn btn-danger btn-sm" (click)="cancelAppointment(a)">Otkazi</button>
-                <button class="btn btn-primary btn-sm" (click)="confirmAppointment(a)">Potvrdi</button>
+                <button class="btn btn-primary btn-sm ms-2" (click)="confirmAppointment(a)">Potvrdi</button>
               </div>
             </div>
           </div>
