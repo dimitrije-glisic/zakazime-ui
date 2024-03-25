@@ -1,0 +1,97 @@
+<div class="container border rounded p-3">
+
+
+  <!-- Component HTML -->
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <h4>{{ customer?.customerData?.firstName }} {{ customer?.customerData?.lastName }}</h4>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="statistic-counter">
+        <h6>Potvrđenih</h6>
+        <span class="badge bg-success">{{ confirmedCnt }}</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="statistic-counter">
+        <h6>Otkazanih</h6>
+        <span class="badge bg-danger">{{ canceledCnt }}</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="statistic-counter">
+        <h6>Nepojavljivanja</h6>
+        <span class="badge bg-warning">{{ noShowCnt }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" (click)="selectTab('appointments')" [class.active]="selectedTab === 'appointments'">Zakazivanja</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="selectTab('info')" [class.active]="selectedTab === 'info'">Info</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="selectedTab === 'appointments'">
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngFor="let appointmentObj of customer?.appointments" class="mt-2 mb-4 p-3 border rounded">
+          <span class="badge" [ngStyle]="{'background-color': getStatusColor(appointmentObj.appointment.status)}">
+            {{ appointmentObj.appointment.startTime | date: 'dd MMM yyyy' }}
+          </span>
+          <div class="row mt-2">
+            <div class="col">
+              <h5 class="mb-0">{{ appointmentObj.service.title }} - {{ appointmentObj.service.price }} RSD</h5>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <p class="mb-0">
+                <i class="bi bi-calendar me-2"></i> {{ appointmentObj.appointment.startTime | date: 'mediumDate' }}
+                <i class="bi bi-clock me-2"></i> {{ appointmentObj.appointment.startTime | date: 'shortTime' }}
+                <i class="bi bi-person me-2"></i> {{ appointmentObj.employee.name }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+  <ng-container *ngIf="selectedTab === 'info'">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="info-section p-3">
+          <dl class="row">
+            <dt class="col-4">Ime:</dt>
+            <dd class="col-8">{{ customer?.customerData?.firstName }}</dd>
+
+            <dt class="col-4">Prezime:</dt>
+            <dd class="col-8">{{ customer?.customerData?.lastName }}</dd>
+
+            <dt class="col-4">Email:</dt>
+            <dd class="col-8">{{ customer?.customerData?.email }}</dd>
+
+            <dt class="col-4">Telefon:</dt>
+            <dd class="col-8">{{ customer?.customerData?.phone }}</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+</div>
+
+

@@ -1,0 +1,34 @@
+.appointment-list h3 {
+  margin-bottom: 15px;
+}
+
+.appointment-info, .customer-info {
+  display: block; /* Ensure each section is on its own line */
+}
+
+.service-title {
+  font-weight: bold; /* Make service title stand out */
+}
+
+.appointment-date, .appointment-time {
+  font-style: italic; /* Italicize date and time for emphasis */
+}
+
+.customer-name {
+  font-weight: bold; /* Emphasize the customer's name */
+}
+
+.employee-name {
+  font-weight: normal; /* Keep employee name in regular font */
+}
+
+.appointment-actions {
+  margin-top: 10px; /* Add some space above the buttons */
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem; /* Smaller buttons */
+  font-size: 0.875rem; /* Adjust font size for buttons */
+  line-height: 1.5; /* Line height for better readability */
+  border-radius: 0.2rem; /* Slightly rounded corners for buttons */
+}

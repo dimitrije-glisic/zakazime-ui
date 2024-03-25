@@ -1,0 +1,33 @@
+<app-calendar-header [(view)]="view" [(viewDate)]="viewDate"
+                     (viewDateChange)="onViewDateChange($event)"
+>
+</app-calendar-header>
+
+<div class="employee-container">
+  <div *ngFor="let employee of businessData?.employees; let i = index">
+    <div class="employee-tile" [class.selected]="selectedEmployee === employee" (click)="onEmployeeClick(employee)">
+      <div class="employee-name">{{ employee.name }}</div>
+    </div>
+  </div>
+</div>
+
+<div [ngSwitch]="view">
+  <mwl-calendar-week-view
+    *ngSwitchCase="'week'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [daysInWeek]="7"
+    [hourSegments]="4"
+    [dayStartHour]="7"
+    (eventClicked)="handleEvent($event.event)"
+  >
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    [hourSegments]="4"
+    [dayStartHour]="7"
+  >
+  </mwl-calendar-day-view>
+</div>

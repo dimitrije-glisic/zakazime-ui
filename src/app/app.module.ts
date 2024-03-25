@@ -119,6 +119,28 @@ import localeSrLatn from '@angular/common/locales/sr-Latn';
 import {
   BookingConfirmationComponent
 } from "./public-layout/booking/booking-confirmation/booking-confirmation.component";
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {
+  AppointmentCalendarComponent
+} from "./business/components/calendar/appointment-calendar/appointment-calendar.component";
+import {CalendarHeaderComponent} from "./business/components/calendar/calendar-header/calendar-header.component";
+import {
+  AppointmentManagementComponent
+} from "./business/components/calendar/appointment-management/appointment-management.component";
+import {CustomerManagementComponent} from "./business/components/customers/customer-management/customer-management.component";
+import {CustomerDetailsComponent} from "./business/components/customers/customer-details/customer-details.component";
+import {CustomerPageComponent} from "./business/components/customers/customer-page/customer-page.component";
+import {
+  CreateAppointmentModalComponent
+} from "./business/components/calendar/create-appointment-modal/create-appointment-modal.component";
+import {SearchCustomersComponent} from "./business/components/calendar/search-customers/search-customers.component";
+import {
+  CreateAppointmentFormComponent
+} from "./business/components/calendar/create-appointment-form/create-appointment-form.component";
+import {
+  AppointmentInfoModalComponent
+} from "./business/components/calendar/appointment-info-modal/appointment-info-modal.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -190,6 +212,16 @@ export class XhrInterceptor implements HttpInterceptor {
     BookingManagementComponent,
     AvailableSlotsComponent,
     BookingConfirmationComponent,
+    AppointmentCalendarComponent,
+    CalendarHeaderComponent,
+    AppointmentManagementComponent,
+    CustomerManagementComponent,
+    CustomerPageComponent,
+    CustomerDetailsComponent,
+    CreateAppointmentModalComponent,
+    SearchCustomersComponent,
+    CreateAppointmentFormComponent,
+    AppointmentInfoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -213,7 +245,8 @@ export class XhrInterceptor implements HttpInterceptor {
     MatButtonToggleModule,
     ReactiveFormsModule,
     MatSelect,
-    MatOption
+    MatOption,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
 
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,},

@@ -35,6 +35,17 @@ import {BookingManagementComponent} from "./public-layout/booking/booking-manage
 import {
   BookingConfirmationComponent
 } from "./public-layout/booking/booking-confirmation/booking-confirmation.component";
+import {
+  AppointmentCalendarComponent
+} from "./business/components/calendar/appointment-calendar/appointment-calendar.component";
+import {
+  AppointmentManagementComponent
+} from "./business/components/calendar/appointment-management/appointment-management.component";
+import {CustomerPageComponent} from "./business/components/customers/customer-page/customer-page.component";
+import {CustomerDetailsComponent} from "./business/components/customers/customer-details/customer-details.component";
+import {
+  CustomerManagementComponent
+} from "./business/components/customers/customer-management/customer-management.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent},
@@ -48,7 +59,10 @@ const routes: Routes = [
       {path: 'home', component: BusinessProfileComponent},
       {path: 'services', component: ServiceManagementComponent},
       {path: 'employees', component: EmployeeManagementComponent},
-      {path: 'employees/:employeeId', component: EmployeeDetailsComponent}
+      {path: 'employees/:employeeId', component: EmployeeDetailsComponent},
+      {path: 'customers', component: CustomerManagementComponent},
+      {path: 'customers/:customerId', component: CustomerPageComponent},
+      {path: 'appointments', component: AppointmentManagementComponent}
     ]
   },
 

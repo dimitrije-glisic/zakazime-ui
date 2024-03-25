@@ -16,6 +16,7 @@ import {Employee} from "../../interfaces/employee";
 })
 export class BusinessService {
   private business: Business | null = null;
+  private businessRichObject: BusinessRichObject | null = null;
   private services: Service[] | null = null;
   private userDefinedCategories: UserDefinedCategory[] | undefined;
   private allBusinesses: Business[] | undefined;
@@ -34,6 +35,22 @@ export class BusinessService {
     console.log('contacting server for business');
     return this.http.get<Business>('/api/business').pipe(
       tap(business => this.business = business), // Cache the response
+      catchError(err => {
+        return throwError(() => err);
+      })
+    );
+  }
+
+  getBusinessRichObjectCached(businessId: number): Observable<BusinessRichObject | undefined> {
+    if (this.businessRichObject) {
+      return of(this.businessRichObject); // Return cached value if available
+    }
+    return this.loadBusinessRichObject(businessId);
+  }
+
+  loadBusinessRichObject(businessId: number): Observable<BusinessRichObject> {
+    return this.http.get<BusinessRichObject>('/api/business/' + businessId + '/full').pipe(
+      tap(businessRichObject => this.businessRichObject = businessRichObject),
       catchError(err => {
         return throwError(() => err);
       })
@@ -161,6 +178,10 @@ export class BusinessService {
 
   getEmployeesForService(businessId: number, serviceId: number) {
     return this.http.get<Employee[]>('/api/business/' + businessId + '/employees/for-service/' + serviceId);
+  }
+
+  getServicesForEmployee(businessId: number, employeeId: number) {
+    return this.http.get<Service[]>('/api/business/' + businessId + '/services/for-employee/' + employeeId);
   }
 
 }

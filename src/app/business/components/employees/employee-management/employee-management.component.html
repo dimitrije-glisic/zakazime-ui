@@ -1,49 +1,51 @@
-<div class="mb-3">
-  <h3>Zaposleni</h3>
+<div class="container-fluid m-5 p-5 mt-2 pt-2">
+  <div class="mb-3">
+    <h3>Zaposleni</h3>
 
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Ime</th>
-      <th>Telefon</th>
-      <th>Email</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let employee of employees" (click)="onEmployeeClick(employee)">
-      <td>{{ employee.name }}</td>
-      <td>{{ employee.phone }}</td>
-      <td>{{ employee.email }}</td>
-      <td>
-        <button class="btn btn-info small" (click)="detailsEmployee(employee)">Detalji</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Ime</th>
+        <th>Telefon</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let employee of employees" (click)="onEmployeeClick(employee)">
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.phone }}</td>
+        <td>{{ employee.email }}</td>
+        <td>
+          <button class="btn btn-info small" (click)="detailsEmployee(employee)">Detalji</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div>
-  <h3>Dodajte novog zaposlenog</h3>
+  <div>
+    <h3>Dodajte novog zaposlenog</h3>
 
-  <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="mb-3">
+    <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="mb-3">
 
-    <div class="mb-3">
-      <label for="name" class="form-label">Ime:</label>
-      <input id="name" type="text" class="form-control" formControlName="name">
-    </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Ime:</label>
+        <input id="name" type="text" class="form-control" formControlName="name">
+      </div>
 
-    <div class="mb-3">
-      <label for="phone" class="form-label">Telefon:</label>
-      <input id="phone" type="text" class="form-control" formControlName="phone">
-    </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Telefon:</label>
+        <input id="phone" type="text" class="form-control" formControlName="phone">
+      </div>
 
-    <div class="mb-3">
-      <label for="email" class="form-label">Email:</label>
-      <input id="email" type="text" class="form-control" formControlName="email">
-    </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input id="email" type="text" class="form-control" formControlName="email">
+      </div>
 
-    <button type="submit" class="btn btn-primary">Dodaj novog zaposlenog</button>
-  </form>
+      <button type="submit" class="btn btn-primary">Dodaj novog zaposlenog</button>
+    </form>
 
+  </div>
 </div>

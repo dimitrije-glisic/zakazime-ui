@@ -1,0 +1,40 @@
+.cal-week-view .cal-time-events .cal-day-column {
+  margin-right: 10px;
+}
+
+.cal-week-view .cal-hour {
+  width: calc(100% + 10px);
+}
+
+.employee-container {
+  display: flex; /* Use flexbox layout */
+  flex-wrap: wrap; /* Allow tiles to wrap to the next line if there's not enough space */
+  justify-content: flex-start; /* Align items to the start of the container */
+}
+
+.employee-tile {
+  display: inline-block;
+  width: 100px;
+  height: 40px;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: all 0.3s; /* Optional: Adds a transition effect when changing styles */
+}
+
+.employee-name {
+  font-size: 14px;
+  word-wrap: break-word;
+  font-weight: bold;
+}
+
+.selected {
+  border-color: #007bff; /* Change the border color for the selected tile */
+  background-color: #e7f1ff; /* Optional: Slight background color change */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Optional: Add a shadow to make it stand out */
+}

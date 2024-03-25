@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Business} from "../../../../interfaces/business";
 import {AdminService} from "../../../services/admin.service";
 import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
@@ -49,7 +49,7 @@ export class BusinessesWaitingForApprovalComponent implements OnInit {
     let message = action === 'approve' ? 'Da li ste sigurni da želite da odobrite ovaj zahtev?' : 'Da li ste sigurni da želite da odbijete ovaj zahtev?';
 
     const dialogRef = this.dialog.open(ConfirmationModalComponent, {
-      data: {action:action, message: message}
+      data: {action: action, message: message}
     });
 
     dialogRef.afterClosed().subscribe(result => {

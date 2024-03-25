@@ -1,0 +1,63 @@
+.custom-card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 0; /* Remove border from the card */
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  border-bottom: 0;
+  padding: 1rem 1.25rem;
+}
+
+.form-control-static {
+  padding: .375rem .75rem;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa;
+  border-radius: .25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/*----------------------------------------------*/
+
+.status-button {
+  color: #fff;
+}
+
+.status-scheduled {
+  background-color: blue;
+}
+
+.status-confirmed {
+  background-color: green;
+}
+
+.status-cancelled {
+  background-color: red;
+}
+
+.status-no_show {
+  background-color: purple;
+}
+
+.status-options {
+  margin-top: 10px; /* Adjust space between the main status button and the row of option buttons */
+}
+
+.status-option-button {
+  margin-right: 5px; /* Space between buttons */
+  cursor: pointer; /* Ensures the cursor changes to a pointer on hover */
+}
+
+.status-option-button:hover {
+  background-color: #e2e6ea; /* Lighter shade on hover for feedback */
+}
+
+
+/* Remaining CSS stays the same */

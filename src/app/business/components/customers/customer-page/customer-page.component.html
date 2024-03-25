@@ -1,0 +1,44 @@
+<div class="container m-5">
+  <div class="row">
+    <h3 class="mb-3">{{ customer?.customerData?.firstName }} {{ customer?.customerData?.lastName }}
+      <span class="bi bi-pencil small" (click)="onEditClick()" style="cursor: pointer"></span>
+    </h3>
+
+    <ng-container *ngIf="showEdit">
+      <div class="col-md-6">
+        <form [formGroup]="editForm" (ngSubmit)="onEditSubmit()" class="mb-3">
+
+          <div class="mb-3">
+            <label for="firstName" class="form-label">Ime:</label>
+            <input id="firstName" type="text" class="form-control" formControlName="firstName">
+          </div>
+
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Prezime:</label>
+            <input id="lastName" type="text" class="form-control" formControlName="lastName">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input id="email" type="email" class="form-control" formControlName="email">
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">Telefon:</label>
+            <input id="phone" type="text" class="form-control" formControlName="phone">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Izmeni</button>
+        </form>
+      </div>
+    </ng-container>
+
+  </div>
+
+  <hr class="mt-3">
+
+  <app-customer-details
+    [customer]="customer">
+  </app-customer-details>
+
+</div>

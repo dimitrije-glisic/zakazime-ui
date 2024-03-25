@@ -1,0 +1,53 @@
+/* Component CSS */
+.statistic-counter h6 {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.statistic-counter .badge {
+  font-size: 1.2rem;
+  padding: 0.5em 0.75em;
+}
+
+/* Optionally, if you want to add more separation between counters */
+.statistic-counter {
+  padding: 1rem 0;
+}
+
+/*------------------------*/
+
+/* Custom styles.css or component's CSS */
+.nav-link.active {
+  background-color: #007bff !important; /* Bootstrap primary color */
+  color: white !important;
+}
+
+.nav-link {
+  font-size: 1em; /* Default size, change as needed */
+}
+
+.nav-link:hover {
+  cursor: pointer;
+  background-color: #0056b3; /* A darker shade of the primary color for hover effect */
+  color: white;
+}
+
+/*------------------------*/
+.info-section {
+  margin-top: 1rem;
+}
+
+dl.row dt, dl.row dd {
+  padding: 0; /* Reduces the default padding */
+}
+
+dl.row dt {
+  text-align: left; /* Aligns the term to the left */
+  font-weight: bold;
+}
+
+dl.row dd {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
