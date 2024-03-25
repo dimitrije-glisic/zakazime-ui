@@ -56,12 +56,12 @@ export class AppointmentService {
     return this.http.post(`${this.basePath}/cancel`, appointmentRequestContext);
   }
 
-  getAppointmentsForCustomer(businessId: number, customerId: number) {
+  getAppointmentsOfBusinessForCustomer(businessId: number, customerId: number) {
     return this.http.get<AppointmentRichObject[]>(`${this.basePath}/${businessId}/customer/${customerId}`);
   }
 
-  getAppointmentFull(businessId: number, appointmentId: number): Observable<AppointmentRichObject> {
-    return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/${appointmentId}/full`);
+  getAppointmentsForUser(userId: number) {
+    return this.http.get<AppointmentRichObject[]>(`${this.basePath}/for-user/${userId}`);
   }
 
   updateStatus(businessId: number, employeeId: number, appointmentId: number, status: string) {

@@ -1,0 +1,16 @@
+<button type="button" class="btn status-button"
+        [ngClass]="getStatusColorClass(appointment!.status.toLowerCase())"
+        (click)="toggleStatusOptions()">
+  {{ statusLabels[appointment!.status.toLowerCase()] }}
+  <ng-container *ngIf="isChangeable()">
+    <i class="fa fa-caret-down"></i>
+  </ng-container>
+</button>
+
+<div class="status-options d-flex" *ngIf="showStatusOptions">
+  <button type="button" class="btn btn-light status-option-button"
+          *ngFor="let status of getStatusNextOptions(appointment!.status.toLowerCase())"
+          (click)="updateStatus(status)">
+    {{ statusLabels[status] }}
+  </button>
+</div>

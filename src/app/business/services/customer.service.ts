@@ -45,7 +45,7 @@ export class CustomerService {
     return new Observable<CustomerRichObject>(subscriber => {
       this.getCustomer(businessId, customerId).subscribe(customer => {
         customerFull.customerData = customer;
-        this.appointmentService.getAppointmentsForCustomer(businessId, customerId).subscribe(appointments => {
+        this.appointmentService.getAppointmentsOfBusinessForCustomer(businessId, customerId).subscribe(appointments => {
           customerFull.appointments = appointments;
           subscriber.next(customerFull);
         });

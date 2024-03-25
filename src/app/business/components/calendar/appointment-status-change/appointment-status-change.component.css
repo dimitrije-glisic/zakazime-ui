@@ -1,0 +1,33 @@
+
+.status-button {
+  color: #fff;
+}
+
+.status-scheduled {
+  background-color: blue;
+}
+
+.status-confirmed {
+  background-color: green;
+}
+
+.status-cancelled {
+  background-color: red;
+}
+
+.status-no_show {
+  background-color: purple;
+}
+
+.status-options {
+  margin-top: 10px; /* Adjust space between the main status button and the row of option buttons */
+}
+
+.status-option-button {
+  margin-right: 5px; /* Space between buttons */
+  cursor: pointer; /* Ensures the cursor changes to a pointer on hover */
+}
+
+.status-option-button:hover {
+  background-color: #e2e6ea; /* Lighter shade on hover for feedback */
+}

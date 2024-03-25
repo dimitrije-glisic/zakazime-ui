@@ -17,7 +17,43 @@
     <div class="col-12">
       <ng-container *ngIf="loggedIn">
         <div class="container">
-          some data
+
+
+          <div class="row mt-5">
+            <div class="col-md-4">
+              <a routerLink="appointments" class="card clickable-card">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <i class="bi bi-calendar-check"></i> Zakazivanja
+                  </h5>
+                  <p class="card-text">Upravljajte svojim terminima</p>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="#" class="card clickable-card">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <i class="bi bi-chat-square-text"></i> Utisci
+                  </h5>
+                  <p class="card-text">Utisci i ocene salona koje ste objavili</p>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href="#" class="card clickable-card">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <i class="bi bi-person-circle"></i> Nalog
+                  </h5>
+                  <p class="card-text">Vaši podaci za prijavu i kontakt</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+
+
         </div>
       </ng-container>
     </div>

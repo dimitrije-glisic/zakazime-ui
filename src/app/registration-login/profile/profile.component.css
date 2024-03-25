@@ -1,0 +1,9 @@
+.clickable-card {
+  text-decoration: none;
+  color: inherit; /* Retain the default text color */
+}
+
+.clickable-card:hover, .clickable-card:focus {
+  text-decoration: none; /* Remove underline on hover/focus */
+  background-color: #f8f9fa; /* Slight background color change on hover/focus */
+}

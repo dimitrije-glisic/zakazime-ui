@@ -1,0 +1,52 @@
+<div class="card custom-card">
+  <div class="card-header">
+    Termin
+  </div>
+  <div class="card-body">
+    <!-- Datum -->
+    <div class="form-group">
+      <label for="datum">Datum</label>
+      <p id="datum"
+         class="form-control-static">{{ appointmentData?.appointment!.startTime | date: 'dd.MM.yyyy.' }}</p>
+    </div>
+
+    <!-- Usluga -->
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <label for="usluga">Usluga</label>
+          <p id="usluga" class="form-control-static">{{ appointmentData?.service!.title }}
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="cena">Cena</label>
+          <p id="cena" class="form-control-static">{{ appointmentData?.service!.price }}</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- Time and Employee -->
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="od">Od</label>
+          <p id="od" class="form-control-static">{{ appointmentData?.appointment!.startTime | date: 'HH:mm' }}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="do">Do</label>
+          <p id="do" class="form-control-static">{{ appointmentData?.appointment!.endTime | date: 'HH:mm' }}</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="zaposleni">Zaposleni</label>
+          <p id="zaposleni" class="form-control-static">{{ appointmentData?.employee!.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

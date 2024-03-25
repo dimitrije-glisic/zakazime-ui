@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+
+    <div class="row mt-5">
+      <div class="col-md-12">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" (click)="selectTab('upcoming')" [class.active]="selectedTab === 'upcoming'">
+              Naredna
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="selectTab('previous')" [class.active]="selectedTab === 'previous'">
+              Prošla
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <ng-container *ngIf="appointmentsToDisplay.length === 0">
+      <div class="alert alert-info mt-3" role="alert">
+        <span class="bi bi-calendar"></span>
+        Nema zakazanih termina.
+      </div>
+    </ng-container>
+
+    <div class="col-12" *ngFor="let appointmentData of appointmentsToDisplay">
+      <ng-container *ngIf="appointmentsToDisplay.length > 0">
+
+        <div class="card mt-3 appointment-card">
+          <div class="card-body">
+            <div class="card-title mb-2">
+              <div class="service-title">
+                {{ appointmentData.business.name }}:
+                <span class="text-secondary">{{ appointmentData.service.title }} </span>
+              </div>
+              <div class="pricing-info">
+                <span class="price">{{ appointmentData.service.price }} RSD </span>
+                <span class="employee-name">({{ appointmentData.employee.name }})</span>
+              </div>
+            </div>
+            <div class="appointment-time mb-3">
+              {{ appointmentData.appointment.startTime | date:'mediumDate' }}
+              <span class="small text-secondary">
+              {{ appointmentData.appointment.startTime | date:'shortTime' }} - {{ appointmentData.appointment.endTime | date:'shortTime' }}
+              </span>
+            </div>
+            <app-appointment-status-change
+              [appointment]="appointmentData.appointment"
+              (statusChanged)="onStatusChange(appointmentData.appointment, $event)"
+            ></app-appointment-status-change>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+
+  </div>
+
+</div>
