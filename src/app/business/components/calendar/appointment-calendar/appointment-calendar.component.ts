@@ -85,21 +85,23 @@ export class AppointmentCalendarComponent implements OnInit {
     });
   }
 
-  private getColorForStatus(status: string) {
+  private getColorForStatus(status: string): EventColor {
     switch (status) {
-      case 'SCHEDULED':
-        return {primary: '#1e90ff', secondary: '#D1E8FF'} as EventColor;
-      case 'CANCELLED':
-        return {primary: '#ad2121', secondary: '#FAE3E3'} as EventColor;
-      case 'CONFIRMED': //GREEN
-        return {primary: '#008000', secondary: '#32CD32'} as EventColor;
-      case 'NO_SHOW':
-        return {primary: '#800080', secondary: '#FF00FF'} as EventColor;
-      default:
-        return {primary: '#1e90ff', secondary: '#D1E8FF'} as EventColor;
+      case 'SCHEDULED': // Blue
+        return { primary: '#007bff', secondary: '#D1E8FF' }; // Bootstrap primary blue and a lighter shade
+      case 'CANCELLED': // Red
+        return { primary: '#dc3545', secondary: '#FADBD8' }; // Bootstrap danger red and a lighter shade
+      case 'CONFIRMED': // Green
+        return { primary: '#28a745', secondary: '#D4EFDF' }; // Bootstrap success green and a lighter shade
+      case 'COMPLETED': // Teal
+        return { primary: '#20c997', secondary: '#C3ECE5' }; // Bootstrap info teal and a lighter shade
+      case 'NO_SHOW': // Purple
+        return { primary: '#6f42c1', secondary: '#E8DAEF' }; // Bootstrap indigo and a lighter shade
+      default: // Default case, can be the same as SCHEDULED or another neutral color
+        return { primary: '#6c757d', secondary: '#E9ECEF' }; // Bootstrap secondary gray and a lighter shade
     }
-
   }
+
 
   onEmployeeClick(employee: Employee): void {
     this.selectedEmployee = employee;

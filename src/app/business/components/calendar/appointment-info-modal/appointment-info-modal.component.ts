@@ -40,7 +40,6 @@ export class AppointmentInfoModalComponent implements OnInit {
       this.appointmentData!.appointment.status = status;
       // this.statusChanged.emit(status);
       this.dialogRef.close({status: status});
-
     });
   }
 

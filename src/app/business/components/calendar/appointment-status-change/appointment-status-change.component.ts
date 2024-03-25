@@ -17,18 +17,12 @@ export class AppointmentStatusChangeComponent {
   @Input() appointment: Appointment | undefined;
   @Output() statusChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  // statusOptions: { [key: string]: StatusOption } = {
-  //   scheduled: {next: ['confirmed', 'cancelled', 'no_show']},
-  //   confirmed: {next: ['cancelled', 'no_show']},
-  //   cancelled: {next: []},
-  //   no_show: {next: []},
-  // };
-
   statusOptions = (): { [key: string]: StatusOption } => {
     if (this.userRole === 'SERVICE_PROVIDER') {
       return {
         scheduled: {next: ['confirmed', 'cancelled', 'no_show']},
-        confirmed: {next: ['cancelled', 'no_show']},
+        confirmed: {next: ['cancelled', 'no_show', 'completed']},
+        completed: {next: []},
         cancelled: {next: []},
         no_show: {next: []},
       };
@@ -36,6 +30,7 @@ export class AppointmentStatusChangeComponent {
     return {
       scheduled: {next: ['cancelled']},
       confirmed: {next: ['cancelled']},
+      completed: {next: []},
       cancelled: {next: []},
       no_show: {next: []},
     };
@@ -44,6 +39,7 @@ export class AppointmentStatusChangeComponent {
   statusLabels: { [key: string]: string } = {
     scheduled: 'Zakazano',
     confirmed: 'Potvrđeno',
+    completed: 'Završeno',
     cancelled: 'Otkazano',
     no_show: 'Nepojavljivanje',
   }

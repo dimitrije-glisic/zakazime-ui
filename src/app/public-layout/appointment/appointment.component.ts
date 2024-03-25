@@ -48,7 +48,6 @@ export class AppointmentComponent {
       appointment.status = statusEvent;
       this.loadAppointments();
     });
-
   }
 
   selectTab(appointmentTimeRelevanceTab: string) {

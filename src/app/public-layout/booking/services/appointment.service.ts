@@ -81,6 +81,9 @@ export class AppointmentService {
       case 'noshow':
         action = 'no-show';
         break;
+      case 'completed':
+        action = 'complete';
+        break;
       default:
         throw new Error('Invalid status');
     }
