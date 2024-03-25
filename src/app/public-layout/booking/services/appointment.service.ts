@@ -93,6 +93,7 @@ export class AppointmentService {
   }
 
   addReview(request: ReviewRequest) {
+    console.log('Adding review', request);
     return this.http.post(`${this.basePath}/reviews`, request);
   }
 

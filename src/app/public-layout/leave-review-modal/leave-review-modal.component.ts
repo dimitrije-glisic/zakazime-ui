@@ -25,7 +25,7 @@ export class LeaveReviewModalComponent {
       service: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       priceQuality: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       hygiene: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
-      ambient: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
+      ambience: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       comment: ['', Validators.maxLength(500)]
     });
   }

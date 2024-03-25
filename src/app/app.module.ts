@@ -148,6 +148,7 @@ import {
   AppointmentStatusChangeComponent
 } from "./business/components/calendar/appointment-status-change/appointment-status-change.component";
 import {LeaveReviewModalComponent} from "./public-layout/leave-review-modal/leave-review-modal.component";
+import {ReviewDetailsComponent} from "./public-layout/review-details/review-details.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -231,7 +232,8 @@ export class XhrInterceptor implements HttpInterceptor {
     AppointmentDetailsComponent,
     AppointmentComponent,
     AppointmentStatusChangeComponent,
-    LeaveReviewModalComponent
+    LeaveReviewModalComponent,
+    ReviewDetailsComponent
   ],
   imports: [
     BrowserModule,

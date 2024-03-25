@@ -8,6 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {LeaveReviewModalComponent} from "../leave-review-modal/leave-review-modal.component";
 import {Review} from "../../interfaces/review";
 import {ReviewRequest} from "../../interfaces/review-request";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-appointment',
@@ -23,7 +24,7 @@ export class AppointmentComponent {
   selectedTab: string = 'upcoming';
 
   constructor(private authService: AuthService, private appointmentService: AppointmentService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -81,8 +82,10 @@ export class AppointmentComponent {
           this.loadAppointments();
         });
       }
-
     });
   }
 
+  averageRating(review: Review) {
+    return (review.service + review.priceQuality + review.hygiene + review.ambience) / 4;
+  }
 }

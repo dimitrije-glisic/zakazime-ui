@@ -44,6 +44,7 @@ import {
 import {AdminGuard} from "./admin-guard.service";
 import {BusinessGuard} from "./business-guard.service";
 import {AppointmentComponent} from "./public-layout/appointment/appointment.component";
+import {ReviewDetailsComponent} from "./public-layout/review-details/review-details.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent},
@@ -84,6 +85,8 @@ const routes: Routes = [
   {path: 'me', component: ProfileComponent},
 
   {path: 'me/appointments', component: AppointmentComponent},
+
+  {path: 'me/reviews', component: ReviewDetailsComponent},
 
   {path: 'finish-registration', component: FinishRegistrationComponent},
 
