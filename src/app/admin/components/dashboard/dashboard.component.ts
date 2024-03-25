@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../../auth.service";
 import {Router} from "@angular/router";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,19 +9,21 @@ import {Router} from "@angular/router";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  isLoggedInSubject: Observable<boolean> | undefined;
 
   constructor(protected authService: AuthService, protected router: Router) {
   }
 
   ngOnInit(): void {
     // workaround - fix this later
-    this.authService.setInitialLoginState();
+    this.authService.initializeUserState();
+    let loggedIn = this.authService.isLoggedIn();
+    this.isLoggedInSubject = of(loggedIn);
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigateByUrl('/');
-    });
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 
 }

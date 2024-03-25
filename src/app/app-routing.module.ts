@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {BusinessDashboardComponent} from './business/components/business-dashboard/business-dashboard.component';
 import {ServiceManagementComponent} from './business/components/service-management/service-management.component';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
-import {IsBusinessUser} from './is-business-user';
 import {BookingDatePickerComponent} from './public-layout/booking/booking-date-picker/booking-date-picker.component';
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
 import {DashboardComponent} from "./admin/components/dashboard/dashboard.component";
@@ -36,16 +35,14 @@ import {
   BookingConfirmationComponent
 } from "./public-layout/booking/booking-confirmation/booking-confirmation.component";
 import {
-  AppointmentCalendarComponent
-} from "./business/components/calendar/appointment-calendar/appointment-calendar.component";
-import {
   AppointmentManagementComponent
 } from "./business/components/calendar/appointment-management/appointment-management.component";
 import {CustomerPageComponent} from "./business/components/customers/customer-page/customer-page.component";
-import {CustomerDetailsComponent} from "./business/components/customers/customer-details/customer-details.component";
 import {
   CustomerManagementComponent
 } from "./business/components/customers/customer-management/customer-management.component";
+import {AdminGuard} from "./admin-guard.service";
+import {BusinessGuard} from "./business-guard.service";
 
 const routes: Routes = [
   {path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent},
@@ -53,7 +50,7 @@ const routes: Routes = [
   {path: 'booking/:business-name/confirm-booking', component: ConfirmBookingComponent},
 
   {
-    path: 'manage-business', component: BusinessDashboardComponent, canActivate: [IsBusinessUser],
+    path: 'manage-business', component: BusinessDashboardComponent, canActivate: [BusinessGuard],
     children: [
       {path: '', component: BusinessProfileComponent},
       {path: 'home', component: BusinessProfileComponent},
@@ -67,7 +64,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'admin', component: DashboardComponent,
+    path: 'admin', component: DashboardComponent, canActivate: [AdminGuard],
     children: [
       {path: 'templates/business-types', component: BusinessTypeManagement},
       {path: 'templates/categories', component: CategoryManagementComponent},

@@ -42,9 +42,7 @@ export class FinishRegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.fetchUser().subscribe((user: any) => {
-      this.loggedInUser = user;
-    });
+    this.loggedInUser = this.authService.getCurrentUser();
     this.businessTypeService.getAll().subscribe((types: BusinessType[]) => {
       this.businessTypes = types;
     });

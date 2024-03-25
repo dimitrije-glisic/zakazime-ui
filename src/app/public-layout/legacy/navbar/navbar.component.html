@@ -11,10 +11,10 @@
         <li class="nav-item active">
           <a class="nav-link list-business-action" routerLink="/become-partner">Izlistajte biznis</a>
         </li>
-        <li *ngIf="this.authService.isLoggedInSubject | async" class="nav-item">
+        <li *ngIf="isLoggedIn()" class="nav-item">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
-        <li *ngIf="!(this.authService.isLoggedInSubject | async)" class="nav-item">
+        <li *ngIf="!(isLoggedIn())" class="nav-item">
           <a class="nav-link" routerLink="/login">Login</a>
         </li>
         <li class="nav-item">

@@ -68,12 +68,10 @@ export class BookingConfirmationComponent implements OnInit {
   }
 
   private loadUser() {
-    this.authService.fetchUser().subscribe(user => {
-      this.user = user;
-      if (user) {
-        this.fillInForm(user);
-      }
-    });
+    this.user = this.authService.getCurrentUser();
+    if (this.user) {
+      this.fillInForm(this.user);
+    }
   }
 
   toggleForm() {

@@ -7,7 +7,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpR
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegistrationComponent} from './registration-login/registration/registration.component';
 import {LoginComponent} from './registration-login/login/login.component';
-import {PublicHeaderComponent} from './public-layout/legacy/public-header/public-header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FinishRegistrationComponent} from './registration-login/finish-registration/finish-registration.component';
@@ -160,7 +159,6 @@ export class XhrInterceptor implements HttpInterceptor {
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    PublicHeaderComponent,
     FinishRegistrationComponent,
     BusinessDashboardComponent,
     ServiceManagementComponent,

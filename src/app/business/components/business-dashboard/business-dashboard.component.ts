@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from 'src/app/auth.service';
 
 @Component({
   selector: 'app-business-dashboard',
@@ -9,17 +9,20 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class BusinessDashboardComponent implements OnInit {
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) {
+  }
 
   ngOnInit(): void {
     // workaround - fix this later
-    this.authService.setInitialLoginState();
+    this.authService.initializeUserState();
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigateByUrl('/');
-    });
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
 }

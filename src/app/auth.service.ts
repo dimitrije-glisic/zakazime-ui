@@ -9,98 +9,70 @@ import {RegistrationRequest} from "./interfaces/registration-request";
   providedIn: 'root'
 })
 export class AuthService {
-  private userSubject: BehaviorSubject<Account | undefined> = new BehaviorSubject<Account | undefined>(undefined);
-
-  isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private currentUser: Account | undefined;
 
   constructor(private http: HttpClient) {
-    this.checkLocalStorage();
+    this.initializeUserState();
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.currentUser;
   }
 
   registerUser(userData: RegistrationRequest): Observable<Account> {
-    return this.http.post<Account>('/api/register', userData)
-      .pipe(
-        tap((response: Account) => {
-          this.userSubject.next(response);
-          localStorage.setItem('account', JSON.stringify(response)); // Store in local storage
-          this.isLoggedInSubject.next(true);
-          this.doDummyPostToObtainCsrfToken();
-        })
-      );
+    return this.http.post<Account>('/api/register', userData).pipe(
+      tap(response => this.setUser(response))
+    );
   }
 
-  login(credentials: any) {
+  login(credentials: any): Observable<Account> {
     const headers = new HttpHeaders(credentials ? {
       authorization: 'Basic ' + btoa(credentials.email + ':' + credentials.password)
     } : {});
 
-    return this.http.get<Account>('api/login', {headers: headers}).pipe(
+    return this.http.get<Account>('api/login', { headers }).pipe(
       tap(response => {
         if (response.email) {
-          console.log('Login successful, setting userSubject');
-          this.userSubject.next(response);
-          localStorage.setItem('account', JSON.stringify(response)); // Store in local storage
-          this.isLoggedInSubject.next(true);
-          this.doDummyPostToObtainCsrfToken();
-
+          this.setUser(response);
         } else {
-          console.log('Login failed');
         }
+      }),
+      catchError(error => {
+        this.clearUser();
+        throw new Error('Login failed');
       })
     );
   }
 
-  logout() {
-    return this.http.post('api/logout', {}).pipe(
-      tap(() => {
-        console.log('Logout successful, clearing userSubject');
-        this.userSubject.next(undefined);
-        localStorage.removeItem('account'); // Remove from local storage
-        this.isLoggedInSubject.next(false);
-      })
-    )
+  logout(): void {
+    this.http.post('api/logout', {}).subscribe(() => this.clearUser());
   }
 
-  loadUser(): Observable<Account | undefined> {
-    // console.log('fetchUser called');
-    if (this.userSubject.getValue() === null) {
-      console.log('fetchUser making HTTP request');
-      return this.http.get<Account>('/api/login', {withCredentials: true}).pipe(
-        tap(response => {
-          this.userSubject.next(response);
-          localStorage.setItem('account', JSON.stringify(response)); // Store in local storage
-        }),
-        catchError(error => {
-          // console.log('fetchUser error', error);
-          this.userSubject.next(undefined);
-          return of(undefined);
-        })
-      );
-    } else {
-      return this.userSubject.asObservable();
-    }
+  getCurrentUser(): Account | undefined {
+    return this.currentUser;
   }
 
-  setInitialLoginState(): void {
-    this.checkLocalStorage();
+  initializeUserState(): void {
+    this.currentUser = this.getStoredUser();
   }
 
-  doDummyPostToObtainCsrfToken() {
-    this.http.post('api/dummy-post', {}).subscribe();
+  private setUser(user: Account): void {
+    this.currentUser = user;
+    localStorage.setItem('account', JSON.stringify(user));
   }
 
-  private checkLocalStorage() {
-    console.log('Checking local storage');
+  private clearUser(): void {
+    this.currentUser = undefined;
+    localStorage.removeItem('account');
+  }
+
+  private getStoredUser(): Account | undefined {
     const storedAccount = localStorage.getItem('account');
-    if (storedAccount) {
-      console.log('Local storage found, setting userSubject');
-      const account: Account = JSON.parse(storedAccount);
-      this.userSubject.next(account);
-      this.isLoggedInSubject.next(true);
-    } else {
-      console.log('Local storage not found');
-      this.isLoggedInSubject.next(false);
-    }
+    return storedAccount ? JSON.parse(storedAccount) : undefined;
+  }
+
+  doDummyPostToObtainCsrfToken(): void {
+    this.http.post('api/dummy-post', {}).subscribe();
   }
 
 }
