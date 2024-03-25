@@ -56,6 +56,10 @@
               [appointment]="appointmentData.appointment"
               (statusChanged)="onStatusChange(appointmentData.appointment, $event)"
             ></app-appointment-status-change>
+            <button *ngIf="appointmentData.appointment.status === 'COMPLETED' && !appointmentData.review"
+                    class="btn btn-primary ms-2" (click)="openReviewDialog(appointmentData)">
+              Ostavite recenziju
+            </button>
           </div>
         </div>
       </ng-container>

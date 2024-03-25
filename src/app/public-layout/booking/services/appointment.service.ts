@@ -5,8 +5,8 @@ import {MultiServiceAppointmentRequest} from "../../../interfaces/multi-service-
 import {formatDate} from "@angular/common";
 import {AppointmentRichObject} from "../../../interfaces/appointment-rich-object";
 import {Appointment} from "../../../interfaces/appointment";
-import {Observable} from "rxjs";
 import {AppointmentRequestContext} from "../../../interfaces/appointment-request-context";
+import {ReviewRequest} from "../../../interfaces/review-request";
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +90,10 @@ export class AppointmentService {
     const url = `${this.basePath}/${action}`;
 
     return this.http.post(url, request);
+  }
+
+  addReview(request: ReviewRequest) {
+    return this.http.post(`${this.basePath}/reviews`, request);
   }
 
 }

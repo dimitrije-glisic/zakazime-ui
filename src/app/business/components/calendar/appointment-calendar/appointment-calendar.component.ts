@@ -102,7 +102,6 @@ export class AppointmentCalendarComponent implements OnInit {
     }
   }
 
-
   onEmployeeClick(employee: Employee): void {
     this.selectedEmployee = employee;
     this.reloadEvents();
