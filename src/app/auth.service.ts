@@ -61,10 +61,10 @@ export class AuthService {
     )
   }
 
-  fetchUser(): Observable<Account | undefined> {
+  loadUser(): Observable<Account | undefined> {
     // console.log('fetchUser called');
     if (this.userSubject.getValue() === null) {
-      // console.log('fetchUser making HTTP request');
+      console.log('fetchUser making HTTP request');
       return this.http.get<Account>('/api/login', {withCredentials: true}).pipe(
         tap(response => {
           this.userSubject.next(response);
@@ -81,16 +81,8 @@ export class AuthService {
     }
   }
 
-  get user$(): Observable<Account | undefined> {
-    return this.userSubject.asObservable();
-  }
-
   setInitialLoginState(): void {
-    this.fetchUser().subscribe(user => {
-      if (user !== null) {
-        this.isLoggedInSubject.next(true);
-      }
-    });
+    this.checkLocalStorage();
   }
 
   doDummyPostToObtainCsrfToken() {
@@ -98,17 +90,19 @@ export class AuthService {
   }
 
   private checkLocalStorage() {
+    console.log('Checking local storage');
     const storedAccount = localStorage.getItem('account');
     if (storedAccount) {
+      console.log('Local storage found, setting userSubject');
       const account: Account = JSON.parse(storedAccount);
       this.userSubject.next(account);
       this.isLoggedInSubject.next(true);
+    } else {
+      console.log('Local storage not found');
+      this.isLoggedInSubject.next(false);
     }
   }
 
-  isLoggedIn() {
-    return this.isLoggedInSubject.getValue();
-  }
 }
 
 
