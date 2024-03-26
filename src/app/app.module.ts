@@ -149,6 +149,7 @@ import {
 } from "./business/components/calendar/appointment-status-change/appointment-status-change.component";
 import {ReviewDialogComponent} from "./public-layout/customer-profile/review-dialog/review-dialog.component";
 import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-details/review-details.component";
+import {UpdateProfileComponent} from "./public-layout/customer-profile/update-profile/update-profile.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -233,7 +234,8 @@ export class XhrInterceptor implements HttpInterceptor {
     AppointmentComponent,
     AppointmentStatusChangeComponent,
     ReviewDialogComponent,
-    ReviewDetailsComponent
+    ReviewDetailsComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

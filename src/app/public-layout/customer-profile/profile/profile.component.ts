@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
 import {AuthService} from 'src/app/auth.service';
+import {Account} from "../../../interfaces/account";
 
 @Component({
   selector: 'app-profile',
@@ -10,11 +10,13 @@ import {AuthService} from 'src/app/auth.service';
 export class ProfileComponent implements OnInit {
 
   loggedIn: boolean = false;
+  user: Account | undefined;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.user = this.authService.getCurrentUser();
     this.loggedIn = this.authService.isLoggedIn();
   }
 

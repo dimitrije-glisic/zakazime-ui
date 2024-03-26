@@ -1,59 +1,54 @@
 <div class="container">
 
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <app-navbar></app-navbar>
-      </div>
+  <div class="row">
+    <div class="col-12">
+      <app-navbar></app-navbar>
     </div>
+  </div>
 
+  <div class="row">
+    <div class="col-12">
+      <h2 class="my-4">Utisci</h2>
 
-    <div class="row">
-      <div class="col-12">
-        <h2 class="my-4">Utisci</h2>
+      <ng-container *ngIf="reviews.length === 0">
+        <div class="alert alert-info text-center" role="alert">
+          Niste ostavili nijedan utisak.
+        </div>
+      </ng-container>
 
-        <ng-container *ngIf="reviews.length === 0">
-          <div class="alert alert-info text-center" role="alert">
-            Niste ostavili nijedan utisak.
+      <div *ngFor="let reviewData of reviews" class="mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            Utisak za
+            <strong>{{ reviewData.appointmentData.business.name }}</strong>: {{ reviewData.appointmentData.service.title }}
+            <span class="badge bg-light text-dark ml-2">{{ reviewData.appointmentData.employee.name }}</span>
           </div>
-        </ng-container>
-
-        <div *ngFor="let reviewData of reviews" class="mb-4">
-          <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white">
-              Utisak za
-              <strong>{{ reviewData.appointmentData.business.name }}</strong>: {{ reviewData.appointmentData.service.title }}
-              <span class="badge bg-light text-dark ml-2">{{ reviewData.appointmentData.employee.name }}</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title mb-3">
-                Datum: {{ reviewData.appointmentData.appointment.startTime | date:'mediumDate' }}
-              </h5>
-              <div class="row">
-                <div class="col-md-6">
-                  <p><strong>Usluga:</strong> {{ reviewData.review.service }} / 10</p>
-                  <p><strong>Cena/Kvalitet:</strong> {{ reviewData.review.priceQuality }} / 10</p>
-                  <p><strong>Higijena:</strong> {{ reviewData.review.hygiene }} / 10</p>
-                  <p><strong>Ambijent:</strong> {{ reviewData.review.ambience }} / 10</p>
-                </div>
-                <div class="col-md-6">
-                  <p><strong>Recenzija:</strong></p>
-                  <blockquote class="blockquote bg-light p-3">
-                    <p class="mb-0">{{ reviewData.review.comment || 'Nije ostavljen' }}</p>
-                  </blockquote>
-                </div>
+          <div class="card-body">
+            <h5 class="card-title mb-3">
+              Datum: {{ reviewData.appointmentData.appointment.startTime | date:'mediumDate' }}
+            </h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Usluga:</strong> {{ reviewData.review.service }} / 10</p>
+                <p><strong>Cena/Kvalitet:</strong> {{ reviewData.review.priceQuality }} / 10</p>
+                <p><strong>Higijena:</strong> {{ reviewData.review.hygiene }} / 10</p>
+                <p><strong>Ambijent:</strong> {{ reviewData.review.ambience }} / 10</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Recenzija:</strong></p>
+                <blockquote class="blockquote bg-light p-3">
+                  <p class="mb-0">{{ reviewData.review.comment || 'Nije ostavljen' }}</p>
+                </blockquote>
               </div>
             </div>
-
-
-            <div class="review-actions p-3">
-              <button class="btn btn-outline-secondary btn-sm" (click)="openReviewDialog(reviewData)">Uredi</button>
-              <button class="btn btn-outline-danger btn-sm" (click)="deleteReview(reviewData)">Obriši</button>
-            </div>
           </div>
 
-
+          <div class="review-actions p-3">
+            <button class="btn btn-outline-secondary btn-sm" (click)="openReviewDialog(reviewData)">Uredi</button>
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteReview(reviewData)">Obriši</button>
+          </div>
         </div>
+
       </div>
     </div>
   </div>

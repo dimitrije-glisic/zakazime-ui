@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Account} from "./interfaces/account";
 import {RegistrationRequest} from "./interfaces/registration-request";
+import {UpdateUserRequest} from "./interfaces/update-user-request";
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +99,13 @@ export class AuthService {
     this.http.post('api/dummy-post', {}).subscribe();
   }
 
+  updateProfile(userId: number, value: UpdateUserRequest) {
+    return this.http.put<Account>(`/api/users/${userId}`, value).pipe(
+      tap(response => {
+        this.setUser(response);
+      })
+    );
+  }
 }
 
 
