@@ -17,7 +17,7 @@ import {DiscoverComponent} from "./public-layout/discover/discover.component";
 import {LoginComponent} from "./registration-login/login/login.component";
 import {FinishRegistrationComponent} from "./registration-login/finish-registration/finish-registration.component";
 import {BusinessesOverviewComponent} from "./public-layout/businesses-overview/businesses-overview.component";
-import {BusinessMainPageComponent} from "./public-layout/business-main-page/business-main-page.component";
+import {BusinessSelectServices} from "./public-layout/business-select-services/business-select-services.component";
 import {RegistrationComponent} from "./registration-login/registration/registration.component";
 import {ProfileComponent} from "./public-layout/customer-profile/profile/profile.component";
 import {
@@ -46,6 +46,7 @@ import {BusinessGuard} from "./business-guard.service";
 import {AppointmentComponent} from "./public-layout/customer-profile/appointment/appointment.component";
 import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-details/review-details.component";
 import {UpdateProfileComponent} from "./public-layout/customer-profile/update-profile/update-profile.component";
+import {BusinessReviewsListComponent} from "./public-layout/business-reviews-list/business-reviews-list.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent},
@@ -101,7 +102,9 @@ const routes: Routes = [
 
   {path: 'discover/:city/:business-type/:category', component: BusinessesOverviewComponent},
 
-  {path: 'business/:city/:business-name', component: BusinessMainPageComponent},
+  {path: 'business/:city/:business-name', component: BusinessSelectServices},
+
+  {path: 'business/:city/:business-name/reviews', component: BusinessReviewsListComponent},
 
   {path: 'business/:city/:business-name/checkout/cart', component: BookingManagementComponent},
 

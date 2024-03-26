@@ -50,7 +50,10 @@ export class BusinessService {
 
   loadBusinessRichObject(businessId: number): Observable<BusinessRichObject> {
     return this.http.get<BusinessRichObject>('/api/business/' + businessId + '/full').pipe(
-      tap(businessRichObject => this.businessRichObject = businessRichObject),
+      tap(businessRichObject => {
+        this.businessRichObject = businessRichObject;
+        this.business = businessRichObject.business;
+      }),
       catchError(err => {
         return throwError(() => err);
       })
@@ -165,15 +168,20 @@ export class BusinessService {
   }
 
   loadRichBusinessObject(city: string, businessName: string): Observable<BusinessRichObject> {
-    return this.http.get<BusinessRichObject>('/api/business/full/' + city + '/' + businessName);
+    return this.http.get<BusinessRichObject>('/api/business/full/' + city + '/' + businessName)
+      .pipe(
+        tap(business => {
+          this.businessRichObject = business;
+          this.business = business.business;
+        }),
+        catchError(err => {
+          return throwError(() => err);
+        })
+      );
   }
 
   submitBusiness(id: number) {
     return this.http.post<MessageResponse>('/api/business/' + id + '/submit', {});
-  }
-
-  getEmployees(businessId: number) {
-    return this.http.get<Employee[]>('/api/business/' + businessId + '/employees/all');
   }
 
   getEmployeesForService(businessId: number, serviceId: number) {

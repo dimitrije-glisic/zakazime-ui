@@ -30,7 +30,7 @@ export class AppointmentManagementComponent implements OnInit {
   }
 
   private loadAppointments(businessId: number, date: Date) {
-    this.appointmentService.getAllAppointments(businessId, date).subscribe((appointments: any) => {
+    this.appointmentService.getAllAppointmentsForBusiness(businessId, date).subscribe((appointments: any) => {
       this.allAppointments = appointments;
       console.log('All appointments:', this.allAppointments);
       this.waitingAppointments = this.allAppointments

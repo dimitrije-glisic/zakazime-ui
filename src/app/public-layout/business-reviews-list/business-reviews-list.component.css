@@ -1,0 +1,50 @@
+/* Container Styling */
+.mt-4.mb-2 {
+  padding: 20px;
+  background-color: #f8f9fa; /* Light grey background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+/* Total Average Rating Styling */
+.display-5 .text-primary {
+  font-size: 2.5rem; /* Larger font size */
+  font-weight: bold; /* Bold font weight */
+  margin-right: 10px; /* Space between the average rating and total reviews */
+}
+
+/* Total Reviews Styling */
+.display-5 .text-secondary {
+  font-size: 1.5rem; /* Slightly smaller font size */
+  color: #6c757d; /* Subdued color for less emphasis */
+}
+
+/*--------------------------------------------*/
+
+.card-title .badge {
+  font-size: 1.2em; /* Larger font size for the badge */
+}
+
+.list-group-item {
+  background-color: #f8f9fa; /* Light background for list items */
+  border: none; /* Remove borders between list items */
+}
+
+.list-group-item:not(:last-child) {
+  border-right: 1px solid #ddd; /* Add a divider between list items */
+}
+
+.card-text {
+  font-size: 1em; /* Ensuring text is easily readable */
+}
+
+.blockquote-footer {
+  font-style: italic;
+  color: #6c757d; /* Muted text for the footer */
+}
+
+.star-rating {
+  color: #ffc107; /* Gold color for the stars */
+  font-weight: bold; /* Make the stars a bit bolder */
+  margin-left: 0.25rem; /* Small space before the star rating */
+}

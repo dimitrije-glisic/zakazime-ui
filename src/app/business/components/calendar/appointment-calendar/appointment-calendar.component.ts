@@ -55,7 +55,7 @@ export class AppointmentCalendarComponent implements OnInit {
 
   private loadAppointments(businessId: number, date: Date) {
     console.log('Loading appointments for business', businessId, 'on date', date);
-    this.appointmentService.getAllAppointments(businessId, date).subscribe((appointments: any) => {
+    this.appointmentService.getAllAppointmentsForBusiness(businessId, date).subscribe((appointments: any) => {
       this.allAppointments = appointments;
       this.reloadEvents();
       console.log(this.events);

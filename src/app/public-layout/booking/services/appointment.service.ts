@@ -26,18 +26,17 @@ export class AppointmentService {
     return this.http.post(`${this.basePath}/multi`, appointment);
   }
 
-  public getAppointmentsForEmployee(businessId: number, employeeId: number, date: Date) {
-    const dateStr = formatDate(date, 'yyyy-MM-dd', 'en-US');
-    return this.http.get(`${this.basePath}/${businessId}/${employeeId}?date=${dateStr}`);
-  }
-
-  public getAllAppointments(businessId: number, date: Date) {
+  public getAllAppointmentsForBusiness(businessId: number, date: Date) {
     const dateStr = formatDate(date, 'yyyy-MM-dd', 'en-US');
     console.log('Getting all appointments for business', businessId, 'on date', dateStr);
     return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/all-full-info?fromDate=${dateStr}`);
   }
 
-  confirmAppointment(appointment: Appointment) {
+  public getAllAppointmentsWithReviewsForBusiness(businessId: number) {
+    return this.http.get<AppointmentRichObject[]>(`${this.basePath}/${businessId}/with-reviews`);
+  }
+
+  public confirmAppointment(appointment: Appointment) {
     const appointmentRequestContext = {
       businessId: appointment.businessId,
       employeeId: appointment.employeeId,

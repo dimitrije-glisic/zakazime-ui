@@ -7,11 +7,11 @@ import {UserDefinedCategory} from "../../interfaces/user-defined-category";
 import {BookingService} from "../booking/services/booking.service";
 
 @Component({
-  selector: 'app-business-main-page',
-  templateUrl: './business-main-page.component.html',
-  styleUrls: ['./business-main-page.component.css']
+  selector: 'app-business-select-services',
+  templateUrl: './business-select-services.component.html',
+  styleUrls: ['./business-select-services.component.css']
 })
-export class BusinessMainPageComponent implements OnInit {
+export class BusinessSelectServices implements OnInit {
 
   city: string | undefined;
   businessName: string | undefined;
@@ -23,7 +23,6 @@ export class BusinessMainPageComponent implements OnInit {
   categoryFilter: number | undefined;
 
   showPicker = false;
-
 
   constructor(private activatedRoute: ActivatedRoute, private businessService: BusinessService, private bookingService: BookingService,
               private router: Router) {

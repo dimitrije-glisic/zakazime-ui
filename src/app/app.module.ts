@@ -86,7 +86,7 @@ import {BusinessFilterComponent} from './public-layout/business-filter/business-
 import {MatRadioModule} from "@angular/material/radio";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {BusinessMainPageComponent} from './public-layout/business-main-page/business-main-page.component';
+import {BusinessSelectServices} from './public-layout/business-select-services/business-select-services.component';
 import {ProfileComponent} from './public-layout/customer-profile/profile/profile.component';
 import {
   BusinessesWaitingForApprovalComponent
@@ -150,6 +150,7 @@ import {
 import {ReviewDialogComponent} from "./public-layout/customer-profile/review-dialog/review-dialog.component";
 import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-details/review-details.component";
 import {UpdateProfileComponent} from "./public-layout/customer-profile/update-profile/update-profile.component";
+import { BusinessReviewsListComponent } from './public-layout/business-reviews-list/business-reviews-list.component';
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -206,7 +207,7 @@ export class XhrInterceptor implements HttpInterceptor {
     BusinessProfileSummaryComponent,
     BusinessesFilterModalComponent,
     BusinessFilterComponent,
-    BusinessMainPageComponent,
+    BusinessSelectServices,
     ProfileComponent,
     BusinessesWaitingForApprovalComponent,
     BusinessesManagementComponent,
@@ -235,7 +236,8 @@ export class XhrInterceptor implements HttpInterceptor {
     AppointmentStatusChangeComponent,
     ReviewDialogComponent,
     ReviewDetailsComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    BusinessReviewsListComponent,
   ],
   imports: [
     BrowserModule,
