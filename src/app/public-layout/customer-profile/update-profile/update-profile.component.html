@@ -1,0 +1,61 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-12">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h2 class="mt-4 mb-3">Update Profile</h2>
+          <form [formGroup]="editForm" (ngSubmit)="updateProfile()">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">Ime</label>
+              <input type="text" id="firstName" class="form-control" formControlName="firstName">
+            </div>
+
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Prezime</label>
+              <input type="text" id="lastName" class="form-control" formControlName="lastName">
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" formControlName="email">
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Telefon</label>
+              <input type="text" id="phone" class="form-control" formControlName="phone">
+            </div>
+
+            <div class="mb-4">
+              <label for="password" class="form-label">Lozinka</label>
+              <input type="password" id="password" class="form-control" formControlName="password">
+              <small class="form-text text-muted">
+                Samo ukoliko želite da promenite lozinku, unesite je ovde.
+              </small>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <button type="submit" class="btn btn-primary btn-save" [disabled]="!editForm.valid" (click)="updateProfile()">
+                Sačuvaj
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <hr class="mt-4">
+
+      <div class="logout-section d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-secondary" (click)="logout()">Odjava</button>
+      </div>
+
+    </div>
+  </div>
+</div>

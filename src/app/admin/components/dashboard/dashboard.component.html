@@ -43,10 +43,10 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <div>
             <ul class="navbar-nav mr-auto">
-              <li *ngIf="this.authService.isLoggedInSubject | async" class="nav-item">
+              <li *ngIf="this.isLoggedInSubject | async" class="nav-item">
                 <button class="btn btn-outline-light my-2 my-sm-0" type="button" (click)="logout()">Logout</button>
               </li>
-              <li *ngIf="!(this.authService.isLoggedInSubject | async)" class="nav-item">
+              <li *ngIf="!(this.isLoggedInSubject | async)" class="nav-item">
                 <button class="btn btn-outline-light my-2 my-sm-0" type="button" routerLink="/login">Login</button>
               </li>
             </ul>

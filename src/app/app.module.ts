@@ -7,7 +7,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpR
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegistrationComponent} from './registration-login/registration/registration.component';
 import {LoginComponent} from './registration-login/login/login.component';
-import {PublicHeaderComponent} from './public-layout/legacy/public-header/public-header.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FinishRegistrationComponent} from './registration-login/finish-registration/finish-registration.component';
@@ -88,7 +87,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {BusinessMainPageComponent} from './public-layout/business-main-page/business-main-page.component';
-import {ProfileComponent} from './registration-login/profile/profile.component';
+import {ProfileComponent} from './public-layout/customer-profile/profile/profile.component';
 import {
   BusinessesWaitingForApprovalComponent
 } from "./admin/components/businesses/businesses-waiting-for-approval/businesses-waiting-for-approval.component";
@@ -141,6 +140,16 @@ import {
 import {
   AppointmentInfoModalComponent
 } from "./business/components/calendar/appointment-info-modal/appointment-info-modal.component";
+import {AppointmentComponent} from "./public-layout/customer-profile/appointment/appointment.component";
+import {
+  AppointmentDetailsComponent
+} from "./business/components/calendar/appointment-details/appointment-details.component";
+import {
+  AppointmentStatusChangeComponent
+} from "./business/components/calendar/appointment-status-change/appointment-status-change.component";
+import {ReviewDialogComponent} from "./public-layout/customer-profile/review-dialog/review-dialog.component";
+import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-details/review-details.component";
+import {UpdateProfileComponent} from "./public-layout/customer-profile/update-profile/update-profile.component";
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -160,7 +169,6 @@ export class XhrInterceptor implements HttpInterceptor {
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    PublicHeaderComponent,
     FinishRegistrationComponent,
     BusinessDashboardComponent,
     ServiceManagementComponent,
@@ -221,7 +229,13 @@ export class XhrInterceptor implements HttpInterceptor {
     CreateAppointmentModalComponent,
     SearchCustomersComponent,
     CreateAppointmentFormComponent,
-    AppointmentInfoModalComponent
+    AppointmentInfoModalComponent,
+    AppointmentDetailsComponent,
+    AppointmentComponent,
+    AppointmentStatusChangeComponent,
+    ReviewDialogComponent,
+    ReviewDetailsComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

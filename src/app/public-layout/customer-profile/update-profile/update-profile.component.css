@@ -1,0 +1,26 @@
+/* update-profile.component.css */
+.btn-save {
+  background-color: orangered; /* Set the button's background color to orange-red */
+  border-color: orangered; /* Ensure the border color matches the background */
+}
+
+.btn-save:hover,
+.btn-save:focus {
+  background-color: #e34234; /* Slightly darker shade for hover/focus states */
+  border-color: #e34234;
+}
+
+.logout-section {
+  margin-top: 2rem; /* Adds more space above the logout section for clear separation */
+}
+
+.logout-section .btn-secondary {
+  background-color: #6c757d; /* Standard Bootstrap secondary button color */
+  border-color: #6c757d;
+  color: white;
+}
+
+.logout-section .btn-secondary:hover {
+  background-color: #5a6268; /* Darker shade on hover for interaction feedback */
+  border-color: #545b62;
+}

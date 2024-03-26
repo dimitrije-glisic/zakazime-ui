@@ -2,83 +2,25 @@
 
   <div class="row">
     <div class="col-md-7">
-      <div>
-        <button type="button" class="btn status-button"
-                [ngClass]="getStatusColorClass(appointmentData?.appointment!.status.toLowerCase())"
-                (click)="toggleStatusOptions()">
-<!--          {{ appointmentData?.appointment!.status | uppercase }}-->
-          {{ statusLabels[appointmentData?.appointment!.status.toLowerCase()] }}
-          <ng-container *ngIf="isChangeable(appointmentData?.appointment!.status.toLowerCase())">
-            <i class="fa fa-caret-down"></i>
-          </ng-container>
-        </button>
 
-        <div class="status-options d-flex" *ngIf="showStatusOptions">
-          <button type="button" class="btn btn-light status-option-button"
-                  *ngFor="let status of getStatusNextOptions(appointmentData?.appointment!.status.toLowerCase())"
-                  (click)="updateStatus(status)">
-            {{ statusLabels[status] }}
-          </button>
-        </div>
+      <div class="row">
+
+        <app-appointment-status-change
+          [userRole]="'SERVICE_PROVIDER'"
+          [appointment]="appointmentData?.appointment"
+          (statusChanged)="onStatusChanged($event)"
+        >
+        </app-appointment-status-change>
+
       </div>
-    </div>
-  </div>
 
-  <div class="row mt-3">
+      <div class="row mt-3">
 
-    <div class="col-md-7">
-      <div class="card custom-card">
-        <div class="card-header">
-          Termin
-        </div>
-        <div class="card-body">
-          <!-- Datum -->
-          <div class="form-group">
-            <label for="datum">Datum</label>
-            <p id="datum"
-               class="form-control-static">{{ appointmentData?.appointment!.startTime | date: 'dd.MM.yyyy.' }}</p>
-          </div>
-
-          <!-- Usluga -->
-          <div class="row">
-            <div class="col-md-8">
-              <div class="form-group">
-                <label for="usluga">Usluga</label>
-                <p id="usluga" class="form-control-static">{{ appointmentData?.service!.title }}
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="form-group">
-                <label for="cena">Cena</label>
-                <p id="cena" class="form-control-static">{{ appointmentData?.service!.price }}</p>
-              </div>
-            </div>
-
-          </div>
-          <!-- Time and Employee -->
-          <div class="row">
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="od">Od</label>
-                <p id="od" class="form-control-static">{{ appointmentData?.appointment!.startTime | date: 'HH:mm' }}</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="do">Do</label>
-                <p id="do" class="form-control-static">{{ appointmentData?.appointment!.endTime | date: 'HH:mm' }}</p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="zaposleni">Zaposleni</label>
-                <p id="zaposleni" class="form-control-static">{{ appointmentData?.employee!.name }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-appointment-details
+          [appointmentData]="appointmentData">
+        </app-appointment-details>
       </div>
+
     </div>
 
     <div class="col-md-5">

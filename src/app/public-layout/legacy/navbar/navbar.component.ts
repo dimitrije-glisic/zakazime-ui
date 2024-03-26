@@ -13,14 +13,17 @@ export class NavbarComponent {
   }
 
   ngOnInit(): void {
-    this.authService.setInitialLoginState();
+    this.authService.initializeUserState();
   }
 
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigateByUrl('/');
-    });
+    // this.authService.logout(this.router.navigateByUrl('/'));
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
 }

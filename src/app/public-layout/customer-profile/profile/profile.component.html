@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <ng-container *ngIf="!loggedIn">
+        <app-login></app-login>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <ng-container *ngIf="loggedIn">
+
+        <div class="row mt-3 user-info-section">
+          <div class="col-md-12">
+            <h1 class="display-6">{{ user?.firstName }} {{ user?.lastName }}</h1>
+            <p>
+              <i class="bi bi-telephone-fill"></i> {{ user?.phone }}
+              <span class="mx-3">|</span>
+              <i class="bi bi-envelope-fill"></i> {{ user?.email }}
+            </p>
+          </div>
+        </div>
+
+
+        <div class="row mt-3">
+          <div class="col-md-4">
+            <a routerLink="appointments" class="card clickable-card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="bi bi-calendar-check"></i> Zakazivanja
+                </h5>
+                <p class="card-text">Upravljajte svojim terminima</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a routerLink="reviews" class="card clickable-card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="bi bi-chat-square-text"></i> Utisci
+                </h5>
+                <p class="card-text">Utisci i ocene salona koje ste objavili</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a routerLink="update" class="card clickable-card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="bi bi-person-circle"></i> Nalog
+                </h5>
+                <p class="card-text">Vaši podaci za prijavu i kontakt</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </ng-container>
+    </div>
+  </div>
+
+</div>
+

@@ -5,8 +5,8 @@ import {MultiServiceAppointmentRequest} from "../../../interfaces/multi-service-
 import {formatDate} from "@angular/common";
 import {AppointmentRichObject} from "../../../interfaces/appointment-rich-object";
 import {Appointment} from "../../../interfaces/appointment";
-import {Observable} from "rxjs";
 import {AppointmentRequestContext} from "../../../interfaces/appointment-request-context";
+import {ReviewRequest} from "../../../interfaces/review-request";
 
 @Injectable({
   providedIn: 'root'
@@ -56,12 +56,12 @@ export class AppointmentService {
     return this.http.post(`${this.basePath}/cancel`, appointmentRequestContext);
   }
 
-  getAppointmentsForCustomer(businessId: number, customerId: number) {
+  getAppointmentsOfBusinessForCustomer(businessId: number, customerId: number) {
     return this.http.get<AppointmentRichObject[]>(`${this.basePath}/${businessId}/customer/${customerId}`);
   }
 
-  getAppointmentFull(businessId: number, appointmentId: number): Observable<AppointmentRichObject> {
-    return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/${appointmentId}/full`);
+  getAppointmentsForUser(userId: number) {
+    return this.http.get<AppointmentRichObject[]>(`${this.basePath}/for-user/${userId}`);
   }
 
   updateStatus(businessId: number, employeeId: number, appointmentId: number, status: string) {
@@ -81,12 +81,30 @@ export class AppointmentService {
       case 'noshow':
         action = 'no-show';
         break;
+      case 'completed':
+        action = 'complete';
+        break;
       default:
         throw new Error('Invalid status');
     }
     const url = `${this.basePath}/${action}`;
 
     return this.http.post(url, request);
+  }
+
+  addReview(request: ReviewRequest) {
+    console.log('Adding review', request);
+    return this.http.post(`${this.basePath}/reviews`, request);
+  }
+
+  updateReview(request: ReviewRequest) {
+    console.log('Updating review', request);
+    return this.http.put(`${this.basePath}/reviews`, request);
+  }
+
+  deleteReview(appointmentId: number) {
+    console.log('Deleting review for appointment', appointmentId);
+    return this.http.delete(`${this.basePath}/reviews/${appointmentId}`);
   }
 
 }

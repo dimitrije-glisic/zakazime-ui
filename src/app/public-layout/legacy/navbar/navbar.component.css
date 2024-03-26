@@ -7,7 +7,9 @@
 }
 
 .navbar-brand {
-  color: #333; /* Dark grey color for the brand name */
+  color: orangered; /* Dark grey color for the brand name */
+  font-weight: bold; /* Bold font weight */
+  font-size: 1.5rem; /* Larger font size */
 }
 
 .navbar-toggler {

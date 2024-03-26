@@ -1,0 +1,25 @@
+.custom-card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 0; /* Remove border from the card */
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  border-bottom: 0;
+  padding: 1rem 1.25rem;
+}
+
+.form-control-static {
+  padding: .375rem .75rem;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa;
+  border-radius: .25rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}

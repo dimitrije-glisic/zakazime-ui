@@ -1,0 +1,48 @@
+.status-button {
+  color: #fff;
+}
+.status-scheduled {
+  background-color: #007bff; /* Bootstrap primary blue */
+  color: white;
+  border: 1px solid #0056b3; /* Slightly darker border for contrast */
+}
+
+.status-confirmed {
+  background-color: #28a745; /* Bootstrap success green */
+  color: white;
+  border: 1px solid #1e7e34; /* Slightly darker border for contrast */
+}
+
+.status-completed {
+  background-color: #20c997; /* Bootstrap info teal */
+  color: white;
+  border: 1px solid #198754; /* Slightly darker border for contrast */
+  cursor: not-allowed; /* Prevents the button from being clicked */
+}
+
+.status-cancelled {
+  background-color: #dc3545; /* Bootstrap danger red */
+  color: white;
+  border: 1px solid #b02a37; /* Slightly darker border for contrast */
+  cursor: not-allowed;
+}
+
+.status-no_show {
+  background-color: #6f42c1; /* Bootstrap indigo */
+  color: white;
+  border: 1px solid #593196; /* Slightly darker border for contrast */
+  cursor: not-allowed;
+}
+
+.status-options {
+  margin-top: 10px; /* Adjust space between the main status button and the row of option buttons */
+}
+
+.status-option-button {
+  margin-right: 5px; /* Space between buttons */
+  cursor: pointer; /* Ensures the cursor changes to a pointer on hover */
+}
+
+.status-option-button:hover {
+  background-color: #e2e6ea; /* Lighter shade on hover for feedback */
+}

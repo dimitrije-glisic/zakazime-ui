@@ -1,0 +1,98 @@
+.appointment-card {
+  border: 1px solid #e3e6f0;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-card .card-body {
+  padding: 1.25rem;
+}
+
+.appointment-card .card-title {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.service-title {
+  font-size: 1.1rem; /* Slightly larger for emphasis */
+  color: #4e73df; /* Using a theme color for emphasis */
+  font-weight: bold;
+}
+
+.pricing-info {
+  text-align: right;
+  margin-top: -0.5rem;
+}
+
+.price {
+  font-size: 0.9rem; /* Slightly larger for visibility */
+  color: #1cc88a; /* Using a success color for price */
+}
+
+.employee-name {
+  font-size: 0.8rem;
+  color: #858796;
+}
+
+.appointment-time {
+  font-size: 0.95rem; /* Increased for better readability */
+  color: #5a5c69;
+  font-weight: normal;
+  display: flex;
+  flex-wrap: wrap; /* Allows content to wrap on smaller screens */
+}
+
+.appointment-time .small {
+  font-size: 0.85rem; /* Slightly larger for readability */
+  color: #6c757d;
+  margin-left: 0.5rem; /* Adds a small space before the time range */
+}
+
+/* Adjustments for the status change component */
+app-appointment-status-change {
+  margin-top: 1rem;
+}
+
+/*------------------------*/
+
+nav-link.active {
+  background-color: #007bff !important; /* Bootstrap primary color */
+  color: white !important;
+}
+
+.nav-link {
+  font-size: 1em; /* Default size, change as needed */
+}
+
+.nav-link:hover {
+  cursor: pointer;
+  background-color: #0056b3; /* A darker shade of the primary color for hover effect */
+  color: white;
+}
+
+/*------------------------*/
+
+.review-summary {
+  margin-top: 1rem; /* Adds space above the review summary section */
+  padding: 0.5rem; /* Adds padding around the content */
+  background-color: #f8f9fa; /* Light background color for the review section */
+  border-radius: 5px; /* Rounded corners for the review summary box */
+  border-left: 4px solid #007bff; /* Highlight with a colored border on the left */
+}
+
+.review-summary .star-rating {
+  color: #ffc107; /* Gold color for the stars */
+  font-weight: bold; /* Make the stars a bit bolder */
+  margin-left: 0.25rem; /* Small space before the star rating */
+}
+
+.review-summary a {
+  text-decoration: none; /* Removes underline from the link */
+  color: #007bff; /* Primary color for the link to match the border highlight */
+  font-weight: bold; /* Makes the link text bold */
+}
+
+.review-summary a:hover {
+  text-decoration: underline; /* Adds underline on hover for better link visibility */
+}
+
