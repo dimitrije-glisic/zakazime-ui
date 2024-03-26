@@ -5,7 +5,7 @@ import {Account} from "../../interfaces/account";
 import {AppointmentRichObject} from "../../interfaces/appointment-rich-object";
 import {Appointment} from "../../interfaces/appointment";
 import {MatDialog} from "@angular/material/dialog";
-import {LeaveReviewModalComponent} from "../leave-review-modal/leave-review-modal.component";
+import {ReviewDialogComponent} from "../review-dialog/review-dialog.component";
 import {Review} from "../../interfaces/review";
 import {ReviewRequest} from "../../interfaces/review-request";
 import {Router} from "@angular/router";
@@ -62,9 +62,8 @@ export class AppointmentComponent {
   }
 
   openReviewDialog(appointmentData: AppointmentRichObject) {
-    const dialogRef = this.dialog.open(LeaveReviewModalComponent, {
+    const dialogRef = this.dialog.open(ReviewDialogComponent, {
       width: '500px',
-      data: {appointment: appointmentData} // Optional: pass any data to the dialog
     });
 
     dialogRef.afterClosed().subscribe((result: Review) => {

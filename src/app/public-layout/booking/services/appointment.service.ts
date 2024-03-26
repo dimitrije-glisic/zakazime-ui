@@ -97,4 +97,14 @@ export class AppointmentService {
     return this.http.post(`${this.basePath}/reviews`, request);
   }
 
+  updateReview(request: ReviewRequest) {
+    console.log('Updating review', request);
+    return this.http.put(`${this.basePath}/reviews`, request);
+  }
+
+  deleteReview(appointmentId: number) {
+    console.log('Deleting review for appointment', appointmentId);
+    return this.http.delete(`${this.basePath}/reviews/${appointmentId}`);
+  }
+
 }
