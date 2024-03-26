@@ -48,3 +48,5 @@ Thumbs.db
 /src/main/java/model/tables
 
 /target
+
+.vscode
