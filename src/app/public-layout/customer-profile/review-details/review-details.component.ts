@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {Account} from "../../interfaces/account";
-import {AppointmentRichObject} from "../../interfaces/appointment-rich-object";
-import {AuthService} from "../../auth.service";
-import {AppointmentService} from "../booking/services/appointment.service";
-import {Review} from "../../interfaces/review";
+import {Account} from "../../../interfaces/account";
+import {AppointmentRichObject} from "../../../interfaces/appointment-rich-object";
+import {AuthService} from "../../../auth.service";
+import {AppointmentService} from "../../booking/services/appointment.service";
+import {Review} from "../../../interfaces/review";
 import {ReviewDialogComponent} from "../review-dialog/review-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {ReviewRequest} from "../../interfaces/review-request";
+import {ReviewRequest} from "../../../interfaces/review-request";
 
 interface ReviewData {
   review: Review;

@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {AuthService} from "../../auth.service";
-import {AppointmentService} from "../booking/services/appointment.service";
-import {Account} from "../../interfaces/account";
-import {AppointmentRichObject} from "../../interfaces/appointment-rich-object";
-import {Appointment} from "../../interfaces/appointment";
+import {AuthService} from "../../../auth.service";
+import {AppointmentService} from "../../booking/services/appointment.service";
+import {Account} from "../../../interfaces/account";
+import {AppointmentRichObject} from "../../../interfaces/appointment-rich-object";
+import {Appointment} from "../../../interfaces/appointment";
 import {MatDialog} from "@angular/material/dialog";
 import {ReviewDialogComponent} from "../review-dialog/review-dialog.component";
-import {Review} from "../../interfaces/review";
-import {ReviewRequest} from "../../interfaces/review-request";
+import {Review} from "../../../interfaces/review";
+import {ReviewRequest} from "../../../interfaces/review-request";
 import {Router} from "@angular/router";
 
 @Component({

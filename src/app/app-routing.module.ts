@@ -19,7 +19,7 @@ import {FinishRegistrationComponent} from "./registration-login/finish-registrat
 import {BusinessesOverviewComponent} from "./public-layout/businesses-overview/businesses-overview.component";
 import {BusinessMainPageComponent} from "./public-layout/business-main-page/business-main-page.component";
 import {RegistrationComponent} from "./registration-login/registration/registration.component";
-import {ProfileComponent} from "./registration-login/profile/profile.component";
+import {ProfileComponent} from "./public-layout/customer-profile/profile/profile.component";
 import {
   BusinessesManagementComponent
 } from "./admin/components/businesses/businesses-management/businesses-management.component";
@@ -43,8 +43,8 @@ import {
 } from "./business/components/customers/customer-management/customer-management.component";
 import {AdminGuard} from "./admin-guard.service";
 import {BusinessGuard} from "./business-guard.service";
-import {AppointmentComponent} from "./public-layout/appointment/appointment.component";
-import {ReviewDetailsComponent} from "./public-layout/review-details/review-details.component";
+import {AppointmentComponent} from "./public-layout/customer-profile/appointment/appointment.component";
+import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-details/review-details.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent},
