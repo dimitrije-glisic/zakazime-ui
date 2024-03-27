@@ -1,0 +1,60 @@
+/* General container and row styling */
+.container-fluid {
+  padding: 20px;
+}
+
+.row {
+  margin: 0 auto;
+  max-width: 1200px; /* Adjust based on your preference */
+}
+
+/* Card styling */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+}
+
+/* Image styling */
+.card-img-top {
+  border-radius: 5px 5px 0 0; /* Round the top corners */
+  max-height: 300px; /* Adjust based on your preference */
+  object-fit: cover; /* Ensures the image covers the card area */
+}
+
+.card-body {
+  padding: 2px 16px;
+}
+
+.card-title {
+  font-size: 24px; /* Adjust based on your preference */
+  margin-bottom: 15px;
+}
+
+.card-text {
+  font-size: 16px; /* Adjust based on your preference */
+  margin-bottom: 15px;
+}
+
+/* Rating styling */
+.star-rating {
+  color: #ffc107; /* Gold color */
+  font-weight: bold;
+}
+
+/* Ensure the star is properly aligned with the text */
+.star-rating::before {
+  vertical-align: middle;
+}
+
+/* Additional styling for the appointment and working hours info */
+p {
+  font-size: 14px; /* Adjust based on your preference */
+  color: #333; /* Dark gray color for better readability */
+}
+
+/* Styling for payment information */
+/*p:last-child {*/
+/*  font-style: italic;*/
+/*  margin-top: 10px;*/
+/*}*/

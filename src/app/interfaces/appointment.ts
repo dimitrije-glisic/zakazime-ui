@@ -7,4 +7,5 @@ export interface Appointment {
   endTime: string;
   status: string;
   customerId: number;
+  createdAt: string;
 }

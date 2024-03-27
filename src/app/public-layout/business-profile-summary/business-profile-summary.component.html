@@ -1,23 +1,24 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-5 order-md-1">
+    <div class="col-md-5">
       <div class="card">
-        <img class="card-img-top img-fluid" [src]="'http://localhost:8080/images/' + business?.profileImageUrl"/>
+        <img class="card-img-top img-fluid" [src]="'http://localhost:8080/images/' + business?.profileImageUrl" alt="saloon_image"/>
       </div>
     </div>
-    <div class="col-md-7 order-md-2">
+    <div class="col-md-7">
       <div class="card-body">
         <h5 class="card-title">{{business?.name}}</h5>
-        <p class="card-text text-secondary">{{business?.address}}</p>
+        <p class="card-text text-secondary">{{business?.address}}, {{business?.city}}</p>
         <p>
           <span class="star-rating">⭐️{{ getRating() }}</span>
           ({{ getRatingCount() }})
         </p>
 
-        <p>Zakazite sad! Poslednji termin zakazan pre {{getLastAppointmentBookTime()}}.
-        Danas radi do {{ getLastWorkingHour()}}.
+        <p>Poslednji termin zakazan pre {{getLastAppointmentBookTime()}}.
+          Danas radi do {{ getLastWorkingHourForToday()}}.
           Sutra radi {{getFirstWorkingHourForTomorrow()}} - {{getLastWorkingHourForTomorrow()}}.
-          Prima platne kartice.</p>
+          Prima platne kartice.
+        </p>
       </div>
     </div>
   </div>

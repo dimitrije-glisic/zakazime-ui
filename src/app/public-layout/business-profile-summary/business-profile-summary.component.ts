@@ -1,5 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {Business} from "../../interfaces/business";
+import {AppointmentRichObject} from "../../interfaces/appointment-rich-object";
+import {BusinessService} from "../../business/services/business-service";
+import {AppointmentService} from "../booking/services/appointment.service";
 
 @Component({
   selector: 'app-business-profile-summary',
@@ -10,33 +13,122 @@ export class BusinessProfileSummaryComponent {
 
   @Input() business: Business | undefined;
 
+  appointments: AppointmentRichObject[] | undefined;
+  lastAppointment: AppointmentRichObject | undefined;
+
+  lastWorkingHourForToday: string | undefined;
+  firstWorkingHourForTomorrow: string | undefined;
+  lastWorkingHourForTomorrow: string | undefined;
+
+  constructor(private appointmentService: AppointmentService,
+              private businessService: BusinessService) {
+  }
+
+  ngOnInit(): void {
+    if (!this.business) {
+      throw new Error('BusinessProfileSummaryComponent: Business is not loaded');
+    }
+    this.loadAppointments(this.business.id);
+  }
+
+  private loadAppointments(id: number) {
+    this.appointmentService.getAllAppointmentsWithReviewsForBusiness(id).subscribe(appointments => {
+      this.appointments = appointments;
+    });
+    this.appointmentService.getLatestAppointmentForBusiness(id).subscribe(appointment => {
+      this.lastAppointment = appointment;
+    });
+    this.loadLastWorkingHourForToday();
+    this.loadWorkingHoursForTomorrow();
+  }
+
+  // =========== NOT IMPLEMENTED ===========
+
   getRating() {
-    return (Math.random() * 3 + 7).toFixed(1);
+
+    if (!this.appointments || this.appointments.length === 0) {
+      return 0;
+    }
+
+    return this.appointments?.map(appointment => {
+      const serviceRating = appointment.review.service;
+      const priceQualityRating = appointment.review.priceQuality;
+      const hygieneRating = appointment.review.hygiene;
+      const ambienceRating = appointment.review.ambience;
+      const sum = serviceRating + priceQualityRating + hygieneRating + ambienceRating;
+      return sum / 4;
+    }).reduce((acc, rating) => acc + rating, 0) / this.appointments.length;
+
   }
 
   getRatingCount() {
-    return Math.floor(Math.random() * 100);
+    // return Math.floor(Math.random() * 100);
+    return this.appointments?.length;
   }
 
   getLastAppointmentBookTime() {
-    const option1 = "pre 2 sata";
-    const option2 = "pre 1 sat";
-    const option3 = "pre 30 minuta";
+    if (!this.lastAppointment) {
+      return "N/A";
+    }
 
-    //return random option
-    const options = [option1, option2, option3];
-    return options[Math.floor(Math.random() * options.length)];
+    // "createdAt": "2024-03-27T13:59:28.705875"
+    const createdDate = new Date(this.lastAppointment?.appointment!.createdAt!);
+    const now = new Date();
+
+    const diff = now.getTime() - createdDate.getTime();
+    const diffInMinutes = Math.floor(diff / 1000 / 60);
+
+    if (diffInMinutes < 60) {
+      return `pre ${diffInMinutes} minuta`;
+    }
+
+    const diffInHours = Math.floor(diffInMinutes / 60);
+
+    if (diffInHours < 24) {
+      return `pre ${diffInHours} sati`;
+    }
+
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    return `pre ${diffInDays} dana`;
+
   }
 
-  getLastWorkingHour() {
-    return "20:00";
+  loadLastWorkingHourForToday() {
+    this.businessService.getWorkingHours(this.business!.id, new Date()).subscribe(workingHours => {
+      this.lastWorkingHourForToday = workingHours.startTime;
+    });
+  }
+
+  loadWorkingHoursForTomorrow() {
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    this.businessService.getWorkingHours(this.business!.id, tomorrow).subscribe(workingHours => {
+      this.firstWorkingHourForTomorrow = workingHours.startTime;
+      this.lastWorkingHourForTomorrow = workingHours.endTime;
+    });
+
   }
 
   getFirstWorkingHourForTomorrow() {
-    return "08:00";
+    if (!this.firstWorkingHourForTomorrow) {
+      return "N/A";
+    }
+    return this.firstWorkingHourForTomorrow;
+
   }
 
   getLastWorkingHourForTomorrow() {
-    return "20:00";
+    if (!this.lastWorkingHourForTomorrow) {
+      return "N/A";
+    }
+    return this.lastWorkingHourForTomorrow;
+  }
+
+  getLastWorkingHourForToday() {
+    if (!this.lastWorkingHourForToday) {
+      return "N/A";
+    }
+    return this.lastWorkingHourForToday;
   }
 }

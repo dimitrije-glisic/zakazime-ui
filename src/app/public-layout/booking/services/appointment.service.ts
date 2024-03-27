@@ -32,6 +32,10 @@ export class AppointmentService {
     return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/all-full-info?fromDate=${dateStr}`);
   }
 
+  public getLatestAppointmentForBusiness(businessId: number) {
+    return this.http.get<AppointmentRichObject>(`${this.basePath}/${businessId}/last-created`);
+  }
+
   public getAllAppointmentsWithReviewsForBusiness(businessId: number) {
     return this.http.get<AppointmentRichObject[]>(`${this.basePath}/${businessId}/with-reviews`);
   }

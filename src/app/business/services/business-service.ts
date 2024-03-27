@@ -10,6 +10,8 @@ import {UserDefinedCategory} from "../../interfaces/user-defined-category";
 import {UserDefinedCategoryService} from "./user-defined-category.service";
 import {BusinessRichObject} from "../../interfaces/business-rich-object";
 import {Employee} from "../../interfaces/employee";
+import {TimeSlot} from "../../interfaces/time-slot";
+import {formatDate} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -190,6 +192,11 @@ export class BusinessService {
 
   getServicesForEmployee(businessId: number, employeeId: number) {
     return this.http.get<Service[]>('/api/business/' + businessId + '/services/for-employee/' + employeeId);
+  }
+
+  getWorkingHours(businessId: number, date: Date) {
+    let formatted = formatDate(date, 'yyyy-MM-dd', 'en-US');
+    return this.http.get<TimeSlot>('/api/business/' + businessId + '/working-hours?date=' + formatted);
   }
 
 }
