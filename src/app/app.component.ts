@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FooterControlService} from "./shared/footer-control.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ZakaziMe';
+
+  constructor(public footerControlService: FooterControlService) {}
+
 }

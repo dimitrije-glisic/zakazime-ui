@@ -5,7 +5,7 @@ import {ServiceManagementComponent} from './business/components/service-manageme
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {BookingDatePickerComponent} from './public-layout/booking/booking-date-picker/booking-date-picker.component';
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
-import {DashboardComponent} from "./admin/components/dashboard/dashboard.component";
+import {AdminDashboardComponent} from "./admin/components/admin-dashboard/admin-dashboard.component";
 import {
   BusinessTypeManagement
 } from "./admin/components/business-types/business-type-management/business-type-management.component";
@@ -69,7 +69,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'admin', component: DashboardComponent, canActivate: [AdminGuard],
+    path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard],
     children: [
       {path: 'templates/business-types', component: BusinessTypeManagement},
       {path: 'templates/categories', component: CategoryManagementComponent},

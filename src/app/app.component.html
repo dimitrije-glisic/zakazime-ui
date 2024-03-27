@@ -2,5 +2,5 @@
   <main class="flex-shrink-0 flex-grow-1">
     <router-outlet></router-outlet>
   </main>
-  <app-footer> </app-footer>
+  <app-footer *ngIf="footerControlService.showFooter$ | async"> </app-footer>
 </div>

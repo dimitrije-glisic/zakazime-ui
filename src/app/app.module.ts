@@ -22,7 +22,7 @@ import {BookingDatePickerComponent} from './public-layout/booking/booking-date-p
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
 import {BookingSummaryComponent} from './public-layout/booking/booking-summary/booking-summary.component';
 import {BookingBreadcrumbComponent} from './public-layout/booking/booking-breadcrumb/booking-breadcrumb.component';
-import {DashboardComponent} from './admin/components/dashboard/dashboard.component';
+import {AdminDashboardComponent} from './admin/components/admin-dashboard/admin-dashboard.component';
 import {
   BusinessTypeListComponent
 } from './admin/components/business-types/business-type-list/business-type-list.component';
@@ -185,7 +185,7 @@ export class XhrInterceptor implements HttpInterceptor {
     ConfirmBookingComponent,
     BookingSummaryComponent,
     BookingBreadcrumbComponent,
-    DashboardComponent,
+    AdminDashboardComponent,
     BusinessTypeListComponent,
     BusinessTypeAddComponent,
     BusinessTypeEditComponent,
