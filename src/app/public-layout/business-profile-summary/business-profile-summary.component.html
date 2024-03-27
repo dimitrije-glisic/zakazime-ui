@@ -1,17 +1,23 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 order-md-1">
+    <div class="col-md-5 order-md-1">
       <div class="card">
         <img class="card-img-top img-fluid" [src]="'http://localhost:8080/images/' + business?.profileImageUrl"/>
       </div>
     </div>
-    <div class="col-md-6 order-md-2">
+    <div class="col-md-7 order-md-2">
       <div class="card-body">
         <h5 class="card-title">{{business?.name}}</h5>
-        <p class="card-text">{{business?.address}}</p>
-        <p>Rating: 4.9 (148 reviews)</p>
-        <p>Book now! Last appointment booked 4 hours ago.</p>
-        <p>Open today until 8:00 PM. Tomorrow 10:00 AM - 8:00 PM. Accepts credit cards.</p>
+        <p class="card-text text-secondary">{{business?.address}}</p>
+        <p>
+          <span class="star-rating">⭐️{{ getRating() }}</span>
+          ({{ getRatingCount() }})
+        </p>
+
+        <p>Zakazite sad! Poslednji termin zakazan pre {{getLastAppointmentBookTime()}}.
+        Danas radi do {{ getLastWorkingHour()}}.
+          Sutra radi {{getFirstWorkingHourForTomorrow()}} - {{getLastWorkingHourForTomorrow()}}.
+          Prima platne kartice.</p>
       </div>
     </div>
   </div>
