@@ -16,7 +16,7 @@ import {ServiceManagementComponent} from './business/components/service-manageme
 import {ServicesFilterPipe} from './business/components/services/services-filter.pipe';
 import {BusinessProfileComponent} from './business/components/business-profile/business-profile.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {NavbarComponent} from './public-layout/legacy/navbar/navbar.component';
+import {NavbarComponent} from './public-layout/navbar/navbar.component';
 import {FilterByCategoryPipe} from './public-layout/legacy/filter-by-subcategory.pipe';
 import {BookingDatePickerComponent} from './public-layout/booking/booking-date-picker/booking-date-picker.component';
 import {ConfirmBookingComponent} from './public-layout/booking/confirm-booking/confirm-booking.component';
@@ -154,6 +154,7 @@ import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-de
 import {UpdateProfileComponent} from "./public-layout/customer-profile/update-profile/update-profile.component";
 import {BusinessReviewsListComponent} from './public-layout/business-reviews-list/business-reviews-list.component';
 import {BusinessMainPageComponent} from './public-layout/business-main-page/business-main-page.component';
+import { FooterComponent } from './public-layout/footer/footer.component';
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -242,6 +243,7 @@ export class XhrInterceptor implements HttpInterceptor {
     UpdateProfileComponent,
     BusinessReviewsListComponent,
     BusinessMainPageComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

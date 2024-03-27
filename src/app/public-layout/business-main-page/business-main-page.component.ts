@@ -37,4 +37,5 @@ export class BusinessMainPageComponent {
   selectTab(tab: string) {
     this.selectedTab = tab;
   }
+
 }

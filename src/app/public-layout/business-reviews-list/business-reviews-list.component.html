@@ -29,7 +29,7 @@
 
   <ng-container *ngIf="reviews && reviews.length > 0; else noReviewsTemplate">
     <div *ngFor="let reviewData of reviews" class="card mb-4 shadow-sm">
-      <div class="card-body">
+      <div class="card-body p-3">
         <h5 class="card-title">
           <span class="star-rating">⭐️{{ avgRating(reviewData.review) }}</span>
           za uslugu {{ reviewData.appointmentData.service.title }}
@@ -42,7 +42,7 @@
             <li class="list-group-item flex-fill">Ambijent: {{ reviewData.review.ambience }} / 10</li>
           </ul>
           <p>{{ reviewData.review.comment }}</p>
-          <footer class="blockquote-footer mt-2">
+          <footer class="blockquote-footer mt-1">
             <cite title="Source Title">{{ reviewData.appointmentData.customer.firstName }}</cite>
           </footer>
         </div>

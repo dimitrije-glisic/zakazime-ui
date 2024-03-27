@@ -1,8 +1,5 @@
-/* what is this ??? */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-/* ===== */
-
 
 /* Common Base Styles */
 .card {
@@ -37,8 +34,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-color: #0056b3;
 }
 
-/* Header and Footer */
-header, footer {
-    /* Add common header and footer styles here */
-}
+/*----------------------------------------------*/
+
+
+/*!* Ensures the body takes up the full viewport height *!*/
+/*body, html {*/
+/*  height: 100%;*/
+/*  margin: 0;*/
+/*}*/
+
+/*!* Main app component styling *!*/
+/*app-root, .d-flex {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  min-height: 100vh;*/
+/*}*/
+
+/*main {*/
+/*  flex: 1; !* Allows the main content to expand *!*/
+/*}*/
 
