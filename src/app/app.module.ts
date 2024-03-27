@@ -118,8 +118,8 @@ import localeSrLatn from '@angular/common/locales/sr-Latn';
 import {
   BookingConfirmationComponent
 } from "./public-layout/booking/booking-confirmation/booking-confirmation.component";
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {
   AppointmentCalendarComponent
 } from "./business/components/calendar/appointment-calendar/appointment-calendar.component";
@@ -127,7 +127,9 @@ import {CalendarHeaderComponent} from "./business/components/calendar/calendar-h
 import {
   AppointmentManagementComponent
 } from "./business/components/calendar/appointment-management/appointment-management.component";
-import {CustomerManagementComponent} from "./business/components/customers/customer-management/customer-management.component";
+import {
+  CustomerManagementComponent
+} from "./business/components/customers/customer-management/customer-management.component";
 import {CustomerDetailsComponent} from "./business/components/customers/customer-details/customer-details.component";
 import {CustomerPageComponent} from "./business/components/customers/customer-page/customer-page.component";
 import {
@@ -150,7 +152,8 @@ import {
 import {ReviewDialogComponent} from "./public-layout/customer-profile/review-dialog/review-dialog.component";
 import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-details/review-details.component";
 import {UpdateProfileComponent} from "./public-layout/customer-profile/update-profile/update-profile.component";
-import { BusinessReviewsListComponent } from './public-layout/business-reviews-list/business-reviews-list.component';
+import {BusinessReviewsListComponent} from './public-layout/business-reviews-list/business-reviews-list.component';
+import {BusinessMainPageComponent} from './public-layout/business-main-page/business-main-page.component';
 
 registerLocaleData(localeSrLatn, 'sr-Latn');
 
@@ -238,6 +241,7 @@ export class XhrInterceptor implements HttpInterceptor {
     ReviewDetailsComponent,
     UpdateProfileComponent,
     BusinessReviewsListComponent,
+    BusinessMainPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -262,7 +266,7 @@ export class XhrInterceptor implements HttpInterceptor {
     ReactiveFormsModule,
     MatSelect,
     MatOption,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory})
   ],
 
   providers: [AuthService, {provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true,},

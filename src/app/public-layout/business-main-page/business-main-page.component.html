@@ -1,0 +1,41 @@
+<div class="container">
+
+  <div class="row">
+    <app-navbar></app-navbar>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <h1>{{ this.businessRichObj?.business!.name }}</h1>
+      <h2 class="text-secondary">{{ this.businessRichObj?.business?.serviceKind }}</h2>
+      <p class="display-6">{{ this.businessRichObj?.business!.address }}, {{ this.businessRichObj?.business!.city}}</p>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" (click)="selectTab('usluge')" [class.active]="selectedTab === 'usluge'">Usluge</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="selectTab('utisci')" [class.active]="selectedTab === 'utisci'">Utisci</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngIf="selectedTab === 'usluge'">
+        <app-business-select-services>
+        </app-business-select-services>
+      </div>
+      <div *ngIf="selectedTab === 'utisci'">
+        <app-business-reviews-list>
+        </app-business-reviews-list>
+      </div>
+    </div>
+
+  </div>
+</div>

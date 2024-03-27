@@ -47,6 +47,7 @@ import {AppointmentComponent} from "./public-layout/customer-profile/appointment
 import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-details/review-details.component";
 import {UpdateProfileComponent} from "./public-layout/customer-profile/update-profile/update-profile.component";
 import {BusinessReviewsListComponent} from "./public-layout/business-reviews-list/business-reviews-list.component";
+import {BusinessMainPageComponent} from "./public-layout/business-main-page/business-main-page.component";
 
 const routes: Routes = [
   {path: 'booking/:business-name/pick-time', component: BookingDatePickerComponent},
@@ -102,9 +103,7 @@ const routes: Routes = [
 
   {path: 'discover/:city/:business-type/:category', component: BusinessesOverviewComponent},
 
-  {path: 'business/:city/:business-name', component: BusinessSelectServices},
-
-  {path: 'business/:city/:business-name/reviews', component: BusinessReviewsListComponent},
+  {path: 'business/:city/:business-name', component: BusinessMainPageComponent},
 
   {path: 'business/:city/:business-name/checkout/cart', component: BookingManagementComponent},
 

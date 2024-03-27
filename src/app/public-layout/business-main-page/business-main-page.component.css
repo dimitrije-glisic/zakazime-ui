@@ -1,0 +1,57 @@
+/* Business Name Styling */
+.row.mt-3 h1 {
+  font-size: 2.5rem; /* Larger font size for emphasis */
+  color: #333; /* Dark color for high contrast */
+  margin-bottom: 0.5rem; /* Reduce space below the h1 to bring the service kind closer */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow for depth */
+}
+
+/* Service Kind Styling */
+.row.mt-3 h2 {
+  font-size: 1.8rem; /* Slightly smaller than the h1 */
+  color: #6c757d; /* Bootstrap's secondary text color for consistency */
+  margin-bottom: 1rem; /* Space below the h2 to separate it from the address */
+}
+
+/* Address Styling */
+.row.mt-3 p {
+  font-size: 1rem; /* Standard font size for readability */
+  color: #545b62; /* Slightly darker than the default paragraph color for readability */
+}
+
+/*-------------------------------*/
+
+/* Enhance the container of the tabs */
+.nav-tabs {
+  border-bottom: 2px solid #dee2e6; /* A solid bottom border for the entire nav-tabs */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-bottom: 20px; /* Spacing below the tabs */
+}
+
+/* Style for each nav-item */
+.nav-item {
+  margin-right: 5px; /* Spacing between tabs */
+}
+
+/* Style for non-active nav-links */
+.nav-link {
+  border: 1px solid transparent; /* Transparent border for non-active tabs (keeps layout consistent) */
+  padding: .5rem 1rem; /* Padding for larger click area */
+  font-size: 1rem; /* Slightly larger font size */
+  color: #007bff; /* Bootstrap primary color for consistency */
+  cursor: pointer;
+}
+
+/* Style for active nav-link */
+.nav-link.active {
+  color: #fff !important; /* White text for active tabs */
+  background-color: #007bff !important; /* Bootstrap primary color for active tabs */
+  border-color: #007bff !important; /* Consistent border color with the active tab */
+}
+
+/* Hover effect for nav-links */
+.nav-link:hover {
+  border-color: #007bff; /* Highlight border on hover */
+  background-color: rgba(0, 123, 255, 0.1); /* Slight background color on hover */
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
