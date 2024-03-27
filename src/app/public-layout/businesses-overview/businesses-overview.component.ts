@@ -97,13 +97,18 @@ export class BusinessesOverviewComponent implements OnInit {
   }
 
   filterByBusinessType(businessType: BusinessType) {
+    const formattedCity = this.cityFilter!.toLowerCase().split(' ').join('-');
     const businessTypeFilter = businessType.slug;
-    this.router.navigate([this.cityFilter, businessTypeFilter]);
+    const formattedBusinessType = businessTypeFilter.toLowerCase().split(' ').join('-');
+    this.router.navigate(['discover', formattedCity, formattedBusinessType]);
   }
 
   filterByCategory(category: PredefinedCategory) {
+    const formattedCity = this.cityFilter!.toLowerCase().split(' ').join('-');
+    const formattedBusinessType = this.businessTypeFilterString?.toLowerCase().split(' ').join('-');
     const categoryFilter = category.slug;
-    this.router.navigate([this.cityFilter, this.businessTypeFilterString, categoryFilter]);
+    const formattedCategory = categoryFilter.toLowerCase().split(' ').join('-');
+    this.router.navigate(['discover', formattedCity, formattedBusinessType, formattedCategory]);
   }
 
   formatUrl(businessName: string) {
