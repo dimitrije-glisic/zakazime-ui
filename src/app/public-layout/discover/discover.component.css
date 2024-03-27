@@ -1,3 +1,10 @@
+.city-toggle-link {
+  color: orangered; /* Sets the text color to orangered */
+  text-decoration: none; /* Optional: Removes the underline from the link */
+}
+
+/*--------------------------------*/
+
 .cities-list .col-md-3 {
   padding: 10px;
   background: #fff;
