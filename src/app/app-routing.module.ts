@@ -17,7 +17,6 @@ import {DiscoverComponent} from "./public-layout/discover/discover.component";
 import {LoginComponent} from "./registration-login/login/login.component";
 import {FinishRegistrationComponent} from "./registration-login/finish-registration/finish-registration.component";
 import {BusinessesOverviewComponent} from "./public-layout/businesses-overview/businesses-overview.component";
-import {BusinessSelectServices} from "./public-layout/business-select-services/business-select-services.component";
 import {RegistrationComponent} from "./registration-login/registration/registration.component";
 import {ProfileComponent} from "./public-layout/customer-profile/profile/profile.component";
 import {
@@ -46,7 +45,6 @@ import {BusinessGuard} from "./business-guard.service";
 import {AppointmentComponent} from "./public-layout/customer-profile/appointment/appointment.component";
 import {ReviewDetailsComponent} from "./public-layout/customer-profile/review-details/review-details.component";
 import {UpdateProfileComponent} from "./public-layout/customer-profile/update-profile/update-profile.component";
-import {BusinessReviewsListComponent} from "./public-layout/business-reviews-list/business-reviews-list.component";
 import {BusinessMainPageComponent} from "./public-layout/business-main-page/business-main-page.component";
 
 const routes: Routes = [
@@ -58,7 +56,7 @@ const routes: Routes = [
     path: 'manage-business', component: BusinessDashboardComponent, canActivate: [BusinessGuard],
     children: [
       {path: '', component: BusinessProfileComponent},
-      {path: 'home', component: BusinessProfileComponent},
+      // {path: 'home', component: BusinessProfileComponent},
       {path: 'services', component: ServiceManagementComponent},
       {path: 'employees', component: EmployeeManagementComponent},
       {path: 'employees/:employeeId', component: EmployeeDetailsComponent},
@@ -71,9 +69,10 @@ const routes: Routes = [
   {
     path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard],
     children: [
+      {path: '', component: BusinessesManagementComponent},
+      {path: 'businesses', component: BusinessesManagementComponent},
       {path: 'templates/business-types', component: BusinessTypeManagement},
       {path: 'templates/categories', component: CategoryManagementComponent},
-      {path: 'businesses', component: BusinessesManagementComponent},
     ]
   },
 
