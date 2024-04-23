@@ -43,4 +43,19 @@ export class ServiceEmployeePairComponent {
   goBack() {
     this.location.back();
   }
+
+  totalPrice() {
+    if (this.selectedServicePossibleEmployeesMap) {
+      let total = 0;
+      this.selectedServicePossibleEmployeesMap.forEach((employees, service) => {
+        const price = service.price;
+        total += price;
+      });
+      return total;
+    } else if (this._service) {
+      return this._service.price;
+    }
+    return 0;
+  }
+
 }
