@@ -1,28 +1,28 @@
-<mat-dialog-content [formGroup]="form" fxLayout="column" fxLayoutGap="20px">
+<mat-dialog-content [formGroup]="form" fxLayout="column" fxLayoutGap="20px" class="dialog-content">
   <h2 mat-dialog-title>Dodaj novu uslugu</h2>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Service Title</mat-label>
+  <mat-form-field appearance="outline" class="custom-form-field">
+    <mat-label>Naziv</mat-label>
     <input matInput formControlName="title">
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Price</mat-label>
+  <mat-form-field appearance="outline" class="custom-form-field">
+    <mat-label>Cena</mat-label>
     <input matInput formControlName="price" type="number">
   </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Average Duration (minutes)</mat-label>
+  <mat-form-field appearance="outline" class="custom-form-field">
+    <mat-label>Trajanje (minuti)</mat-label>
     <input matInput formControlName="avgDuration" type="number">
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Description</mat-label>
+  <mat-form-field appearance="outline" class="custom-form-field full-width">
+    <mat-label>Opis</mat-label>
     <textarea matInput formControlName="description"></textarea>
   </mat-form-field>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end" class="dialog-actions">
   <button mat-button (click)="close()">Prekini</button>
   <button mat-button color="primary" (click)="save()">Sacuvaj</button>
 </mat-dialog-actions>
